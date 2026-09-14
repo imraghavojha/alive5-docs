@@ -1,0 +1,815 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>API reference · Alive5 docs</title>
+    <meta
+      content="Documented Alive5 messaging, directory, and reporting endpoints, grouped by resource."
+      name="description"
+    />
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png" />
+    <link href="../assets/styles.css" rel="stylesheet" />
+    <link href="../assets/demos.css" rel="stylesheet" />
+    <link href="../assets/reference.css" rel="stylesheet" />
+  </head>
+  <body data-page="api-reference" data-root="../" data-section="devres">
+    <a class="skip" href="#main">Skip to content</a>
+    <header data-header=""></header>
+    <div class="layout reference-layout">
+      <nav aria-label="Documentation" data-sidebar=""></nav>
+      <main class="doc" id="main">
+        <p class="crumbs">
+          <a href="../index.html">Home</a><span>/</span>
+          <a href="index.html">API</a><span>/</span>Reference
+        </p>
+        <h1>API reference</h1>
+        <p class="sub">
+          API endpoints covered by these guides, grouped by resource. All calls
+          require the X-A5-APIKEY header.
+        </p>
+        <p class="reference-note">
+          Replace <code>$ALIVE5_KEY</code> and the other placeholders with your
+          own values. Responses are shortened examples with fictional data;
+          account secrets are omitted. Request formats follow the
+          <a
+            href="https://documenter.getpostman.com/view/12135254/UVsQr3zh"
+            rel="noreferrer"
+            target="_blank"
+            >public API collection ↗</a
+          >.
+        </p>
+        <nav aria-label="API reference sections" class="reference-sections">
+          <a href="#messaging">Messaging</a><a href="#directory">Directory</a
+          ><a href="#reporting">Reporting</a>
+        </nav>
+        <h2 id="messaging">Messaging</h2>
+        <p>
+          SMS sending uses the original host. Conversation lists and summary use
+          the v2 host, as shown in each request.
+        </p>
+        <div class="endpoint reference-entry" id="send-sms">
+          <div class="reference-description">
+            <h3><span class="method m-post">POST</span>Send SMS</h3>
+            <p class="path">/conversations/sms/send</p>
+            <p>
+              Sends a text from a business line. Requires
+              <code>phone_number_from</code>, <code>phone_number_to</code>,
+              <code>message</code>, <code>channel_id</code>, and
+              <code>user_id</code> as form fields. See
+              <a href="send-a-message.html">Send a message</a>.
+            </p>
+          </div>
+          <div
+            aria-label="Examples for POST Send SMS"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for POST Send SMS"
+                tabindex="0"
+              ><code>curl -X POST \
+  "https://api.alive5.com/public/1.0/conversations/sms/send" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --form-string "phone_number_from=$ALIVE5_FROM_NUMBER" \
+  --form-string "phone_number_to=$RECIPIENT_NUMBER" \
+  --form-string "message=Hello from Alive5." \
+  --form-string "channel_id=$CHANNEL_ID" \
+  --form-string "user_id=$USER_ID"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"code":</span> <span class="json-value">200</span>,
+    <span class="json-key">"data":</span> {
+      <span class="json-key">"message_id":</span> <span class="json-string">"example_message"</span>,
+      <span class="json-key">"message_status":</span> <span class="json-string">"queued"</span>,
+      <span class="json-key">"From":</span> <span class="json-string">"+12025550100"</span>,
+      <span class="json-key">"To":</span> <span class="json-string">"+12025550123"</span>,
+      <span class="json-key">"message_content":</span> <span class="json-string">"Hello from Alive5."
+    </span>},
+    <span class="json-key">"error":</span> <span class="json-value">null</span>
+  },
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="sms-conversations">
+          <div class="reference-description">
+            <h3><span class="method m-get">GET</span>List SMS conversations</h3>
+            <p class="path">/conversations/sms</p>
+            <p>
+              Returns SMS conversations with message history under
+              <code>chat_conversation</code>. The public collection uses the v2
+              host and <code>date_start</code>/<code>date_end</code> parameters.
+            </p>
+          </div>
+          <div
+            aria-label="Examples for GET List SMS conversations"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for GET List SMS conversations"
+                tabindex="0"
+              ><code>curl -G \
+  "https://api-v2.alive5.com/public/1.0/conversations/sms" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --data-urlencode "date_start=09-01-2026" \
+  --data-urlencode "date_end=09-10-2026"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"Items":</span> [
+      {
+        <span class="json-key">"alive5_sessionID":</span> <span class="json-string">"example_conversation"</span>,
+        <span class="json-key">"contacts_first_name":</span> <span class="json-string">"Alex"</span>,
+        <span class="json-key">"chat_conversation":</span> [
+          {
+            <span class="json-key">"message_content":</span> <span class="json-string">"Can I move my appointment?"</span>,
+            <span class="json-key">"created_by":</span> <span class="json-string">"+12025550123"</span>,
+            <span class="json-key">"created_at":</span> <span class="json-value">1788278400000</span>
+          }
+        ]
+      }
+    ],
+    <span class="json-key">"page":</span> <span class="json-value">1</span>,
+    <span class="json-key">"pages":</span> <span class="json-value">1</span>
+  },
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="messenger-conversations">
+          <div class="reference-description">
+            <h3>
+              <span class="method m-get">GET</span>List Messenger conversations
+            </h3>
+            <p class="path">/conversations/fbm</p>
+            <p>
+              Same shape as the SMS list, for Facebook Messenger channels.
+              Returns code <code>404</code> when the account has none.
+            </p>
+          </div>
+          <div
+            aria-label="Examples for GET List Messenger conversations"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for GET List Messenger conversations"
+                tabindex="0"
+              ><code>curl -G \
+  "https://api-v2.alive5.com/public/1.0/conversations/fbm" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --data-urlencode "date_start=09-01-2026" \
+  --data-urlencode "date_end=09-10-2026" \
+  --data-urlencode "page=1"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"Items":</span> [
+      {
+        <span class="json-key">"alive5_sessionID":</span> <span class="json-string">"example_messenger_conversation"</span>,
+        <span class="json-key">"channel_name":</span> <span class="json-string">"Example Messenger channel"</span>,
+        <span class="json-key">"contacts_first_name":</span> <span class="json-string">"Alex"</span>,
+        <span class="json-key">"chat_conversation":</span> [
+          {
+            <span class="json-key">"message_content":</span> <span class="json-string">"What are your opening hours?"</span>,
+            <span class="json-key">"created_at":</span> <span class="json-value">1788278400000</span>
+          }
+        ]
+      }
+    ],
+    <span class="json-key">"page":</span> <span class="json-value">1</span>,
+    <span class="json-key">"pages":</span> <span class="json-value">1</span>
+  },
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="conversation-summary">
+          <div class="reference-description">
+            <h3><span class="method m-get">GET</span>Conversation summary</h3>
+            <p class="path">/conversations/summary</p>
+            <p>
+              Aggregate conversation counts. Pass <code>from_datetime</code> and
+              <code>date_end</code> on the v2 host, using the parameter names
+              from the public collection. The example error applies if either
+              date is omitted; the example request includes both.
+            </p>
+          </div>
+          <div
+            aria-label="Examples for GET Conversation summary"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for GET Conversation summary"
+                tabindex="0"
+              ><code>curl -G \
+  "https://api-v2.alive5.com/public/1.0/conversations/summary" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --data-urlencode "from_datetime=09-01-2026" \
+  --data-urlencode "date_end=09-10-2026"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example error · if a date is missing</span
+                ><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"code":</span> <span class="json-value">400</span>,
+  <span class="json-key">"error":</span> {}
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <h2 id="directory">Directory</h2>
+        <p>
+          Account and contact writes use the original host. Directory lists use
+          the v2 host.
+        </p>
+        <div class="endpoint reference-entry" id="account">
+          <div class="reference-description">
+            <h3><span class="method m-get">GET</span>Account</h3>
+            <p class="path">/account</p>
+            <p>
+              Account profile and plan. Treat responses as sensitive and avoid
+              logging raw payloads.
+            </p>
+          </div>
+          <div aria-label="Examples for GET Account" class="reference-examples">
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for GET Account"
+                tabindex="0"
+              ><code>curl \
+  "https://api.alive5.com/public/1.0/account" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · sensitive fields omitted</span
+                ><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"org_name":</span> <span class="json-string">"Example workspace"</span>,
+    <span class="json-key">"email":</span> <span class="json-string">"team@example.com"</span>,
+    <span class="json-key">"user_role":</span> <span class="json-string">"admin"
+  </span>},
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="channels-and-users">
+          <div class="reference-description">
+            <h3>
+              <span class="method m-get">GET</span>List channels and users
+            </h3>
+            <p class="path">/objects/channels-and-users/list</p>
+            <p>
+              Channels with their assigned agents. The only call that returns
+              both
+              <code>channel_id</code> and <code>user_id</code>, so it is the
+              starting point for sending.
+            </p>
+          </div>
+          <div
+            aria-label="Examples for GET List channels and users"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for GET List channels and users"
+                tabindex="0"
+              ><code>curl \
+  "https://api-v2.alive5.com/public/1.0/objects/channels-and-users/list" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"Items":</span> [
+      {
+        <span class="json-key">"channel_id":</span> <span class="json-string">"example_channel"</span>,
+        <span class="json-key">"channel_label":</span> <span class="json-string">"+12025550100"</span>,
+        <span class="json-key">"agents":</span> [
+          {
+            <span class="json-key">"user_id":</span> <span class="json-string">"example_user"</span>,
+            <span class="json-key">"screen_name":</span> <span class="json-string">"Alex Example"</span>,
+            <span class="json-key">"email":</span> <span class="json-string">"alex@example.com"
+          </span>}
+        ]
+      }
+    ]
+  },
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="users">
+          <div class="reference-description">
+            <h3><span class="method m-get">GET</span>List users</h3>
+            <p class="path">/get/users</p>
+            <p>
+              Account teammates. Does not include the user IDs a send requires.
+              Use the channels call for those.
+            </p>
+          </div>
+          <div
+            aria-label="Examples for GET List users"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for GET List users"
+                tabindex="0"
+              ><code>curl \
+  "https://api-v2.alive5.com/public/1.0/get/users" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"data":</span> [
+    {
+      <span class="json-key">"agent_email":</span> <span class="json-string">"alex@example.com"</span>,
+      <span class="json-key">"agent_first_name":</span> <span class="json-string">"Alex"</span>,
+      <span class="json-key">"agent_last_name":</span> <span class="json-string">"Example"</span>,
+      <span class="json-key">"agent_role":</span> <span class="json-string">"admin"
+    </span>}
+  ],
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="contacts">
+          <div class="reference-description">
+            <h3><span class="method m-get">GET</span>List contacts</h3>
+            <p class="path">/objects/contact/get-all</p>
+            <p>
+              Paginated contact records. Accepts <code>page</code> and
+              <code>limit</code>; pagination metadata comes back with the
+              results.
+            </p>
+          </div>
+          <div
+            aria-label="Examples for GET List contacts"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for GET List contacts"
+                tabindex="0"
+              ><code>curl -G \
+  "https://api-v2.alive5.com/public/1.0/objects/contact/get-all" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --data-urlencode "page=1" \
+  --data-urlencode "limit=1"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"Items":</span> [
+      {
+        <span class="json-key">"crm_id":</span> <span class="json-string">"example_contact"</span>,
+        <span class="json-key">"first_name":</span> <span class="json-string">"Alex"</span>,
+        <span class="json-key">"last_name":</span> <span class="json-string">"Example"</span>,
+        <span class="json-key">"email":</span> <span class="json-string">"alex@example.com"</span>,
+        <span class="json-key">"phone_mobile":</span> <span class="json-string">"+12025550123"
+      </span>}
+    ],
+    <span class="json-key">"page":</span> <span class="json-value">1</span>,
+    <span class="json-key">"totalPages":</span> <span class="json-value">1</span>,
+    <span class="json-key">"totalRecord":</span> <span class="json-value">1</span>
+  },
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="create-contact">
+          <div class="reference-description">
+            <h3><span class="method m-post">POST</span>Create contact</h3>
+            <p class="path">/contact/create-new</p>
+            <p>
+              Adds a contact on the original API host. The public collection
+              sends contact fields as query parameters with a
+              <code>POST</code> request. Use your own organization and account
+              values. In curl, <code>-G</code> puts the fields in the query
+              string while <code>-X POST</code> sets the method.
+            </p>
+          </div>
+          <div
+            aria-label="Examples for POST Create contact"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for POST Create contact"
+                tabindex="0"
+              ><code>curl -G -X POST \
+  "https://api.alive5.com/public/1.0/contact/create-new" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --data-urlencode "email=alex@example.com" \
+  --data-urlencode "org_name=$ALIVE5_ORG_NAME" \
+  --data-urlencode "first_name=Alex" \
+  --data-urlencode "phone_mobile=$CONTACT_NUMBER" \
+  --data-urlencode "last_name=Example" \
+  --data-urlencode "account_id=$ACCOUNT_ID" \
+  --data-urlencode "title=Customer" \
+  --data-urlencode "company=Example company"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"crm_id":</span> <span class="json-string">"example_contact"</span>,
+    <span class="json-key">"first_name":</span> <span class="json-string">"Alex"</span>,
+    <span class="json-key">"last_name":</span> <span class="json-string">"Example"</span>,
+    <span class="json-key">"email":</span> <span class="json-string">"alex@example.com"</span>,
+    <span class="json-key">"phone_mobile":</span> <span class="json-string">"+12025550123"
+  </span>},
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="update-contact">
+          <div class="reference-description">
+            <h3><span class="method m-put">PUT</span>Update contact</h3>
+            <p class="path">/contact/update-contact</p>
+            <p>
+              Updates an existing contact on the original API host. Send JSON
+              with the contact ID and fields to change. This example updates
+              tags. Re-read the contact to confirm the write; code
+              <code>200</code> alone does not confirm every update.
+            </p>
+          </div>
+          <div
+            aria-label="Examples for PUT Update contact"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for PUT Update contact"
+                tabindex="0"
+              ><code>curl -X PUT \
+  "https://api.alive5.com/public/1.0/contact/update-contact" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  -H "Content-Type: application/json" \
+  --data '{"crm_id":"YOUR_CONTACT_ID","tags":["YOUR_TAG_ID"]}'</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"first_name":</span> <span class="json-string">"Alex"</span>,
+    <span class="json-key">"last_name":</span> <span class="json-string">"Example"</span>,
+    <span class="json-key">"email":</span> <span class="json-string">"alex@example.com"</span>,
+    <span class="json-key">"phone_mobile":</span> <span class="json-string">"+12025550123"</span>,
+    <span class="json-key">"updated_at":</span> <span class="json-value">1788278400000</span>
+  },
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="tags">
+          <div class="reference-description">
+            <h3><span class="method m-get">GET</span>List tags</h3>
+            <p class="path">/objects/tags/list</p>
+            <p>Tags available for conversations and contacts.</p>
+          </div>
+          <div
+            aria-label="Examples for GET List tags"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for GET List tags"
+                tabindex="0"
+              ><code>curl \
+  "https://api-v2.alive5.com/public/1.0/objects/tags/list" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"Items":</span> [
+      {
+        <span class="json-key">"tag_id":</span> <span class="json-string">"example_tag"</span>,
+        <span class="json-key">"tag_label":</span> <span class="json-string">"Follow up"
+      </span>}
+    ]
+  },
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <h2 id="reporting">Reporting</h2>
+        <p>
+          <code>https://api-v2.alive5.com/public/1.0</code>. Date parameters use
+          <code>MM-DD-YYYY</code>.
+        </p>
+        <div class="endpoint reference-entry" id="performance-report">
+          <div class="reference-description">
+            <h3><span class="method m-get">GET</span>Performance report</h3>
+            <p class="path">/performance-reporting</p>
+            <p>
+              Volume and response metrics. Takes <code>date_start</code>,
+              <code>date_end</code>, and <code>timezone_offset</code>.
+            </p>
+          </div>
+          <div
+            aria-label="Examples for GET Performance report"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for GET Performance report"
+                tabindex="0"
+              ><code>curl -G \
+  "https://api-v2.alive5.com/public/1.0/performance-reporting" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --data-urlencode "date_start=09-01-2026" \
+  --data-urlencode "date_end=09-10-2026" \
+  --data-urlencode "timezone_offset=-500"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"channelsReport":</span> [
+      {
+        <span class="json-key">"channel_name":</span> <span class="json-string">"Example SMS channel"</span>,
+        <span class="json-key">"total":</span> <span class="json-value">12</span>,
+        <span class="json-key">"total_completed":</span> <span class="json-value">10</span>,
+        <span class="json-key">"total_missed":</span> <span class="json-value">2</span>
+      }
+    ],
+    <span class="json-key">"agentsReport":</span> [
+      {
+        <span class="json-key">"screen_name":</span> <span class="json-string">"Alex Example"</span>,
+        <span class="json-key">"total_completed":</span> <span class="json-value">10</span>
+      }
+    ],
+    <span class="json-key">"tagsReport":</span> []
+  },
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="bot-report">
+          <div class="reference-description">
+            <h3><span class="method m-get">GET</span>Bot report</h3>
+            <p class="path">/get-bots-reporting</p>
+            <p>
+              Bot flow activity. Takes <code>from_datetime</code>,
+              <code>to_datetime</code>, and <code>botflowFilter</code>.
+            </p>
+          </div>
+          <div
+            aria-label="Examples for GET Bot report"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for GET Bot report"
+                tabindex="0"
+              ><code>curl -G \
+  "https://api-v2.alive5.com/public/1.0/get-bots-reporting" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --data-urlencode "from_datetime=09-01-2026" \
+  --data-urlencode "to_datetime=09-10-2026" \
+  --data-urlencode "botflowFilter=All"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"Items":</span> {
+      <span class="json-key">"example_thread":</span> [
+        {
+          <span class="json-key">"botchain_name":</span> <span class="json-string">"Example welcome flow"</span>,
+          <span class="json-key">"bot_message":</span> <span class="json-string">"How can we help?"</span>,
+          <span class="json-key">"user_reply":</span> <span class="json-string">"I have a question."</span>,
+          <span class="json-key">"bot_timestamp":</span> <span class="json-value">1788278400000</span>
+        }
+      ]
+    },
+    <span class="json-key">"page":</span> <span class="json-value">1</span>,
+    <span class="json-key">"totalPages":</span> <span class="json-value">1</span>,
+    <span class="json-key">"totalRecord":</span> <span class="json-value">1</span>
+  },
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="multiple-choice-report">
+          <div class="reference-description">
+            <h3><span class="method m-get">GET</span>Multiple-choice report</h3>
+            <p class="path">/get-multiplequestion-reporting</p>
+            <p>
+              Answers to multiple-choice bot questions, same parameters as the
+              bot report. Returns code <code>404</code> when there are no
+              matches.
+            </p>
+          </div>
+          <div
+            aria-label="Examples for GET Multiple-choice report"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for GET Multiple-choice report"
+                tabindex="0"
+              ><code>curl -G \
+  "https://api-v2.alive5.com/public/1.0/get-multiplequestion-reporting" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --data-urlencode "from_datetime=09-01-2026" \
+  --data-urlencode "to_datetime=09-10-2026" \
+  --data-urlencode "botflowFilter=All"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · no matches excerpt</span
+                ><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"code":</span> <span class="json-value">404</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="free-text-report">
+          <div class="reference-description">
+            <h3><span class="method m-get">GET</span>Free-text report</h3>
+            <p class="path">/get-freetext-reporting</p>
+            <p>
+              Free-text answers captured by bot flows, same parameters as the
+              bot report.
+            </p>
+          </div>
+          <div
+            aria-label="Examples for GET Free-text report"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for GET Free-text report"
+                tabindex="0"
+              ><code>curl -G \
+  "https://api-v2.alive5.com/public/1.0/get-freetext-reporting" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --data-urlencode "from_datetime=09-01-2026" \
+  --data-urlencode "to_datetime=09-10-2026" \
+  --data-urlencode "botflowFilter=All"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"Items":</span> {
+      <span class="json-key">"example_thread":</span> [
+        {
+          <span class="json-key">"botchain_name":</span> <span class="json-string">"Example support flow"</span>,
+          <span class="json-key">"bot_message":</span> <span class="json-string">"What would you like help with?"</span>,
+          <span class="json-key">"user_reply":</span> <span class="json-string">"Rescheduling an appointment."</span>,
+          <span class="json-key">"bot_timestamp":</span> <span class="json-value">1788278400000</span>
+        }
+      ]
+    }
+  },
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="faq-report">
+          <div class="reference-description">
+            <h3><span class="method m-get">GET</span>FAQ report</h3>
+            <p class="path">/get-faq-reporting</p>
+            <p>FAQ article hits over a date range.</p>
+          </div>
+          <div
+            aria-label="Examples for GET FAQ report"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for GET FAQ report"
+                tabindex="0"
+              ><code>curl -G \
+  "https://api-v2.alive5.com/public/1.0/get-faq-reporting" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --data-urlencode "from_datetime=09-01-2026" \
+  --data-urlencode "to_datetime=09-10-2026" \
+  --data-urlencode "botflowFilter=All"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"data":</span> [
+    {
+      <span class="json-key">"botflow":</span> <span class="json-string">"Example support flow"</span>,
+      <span class="json-key">"visitor_question":</span> <span class="json-string">"When are you open?"</span>,
+      <span class="json-key">"bot_response":</span> <span class="json-string">"Monday to Friday, 9am to 5pm."
+    </span>}
+  ],
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="pager">
+          <a href="receive-messages.html"
+            ><span>Previous</span><strong>← Read messages</strong></a
+          >
+          <a class="next" href="../connectors/index.html"
+            ><span>Next</span><strong>Connectors →</strong></a
+          >
+        </div>
+      </main>
+    </div>
+    <footer data-docfoot=""></footer>
+    <script src="../assets/site.js"></script>
+    <script src="../assets/demos.js"></script>
+  </body>
+</html>

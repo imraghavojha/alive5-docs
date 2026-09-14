@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Keragon connector · Alive5 docs</title>
+    <meta
+      name="description"
+      content="Connect Alive5 to Keragon: triggers, actions, and setup."
+    />
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png" />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="stylesheet" href="../assets/demos.css" />
+  </head>
+  <body
+    data-root="../"
+    data-page="connectors-keragon"
+    data-section="connectors"
+  >
+    <a class="skip" href="#main">Skip to content</a>
+    <header data-header></header>
+    <div class="layout">
+      <nav data-sidebar="" aria-label="Documentation"></nav>
+      <main class="doc" id="main">
+        <p class="crumbs">
+          <a href="../index.html">Home</a><span>/</span
+          ><a href="index.html">Connectors</a><span>/</span>Keragon
+        </p>
+        <div class="connector-title">
+          <span class="connector-logo keragon" aria-hidden="true"
+            ><img src="../assets/images/keragon.svg" alt=""
+          /></span>
+          <h1>Keragon</h1>
+        </div>
+        <p class="sub">
+          Run a workflow when a patient texts, and reply from the same line.
+        </p>
+        <p class="availability">
+          <span class="pill">Developer connector</span
+          ><a href="https://www.keragon.com" target="_blank" rel="noreferrer"
+            >Open Keragon ↗</a
+          >
+        </p>
+
+        <section
+          class="automation-lab"
+          data-automation="keragon"
+          aria-label="Interactive SMS workflow"
+        ></section>
+        <h2 id="setup">Connect your account</h2>
+        <ol class="setup-list">
+          <li>
+            <strong>Add Alive5</strong>
+            <p>In Keragon, add Alive5 to your workflow.</p>
+          </li>
+          <li>
+            <strong>Connect with an API key</strong>
+            <p>
+              Copy your key from
+              <a href="../api/authentication.html">Alive5 Integrations</a> and
+              paste it into the connection.
+            </p>
+          </li>
+          <li>
+            <strong>Choose your business number</strong>
+            <p>
+              Select an SMS line, then test the workflow with a phone number you
+              control.
+            </p>
+          </li>
+        </ol>
+        <h2 id="triggers">Triggers and actions</h2>
+        <div class="endpoint">
+          <h3>SMS received</h3>
+          <p class="path">Incoming message trigger</p>
+          <p>
+            Starts a workflow when a text arrives at the selected business
+            number. Needs one field, <strong>Business number</strong>.
+          </p>
+          <p>Image-only messages do not start this trigger.</p>
+        </div>
+        <div class="endpoint">
+          <h3>SMS received periodically</h3>
+          <p class="path">polling · 5 minute interval</p>
+          <p>
+            Checks the same line on a schedule and includes image-only messages.
+            Use it when delivery matters more than latency; new texts can take
+            up to five minutes to appear.
+          </p>
+        </div>
+
+        <h3>What a trigger passes on</h3>
+        <table class="tbl">
+          <tr>
+            <th>Field</th>
+            <th>Example</th>
+          </tr>
+          <tr>
+            <td>message</td>
+            <td>Can I move my appointment to Friday?</td>
+          </tr>
+          <tr>
+            <td>from_phone</td>
+            <td>+12025550123</td>
+          </tr>
+          <tr>
+            <td>business_line</td>
+            <td>+12025550100</td>
+          </tr>
+          <tr>
+            <td>contact_first_name</td>
+            <td>Alex</td>
+          </tr>
+          <tr>
+            <td>contact_email</td>
+            <td>alex@example.com</td>
+          </tr>
+          <tr>
+            <td>thread_id</td>
+            <td>Conversation the reply should continue</td>
+          </tr>
+          <tr>
+            <td>received_at</td>
+            <td class="t">2026-01-15T16:04:05.000Z</td>
+          </tr>
+        </table>
+
+        <h3 id="actions">Actions</h3>
+        <div class="endpoint">
+          <h3>Send SMS</h3>
+          <p>
+            Sends a text from a business line. Fields:
+            <strong>From number</strong>, <strong>To number</strong>,
+            <strong>Message</strong>, and <strong>Send as</strong>, the teammate
+            credited in the shared inbox. Sends a real text; attachments are not
+            supported.
+          </p>
+        </div>
+        <div class="endpoint">
+          <h3>Get received messages</h3>
+          <p>
+            Lists received messages from recent conversations, optionally
+            filtered to one business number. For reporting and catch-up steps
+            rather than live routing.
+          </p>
+        </div>
+        <div class="endpoint">
+          <h3>Get channels</h3>
+          <p>
+            Lists your channels and their assigned teammates. Mostly used behind
+            the scenes to populate the number and teammate dropdowns.
+          </p>
+        </div>
+
+        <h2 id="example">Configure an example reply</h2>
+        <ol>
+          <li>
+            Add <strong>SMS received</strong> and select your business number.
+          </li>
+          <li>
+            Add <strong>Send SMS</strong>. Map <code>from_phone</code> to the
+            recipient, then choose your sending number and user.
+          </li>
+          <li>Write a reply template and test it with a phone you control.</li>
+        </ol>
+        <p>The animated examples illustrate a fixed reply configured by you.</p>
+        <h2 id="notes">Working with messages</h2>
+        <ul>
+          <li>
+            The received-message triggers provide <code>received_at</code> in
+            ISO format and <code>received_at_ms</code> in epoch milliseconds.
+          </li>
+          <li>
+            The periodic trigger checks every five minutes and includes
+            image-only texts.
+          </li>
+          <li>
+            After a send times out, check conversation history before retrying.
+          </li>
+        </ul>
+        <h2 id="resources">Resources</h2>
+        <div class="resource-links">
+          <a href="https://www.keragon.com" target="_blank" rel="noreferrer"
+            >Open Keragon ↗</a
+          ><a href="../api/receive-messages.html">Message history →</a
+          ><a href="https://support.alive5.com" target="_blank" rel="noreferrer"
+            >Alive5 support ↗</a
+          >
+        </div>
+        <div class="pager">
+          <a href="index.html"
+            ><span>Previous</span><strong>← Connectors</strong></a
+          >
+          <a class="next" href="../api/index.html"
+            ><span>Next</span><strong>API overview →</strong></a
+          >
+        </div>
+      </main>
+      <aside data-toc aria-label="On this page"></aside>
+    </div>
+    <footer data-docfoot></footer>
+    <script src="../assets/site.js"></script>
+    <script src="../assets/demos.js"></script>
+  </body>
+</html>

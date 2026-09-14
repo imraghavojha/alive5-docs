@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Build with n8n · Alive5 docs</title>
+    <meta
+      name="description"
+      content="Install the Alive5 integration in n8n and send an SMS from your workflow."
+    />
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png" />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="stylesheet" href="../assets/demos.css" />
+  </head>
+  <body
+    data-root="../"
+    data-page="connectors-n8n"
+    data-section="connectors"
+  >
+    <a class="skip" href="#main">Skip to content</a>
+    <header data-header></header>
+    <div class="layout">
+      <nav data-sidebar="" aria-label="Documentation"></nav>
+      <main class="doc" id="main">
+        <p class="crumbs"><a href="../index.html">Home</a><span>/</span><a href="index.html">Connectors</a><span>/</span>n8n</p>
+        <h1>Build with n8n</h1>
+        <p class="sub">Send SMS from your workflows with the Alive5 node.</p>
+        <p class="availability"><span class="pill">Verified community node</span><a href="https://n8n.io/integrations/alive5/" target="_blank" rel="noreferrer">Alive5 on n8n ↗</a></p>
+        <p>The integration is maintained by Alive5 and verified by n8n. Use the SMS Send action to add business texting to a workflow.</p>
+        <h2 id="setup">Connect your account</h2>
+        <ol class="setup-list">
+          <li><strong>Install Alive5</strong><p>As an n8n instance owner or admin, open the canvas and select <strong>+</strong>. Search for <strong>Alive5</strong> under <strong>More from the community</strong>, select it, then choose <strong>Install</strong>.</p></li>
+          <li><strong>Add your credentials</strong><p>Add the Alive5 node and create an <strong>Alive5 API</strong> credential. Paste your <a href="../api/authentication.html">API key</a> and keep the default API Base URL. Store the key in the credential, not in a workflow field.</p></li>
+          <li><strong>Choose the action</strong><p>Set <strong>Resource</strong> to <strong>SMS</strong> and <strong>Operation</strong> to <strong>Send</strong>. Select your channel and a user assigned to that channel.</p></li>
+        </ol>
+        <p>If Alive5 does not appear, ask your instance owner to enable verified community nodes. See <a href="https://docs.n8n.io/integrations/community-nodes/installation-and-management/install-verified-community-nodes" target="_blank" rel="noreferrer">n8n's installation guide ↗</a>.</p>
+        <h2 id="send">Send an SMS</h2>
+        <p>Fill these fields in the Alive5 node. You can also map values from an earlier step using n8n expressions.</p>
+        <table class="tbl"><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>
+          <tr><td>Channel name or ID</td><td>The channel for your SMS business line.</td></tr>
+          <tr><td>User email or ID</td><td>A user assigned to the selected channel.</td></tr>
+          <tr><td>To phone number</td><td>Your recipient's number with country code.</td></tr>
+          <tr><td>Message</td><td>The text to send.</td></tr>
+        </tbody></table>
+        <h2 id="example">Try a first workflow</h2>
+        <div class="n8n-example" role="group" aria-label="Example workflow: Manual Trigger followed by Alive5 Send SMS">
+          <div class="example-steps"><div class="example-step"><small>01 · n8n</small><strong>Manual Trigger</strong></div><span class="example-arrow" aria-hidden="true">→</span><div class="example-step"><small>02 · Alive5</small><strong>SMS · Send</strong></div></div>
+          <p>Example configuration. Run it in your n8n workspace.</p>
+        </div>
+        <ol><li>Connect a <strong>Manual Trigger</strong> to the Alive5 node.</li><li>Enter a phone number you control and a short message, such as <strong>Hello from Alive5.</strong></li><li>Execute the workflow. This sends a real SMS.</li><li>Check the node output and confirm that the text arrives on your phone.</li></ol>
+        <h2 id="next">Build on your workflow</h2>
+        <p>Replace the manual step with a schedule or a trigger from another app. Map its recipient and message values into Alive5.</p>
+        <div class="note"><strong>Before enabling an automated send</strong><p>Send only to recipients who have agreed to receive texts from your business. Check the recipient and message mappings. Keep automatic retries off until you have a way to prevent duplicate messages.</p></div>
+        <h2 id="resources">Resources</h2>
+        <ul><li><a href="https://n8n.io/integrations/alive5/" target="_blank" rel="noreferrer">Alive5 integration and supported actions ↗</a></li><li><a href="https://www.npmjs.com/package/n8n-nodes-alive5" target="_blank" rel="noreferrer">Alive5 node package ↗</a></li><li><a href="../api/errors.html">API errors and responses</a></li></ul>
+      </main>
+      <aside data-toc aria-label="On this page"></aside>
+    </div>
+    <footer data-docfoot></footer>
+    <script src="../assets/site.js"></script>
+    <script src="../assets/demos.js"></script>
+  </body>
+</html>

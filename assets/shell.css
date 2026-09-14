@@ -1,0 +1,352 @@
+/* Light documentation shell, with local illustrative responses. */
+.stripe-shell {
+  display: flex;
+  flex-direction: column;
+  height: 420px;
+  min-height: 420px;
+  background: #fff;
+  color: #313747;
+  border: 1px solid #eceef2;
+  border-radius: 14px;
+  box-shadow:
+    0 9px 24px #1f263015,
+    0 2px 7px #1f26300a;
+  overflow: hidden;
+}
+.shell-scroll {
+  position: relative;
+  padding: 18px 15px 10px;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #c4c9d1 transparent;
+}
+.shell-logo {
+  display: block;
+  max-width: 100%;
+  margin: 0 0 14px;
+}
+.stripe-shell .shell-out {
+  padding: 0;
+  overflow: visible;
+  font: 12px/20px var(--mono);
+  color: #313747;
+  white-space: normal;
+}
+.shell-intro {
+  font: 12px/20px var(--mono);
+  color: #303746;
+}
+.shell-intro button,
+.shell-help-list button {
+  display: inline;
+  border: 0;
+  background: none;
+  padding: 0;
+  color: #aa492d;
+  font: 600 12px/20px var(--mono);
+  text-align: left;
+  cursor: pointer;
+}
+.shell-intro button:hover,
+.shell-help-list button:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.shell-bullet {
+  color: #747e8c;
+}
+.shell-prompt {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 18px;
+  color: #424b59;
+  font: 12px/21px var(--mono);
+}
+.shell-prompt > span {
+  padding-top: 2px;
+}
+.shell-prompt textarea {
+  resize: none;
+  flex: 1;
+  min-width: 0;
+  min-height: 27px;
+  height: 45px;
+  border: 0;
+  border-bottom: 1px solid #edf0f5;
+  border-radius: 0;
+  background: transparent;
+  color: #313747;
+  padding: 2px 0;
+  margin: 0;
+  font: 12px/21px var(--mono);
+  overflow: hidden;
+  outline: none;
+  caret-color: #aa492d;
+}
+.shell-prompt textarea:focus-visible {
+  outline: none;
+  box-shadow: 0 1px #aab3c2;
+}
+.shell-status {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 34px;
+  flex: none;
+  padding: 5px 12px;
+  background: #f5f6f9;
+  border-top: 1px solid #eceef2;
+  color: #626d7e;
+  font: 11px var(--mono);
+}
+.shell-status button {
+  color: #626d7e;
+  border: 0;
+  background: none;
+  padding: 3px;
+  cursor: pointer;
+  font: 15px var(--sans);
+}
+.shell-status [data-cli-motion] {
+  font: 15px var(--sans);
+}
+.stripe-shell button:focus-visible {
+  outline: 2px solid #b14c2c;
+  outline-offset: 2px;
+}
+.shell-history-entry {
+  margin-top: 20px;
+}
+.shell-history-command {
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.shell-history-command > span {
+  color: #858b96;
+}
+.shell-response {
+  margin-top: 8px;
+}
+.shell-response pre {
+  margin: 7px 0 0;
+  font: 11px/19px var(--mono);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.stripe-shell .key {
+  color: #486083;
+}
+.stripe-shell .str {
+  color: #2d7b65;
+}
+.stripe-shell .num {
+  color: #8a672e;
+}
+.shell-result-label {
+  color: #337964;
+  font-size: 11px;
+}
+.shell-result-label > span {
+  color: #697687;
+}
+.shell-error {
+  color: #b14335;
+}
+.shell-working {
+  color: #6b7380;
+}
+.shell-help-list {
+  display: grid;
+  gap: 0;
+}
+.shell-help-list span {
+  color: #6c7685;
+  font-size: 11px;
+  margin-bottom: 6px;
+}
+.tryout {
+  grid-template-columns: 33% minmax(0, 1fr);
+  gap: 24px;
+}
+.tryout-list {
+  padding: 9px;
+}
+.tryout-list button {
+  font-size: 15px;
+  min-height: 54px;
+  padding: 12px 14px;
+  margin: 2px 0;
+}
+/* Terminal height follows the command list; the grip in the status bar extends it. */
+.stripe-shell {
+  height: auto;
+  min-height: 0;
+}
+.shell-scroll {
+  padding-top: 14px;
+}
+.shell-logo {
+  margin-bottom: 8px;
+}
+.shell-prompt {
+  margin-top: 12px;
+}
+.shell-status {
+  position: relative;
+}
+.shell-resize {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 72px;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  cursor: ns-resize;
+  touch-action: none;
+  border-radius: 4px;
+}
+.shell-resize::before {
+  content: "";
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  background: #c6ccd5;
+  transition: background 0.15s;
+}
+.shell-resize:hover::before,
+.shell-resize:focus-visible::before,
+.is-resizing .shell-resize::before {
+  background: #8b94a3;
+}
+.shell-resize:focus-visible {
+  outline: 2px solid #b14c2c;
+  outline-offset: -2px;
+}
+.is-resizing,
+.is-resizing * {
+  cursor: ns-resize !important;
+  user-select: none;
+}
+.tryout-foot {
+  justify-content: flex-end;
+}
+/* "Try it out" info popover */
+.tryout-head {
+  position: relative;
+  justify-content: flex-start;
+  gap: 6px;
+}
+/* Anchored to the heading row so the hidden bubble never widens the page. */
+.info-tip {
+  display: inline-flex;
+}
+.info-trigger {
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: none;
+  padding: 4px;
+  color: #7a8494;
+  border-radius: 4px;
+}
+.info-trigger:hover {
+  color: var(--link);
+}
+.info-bubble {
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  top: calc(100% + 6px);
+  width: min(320px, 100%);
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid #e1e5eb;
+  border-radius: 8px;
+  box-shadow:
+    0 12px 30px #1820301a,
+    0 2px 6px #1820300d;
+  color: #4a5261;
+  font-size: 13px;
+  line-height: 20px;
+  letter-spacing: 0;
+  font-weight: 400;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition:
+    opacity 0.15s,
+    transform 0.15s,
+    visibility 0.15s;
+  pointer-events: none;
+}
+.info-tip:hover .info-bubble,
+.info-trigger:focus + .info-bubble {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+.shell-scroll-cue {
+  display: none;
+}
+@media (max-width: 940px) and (min-width: 721px) {
+  .tryout {
+    grid-template-columns: 28% minmax(0, 1fr);
+    gap: 16px;
+  }
+  .tryout-list button {
+    font-size: 13px;
+  }
+  .shell-status {
+    gap: 5px;
+  }
+}
+@media (max-width: 720px) {
+  .tryout {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .tryout-list {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 5px 25px 5px 5px;
+  }
+  .tryout-list button {
+    flex: none;
+    font-size: 12px;
+    min-height: 36px;
+    padding: 6px 10px;
+  }
+  .shell-scroll-cue {
+    display: block;
+    color: #737e90;
+    font-size: 11px;
+  }
+  .stripe-shell {
+    height: 480px;
+    min-height: 480px;
+    border-radius: 10px;
+  }
+  .shell-status {
+    gap: 5px;
+    padding: 5px 9px;
+  }
+}
+
+.shell-announcement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

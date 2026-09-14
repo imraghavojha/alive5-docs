@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>API overview · Alive5 docs</title>
+    <meta
+      name="description"
+      content="How the Alive5 public API is organized: base URLs, resources, and limits."
+    />
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png" />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="stylesheet" href="../assets/demos.css" />
+  </head>
+  <body data-root="../" data-page="api" data-section="devres">
+    <a class="skip" href="#main">Skip to content</a>
+    <header data-header></header>
+    <div class="layout">
+      <nav data-sidebar="" aria-label="Documentation"></nav>
+      <main class="doc" id="main">
+        <p class="crumbs">
+          <a href="../index.html">Home</a><span>/</span
+          ><a href="index.html">Developer resources</a><span>/</span>Overview
+        </p>
+        <h1>Developer resources</h1>
+        <p class="sub">
+          Build on the Alive5 API: send texts, read conversations, manage
+          contacts, and pull reporting.
+        </p>
+
+        <section class="devres-hero" aria-label="Agent-ready tools">
+          <div class="devres-copy">
+            <p>
+              Start building with Alive5’s suite of agent-ready tools, from the
+              REST API to workflow connectors.
+            </p>
+            <p class="devres-soon">
+              The Alive5 CLI and an MCP server for agents are coming soon.
+            </p>
+            <a class="devres-link" href="reference.html"
+              >Explore the API reference →</a
+            >
+          </div>
+          <figure
+            class="devres-term"
+            role="img"
+            aria-label="Terminal example: sending a text with the Alive5 CLI returns a queued message"
+          >
+            <div class="term-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+            <pre aria-hidden="true"><span class="t-dim">$</span> <span class="t-cmd">alive5 messages</span> <span class="t-sub">send</span> <span class="t-flag">--to</span> <span class="t-val">+12025550123</span> <span class="t-flag">--text</span> <span class="t-val">"Hello"</span>
+
+<span class="t-dim">{</span>
+  <span class="t-key">"code"</span><span class="t-dim">:</span> <span class="t-num">200</span><span class="t-dim">,</span>
+  <span class="t-key">"data"</span><span class="t-dim">: {</span>
+    <span class="t-key">"message_id"</span><span class="t-dim">:</span> <span class="t-str">"example_message"</span><span class="t-dim">,</span>
+    <span class="t-key">"message_status"</span><span class="t-dim">:</span> <span class="t-str">"queued"</span><span class="t-dim">,</span>
+    <span class="t-key">"direction"</span><span class="t-dim">:</span> <span class="t-str">"outbound"</span><span class="t-dim">,</span>
+    <span class="t-key">"to"</span><span class="t-dim">:</span> <span class="t-str">"+12025550123"</span><span class="t-dim">,</span>
+    <span class="t-key">"message"</span><span class="t-dim">:</span> <span class="t-str">"Hello"</span>
+  <span class="t-dim">},</span></pre>
+          </figure>
+        </section>
+
+        <div class="note">
+          Use the API key, SMS number, channel ID, and user ID from your own
+          Alive5 account. Sample responses use fictional data.
+        </div>
+        <h2 id="base-urls">Base URLs</h2>
+        <p>
+          Two hosts are in service. Messaging and account calls run on the
+          original host; directory and reporting calls run on
+          <code>api-v2</code>. Each endpoint in the reference states which one
+          it uses.
+        </p>
+        <table class="tbl">
+          <tr>
+            <th>Host</th>
+            <th>Serves</th>
+          </tr>
+          <tr>
+            <td>https://api.alive5.com/public/1.0</td>
+            <td>Account, conversations, send and push</td>
+          </tr>
+          <tr>
+            <td>https://api-v2.alive5.com/public/1.0</td>
+            <td>Channels, users, contacts, tags, reporting</td>
+          </tr>
+        </table>
+
+        <h2 id="resources">Resources</h2>
+        <div class="cards" style="margin-top: 20px">
+          <a class="card" href="reference.html#messaging"
+            ><h3>Messaging</h3>
+            <p>
+              Send an SMS, read recent conversations, simulate an inbound
+              message.
+            </p>
+            <span class="go">Reference →</span></a
+          >
+          <a class="card" href="reference.html#directory"
+            ><h3>Directory</h3>
+            <p>
+              Channels, users, contacts, and tags. The IDs the rest of the API
+              needs.
+            </p>
+            <span class="go">Reference →</span></a
+          >
+          <a class="card" href="reference.html#reporting"
+            ><h3>Reporting</h3>
+            <p>
+              Performance, bot, free-text, multiple-choice, and FAQ reports by
+              date range.
+            </p>
+            <span class="go">Reference →</span></a
+          >
+        </div>
+
+        <h2 id="shape">Request and response shape</h2>
+        <p>
+          Every call carries the <code>X-A5-APIKEY</code> header. The examples
+          on each endpoint page show its request format. Responses are JSON
+          wrapped in an envelope:
+        </p>
+        <div class="code">
+          <div class="code-head">
+            <span class="name">envelope</span
+            ><button class="copy" type="button">Copy</button>
+          </div>
+          <pre><span class="tok-punc">{</span>
+  <span class="tok-key">"code"</span><span class="tok-punc">:</span> <span class="tok-num">200</span><span class="tok-punc">,</span>
+  <span class="tok-key">"data"</span><span class="tok-punc">:</span> <span class="tok-punc">{ … }</span><span class="tok-punc">,</span>
+  <span class="tok-key">"error"</span><span class="tok-punc">:</span> <span class="tok-punc">{}</span>
+<span class="tok-punc">}</span></pre>
+        </div>
+        <div class="note">
+          <strong>Read <code>code</code>, not the HTTP status.</strong> A failed
+          call can still return HTTP 200 with a failure code inside the body.
+          See <a href="errors.html">Errors and responses</a>.
+        </div>
+
+        <h2 id="limits">Known limits</h2>
+        <ul>
+          <li>
+            <code>GET /conversations/sms</code> returns recent conversations
+            only; <code>date-start</code> and <code>date-end</code> are ignored.
+          </li>
+          <li>
+            Sending requires a channel ID and a user ID, both from the
+            directory.
+          </li>
+        </ul>
+
+        <div class="pager">
+          <span></span>
+          <a class="next" href="authentication.html"
+            ><span>Next</span><strong>Authentication →</strong></a
+          >
+        </div>
+      </main>
+      <aside data-toc aria-label="On this page"></aside>
+    </div>
+    <footer data-docfoot></footer>
+    <script src="../assets/site.js"></script>
+    <script src="../assets/demos.js"></script>
+  </body>
+</html>

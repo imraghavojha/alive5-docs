@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Errors and responses · Alive5 docs</title>
+    <meta
+      name="description"
+      content="How Alive5 reports failures and how to detect them reliably."
+    />
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png" />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="stylesheet" href="../assets/demos.css" />
+  </head>
+  <body data-root="../" data-page="api-errors" data-section="devres">
+    <a class="skip" href="#main">Skip to content</a>
+    <header data-header></header>
+    <div class="layout">
+      <nav data-sidebar="" aria-label="Documentation"></nav>
+      <main class="doc" id="main">
+        <p class="crumbs">
+          <a href="../index.html">Home</a><span>/</span
+          ><a href="index.html">API</a><span>/</span>Errors
+        </p>
+        <h1>Errors and responses</h1>
+        <p class="sub">
+          The HTTP status is not the source of truth. Check the envelope.
+        </p>
+
+        <h2 id="envelope">Check three fields</h2>
+        <p>
+          A call succeeded only when <code>code</code> is below 400
+          <em>and</em> <code>error</code> is empty. Some endpoints nest a second
+          envelope inside <code>data</code>, so check that too.
+        </p>
+        <div class="code">
+          <div class="code-head">
+            <span class="name">is-ok.js</span
+            ><button class="copy" type="button">Copy</button>
+          </div>
+          <pre><span class="tok-key">function</span> <span class="tok-cmd">isOk</span><span class="tok-punc">(</span>body<span class="tok-punc">) {</span>
+  <span class="tok-key">const</span> inner <span class="tok-punc">=</span> body<span class="tok-punc">?.</span>data <span class="tok-punc">??</span> <span class="tok-punc">{};</span>
+  <span class="tok-key">const</span> code  <span class="tok-punc">=</span> inner<span class="tok-punc">.</span>code <span class="tok-punc">??</span> body<span class="tok-punc">.</span>code <span class="tok-punc">??</span> <span class="tok-num">200</span><span class="tok-punc">;</span>
+  <span class="tok-key">const</span> err   <span class="tok-punc">=</span> inner<span class="tok-punc">.</span>error <span class="tok-punc">??</span> body<span class="tok-punc">.</span>error<span class="tok-punc">;</span>
+  <span class="tok-key">const</span> empty <span class="tok-punc">=</span> err <span class="tok-punc">==</span> <span class="tok-key">null</span> <span class="tok-punc">|| (</span><span class="tok-key">typeof</span> err <span class="tok-punc">===</span> <span class="tok-str">"object"</span> <span class="tok-punc">&&</span> Object<span class="tok-punc">.</span><span class="tok-cmd">keys</span><span class="tok-punc">(</span>err<span class="tok-punc">).</span>length <span class="tok-punc">===</span> <span class="tok-num">0</span><span class="tok-punc">);</span>
+  <span class="tok-key">return</span> code <span class="tok-punc">&lt;</span> <span class="tok-num">400</span> <span class="tok-punc">&&</span> empty<span class="tok-punc">;</span>
+<span class="tok-punc">}</span></pre>
+        </div>
+
+        <h2 id="codes">Codes you will see</h2>
+        <table class="tbl">
+          <tr>
+            <th>Code</th>
+            <th>Meaning</th>
+            <th>Action</th>
+          </tr>
+          <tr>
+            <td>200</td>
+            <td>Call accepted</td>
+            <td>Confirm <code>error</code> is empty before trusting it</td>
+          </tr>
+          <tr>
+            <td>400</td>
+            <td>Missing or invalid field</td>
+            <td>Fix the request; do not retry unchanged</td>
+          </tr>
+          <tr>
+            <td>401</td>
+            <td>No API key</td>
+            <td>Add the header</td>
+          </tr>
+          <tr>
+            <td>404</td>
+            <td>No matching records</td>
+            <td>Often an empty result, not a broken endpoint</td>
+          </tr>
+        </table>
+
+        <h2 id="empty">Empty error objects</h2>
+        <p>
+          Several write endpoints return <code>"error": {}</code> alongside a
+          400 code, with no field name. When that happens, compare your request
+          against the field list in the <a href="reference.html">reference</a>.
+          a missing required field is the usual cause.
+        </p>
+
+        <h2 id="404">Empty 404s</h2>
+        <p>
+          Conversation and report endpoints return code <code>404</code> when
+          the account has no matching records for the filter. Treat it as an
+          empty list rather than an error, unless the same filter returned data
+          before.
+        </p>
+
+        <div class="pager">
+          <a href="authentication.html"
+            ><span>Previous</span><strong>← Authentication</strong></a
+          >
+          <a class="next" href="send-a-message.html"
+            ><span>Next</span><strong>Send a message →</strong></a
+          >
+        </div>
+      </main>
+      <aside data-toc aria-label="On this page"></aside>
+    </div>
+    <footer data-docfoot></footer>
+    <script src="../assets/site.js"></script>
+    <script src="../assets/demos.js"></script>
+  </body>
+</html>
