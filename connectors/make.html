@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Make · Alive5 docs</title>
+    <meta name="description" content="Connect Alive5 SMS to Make workflows." />
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png" />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="stylesheet" href="../assets/demos.css" />
+  </head>
+  <body data-root="../" data-page="connectors-make" data-section="connectors">
+    <a class="skip" href="#main">Skip to content</a>
+    <header data-header></header>
+    <div class="layout">
+      <nav data-sidebar aria-label="Documentation"></nav>
+      <main class="doc" id="main">
+        <p class="crumbs">
+          <a href="../index.html">Home</a><span>/</span
+          ><a href="index.html">Connectors</a><span>/</span>Make
+        </p>
+        <div class="connector-title">
+          <span class="connector-logo make" aria-hidden="true"
+            ><i></i><i></i><i></i
+          ></span>
+          <h1>Make</h1>
+        </div>
+        <p class="sub">
+          Build visual scenarios that receive and send business texts.
+        </p>
+        <p class="availability">
+          <span class="pill">Review pending</span
+          ><span>Public listing not yet available</span>
+        </p>
+        <section
+          class="automation-lab"
+          data-automation="make"
+          aria-label="Interactive SMS workflow"
+        ></section>
+        <h2 id="connect">Connect your account</h2>
+        <ol class="setup-list">
+          <li>
+            <strong>Add Alive5</strong>
+            <p>In Make, add the Alive5 connector to your scenario.</p>
+          </li>
+          <li>
+            <strong>Connect with an API key</strong>
+            <p>
+              Copy your key from
+              <a href="../api/authentication.html">Alive5 Integrations</a> and
+              paste it into the connection.
+            </p>
+          </li>
+          <li>
+            <strong>Choose your business number</strong>
+            <p>
+              Select an SMS line. For outbound texts, choose a user assigned to
+              that channel.
+            </p>
+          </li>
+        </ol>
+        <div class="note">
+          The app is under review. If Alive5 is not available in your workspace,
+          <a href="mailto:support@alive5.com">contact Alive5 support</a> for
+          access.
+        </div>
+        <h2 id="modules">Triggers and actions</h2>
+        <div class="module-row">
+          <span class="module-type">TRIGGER</span>
+          <div>
+            <h3>Watch Incoming SMS</h3>
+            <p>
+              Starts when a text arrives at the selected number. Choose the SMS
+              number when setting up the trigger.
+            </p>
+          </div>
+        </div>
+        <div class="module-row">
+          <span class="module-type action">ACTION</span>
+          <div>
+            <h3>Send an SMS</h3>
+            <p>
+              Choose a business number and sending user. Enter the recipient
+              with a country code and your message.
+            </p>
+          </div>
+        </div>
+        <div class="module-row">
+          <span class="module-type action">ACTION</span>
+          <div>
+            <h3>Make an API Call</h3>
+            <p>
+              Call an Alive5 endpoint with authentication included. Returns the
+              body, status, and response headers.
+            </p>
+          </div>
+        </div>
+        <h2 id="example">Build a reply workflow</h2>
+        <ol>
+          <li>Add <strong>Watch Incoming SMS</strong> and choose your line.</li>
+          <li>
+            Add <strong>Send an SMS</strong>. Map the incoming sender to the
+            recipient.
+          </li>
+          <li>Enter a reply, then test with a phone number you control.</li>
+        </ol>
+        <div class="note">
+          When enabled in Make, this workflow sends real SMS. A successful
+          result confirms API acceptance, not carrier delivery.
+        </div>
+        <h2 id="limits">Usage notes</h2>
+        <ul>
+          <li>Image-only messages do not trigger a workflow.</li>
+          <li>
+            After a send times out, check conversation history before retrying.
+          </li>
+        </ul>
+        <h2 id="resources">Resources</h2>
+        <div class="resource-links">
+          <a href="https://www.make.com" target="_blank" rel="noreferrer"
+            >Open Make ↗</a
+          ><a href="../api/receive-messages.html">Message history →</a
+          ><a href="https://support.alive5.com" target="_blank" rel="noreferrer"
+            >Alive5 support ↗</a
+          >
+        </div>
+        <div class="pager">
+          <a href="index.html"
+            ><span>Previous</span><strong>← All connectors</strong></a
+          ><a class="next" href="keragon.html"
+            ><span>Next connector</span><strong>Keragon →</strong></a
+          >
+        </div>
+      </main>
+      <aside data-toc aria-label="On this page"></aside>
+    </div>
+    <footer data-docfoot></footer>
+    <script src="../assets/site.js"></script>
+    <script src="../assets/demos.js"></script>
+  </body>
+</html>

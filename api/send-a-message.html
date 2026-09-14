@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Send a message · Alive5 docs</title>
+    <meta
+      name="description"
+      content="Send an SMS from an Alive5 business line in two API calls."
+    />
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png" />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="stylesheet" href="../assets/demos.css" />
+  </head>
+  <body data-root="../" data-page="api-send" data-section="messaging">
+    <a class="skip" href="#main">Skip to content</a>
+    <header data-header></header>
+    <div class="layout">
+      <nav data-sidebar="" aria-label="Documentation"></nav>
+      <main class="doc" id="main">
+        <p class="crumbs">
+          <a href="../index.html">Home</a><span>/</span>
+          <a href="index.html">API</a><span>/</span>Send a message
+        </p>
+        <h1>Send a message</h1>
+        <p class="sub">Two calls: look up the channel and user, then send.</p>
+
+        <div class="note">
+          Use your own Alive5 account. Set <code>ALIVE5_FROM_NUMBER</code> to an
+          SMS line on that account and <code>RECIPIENT_NUMBER</code> to a phone
+          you control. Use E.164 format, including the country code.
+        </div>
+        <h2 id="ids">1. Find your IDs</h2>
+        <p>
+          A send needs the channel that owns the business number and the user it
+          is credited to. One call returns both.
+        </p>
+        <div class="code">
+          <div class="code-head">
+            <span class="name">GET /objects/channels-and-users/list</span
+            ><button class="copy" type="button">Copy</button>
+          </div>
+          <pre><span class="tok-cmd">curl</span> https://api-v2.alive5.com/public/1.0/objects/channels-and-users/list \
+  <span class="tok-flag">-H</span> <span class="tok-str">"X-A5-APIKEY: $ALIVE5_KEY"</span></pre>
+        </div>
+        <p>
+          Channels whose <code>channel_label</code> is a phone number are SMS
+          lines. Take its <code>channel_id</code>, and a
+          <code>user_id</code> from that channel's <code>agents</code> array.
+          Save these as <code>CHANNEL_ID</code> and <code>USER_ID</code>.
+        </p>
+
+        <h2 id="send">2. Send the SMS</h2>
+        <p>
+          This SMS endpoint uses <code>api.alive5.com</code>; the directory call
+          above uses <code>api-v2.alive5.com</code>. Send the fields as
+          multipart form data.
+        </p>
+        <div class="code">
+          <div class="code-head">
+            <button class="tab" aria-selected="true" type="button">curl</button>
+            <button class="tab" aria-selected="false" type="button">
+              Node
+            </button>
+            <button class="copy" type="button">Copy</button>
+          </div>
+          <pre><span class="tok-cmd">curl</span> https://api.alive5.com/public/1.0/conversations/sms/send \
+  <span class="tok-flag">-H</span> <span class="tok-str">"X-A5-APIKEY: $ALIVE5_KEY"</span> \
+  <span class="tok-flag">-F</span> <span class="tok-str">"phone_number_from=$ALIVE5_FROM_NUMBER"</span> \
+  <span class="tok-flag">-F</span> <span class="tok-str">"phone_number_to=$RECIPIENT_NUMBER"</span> \
+  <span class="tok-flag">-F</span> <span class="tok-str">"message=Hello from Alive5."</span> \
+  <span class="tok-flag">-F</span> <span class="tok-str">"channel_id=$CHANNEL_ID"</span> \
+  <span class="tok-flag">-F</span> <span class="tok-str">"user_id=$USER_ID"</span></pre>
+          <pre
+            hidden
+          ><span class="tok-key">const</span> form <span class="tok-punc">=</span> <span class="tok-key">new</span> <span class="tok-cmd">FormData</span><span class="tok-punc">();</span>
+form<span class="tok-punc">.</span><span class="tok-cmd">set</span><span class="tok-punc">(</span><span class="tok-str">"phone_number_from"</span><span class="tok-punc">,</span> process.env.ALIVE5_FROM_NUMBER<span class="tok-punc">);</span>
+form<span class="tok-punc">.</span><span class="tok-cmd">set</span><span class="tok-punc">(</span><span class="tok-str">"phone_number_to"</span><span class="tok-punc">,</span> process.env.RECIPIENT_NUMBER<span class="tok-punc">);</span>
+form<span class="tok-punc">.</span><span class="tok-cmd">set</span><span class="tok-punc">(</span><span class="tok-str">"message"</span><span class="tok-punc">,</span> <span class="tok-str">"Hello from Alive5."</span><span class="tok-punc">);</span>
+form<span class="tok-punc">.</span><span class="tok-cmd">set</span><span class="tok-punc">(</span><span class="tok-str">"channel_id"</span><span class="tok-punc">,</span> process.env.CHANNEL_ID<span class="tok-punc">);</span>
+form<span class="tok-punc">.</span><span class="tok-cmd">set</span><span class="tok-punc">(</span><span class="tok-str">"user_id"</span><span class="tok-punc">,</span> process.env.USER_ID<span class="tok-punc">);</span>
+
+<span class="tok-key">await</span> <span class="tok-cmd">fetch</span><span class="tok-punc">(</span><span class="tok-str">"https://api.alive5.com/public/1.0/conversations/sms/send"</span><span class="tok-punc">, {</span>
+  <span class="tok-key">method</span><span class="tok-punc">:</span> <span class="tok-str">"POST"</span><span class="tok-punc">,</span>
+  <span class="tok-key">headers</span><span class="tok-punc">: {</span> <span class="tok-str">"X-A5-APIKEY"</span><span class="tok-punc">:</span> process<span class="tok-punc">.</span>env<span class="tok-punc">.</span>ALIVE5_KEY <span class="tok-punc">},</span>
+  <span class="tok-key">body</span><span class="tok-punc">:</span> form
+<span class="tok-punc">});</span></pre>
+        </div>
+
+        <h2 id="fields">Fields</h2>
+        <table class="tbl">
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Notes</th>
+          </tr>
+          <tr>
+            <td>phone_number_from</td>
+            <td class="t">string</td>
+            <td>An Alive5 business line, E.164 format</td>
+          </tr>
+          <tr>
+            <td>phone_number_to</td>
+            <td class="t">string</td>
+            <td>Recipient mobile number, including country code</td>
+          </tr>
+          <tr>
+            <td>message</td>
+            <td class="t">string</td>
+            <td>Up to 1,600 characters; longer texts split into segments</td>
+          </tr>
+          <tr>
+            <td>channel_id</td>
+            <td class="t">uuid</td>
+            <td>Inbox the thread belongs to</td>
+          </tr>
+          <tr>
+            <td>user_id</td>
+            <td class="t">uuid</td>
+            <td>Teammate credited with the send</td>
+          </tr>
+        </table>
+        <div class="note">
+          <strong>This sends a real text.</strong> Test against a number you
+          control. Attachments are not supported on this endpoint.
+        </div>
+
+        <h2 id="verify">Check API acceptance</h2>
+        <p>
+          The response returns a message ID, a status, and the thread ID. The
+          same thread is what your team sees in the shared inbox, so a reply
+          continues the conversation rather than opening a new one.
+        </p>
+
+        <div class="code">
+          <div class="code-head">
+            <span class="name">Example response</span
+            ><button class="copy" type="button">Copy</button>
+          </div>
+          <pre>
+{
+  "code": 200,
+  "data": {
+    "data": {
+      "message_id": "example_message",
+      "message_status": "queued",
+      "thread_id": "example_thread",
+      "From": "+12025550100",
+      "To": "+12025550123",
+      "direction": "outbound",
+      "message_content": "Hello from Alive5."
+    }
+  },
+  "error": {}
+}</pre
+          >
+        </div>
+        <p>API acceptance does not confirm carrier delivery.</p>
+        <div class="pager">
+          <a href="errors.html"
+            ><span>Previous</span><strong>← Errors</strong></a
+          >
+          <a class="next" href="receive-messages.html"
+            ><span>Next</span><strong>Receive messages →</strong></a
+          >
+        </div>
+      </main>
+      <aside data-toc aria-label="On this page"></aside>
+    </div>
+    <footer data-docfoot></footer>
+    <script src="../assets/site.js"></script>
+    <script src="../assets/demos.js"></script>
+  </body>
+</html>
