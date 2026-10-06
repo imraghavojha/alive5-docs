@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Build with Zapier · Alive5 docs</title>
+    <meta name="description" content="Connect Alive5 to Zapier. Automate SMS, live chat, and contacts with supported triggers, actions, and step-by-step setup." />
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png" />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="stylesheet" href="../assets/zapier.css" />
+  </head>
+  <body data-root="../" data-page="connectors-zapier" data-section="connectors">
+    <a class="skip" href="#main">Skip to content</a>
+    <header data-header></header>
+    <div class="layout">
+      <nav data-sidebar aria-label="Documentation"></nav>
+      <main class="doc" id="main">
+        <p class="crumbs"><a href="../index.html">Home</a><span>/</span><a href="index.html">Connectors</a><span>/</span>Zapier</p>
+        <h1>Build with Zapier</h1>
+        <p class="sub">Bring customer conversations into your everyday workflows.</p>
+        <p class="availability"><span class="pill">Available on Zapier</span><a href="https://zapier.com/apps/alive5/integrations" target="_blank" rel="noreferrer">Explore the integration ↗</a></p>
+        <p>Connect Alive5 with the tools your team already uses. Start an automation from a conversation, keep contact details up to date, or send a text when something happens in another app.</p>
+
+        <section class="zapier-product" aria-labelledby="explore">
+          <div class="zapier-product-copy">
+            <div class="zapier-brand"><span class="connector-logo zapier" aria-hidden="true">✳</span><span>Alive5 + Zapier</span></div>
+            <h2 id="explore">Explore Alive5 + Zapier</h2>
+            <p>Explore a workflow to see how your apps can work together.</p>
+            <fieldset class="zapier-choices">
+              <legend>Choose an example workflow</legend>
+              <label><input type="radio" name="workflow" value="reminder" checked aria-controls="zapier-preview" /><span><strong>Send a reminder</strong><small>Turn a calendar event into a text.</small></span></label>
+              <label><input type="radio" name="workflow" value="log" aria-controls="zapier-preview" /><span><strong>Log a conversation</strong><small>Keep your messages in a spreadsheet.</small></span></label>
+              <label><input type="radio" name="workflow" value="notify" aria-controls="zapier-preview" /><span><strong>Keep your team in the loop</strong><small>Bring new live chats into Slack.</small></span></label>
+            </fieldset>
+            <a class="zapier-cta" data-zapier-template href="https://zapier.com/apps/alive5/integrations/google-calendar/337150/send-alive5-text-messages-for-new-events-starting-in-google-calendar" target="_blank" rel="noreferrer">Explore this template <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="zapier-product-visual" id="zapier-preview" role="region" aria-label="Example workflow preview">
+            <div class="zapier-preview-heading"><span class="zapier-preview-dot" aria-hidden="true"></span>Workflow preview<span class="zapier-preview-badge">Example</span></div>
+            <div class="zapier-workflow">
+              <div class="zapier-step"><span class="zapier-app-icon calendar" data-trigger-icon aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="5" width="16" height="16" rx="3"/><path d="M8 3v4m8-4v4M4 11h16m-11 4h2m2 0h2m-6 3h2"/></svg></span><div><small>1. Trigger · <span data-trigger-app>Google Calendar</span></small><strong data-trigger-event>Event Start</strong></div></div>
+              <div class="zapier-connection" aria-hidden="true"><span>↓</span></div>
+              <div class="zapier-step"><span class="zapier-app-icon alive5" data-action-icon aria-hidden="true"><img src="../assets/images/alive5-logo.png" alt="" /></span><div><small>2. Action · <span data-action-app>Alive5</span></small><strong data-action-event>Send SMS</strong></div></div>
+            </div>
+            <div class="zapier-result" data-result>
+              <div class="zapier-result-label"><span data-result-label>Appointment reminder</span><span aria-hidden="true">↗</span></div>
+              <p data-result-message>Hi Alex, a quick reminder that your appointment is tomorrow at 10:00 AM. See you then!</p>
+              <div class="zapier-result-footer"><span data-result-footer>From your business number</span><span aria-hidden="true">✓</span></div>
+            </div>
+            <p class="zapier-preview-caption">Illustrative preview · Set up and run in Zapier</p>
+            <span class="zapier-sr-only" data-workflow-announcement role="status" aria-live="polite"></span>
+          </div>
+        </section>
+
+        <h2 id="setup">Connect your account</h2>
+        <p>Have your Alive5 and Zapier accounts ready, with permission to connect them. For outbound texts, you’ll also need an SMS business number and a user assigned to its channel.</p>
+        <ol class="setup-list">
+          <li><strong>Add Alive5 to a Zap</strong><p>Create a Zap, choose <strong>Alive5</strong> as the trigger or action app, and select an event from the lists below.</p></li>
+          <li><strong>Connect your Alive5 account</strong><p>In the account step, add a connection and follow Zapier’s sign-in prompts. You can manage it later in <a href="https://zapier.com/app/connections" target="_blank" rel="noreferrer">App Connections ↗</a>. Follow the <a href="https://help.zapier.com/hc/en-us/articles/8496258785421-Connect-your-app-accounts-to-Zapier" target="_blank" rel="noreferrer">account connection guide ↗</a> if the connection window doesn’t open.</p></li>
+          <li><strong>Map fields and test</strong><p>Select the requested channel, load a sample, and map its values into the next step. Review the test output before publishing your Zap. Testing a sending action can send a real text; use a phone number you control.</p></li>
+        </ol>
+
+        <h2 id="triggers">Start with an Alive5 event</h2>
+        <p>A trigger starts your Zap. These events are listed in the <a href="https://zapier.com/apps/alive5/integrations#triggers-and-actions" target="_blank" rel="noreferrer">Alive5 app directory ↗</a>.</p>
+        <div class="zapier-events">
+          <div><h3>SMS Conversation</h3><span>Instant</span><p>A text is sent or received. Select a channel.</p></div>
+          <div><h3>Chat Start</h3><span>Instant</span><p>A live chat begins in the selected channel.</p></div>
+          <div><h3>Chat End</h3><span>Instant</span><p>A live chat ends in the selected channel.</p></div>
+          <div><h3>Contact Created</h3><span>Instant</span><p>A new contact is added.</p></div>
+          <div><h3>Get Tags</h3><span>Polling</span><p>Fetch account tags. Timing depends on your Zapier plan.</p></div>
+        </div>
+        <div class="note"><strong>Working with incoming texts?</strong><p>SMS Conversation covers both sent and received messages. Inspect your sample and filter for the direction you need before adding a reply action, so your own outgoing texts don’t trigger a loop.</p></div>
+
+        <h2 id="actions">Take action in Alive5</h2>
+        <div class="zapier-events">
+          <div><h3>Send SMS</h3><span>Action</span><p>Send an outbound text. Requires From, To, message, Channel ID, and User ID.</p></div>
+          <div><h3>Create Contact</h3><span>Action</span><p>Add a contact. First Name is required; email, mobile number, and last name are also available.</p></div>
+          <div><h3>Update Contact</h3><span>Action</span><p>Update an existing contact using its phone number.</p></div>
+          <div><h3>Send SMS to Alive5</h3><span>Action</span><p>Pass a message into Alive5. Requires Alive5 Channel Number, Phone Number From, and Message.</p></div>
+        </div>
+
+        <h2 id="first-zap">Build your first Zap</h2>
+        <p>Start with a calendar reminder. Open the <a href="https://zapier.com/apps/alive5/integrations/google-calendar/337150/send-alive5-text-messages-for-new-events-starting-in-google-calendar" target="_blank" rel="noreferrer">Google Calendar template ↗</a>, then connect both accounts.</p>
+        <ol>
+          <li>Choose the calendar and when the reminder should run.</li>
+          <li>In the Alive5 action, select your business line, channel, and assigned user.</li>
+          <li>Map a recipient’s phone number into <strong>To</strong>; a calendar attendee’s email address cannot receive an SMS. Compose your message using event details.</li>
+          <li>Test with your own number, confirm the message arrives, and publish when the mappings are correct.</li>
+        </ol>
+        <p>Only automate texts to recipients who have agreed to hear from your business. Use Zap History to inspect failures before rerunning a send.</p>
+
+        <h2 id="resources">Keep building</h2>
+        <div class="cards cards-2">
+          <a class="card" href="https://zapier.com/apps/alive5/integrations" target="_blank" rel="noreferrer"><h3>Explore Alive5 templates ↗</h3><p>Find more app pairings and the latest supported events.</p></a>
+          <a class="card" href="../api/send-a-message.html"><h3>Build with the API →</h3><p>Send a message directly from your own application.</p></a>
+        </div>
+        <p class="zapier-source">Events checked against Zapier’s public Alive5 listing on October 6, 2026. Available fields may change; use the current Zap editor as your reference.</p>
+      </main>
+      <aside data-toc aria-label="On this page"></aside>
+    </div>
+    <footer data-docfoot></footer>
+    <script src="../assets/site.js"></script>
+    <script src="../assets/zapier.js"></script>
+  </body>
+</html>

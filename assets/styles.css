@@ -777,3 +777,5 @@ h3 { letter-spacing: -0.015em; }
   .logo .word { display: none; }
   .logo .mobile-brand { display: block; }
 }
+/* Zapier connector identity across the documentation. */
+.connector-logo.zapier { background: #fff0e8; color: #e75516; font-size: 30px !important; line-height: 1; }
