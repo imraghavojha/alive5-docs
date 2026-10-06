@@ -83,6 +83,7 @@ const SIDEBAR = [
     label: "Connectors",
     items: [
       ["connectors", "connectors/index.html", "Overview"],
+      ["connectors-zapier", "connectors/zapier.html", "Zapier"],
       ["connectors-n8n", "connectors/n8n.html", "n8n"],
       ["connectors-pipedream", "connectors/pipedream.html", "Pipedream"],
       ["connectors-make", "connectors/make.html", "Make"],
@@ -243,6 +244,7 @@ function wireToc() {
 
 /* --------------------------------------------------------------- search */
 const SEARCH = [
+  ["Build with Zapier", "connectors/zapier.html", "connector Zap SMS chat contacts automation calendar sheets Slack"],
   [
     "Authentication",
     "api/authentication.html",
