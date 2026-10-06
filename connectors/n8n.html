@@ -11,6 +11,7 @@
     <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png" />
     <link rel="stylesheet" href="../assets/styles.css" />
     <link rel="stylesheet" href="../assets/demos.css" />
+    <link rel="stylesheet" href="../assets/n8n.css" />
   </head>
   <body
     data-root="../"
@@ -27,6 +28,21 @@
         <p class="sub">Send SMS from your workflows with the Alive5 node.</p>
         <p class="availability"><span class="pill">Verified community node</span><a href="https://n8n.io/integrations/alive5/" target="_blank" rel="noreferrer">Alive5 on n8n ↗</a></p>
         <p>The integration is maintained by Alive5 and verified by n8n. Use the SMS Send action to add business texting to a workflow.</p>
+        <section class="n8n-product" aria-labelledby="explore">
+          <div class="n8n-product-heading">
+            <div><span class="n8n-product-eyebrow">ALIVE5 FOR n8n</span><h2 id="explore">Add SMS to your workflow</h2><p>Connect a trigger. Map your message. Make it personal.</p></div>
+            <a class="n8n-product-cta" href="#setup">Set up the node <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="n8n-canvas" role="img" aria-label="Example: a Manual Trigger connects to the Alive5 SMS Send node, with a sample message saying Hello Alex, your order is ready for pickup.">
+            <div class="n8n-node-flow" aria-hidden="true">
+              <div class="n8n-product-node"><div class="n8n-node-tile n8n-trigger-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 4 10 8-10 8z"/></svg><i class="n8n-port n8n-port-out"></i></div><strong>Manual Trigger</strong><small>Run manually</small></div>
+              <div class="n8n-node-wire"><span>→</span></div>
+              <div class="n8n-product-node"><div class="n8n-node-tile n8n-alive5-tile"><i class="n8n-port n8n-port-in"></i><img src="../assets/images/alive5-logo.png" alt="" /></div><strong>Alive5</strong><small>SMS · Send</small></div>
+            </div>
+            <div class="n8n-message-preview" aria-hidden="true"><div class="n8n-message-heading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l-3 3V11.5A7.5 7.5 0 0 1 9.5 4h3a7.5 7.5 0 0 1 7.5 7.5Z"/></svg><span>Your message</span><span>SMS</span></div><p>Hello Alex, your order is ready for pickup.</p><div class="n8n-message-meta">Sent from your business number</div></div>
+          </div>
+          <div class="n8n-product-footer"><span><span class="n8n-verified" aria-hidden="true">✓</span> Verified community node</span><span>Example workflow</span></div>
+        </section>
         <h2 id="setup">Connect your account</h2>
         <ol class="setup-list">
           <li><strong>Install Alive5</strong><p>As an n8n instance owner or admin, open the canvas and select <strong>+</strong>. Search for <strong>Alive5</strong> under <strong>More from the community</strong>, select it, then choose <strong>Install</strong>.</p></li>
