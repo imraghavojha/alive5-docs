@@ -18,24 +18,21 @@
 .zapier-preview-heading { display: flex; align-items: center; gap: 6px; font-size: 10px; line-height: 16px; color: #707989; margin: 0 0 12px; }
 .zapier-preview-dot { width: 5px; height: 5px; border-radius: 50%; background: #929bac; }
 .zapier-preview-badge { margin-left: auto; font-size: 9px; border: 1px solid #dce1e8; border-radius: 4px; padding: 2px 5px; color: #637083; }
-.zapier-step { display: flex; align-items: center; gap: 11px; background: #fff; border: 1px solid #e0e4ec; border-radius: 9px; padding: 11px 12px; box-shadow: 0 3px 6px #24334d06; }
-.zapier-step > div { min-width: 0; }
-.zapier-step small { display: block; font-size: 10px; color: #6a7382; line-height: 17px; }
-.zapier-step strong { display: block; color: #303949; font-size: 13px; line-height: 20px; font-weight: 600; }
+.zapier-step, .zapier-result { display: grid; grid-template-columns: 35px minmax(0, 1fr); align-items: center; gap: 11px; width: 100%; height: 84px; background: #fff; border: 1px solid #e0e4ec; border-radius: 8px; padding: 10px 12px; box-shadow: 0 2px 5px #24334d04; margin: 0; }
+.zapier-step > div, .zapier-result > div { min-width: 0; }
+.zapier-step small, .zapier-result small { display: block; font-size: 10px; color: #6a7382; line-height: 16px; }
+.zapier-step strong, .zapier-result strong { display: block; color: #303949; font-size: 13px; line-height: 19px; font-weight: 600; }
 .zapier-app-icon { width: 35px; height: 35px; flex: none; display: grid; place-items: center; border: 1px solid #e8ebf0; border-radius: 8px; background: #fff; }
 .zapier-app-icon svg { width: 23px; height: 23px; }
 .zapier-app-icon img { width: 28px; height: 25px; object-fit: contain; }
 .zapier-app-icon.calendar { color: #3f79c5; background: #f5f9ff; }
 .zapier-app-icon.sheets { color: #208453; background: #f0faf4; }
 .zapier-app-icon.slack { color: #6e427e; background: #f9f3fb; }
-.zapier-connection { display: flex; justify-content: center; height: 24px; position: relative; }
-.zapier-connection::before { content: ''; position: absolute; top: 0; bottom: 0; width: 1px; background: #cfd6e0; }
-.zapier-connection span { position: relative; align-self: center; background: #f6f7fa; font-size: 14px; color: #8793a3; line-height: 17px; }
-.zapier-result { background: #fff; border: 1px solid #e6e9ef; border-radius: 9px; padding: 12px; margin: 12px 0 0; box-shadow: 0 3px 6px #24334d06; }
-.zapier-result-label { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #576274; line-height: 16px; font-size: 10px; font-weight: 600; }
-.doc .zapier-result p { font-size: 12px; line-height: 20px; color: #424e60; margin: 8px 0 10px; }
-.zapier-result-footer { border-top: 1px solid #edf0f4; padding-top: 8px; display: flex; justify-content: space-between; gap: 10px; color: #75808d; line-height: 14px; font-size: 9px; }
-.zapier-result-footer > span:last-child { color: #397459; }
+.zapier-connection { height: 12px; position: relative; }
+.zapier-connection::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: #d9dee6; }
+.zapier-connection span { display: none; }
+.zapier-result { margin-top: 12px; }
+.zapier-app-icon.result { color: #498875; background: #eff7f3; border-color: #dfeee6; font-size: 17px; }
 .doc .zapier-preview-caption { color: #79818e; font-size: 9px; line-height: 16px; text-align: center; margin-top: 8px; }
 .zapier-events > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; padding: 17px 0; border-top: 1px solid var(--line); }
 .doc .zapier-events h3 { font-size: 15px; margin: 0; }

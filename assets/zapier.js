@@ -16,7 +16,6 @@
       trigger: ['calendar', 'Google Calendar', 'Event Start'],
       action: ['alive5', 'Alive5', 'Send SMS'],
       label: 'Appointment reminder',
-      message: 'Hi Alex, a quick reminder that your appointment is tomorrow at 10:00 AM. See you then!',
       footer: 'From your business number',
       path: 'google-calendar/337150/send-alive5-text-messages-for-new-events-starting-in-google-calendar',
     },
@@ -24,7 +23,6 @@
       trigger: ['alive5', 'Alive5', 'SMS Conversation'],
       action: ['sheets', 'Google Sheets', 'Create Spreadsheet Row'],
       label: 'Conversation log',
-      message: 'Alex Morgan · Incoming SMS\n“Thanks! Tomorrow at 10 works for me.”',
       footer: 'A new row in your shared spreadsheet',
       path: 'google-sheets',
     },
@@ -32,7 +30,6 @@
       trigger: ['alive5', 'Alive5', 'Chat Start'],
       action: ['slack', 'Slack', 'Send Channel Message'],
       label: '#customer-conversations',
-      message: 'A new live chat is waiting in Alive5. Your team can pick up the conversation from the inbox.',
       footer: 'Keep your team up to date',
       path: 'slack',
     },
@@ -50,7 +47,6 @@
       setText(`${step}-event`, event);
     }
     setText('result-label', example.label);
-    setText('result-message', example.message);
     setText('result-footer', example.footer);
     const link = product.querySelector('[data-zapier-template]');
     link.href = `https://zapier.com/apps/alive5/integrations/${example.path}`;
