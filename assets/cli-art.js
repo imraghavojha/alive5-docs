@@ -46,14 +46,14 @@ const alphabet = {
   5: ['#####', '#    ', '#### ', '    #', '#### '],
 };
 const matrix = Array.from({ length: 5 }, (_, row) =>
-  [...'Alive 5'].map((letter) => alphabet[letter][row]).join(' '),
+  [...'Alive5'].map((letter) => alphabet[letter][row]).join(' '),
 );
 export const logos = [
   {
     id: 'type',
     name: 'Wordmark',
     description: 'Simple type with an orange 5.',
-    lines: ['Alive 5'],
+    lines: ['Alive5'],
   },
   {
     id: 'slash',
@@ -90,7 +90,7 @@ export const logos = [
     id: 'frame',
     name: 'Label',
     description: 'A small terminal label with a fine border.',
-    lines: ['╭─────────────╮', '│   Alive 5   │', '╰─────────────╯'],
+    lines: ['╭─────────────╮', '│   Alive5    │', '╰─────────────╯'],
   },
 ];
 export const logoSizes = [28, 38, 48, 52, 62];
@@ -104,7 +104,7 @@ export function drawLogo(
   let lines = logo.lines;
 
 
-  if (Math.max(...lines.map((line) => line.length)) > width - 2) lines = ['Alive 5'];
+  if (Math.max(...lines.map((line) => line.length)) > width - 2) lines = ['Alive5'];
   const artWidth = Math.max(...lines.map((line) => line.length));
   const left = x;
   const top = y + Math.floor((height - lines.length) / 2);
@@ -181,8 +181,8 @@ export function drawLogo(
         outline: [21, 20, 20, 20][row],
         slash: [24, 23, 22, 21][row],
         lean: 20,
-        pixel: 27,
-        stipple: 27,
+        pixel: 24,
+        stipple: 24,
         wire: 18,
       }[logo.id];
       const isPlainFive =
