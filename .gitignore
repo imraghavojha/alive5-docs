@@ -1,0 +1,6 @@
+.design-review/
+.DS_Store
+__pycache__/
+.local/
+.orchestration/
+node_modules/
