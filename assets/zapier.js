@@ -1,4 +1,3 @@
-/* Local, fictional product previews. Selecting a workflow makes no requests. */
 (() => {
   const product = document.querySelector('.zapier-product');
   if (!product) return;
