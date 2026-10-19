@@ -1,4 +1,3 @@
-// Browser-only examples. No API client, credentials, or network execution.
 const OPS = [
   {
     label: "Send an SMS",
@@ -404,7 +403,7 @@ function wireShell() {
     scroll.scrollTop = scroll.scrollHeight;
   });
   const narrow = matchMedia("(max-width:720px)");
-  // By default the terminal matches the command list; dragging the grip extends it.
+
   const shell = root.querySelector(".shell"),
     grip = root.querySelector("[data-shell-resize]");
   let extra = 0;

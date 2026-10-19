@@ -53,8 +53,6 @@ if (root) {
         height: 5,
         time,
         motion: paused ? "off" : "full",
-        effect: "cosmos",
-        variant: "frame",
       },
     );
   }

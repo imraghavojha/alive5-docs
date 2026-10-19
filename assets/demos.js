@@ -5,8 +5,6 @@ const escapeHtml = (value) =>
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
 
-// Fixed illustrations of supported trigger-to-action configurations.
-// Choosing an example changes both the sample message and the configured reply.
 const SCENARIOS = [
   {
     id: "appointment",

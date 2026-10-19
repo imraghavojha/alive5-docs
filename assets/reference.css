@@ -1,4 +1,3 @@
-/* Static request/response pairs, scoped to the API reference. */
 .reference-layout {
   grid-template-columns: 220px minmax(0, 1fr);
   gap: 40px;

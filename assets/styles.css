@@ -1,4 +1,3 @@
-/* Alive5 developer documentation */
 :root {   --line-2: #eceff3; --tint: #f6f9fc; --sans: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu,
     sans-serif; --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; --shadow-card: 0 2px 5px -1px rgba(50, 50, 93, 0.12), 0 1px 3px -1px rgba(0, 0, 0, 0.15); --shadow-float: 0 15px 35px rgba(50, 50, 93, 0.12), 0 5px 15px rgba(0, 0, 0, 0.08); --bar-h: 64px; --menu-h: 46px; --gutter: 230px; }
 * { box-sizing: border-box; }
@@ -60,7 +59,6 @@ button { font-family: inherit; }
 .btn-primary:hover { background: var(--a5-dark); color: #fff; }
 .link-arrow { font-weight: 500; }
 .link-arrow::after { content: " ›"; }
-/* floating cards, right of the hero copy */
 .hero-art { position: relative; flex: none; }
 .keycard { position: absolute; z-index: 3; background: #fff; }
 .keycard .head { display: flex; align-items: center; justify-content: space-between; }
@@ -185,7 +183,6 @@ table.tbl td.t { color: var(--faint); font-size: 12px; font-family: var(--mono);
   .hero h1,
   .doc h1 { font-size: 27px; line-height: 34px; }
 }
-/* Shared documentation rhythm */
 :root { --a5-light: #fff2eb; --link-hov: #85341e; --ink-str: #202534; --bar: #f7f8fb; --line: #e2e5eb; --night: #19202d; --night-2: #222b3a; }
 h1,
 h2,
@@ -503,7 +500,6 @@ a:hover { text-decoration: none; }
 }
 .dashboard-figure figcaption { justify-content: space-between; }
 .dashboard-figure figcaption span { color: #8490a2; }
-/* Readability pass following visual review */
 :root { --a5: #c34c27; --a5-dark: #a33d1d; --link: #ac4225; --muted: #5f6877; --faint: #657080; --ink: #3d4350; }
 body { font-size: 16px; line-height: 26px; }
 h2,
@@ -642,7 +638,6 @@ h3 { letter-spacing: -0.015em; }
   .dashboard-figure figcaption { font-size: 10px; }
   .search-hint { font-size: 11px; }
 }
-/* Final component details */
 .linecard .sub { font-size: 12px; }
 .linecard .lbl { font-size: 13px; }
 .hero .linecard { min-height: 117px; top: 119px; transform: rotate(-2deg); }
@@ -681,7 +676,6 @@ h3 { letter-spacing: -0.015em; }
   .menubar.has-left:before { content: "‹"; position: absolute; z-index: 1; left: 0; top: 0; width: 27px; height: 43px; display: grid; place-items: center; pointer-events: none; background: linear-gradient(90deg, #f7f8fb 55%, #f7f8fb00); color: #67778b; font-size: 20px; }
 }
 
-/* Homepage availability and original branding. */
 .coming-soon { display: flex; align-items: baseline; gap: 12px; font-size: 15px; color: var(--ink); }
 .coming-soon small { font-size: 11px; color: #657080; white-space: nowrap; }
 .message-brand { display: flex; align-items: center; gap: 8px; }
@@ -705,7 +699,6 @@ h3 { letter-spacing: -0.015em; }
   [aria-labelledby="cli-heading"] .section-head { flex-wrap: wrap; }
 }
 
-/* Hero cards: frosted top card over a slightly lower message card. */
 .hero-art { height: 296px; }
 .keycard { background: #ffffffa6; border-color: #d9dde3cc; -webkit-backdrop-filter: blur(6px) saturate(1.4); backdrop-filter: blur(6px) saturate(1.4); }
 .hero .linecard { top: 132px; padding-top: 42px; overflow: hidden; transform: rotate(-3deg); box-shadow: 0 6px 16px #1820300f, 0 1px 3px #18203012; }
@@ -714,7 +707,6 @@ h3 { letter-spacing: -0.015em; }
   .hero .linecard { top: 130px; }
 }
 
-/* Developer resources: static terminal band under the page heading. */
 .devres-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 54%); gap: 36px; align-items: end; margin: -8px 0 8px; border-bottom: 1px solid var(--line); }
 .devres-copy { align-self: center; padding: 28px 0 44px; }
 .doc .devres-copy p { margin: 0; font-size: 17px; line-height: 28px; color: #444b58; max-width: none; }
@@ -745,7 +737,6 @@ h3 { letter-spacing: -0.015em; }
   .devres-term pre { padding: 6px 16px 0; }
 }
 
-/* Stripe-style help links in place of a column footer. */
 .docfoot { border-top: 0; padding: 0 0 40px; }
 .docfoot-in { display: block; color: #4a5261; }
 .docfoot-in::before { content: ""; display: block; height: 1px; background: var(--line); margin-bottom: 32px; }
@@ -762,7 +753,6 @@ h3 { letter-spacing: -0.015em; }
   .home-foot { margin-top: 44px; }
 }
 
-/* Browse by product: one icon box size for products and connectors. */
 .browse-grid > a { gap: 14px; }
 .browse-grid .product-icon,
 .browse-grid .connector-logo { width: 32px; height: 32px; border-radius: 8px; }
@@ -777,5 +767,4 @@ h3 { letter-spacing: -0.015em; }
   .logo .word { display: none; }
   .logo .mobile-brand { display: block; }
 }
-/* Zapier connector identity across the documentation. */
 .connector-logo.zapier { background: #fff0e8; color: #e75516; font-size: 30px !important; line-height: 1; }

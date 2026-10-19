@@ -1,5 +1,3 @@
-/* Shared chrome + interactions for the Alive5 developer docs. */
-
 const ROOT = document.body.dataset.root || "";
 const PAGE = document.body.dataset.page || "";
 const href = (p) => ROOT + p;
@@ -13,7 +11,6 @@ const MENU = [
   ["reporting", "api/reporting.html", "Reporting"],
 ];
 
-/* --------------------------------------------------------------- header */
 function renderHeader() {
   const host = document.querySelector("[data-header]");
   if (!host) return;
@@ -56,7 +53,6 @@ function renderHeader() {
     </div>`;
 }
 
-/* -------------------------------------------------------------- sidebar */
 const SIDEBAR = [
   {
     label: "Alive5 API",
@@ -121,7 +117,6 @@ function renderSidebar() {
   });
 }
 
-/* --------------------------------------------------------------- footer */
 function renderDocFooter() {
   const host = document.querySelector("[data-docfoot]");
   if (!host) return;
@@ -166,7 +161,6 @@ function renderDocFooter() {
   </div>`;
 }
 
-/* ------------------------------------------------------------ code tabs */
 function wireCode() {
   document.querySelectorAll(".code").forEach((box) => {
     const tabs = [...box.querySelectorAll(".tab")];
@@ -194,7 +188,6 @@ function wireCode() {
   });
 }
 
-/* --------------------------------------------------------- toc scrollspy */
 function wireToc() {
   const toc = document.querySelector("[data-toc]");
   if (!toc) return;
@@ -242,7 +235,6 @@ function wireToc() {
   update();
 }
 
-/* --------------------------------------------------------------- search */
 const SEARCH = [
   ["Build with Zapier", "connectors/zapier.html", "connector Zap SMS chat contacts automation calendar sheets Slack"],
   [
@@ -346,7 +338,6 @@ function wireSearch() {
   });
 }
 
-/* ------------------------------------------------- landing: copy buttons */
 function wireKeyCopy() {
   document.querySelectorAll("[data-copy]").forEach((b) => {
     b.addEventListener("click", async () => {
@@ -362,7 +353,6 @@ function wireKeyCopy() {
   });
 }
 
-/* ------------------------------------------------ landing: Alive5 Shell */
 function enhanceDocs() {
   document.querySelectorAll("table.tbl").forEach((table) => {
     const wrap = document.createElement("div");
