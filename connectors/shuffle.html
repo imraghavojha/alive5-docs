@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Automate with Shuffle · Alive5 docs</title>
+    <meta
+      name="description"
+      content="Connect the public Alive5 SMS app in Shuffle to send texts and read recent conversations from your workflows."
+    />
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png" />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="stylesheet" href="../assets/demos.css" />
+  </head>
+  <body data-root="../" data-page="connectors-shuffle" data-section="connectors">
+    <a class="skip" href="#main">Skip to content</a>
+    <header data-header></header>
+    <div class="layout">
+      <nav data-sidebar aria-label="Documentation"></nav>
+      <main class="doc" id="main">
+        <p class="crumbs"><a href="../index.html">Home</a><span>/</span><a href="index.html">Connectors</a><span>/</span>Shuffle</p>
+        <h1>Automate with Shuffle</h1>
+        <p class="sub">Send SMS and read recent conversations from your Shuffle workflows.</p>
+        <p class="availability"><span class="pill">Public app in Shuffle</span><a href="https://shuffler.io" target="_blank" rel="noreferrer">Open Shuffle ↗</a></p>
+        <figure class="page-art" data-art="shuffle"></figure>
+
+        <h2 id="setup">Add the app and authenticate</h2>
+        <ol class="setup-list">
+          <li><strong>Find Alive5 SMS</strong><p>In Shuffle, open <strong>Apps</strong> and search for <strong>Alive5 SMS</strong>, or find it under <strong>Discover public apps</strong>. Add the public app to your workspace.</p></li>
+          <li><strong>Connect your account</strong><p>In the app authentication, enter your <a href="../api/authentication.html">Alive5 API key</a>. The app sends it in the <code>X-A5-APIKEY</code> header with no prefix.</p></li>
+          <li><strong>Add an action</strong><p>Open a workflow, add Alive5 SMS, and select an action and your saved authentication.</p></li>
+        </ol>
+
+        <h2 id="actions">Available actions</h2>
+        <table class="tbl">
+          <thead><tr><th>Action name</th><th>What it does</th><th>Key inputs and outputs</th></tr></thead>
+          <tbody>
+            <tr><td><strong>List channels and users</strong><br /><code>list_channels_and_users</code></td><td>Find accessible channels and their assigned users.</td><td>No action inputs. Returns <code>data.Items</code> with <code>channel_id</code>, <code>channel_label</code>, and <code>agents</code> containing <code>user_id</code> and <code>screen_name</code>.</td></tr>
+            <tr><td><strong>Send SMS</strong><br /><code>send_sms</code></td><td>Submit one outbound text message.</td><td>Requires <code>phone_number_from</code>, <code>phone_number_to</code>, <code>channel_id</code>, <code>user_id</code>, and <code>message</code>. Returns <code>data.data.message_id</code>.</td></tr>
+            <tr><td><strong>List SMS conversations</strong><br /><code>list_sms_conversations</code></td><td>Read a snapshot of recent SMS conversations.</td><td>No action inputs. Returns conversations in <code>data.Items</code>.</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="send">Send an SMS</h2>
+        <ol>
+          <li>Run <strong>List channels and users</strong>. In <code>data.Items</code>, choose an SMS channel whose <code>channel_label</code> is your business phone number.</li>
+          <li>Copy its <code>channel_id</code> and an assigned agent's <code>user_id</code>. Use that channel's business number as <code>phone_number_from</code>.</li>
+          <li>Add <strong>Send SMS</strong> after the lookup. Map those three values, set <code>phone_number_to</code> to a number you control, and enter a message such as <strong>Hello from Alive5.</strong> Use E.164 format for both numbers, such as <code>+14155550123</code>.</li>
+          <li>Run the workflow to send a real SMS. Check the response body for errors, then look for the message ID at <code>data.data.message_id</code>. Confirm the text arrives on your phone.</li>
+        </ol>
+        <p>A message ID confirms submission, not delivery. Before automating sends, use recipients who have agreed to receive texts from your business.</p>
+
+        <h2 id="responses">Check responses</h2>
+        <p>Alive5 may return HTTP 200 with an error in the response body. Add a workflow condition after each action and check these fields before continuing:</p>
+        <ul>
+          <li><code>code</code> and <code>data.code</code>: inspect application status codes for a failure.</li>
+          <li><code>error</code>, <code>data.error</code>, and <code>data.errors</code>: check for error details. An empty <code>error</code> object is used in successful responses.</li>
+        </ul>
+        <p>See <a href="../api/errors.html">API errors and responses</a> for details. If a send result is unclear, inspect conversation history before retrying to avoid duplicate texts.</p>
+
+        <h2 id="limits">Limits</h2>
+        <ul>
+          <li>The app has no automatic inbound-message trigger. Start the workflow with a Shuffle trigger or schedule.</li>
+          <li><strong>List SMS conversations</strong> covers recent activity. It is a snapshot, not a complete message archive.</li>
+        </ul>
+
+        <h2 id="resources">Resources</h2>
+        <ul>
+          <li><a href="https://shuffler.io" target="_blank" rel="noreferrer">Open Shuffle ↗</a></li>
+          <li><a href="../api/authentication.html">Authenticate with an Alive5 API key</a></li>
+          <li><a href="../api/send-a-message.html">Send a message with the API</a></li>
+          <li><a href="../api/errors.html">API errors and responses</a></li>
+        </ul>
+        <div class="pager">
+          <a href="node-red.html"><span>Previous</span><strong>← Node-RED</strong></a>
+          <a class="next" href="mcp.html"><span>Next</span><strong>MCP →</strong></a>
+        </div>
+      </main>
+      <aside data-toc aria-label="On this page"></aside>
+    </div>
+    <footer data-docfoot></footer>
+    <script src="../assets/site.js"></script>
+    <script src="../assets/demos.js"></script>
+  </body>
+</html>
