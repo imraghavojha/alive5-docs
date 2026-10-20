@@ -337,6 +337,12 @@ a:hover { text-decoration: none; }
 .flow .node p { font-size: 11px; line-height: 19px; }
 .mobile-nav { display: none; }
 .connector-logo { display: flex !important; align-items: center; justify-content: center; gap: 3px; width: 35px; height: 35px; flex: none; border-radius: 8px; margin-top: 0 !important; font-weight: 750; font-size: 22px !important; }
+.connector-logo.node-red { background: #fbeeee; color: #8f0000; }
+.connector-logo.shuffle { background: #fff1ec; color: #f86742; }
+.connector-logo.mcp { background: #eef1f5; color: #202534; }
+.connector-logo.node-red svg,
+.connector-logo.shuffle svg,
+.connector-logo.mcp svg { width: 27px; height: 27px; }
 .connector-logo.pipedream { background: #ecf8f2; color: #158855; }
 .connector-logo.pipedream i { width: 4px; background: #278b62; border-radius: 2px; height: 17px; transform: skewY(-30deg); }
 .connector-logo.pipedream i:nth-child(2) { height: 24px; }
