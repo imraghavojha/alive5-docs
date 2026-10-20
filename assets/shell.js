@@ -1,48 +1,73 @@
 const OPS = [
   {
-    label: "Send an SMS",
-    cmd: 'alive5 messages send --to +12025550123 --text "Hello from Alive5."',
-    doc: "api/send-a-message.html",
-    docLabel: "Learn more about sending messages",
+    label: "Preview an SMS",
+    cmd: 'alive5 sms send --from +12025550100 --to +12025550123 --channel example_channel --user example_user --message "Hello from Alive5." --dry-run',
+    doc: "api/cli.html#preview",
+    docLabel: "Learn more about the CLI preview",
     res: {
-      code: 200,
+      ok: true,
       data: {
-        message_id: "example_message",
-        message_status: "queued",
-        thread_id: "example_thread",
-        from: "+12025550100",
-        to: "+12025550123",
-        direction: "outbound",
-        message: "Hello from Alive5.",
+        preview: true,
+        validated: "locally",
+        method: "POST",
+        url: "https://api.alive5.com/public/1.0/conversations/sms/send",
+        form: {
+          phone_number_from: "+12025550100",
+          phone_number_to: "+12025550123",
+          message: "Hello from Alive5.",
+          channel_id: "example_channel",
+          user_id: "example_user",
+        },
       },
-      error: {},
+      error: null,
+      meta: {
+        schemaVersion: 1,
+      },
     },
   },
   {
     label: "List conversations",
-    cmd: "alive5 conversations list --channel sms",
+    cmd: "alive5 conversations list --type sms --since 2026-09-01 --until 2026-09-11",
     doc: "api/receive-messages.html",
     docLabel: "Learn more about reading conversations",
     res: {
-      code: 200,
-      data: {
-        Items: [
-          {
-            alive5_sessionID: "example_conversation",
-            channel_label: "Example team",
-            alive_sms_phone_number: "+12025550100",
-            contacts_first_name: "Alex",
-            chat_conversation: [
-              {
-                message_content: "Can I move my appointment to Friday?",
-                created_by: "+12025550123",
-                created_at: 1757372041880,
-              },
-            ],
+      ok: true,
+      data: [
+        {
+          id: "example_conversation",
+          type: "sms",
+          channel: {
+            id: "example_channel",
+            name: "Example team",
           },
-        ],
+          assignedTo: "example_user",
+          startedAt: "2026-09-09T15:00:00.000Z",
+          endedAt: null,
+          contact: {
+            id: "example_contact_1",
+            firstName: "Alex",
+            lastName: "Example",
+            email: "alex@example.com",
+            phone: "+12025550123",
+          },
+          tags: [],
+          messages: [
+            {
+              id: "example_message",
+              at: "2026-09-09T15:00:00.000Z",
+              sender: "+12025550123",
+              text: "Can I move my appointment to Friday?",
+            },
+          ],
+        },
+      ],
+      error: null,
+      meta: {
+        schemaVersion: 1,
+        page: 1,
+        totalPages: 1,
+        nextPage: null,
       },
-      error: {},
     },
   },
   {
@@ -51,39 +76,47 @@ const OPS = [
     doc: "api/send-a-message.html",
     docLabel: "Learn more about channels and users",
     res: {
-      code: 200,
-      data: {
-        Items: [
-          {
-            channel_id: "example_channel",
-            channel_label: "+12025550100",
-            agents: [
-              {
-                user_id: "example_user",
-                screen_name: "Example team",
-                email: "team@example.com",
-              },
-            ],
-          },
-        ],
+      ok: true,
+      data: [
+        {
+          id: "example_channel",
+          name: "+12025550100",
+          users: [
+            {
+              id: "example_user",
+              name: "Example team",
+              email: "team@example.com",
+              role: "agent",
+            },
+          ],
+        },
+      ],
+      error: null,
+      meta: {
+        schemaVersion: 1,
       },
-      error: {},
     },
   },
   {
-    label: "Create a contact",
-    cmd: "alive5 contacts create --first Alex --phone +12025550123",
-    doc: "api/contacts.html",
-    docLabel: "Learn more about contacts",
+    label: "List teammates",
+    cmd: "alive5 users list",
+    doc: "api/cli.html#commands",
+    docLabel: "Explore CLI commands",
     res: {
-      code: 200,
-      data: {
-        crm_id: "example_contact_1",
-        contacts_first_name: "Alex",
-        contacts_phone_mobile: "+12025550123",
-        created_at: 1757372112004,
+      ok: true,
+      data: [
+        {
+          id: "example_user",
+          name: "Example team",
+          email: "team@example.com",
+          role: "agent",
+          channelIds: ["example_channel"],
+        },
+      ],
+      error: null,
+      meta: {
+        schemaVersion: 1,
       },
-      error: {},
     },
   },
   {
@@ -92,43 +125,56 @@ const OPS = [
     doc: "api/contacts.html",
     docLabel: "Learn more about contacts",
     res: {
-      code: 200,
-      data: {
-        total: 2,
+      ok: true,
+      data: [
+        {
+          id: "example_contact_1",
+          firstName: "Alex",
+          lastName: "Example",
+          email: "alex@example.com",
+          phone: "+12025550123",
+          company: null,
+          tags: [],
+          updatedAt: null,
+        },
+        {
+          id: "example_contact_2",
+          firstName: "Sam",
+          lastName: "Example",
+          email: "sam@example.com",
+          phone: "+12025550124",
+          company: null,
+          tags: [],
+          updatedAt: null,
+        },
+      ],
+      error: null,
+      meta: {
+        schemaVersion: 1,
         page: 1,
-        limit: 2,
-        Items: [
-          {
-            crm_id: "example_contact_1",
-            contacts_first_name: "Alex",
-            contacts_phone_mobile: "+12025550123",
-          },
-          {
-            crm_id: "example_contact_2",
-            contacts_first_name: "Sam",
-            contacts_phone_mobile: "+12025550124",
-          },
-        ],
+        totalRecords: 2,
+        totalPages: 1,
+        nextPage: null,
       },
-      error: {},
     },
   },
   {
-    label: "Pull a report",
-    cmd: "alive5 reports performance --from 09-01-2026 --to 09-10-2026",
-    doc: "api/reporting.html",
-    docLabel: "Learn more about reporting",
+    label: "List tags",
+    cmd: "alive5 tags list",
+    doc: "api/cli.html#commands",
+    docLabel: "Explore CLI commands",
     res: {
-      code: 200,
-      data: {
-        date_start: "09-01-2026",
-        date_end: "09-10-2026",
-        messages_in: 348,
-        messages_out: 402,
-        conversations: 96,
-        median_first_reply_seconds: 74,
+      ok: true,
+      data: [
+        {
+          id: "example_tag",
+          name: "Follow up",
+        },
+      ],
+      error: null,
+      meta: {
+        schemaVersion: 1,
       },
-      error: {},
     },
   },
 ];
@@ -165,6 +211,10 @@ function parseCommand(command) {
     s.startsWith('"') ? JSON.parse(s) : s.startsWith("'") ? s.slice(1, -1) : s;
   for (let i = 0; i < tokens.length; i++) {
     if (tokens[i].startsWith("--")) {
+      if (tokens[i] === "--dry-run") {
+        flags["dry-run"] = true;
+        continue;
+      }
       if (!tokens[i + 1] || tokens[i + 1].startsWith("--"))
         throw Error(`Missing value for ${tokens[i]}.`);
       flags[tokens[i].slice(2)] = unquote(tokens[++i]);
@@ -174,28 +224,49 @@ function parseCommand(command) {
 }
 function shellResponse(op, flags) {
   const res = structuredClone(op.res);
+  const allowed = new Set(
+    [...op.cmd.matchAll(/--([a-z-]+)/g)].map((m) => m[1]),
+  );
+  for (const flag of Object.keys(flags))
+    if (!allowed.has(flag)) throw Error(`Unsupported example flag: --${flag}.`);
   if (op === OPS[0]) {
-    if (!flags.to || !/^\+[1-9]\d{7,14}$/.test(flags.to))
-      throw Error(
-        "Use --to with a number in E.164 format, such as +12025550123.",
-      );
-    if (!flags.text?.trim())
-      throw Error('Add your message with --text "Hello".');
-    res.data.to = flags.to;
-    res.data.message = flags.text;
+    if (!flags["dry-run"])
+      throw Error("This example requires --dry-run. Nothing is sent.");
+    for (const field of ["from", "to"])
+      if (!/^\+[1-9]\d{7,14}$/.test(flags[field] || ""))
+        throw Error(`Use --${field} with an E.164 phone number.`);
+    if (!flags.channel || !flags.user)
+      throw Error("Provide --channel and --user.");
+    if (!flags.message?.trim() || flags.message.length > 1600)
+      throw Error("Provide --message with 1–1600 characters.");
+    res.data.form = {
+      phone_number_from: flags.from,
+      phone_number_to: flags.to,
+      message: flags.message,
+      channel_id: flags.channel,
+      user_id: flags.user,
+    };
   }
-  if (op.cmd.startsWith("alive5 contacts create")) {
-    if (!flags.first?.trim() || !/^\+[1-9]\d{7,14}$/.test(flags.phone || ""))
-      throw Error("Provide --first and a valid --phone number.");
-    res.data.contacts_first_name = flags.first;
-    res.data.contacts_phone_mobile = flags.phone;
+  if (op === OPS[1]) {
+    if (flags.type !== "sms")
+      throw Error("This browser example supports --type sms.");
+    const validDate = (date) =>
+      /^\d{4}-\d{2}-\d{2}$/.test(date || "") &&
+      !Number.isNaN(Date.parse(date)) &&
+      new Date(date).toISOString().slice(0, 10) === date;
+    if (
+      !validDate(flags.since) ||
+      !validDate(flags.until) ||
+      flags.since >= flags.until
+    )
+      throw Error("Use real YYYY-MM-DD dates, with --until after --since.");
+    res.data = res.data.filter(
+      (row) => row.startedAt >= flags.since && row.startedAt < flags.until,
+    );
   }
-
-  if (op.cmd.startsWith("alive5 conversations list") && flags.channel !== "sms")
-    throw Error("This example supports --channel sms.");
-  if (op.cmd.startsWith("alive5 contacts list")) {
-    const page = Number(flags.page),
-      limit = Number(flags.limit);
+  if (op === OPS[4]) {
+    const page = Number(flags.page || 1),
+      limit = Number(flags.limit || 25);
     if (
       !Number.isInteger(page) ||
       page < 1 ||
@@ -204,18 +275,14 @@ function shellResponse(op, flags) {
       limit > 100
     )
       throw Error("Use a positive --page and a --limit from 1 to 100.");
-    res.data.page = page;
-    res.data.limit = limit;
-    res.data.Items = res.data.Items.slice((page - 1) * limit, page * limit);
-  }
-  if (op.cmd.startsWith("alive5 reports performance")) {
-    if (
-      !/^\d{2}-\d{2}-\d{4}$/.test(flags.from || "") ||
-      !/^\d{2}-\d{2}-\d{4}$/.test(flags.to || "")
-    )
-      throw Error("Use --from and --to dates in MM-DD-YYYY format.");
-    res.data.date_start = flags.from;
-    res.data.date_end = flags.to;
+    res.meta = {
+      schemaVersion: 1,
+      page,
+      totalRecords: 2,
+      totalPages: Math.ceil(2 / limit),
+      nextPage: page < Math.ceil(2 / limit) ? page + 1 : null,
+    };
+    res.data = res.data.slice((page - 1) * limit, page * limit);
   }
   return res;
 }
@@ -268,7 +335,7 @@ function wireShell() {
     busy = false;
     form.removeAttribute("aria-busy");
     input.disabled = false;
-    out.innerHTML = `<div class="shell-intro">Welcome to Alive5 Shell!<br>Explore the API with example data. No account required.<br><br><span class="shell-bullet">–</span> View commands: <button type="button" data-stage="help">alive5 help ▷</button><br><span class="shell-bullet">–</span> List example channels: <button type="button" data-stage="2">alive5 channels list ▷</button><br><span class="shell-bullet">–</span> Send a message: <button type="button" data-stage="0">alive5 messages send ▷</button></div><div class="shell-history"></div>`;
+    out.innerHTML = `<div class="shell-intro">Welcome to Alive5 Shell!<br>Preview CLI v0.5 commands with fictional data. No account required.<br><br><span class="shell-bullet">–</span> View commands: <button type="button" data-stage="help">alive5 help ▷</button><br><span class="shell-bullet">–</span> List example channels: <button type="button" data-stage="2">alive5 channels list ▷</button><br><span class="shell-bullet">–</span> Preview an SMS: <button type="button" data-stage="0">alive5 sms send ▷</button></div><div class="shell-history"></div>`;
     stage(0, false);
     scroll.scrollTop = 0;
   };
@@ -318,7 +385,7 @@ function wireShell() {
       setTimeout(
         () => {
           if (ticket !== serial) return;
-          response.innerHTML = `<div class="shell-result-label">200 OK <span>· Example response</span></div><pre>${paintJson(result)}</pre>`;
+          response.innerHTML = `<div class="shell-result-label">Local example <span>· No API request</span></div><pre>${paintJson(result)}</pre>`;
           busy = false;
           announce("Example response ready. Nothing sent.");
           form.removeAttribute("aria-busy");

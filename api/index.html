@@ -35,7 +35,8 @@
               REST API to workflow connectors.
             </p>
             <p class="devres-soon">
-              The Alive5 CLI and an MCP server for agents are coming soon.
+              The <a href="cli.html">Alive5 CLI v0.5.0</a> is available as a
+              developer preview from a source checkout. An MCP server is planned.
             </p>
             <a class="devres-link" href="reference.html"
               >Explore the API reference →</a
@@ -44,20 +45,21 @@
           <figure
             class="devres-term"
             role="img"
-            aria-label="Terminal example: sending a text with the Alive5 CLI returns a queued message"
+            aria-label="Terminal example: listing channels with the Alive5 CLI returns fictional JSON"
           >
             <div class="term-bar" aria-hidden="true"><i></i><i></i><i></i></div>
-            <pre aria-hidden="true"><span class="t-dim">$</span> <span class="t-cmd">alive5 messages</span> <span class="t-sub">send</span> <span class="t-flag">--to</span> <span class="t-val">+12025550123</span> <span class="t-flag">--text</span> <span class="t-val">"Hello"</span>
+            <pre aria-hidden="true"><span class="t-dim">$</span> <span class="t-cmd">alive5 channels list</span> <span class="t-flag">--json</span>
 
-<span class="t-dim">{</span>
-  <span class="t-key">"code"</span><span class="t-dim">:</span> <span class="t-num">200</span><span class="t-dim">,</span>
-  <span class="t-key">"data"</span><span class="t-dim">: {</span>
-    <span class="t-key">"message_id"</span><span class="t-dim">:</span> <span class="t-str">"example_message"</span><span class="t-dim">,</span>
-    <span class="t-key">"message_status"</span><span class="t-dim">:</span> <span class="t-str">"queued"</span><span class="t-dim">,</span>
-    <span class="t-key">"direction"</span><span class="t-dim">:</span> <span class="t-str">"outbound"</span><span class="t-dim">,</span>
-    <span class="t-key">"to"</span><span class="t-dim">:</span> <span class="t-str">"+12025550123"</span><span class="t-dim">,</span>
-    <span class="t-key">"message"</span><span class="t-dim">:</span> <span class="t-str">"Hello"</span>
-  <span class="t-dim">},</span></pre>
+{
+  "ok": true,
+  "data": [{
+    "id": "example_channel",
+    "name": "+12025550100",
+    "users": []
+  }],
+  "error": null,
+  "meta": { "schemaVersion": 1 }
+}</pre>
           </figure>
         </section>
 
@@ -67,9 +69,9 @@
         </div>
         <h2 id="base-urls">Base URLs</h2>
         <p>
-          Two hosts are in service. Messaging and account calls run on the
-          original host; directory and reporting calls run on
-          <code>api-v2</code>. Each endpoint in the reference states which one
+          Two hosts are in service. Sending, account calls, and contact writes
+          use the original host. Conversation history, directory lists, and
+          reporting use <code>api-v2</code>. Each endpoint in the reference states which one
           it uses.
         </p>
         <table class="tbl">
@@ -79,11 +81,11 @@
           </tr>
           <tr>
             <td>https://api.alive5.com/public/1.0</td>
-            <td>Account, conversations, send and push</td>
+            <td>Account, SMS send/push, contact writes</td>
           </tr>
           <tr>
             <td>https://api-v2.alive5.com/public/1.0</td>
-            <td>Channels, users, contacts, tags, reporting</td>
+            <td>Conversation history, channels, users, contacts, tags, reporting</td>
           </tr>
         </table>
 
@@ -92,8 +94,7 @@
           <a class="card" href="reference.html#messaging"
             ><h3>Messaging</h3>
             <p>
-              Send an SMS, read recent conversations, simulate an inbound
-              message.
+              Send an SMS and read conversation history.
             </p>
             <span class="go">Reference →</span></a
           >
@@ -133,7 +134,7 @@
 <span class="tok-punc">}</span></pre>
         </div>
         <div class="note">
-          <strong>Read <code>code</code>, not the HTTP status.</strong> A failed
+          <strong>Check the HTTP status and response body.</strong> A failed
           call can still return HTTP 200 with a failure code inside the body.
           See <a href="errors.html">Errors and responses</a>.
         </div>
@@ -141,8 +142,8 @@
         <h2 id="limits">Known limits</h2>
         <ul>
           <li>
-            <code>GET /conversations/sms</code> returns recent conversations
-            only; <code>date-start</code> and <code>date-end</code> are ignored.
+            SMS history uses the v2 host with <code>date_start</code> and
+            <code>date_end</code>. Read all pages for the requested range.
           </li>
           <li>
             Sending requires a channel ID and a user ID, both from the

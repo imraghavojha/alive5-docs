@@ -59,6 +59,7 @@ const SIDEBAR = [
     items: [
       ["api", "api/index.html", "Overview"],
       ["api-auth", "api/authentication.html", "Authentication"],
+      ["api-cli", "api/cli.html", "CLI developer preview"],
       ["api-errors", "api/errors.html", "Errors and responses"],
     ],
   },
@@ -237,6 +238,7 @@ function wireToc() {
 
 const SEARCH = [
   ["Build with Zapier", "connectors/zapier.html", "connector Zap SMS chat contacts automation calendar sheets Slack"],
+  ["Alive5 CLI", "api/cli.html", "terminal command JSON agent install dry run preview"],
   [
     "Authentication",
     "api/authentication.html",
