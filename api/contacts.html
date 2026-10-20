@@ -48,34 +48,43 @@
           format.
         </p>
         <p>
-          Fields are sent as multipart form data, the same as the messaging
-          endpoints.
+          The public collection uses the original API host and sends contact
+          fields in the query string of a POST request. Set
+          <code>ALIVE5_ORG_NAME</code> and <code>ACCOUNT_ID</code> to your own
+          account values. Creating a contact does not establish SMS consent.
         </p>
         <div class="code">
           <div class="code-head">
             <span class="name">POST /contact/create-new</span
             ><button class="copy" type="button">Copy</button>
           </div>
-          <pre><span class="tok-cmd">curl</span> https://api-v2.alive5.com/public/1.0/contact/create-new \
+          <pre><span class="tok-cmd">curl</span> -G -X POST https://api.alive5.com/public/1.0/contact/create-new \
   <span class="tok-flag">-H</span> <span class="tok-str">"X-A5-APIKEY: $ALIVE5_KEY"</span> \
-  <span class="tok-flag">-F</span> <span class="tok-str">"contacts_first_name=Alex"</span> \
-  <span class="tok-flag">-F</span> <span class="tok-str">"contacts_phone_mobile=$CONTACT_NUMBER"</span></pre>
+  --data-urlencode "email=alex@example.com" \
+  --data-urlencode "org_name=$ALIVE5_ORG_NAME" \
+  --data-urlencode "first_name=Alex" \
+  --data-urlencode "phone_mobile=$CONTACT_NUMBER" \
+  --data-urlencode "last_name=Example" \
+  --data-urlencode "account_id=$ACCOUNT_ID" \
+  --data-urlencode "title=Customer" \
+  --data-urlencode "company=Example company"</pre>
         </div>
 
         <h2 id="update">Update a contact</h2>
         <p>
-          Set <code>CONTACT_ID</code> to an ID returned by your contact list,
-          then send the fields you want changed.
+          Replace <code>YOUR_CONTACT_ID</code> with an ID returned by your
+          contact list and <code>YOUR_TAG_ID</code> with a tag from your
+          account. Send the changes as JSON to the original API host.
         </p>
         <div class="code">
           <div class="code-head">
             <span class="name">PUT /contact/update-contact</span
             ><button class="copy" type="button">Copy</button>
           </div>
-          <pre><span class="tok-cmd">curl</span> <span class="tok-flag">-X</span> PUT https://api-v2.alive5.com/public/1.0/contact/update-contact \
+          <pre><span class="tok-cmd">curl</span> <span class="tok-flag">-X</span> PUT https://api.alive5.com/public/1.0/contact/update-contact \
   <span class="tok-flag">-H</span> <span class="tok-str">"X-A5-APIKEY: $ALIVE5_KEY"</span> \
-  <span class="tok-flag">-F</span> <span class="tok-str">"crm_id=$CONTACT_ID"</span> \
-  <span class="tok-flag">-F</span> <span class="tok-str">"contacts_email=alex@example.com"</span></pre>
+  -H "Content-Type: application/json" \
+  --data '{"crm_id":"YOUR_CONTACT_ID","tags":["YOUR_TAG_ID"]}'</pre>
         </div>
         <div class="note">
           <strong>Confirm the write.</strong> This endpoint can return code

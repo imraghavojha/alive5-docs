@@ -8,7 +8,12 @@
       name="description"
       content="How Alive5 reports failures and how to detect them reliably."
     />
-    <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="../assets/images/favicon.png"
+    />
     <link rel="stylesheet" href="../assets/styles.css" />
     <link rel="stylesheet" href="../assets/demos.css" />
   </head>
@@ -24,27 +29,39 @@
         </p>
         <h1>Errors and responses</h1>
         <p class="sub">
-          The HTTP status is not the source of truth. Check the envelope.
+          Check both the HTTP status and every response envelope.
         </p>
 
         <h2 id="envelope">Check three fields</h2>
         <p>
-          A call succeeded only when <code>code</code> is below 400
-          <em>and</em> <code>error</code> is empty. Some endpoints nest a second
-          envelope inside <code>data</code>, so check that too.
+          A call is accepted only when the HTTP status and response
+          <code>code</code> are successful and <code>error</code> is empty.
+          Some endpoints nest a second envelope
+          inside <code>data</code>, so check that too.
         </p>
         <div class="code">
           <div class="code-head">
             <span class="name">is-ok.js</span
             ><button class="copy" type="button">Copy</button>
           </div>
-          <pre><span class="tok-key">function</span> <span class="tok-cmd">isOk</span><span class="tok-punc">(</span>body<span class="tok-punc">) {</span>
-  <span class="tok-key">const</span> inner <span class="tok-punc">=</span> body<span class="tok-punc">?.</span>data <span class="tok-punc">??</span> <span class="tok-punc">{};</span>
-  <span class="tok-key">const</span> code  <span class="tok-punc">=</span> inner<span class="tok-punc">.</span>code <span class="tok-punc">??</span> body<span class="tok-punc">.</span>code <span class="tok-punc">??</span> <span class="tok-num">200</span><span class="tok-punc">;</span>
-  <span class="tok-key">const</span> err   <span class="tok-punc">=</span> inner<span class="tok-punc">.</span>error <span class="tok-punc">??</span> body<span class="tok-punc">.</span>error<span class="tok-punc">;</span>
-  <span class="tok-key">const</span> empty <span class="tok-punc">=</span> err <span class="tok-punc">==</span> <span class="tok-key">null</span> <span class="tok-punc">|| (</span><span class="tok-key">typeof</span> err <span class="tok-punc">===</span> <span class="tok-str">"object"</span> <span class="tok-punc">&&</span> Object<span class="tok-punc">.</span><span class="tok-cmd">keys</span><span class="tok-punc">(</span>err<span class="tok-punc">).</span>length <span class="tok-punc">===</span> <span class="tok-num">0</span><span class="tok-punc">);</span>
-  <span class="tok-key">return</span> code <span class="tok-punc">&lt;</span> <span class="tok-num">400</span> <span class="tok-punc">&&</span> empty<span class="tok-punc">;</span>
-<span class="tok-punc">}</span></pre>
+          <pre>
+// Pass the HTTP response status: isOk(body, response.status).
+function isOk(body, httpStatus) {
+  if (!(httpStatus &gt;= 200 &amp;&amp; httpStatus &lt; 300)) return false;
+  if (!body || typeof body !== &quot;object&quot; || Array.isArray(body)) return false;
+  if (body.code == null) return false;
+  for (let part = body; part; ) {
+    if (part.code != null &amp;&amp; !(Number(part.code) &gt;= 200 &amp;&amp; Number(part.code) &lt; 300)) return false;
+    const error = part.error;
+    const empty = error == null ||
+      (typeof error === &quot;object&quot; &amp;&amp; Object.keys(error).length === 0);
+    if (!empty) return false;
+    const next = part.data;
+    part = next &amp;&amp; typeof next === &quot;object&quot; &amp;&amp; !Array.isArray(next) &amp;&amp;
+      (&quot;code&quot; in next || &quot;error&quot; in next) ? next : null;
+  }
+  return true;
+}</pre>
         </div>
 
         <h2 id="codes">Codes you will see</h2>
@@ -71,8 +88,8 @@
           </tr>
           <tr>
             <td>404</td>
-            <td>No matching records</td>
-            <td>Often an empty result, not a broken endpoint</td>
+            <td>Not found or no matching records</td>
+            <td>Verify the endpoint, filters, and response body</td>
           </tr>
         </table>
 
@@ -81,15 +98,15 @@
           Several write endpoints return <code>"error": {}</code> alongside a
           400 code, with no field name. When that happens, compare your request
           against the field list in the <a href="reference.html">reference</a>.
-          a missing required field is the usual cause.
+          Check required fields before attempting the request again.
         </p>
 
         <h2 id="404">Empty 404s</h2>
         <p>
-          Conversation and report endpoints return code <code>404</code> when
-          the account has no matching records for the filter. Treat it as an
-          empty list rather than an error, unless the same filter returned data
-          before.
+          Some conversation and report examples use code <code>404</code> for no
+          matching records. A 404 can also indicate a wrong endpoint or
+          resource. Keep the error visible until the endpoint and filter have
+          been verified; do not convert every 404 into a successful empty list.
         </p>
 
         <div class="pager">

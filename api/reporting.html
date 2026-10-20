@@ -32,9 +32,10 @@
           <code>from_datetime</code> and <code>to_datetime</code>.
         </p>
         <div class="note">
-          An empty list is a valid answer. These endpoints return code
-          <code>404</code> when the account has no matching records, which means
-          "nothing in range", not a broken request.
+          Some saved examples return code <code>404</code> for no matching
+          records. Check the response body, date range, and endpoint before
+          interpreting it as an empty result; not every 404 means "nothing in
+          range". See <a href="errors.html">Errors and responses</a>.
         </div>
 
         <h2 id="performance">Performance</h2>

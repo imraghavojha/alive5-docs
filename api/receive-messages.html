@@ -24,15 +24,20 @@
         </p>
         <h1>Read messages</h1>
         <p class="sub">Read received texts from recent SMS conversations.</p>
-        <h2 id="polling">List recent conversations</h2>
-        <p>Use your account's API key to request conversation history.</p>
+        <h2 id="polling">List conversations by date</h2>
+        <p>Use your account's API key and the v2 host. The public collection
+          uses <code>date_start</code> and <code>date_end</code> in
+          <code>MM-DD-YYYY</code> format, with one-indexed pages.</p>
         <div class="code">
           <div class="code-head">
             <span class="name">GET /conversations/sms</span
             ><button class="copy" type="button">Copy</button>
           </div>
-          <pre><span class="tok-cmd">curl</span> https://api.alive5.com/public/1.0/conversations/sms \
-  <span class="tok-flag">-H</span> <span class="tok-str">"X-A5-APIKEY: $ALIVE5_KEY"</span></pre>
+          <pre><span class="tok-cmd">curl</span> -G https://api-v2.alive5.com/public/1.0/conversations/sms \
+  <span class="tok-flag">-H</span> <span class="tok-str">"X-A5-APIKEY: $ALIVE5_KEY"</span> \
+  --data-urlencode "date_start=09-01-2026" \
+  --data-urlencode "date_end=09-10-2026" \
+  --data-urlencode "page=1"</pre>
         </div>
         <p>
           Each conversation includes a <code>chat_conversation</code> array.
@@ -45,10 +50,10 @@
           sender, and content to avoid processing the same message twice.
         </p>
         <div class="note">
-          This endpoint returns recent conversations. The
-          <code>date-start</code> and <code>date-end</code> parameters do not
-          filter its results. Filter in your application, and do not treat it as
-          a complete historical export.
+          Follow the response pagination to read additional pages. The older
+          <code>api.alive5.com</code> recent-conversations route is different;
+          do not use its hyphenated date parameters with this endpoint. See
+          the <a href="reference.html#sms-conversations">request and response example</a>.
         </div>
         <h2 id="connectors">Use an automation connector</h2>
         <p>
@@ -56,7 +61,8 @@
           <a href="../connectors/pipedream.html">Pipedream</a>,
           <a href="../connectors/make.html">Make</a>, or
           <a href="../connectors/keragon.html">Keragon</a>. Follow the setup
-          guide for your platform.
+          guide and availability notes for your platform; publication of these
+          three connectors is pending platform review.
         </p>
         <div class="pager">
           <a href="send-a-message.html"
