@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Build with Node-RED · Alive5 docs</title>
+    <meta name="description" content="Install the Alive5 nodes for Node-RED to send SMS and poll for incoming texts." />
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png" />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="stylesheet" href="../assets/demos.css" />
+  </head>
+  <body data-root="../" data-page="connectors-node-red" data-section="connectors">
+    <a class="skip" href="#main">Skip to content</a>
+    <header data-header></header>
+    <div class="layout">
+      <nav data-sidebar aria-label="Documentation"></nav>
+      <main class="doc" id="main">
+        <p class="crumbs"><a href="../index.html">Home</a><span>/</span><a href="index.html">Connectors</a><span>/</span>Node-RED</p>
+        <h1>Build with Node-RED</h1>
+        <p class="sub">Send SMS and receive incoming texts in your Node-RED flows.</p>
+        <p class="availability"><span class="pill">Available on npm</span><a href="https://flows.nodered.org/node/@imraghavojha/node-red-alive5" target="_blank" rel="noreferrer">View in the Flow Library ↗</a></p>
+        <figure class="page-art" data-art="node-red"></figure>
+
+        <h2 id="install">Install</h2>
+        <p>Use Node.js 18+ and Node-RED 3+. In Node-RED, open <strong>Menu → Manage palette → Install</strong> and search for <code>@imraghavojha/node-red-alive5</code> (version 0.1.0).</p>
+        <p>Or run this command in your Node-RED user directory, then restart Node-RED:</p>
+        <div class="code">
+          <div class="code-head"><span class="name">Terminal</span><button class="copy" type="button">Copy</button></div>
+          <pre><span class="tok-cmd">npm install</span> @imraghavojha/node-red-alive5</pre>
+        </div>
+
+        <h2 id="setup">Connect your account</h2>
+        <ol class="setup-list">
+          <li><strong>Add an Alive5 account</strong><p>Add an <strong>alive5 send sms</strong> or <strong>alive5 sms in</strong> node. In <strong>Account</strong>, create an <code>alive5-config</code> node with a name and your <a href="../api/authentication.html">API key</a>. The key is stored as a Node-RED credential.</p></li>
+          <li><strong>Select your SMS line</strong><p>Select the account and click <strong>Refresh lines and users</strong>. Choose an <strong>SMS line</strong>. For sending, also choose a <strong>Sending user</strong> assigned to that line.</p></li>
+        </ol>
+
+        <h2 id="send">Send an SMS</h2>
+        <p>Configure <strong>alive5 send sms</strong> and pass it a message with these values:</p>
+        <table class="tbl"><thead><tr><th>Node field or message property</th><th>Value</th></tr></thead><tbody>
+          <tr><td>Account</td><td>Your <code>alive5-config</code> connection.</td></tr>
+          <tr><td>SMS line</td><td>The Alive5 business number to send from.</td></tr>
+          <tr><td>Sending user</td><td>A user assigned to the selected line.</td></tr>
+          <tr><td>To / <code>msg.to</code></td><td>The recipient in E.164 format, such as <code>+14155550123</code>. <code>msg.to</code> overrides the node’s To field.</td></tr>
+          <tr><td><code>msg.payload</code></td><td>A non-empty string containing the SMS text.</td></tr>
+        </tbody></table>
+        <p>On success, <code>msg.payload</code> becomes an object with <code>message_id</code> and any available <code>message_status</code>, <code>thread_id</code>, <code>From</code>, <code>To</code>, <code>direction</code>, and <code>message_content</code> fields. This confirms API acceptance, not delivery.</p>
+        <p>Connect a <strong>Catch</strong> node to handle failures. If a send times out, check conversation history before retrying; a failed response does not prove the SMS was not sent.</p>
+
+        <h2 id="receive">Receive texts</h2>
+        <p>Add <strong>alive5 sms in</strong>, select your account and SMS line, and set <strong>Poll seconds</strong>. The default is 30 seconds, with a minimum of 1 second. The next interval starts after the current request finishes.</p>
+        <p>The first successful poll records a silent baseline without emitting messages. Later polls output new incoming texts in <code>msg.payload</code>:</p>
+        <table class="tbl"><thead><tr><th>Payload field</th><th>Value</th></tr></thead><tbody>
+          <tr><td><code>message</code></td><td>The incoming text.</td></tr>
+          <tr><td><code>from_phone</code></td><td>The sender’s phone number.</td></tr>
+          <tr><td><code>business_line</code></td><td>The selected Alive5 SMS number.</td></tr>
+          <tr><td><code>thread_id</code></td><td>The Alive5 conversation identifier.</td></tr>
+          <tr><td><code>received_at</code></td><td>The message timestamp in ISO 8601 UTC format.</td></tr>
+        </tbody></table>
+        <div class="note"><strong>Polling limits</strong><p>State resets on restart or redeploy. The API returns a recent conversation window, so downtime is not backfilled and messages can be missed between polls. Messages with an older timestamp than one already seen are skipped.</p></div>
+
+        <h2 id="example">Example flow</h2>
+        <p>Open <strong>Import → Examples → @imraghavojha/node-red-alive5</strong> and import the SMS example. It includes send, receive, Debug, and Catch nodes, with no credentials included.</p>
+        <ol>
+          <li>Add your API key to the example account and select your SMS line and sending user.</li>
+          <li>Set a recipient in the send node. The Inject node contains <strong>Hello from Node-RED</strong> and runs only when clicked.</li>
+          <li>Deploy, then click Inject to send an SMS. Inspect <strong>SMS acceptance</strong> in Debug for the result.</li>
+          <li>After the receive node records its baseline, send a text to your SMS line and inspect <strong>Incoming SMS</strong> in Debug.</li>
+        </ol>
+
+        <h2 id="resources">Resources</h2>
+        <ul>
+          <li><a href="https://flows.nodered.org/node/@imraghavojha/node-red-alive5" target="_blank" rel="noreferrer">Alive5 in the Node-RED Flow Library ↗</a></li>
+          <li><a href="https://www.npmjs.com/package/@imraghavojha/node-red-alive5" target="_blank" rel="noreferrer">Alive5 node package on npm ↗</a></li>
+          <li><a href="https://support.alive5.com/" target="_blank" rel="noreferrer">Alive5 help center ↗</a></li>
+        </ul>
+        <div class="pager">
+          <a href="n8n.html"><span>Previous</span><strong>← n8n</strong></a>
+          <a class="next" href="shuffle.html"><span>Next</span><strong>Shuffle →</strong></a>
+        </div>
+      </main>
+      <aside data-toc aria-label="On this page"></aside>
+    </div>
+    <footer data-docfoot></footer>
+    <script src="../assets/site.js"></script>
+  </body>
+</html>
