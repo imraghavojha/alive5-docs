@@ -36,7 +36,7 @@
           Run a workflow when a patient texts, and reply from the same line.
         </p>
         <p class="availability">
-          <span class="pill">Developer connector</span
+          <span class="pill">Review requested</span
           ><a href="https://www.keragon.com" target="_blank" rel="noreferrer"
             >Open Keragon ↗</a
           >
@@ -47,11 +47,17 @@
           data-automation="keragon"
           aria-label="Interactive SMS workflow"
         ></section>
-        <h2 id="setup">Connect your account</h2>
+        <div class="note">
+          Alive5 SMS has been submitted for platform review. Native workflow
+          access and public publication are pending; these setup steps apply
+          once Keragon enables the connector. Contact
+          <a href="mailto:support@alive5.com">Alive5 support</a> for availability.
+        </div>
+        <h2 id="setup">Connect when available</h2>
         <ol class="setup-list">
           <li>
-            <strong>Add Alive5</strong>
-            <p>In Keragon, add Alive5 to your workflow.</p>
+            <strong>Add Alive5 SMS</strong>
+            <p>In Keragon, add the Alive5 SMS connector to your workflow.</p>
           </li>
           <li>
             <strong>Connect with an API key</strong>
@@ -84,8 +90,9 @@
           <p class="path">polling · 5 minute interval</p>
           <p>
             Checks the same line on a schedule and includes image-only messages.
-            Use it when delivery matters more than latency; new texts can take
-            up to five minutes to appear.
+            It runs every five minutes when active. Actual arrival time depends
+            on platform scheduling and successful API reads; it does not
+            guarantee delivery.
           </p>
         </div>
 
