@@ -30,11 +30,30 @@
           SMS line on that account and <code>RECIPIENT_NUMBER</code> to a phone
           you control. Use E.164 format, including the country code.
         </div>
+        <h2 id="before-you-send">Before you send</h2>
+        <ul>
+          <li>
+            Assign the sending number to the channel you pass as
+            <code>channel_id</code>: Settings → Messaging → Phone Numbers &amp;
+            Accounts → Assign to channel. Get <code>channel_id</code> and
+            <code>user_id</code> from
+            <a href="reference.html#channels-and-users"
+              ><code>GET /objects/channels-and-users/list</code></a
+            >.
+          </li>
+          <li>
+            US local numbers need an approved
+            <a href="https://support.alive5.com/10dlc-compliance">10DLC campaign</a>
+            before outbound texts are delivered.
+          </li>
+          <li>
+            If your website collects phone numbers for texting, use HTTPS,
+            consent/privacy language, and an initially unchecked “Opt-in to
+            receive texts?” checkbox.
+          </li>
+        </ul>
+
         <h2 id="ids">1. Find your IDs</h2>
-        <p>
-          A send needs the channel that owns the business number and the user it
-          is credited to. One call returns both.
-        </p>
         <div class="code">
           <div class="code-head">
             <span class="name">GET /objects/channels-and-users/list</span
