@@ -6,6 +6,7 @@ const MENU = [
   ["start", "index.html", "Get started"],
   ["devres", "api/index.html", "Developer resources"],
   ["connectors", "connectors/index.html", "Connectors"],
+  ["integrations", "integrations/index.html", "Integrations"],
   ["messaging", "api/send-a-message.html", "Messaging"],
   ["contacts", "api/contacts.html", "Contacts"],
   ["reporting", "api/reporting.html", "Reporting"],
@@ -86,6 +87,15 @@ const SIDEBAR = [
       ["connectors-pipedream", "connectors/pipedream.html", "Pipedream"],
       ["connectors-make", "connectors/make.html", "Make"],
       ["connectors-keragon", "connectors/keragon.html", "Keragon"],
+    ],
+  },
+  {
+    label: "Integrations",
+    items: [
+      ["int-overview", "integrations/index.html", "Overview"],
+      ["int-widget", "integrations/widget.html", "Chat widget"],
+      ["int-visitor", "integrations/visitor-data.html", "Visitor data"],
+      ["int-crm", "integrations/crm.html", "CRM integrations"],
     ],
   },
 ];
@@ -265,6 +275,10 @@ const SEARCH = [
   ["Build with n8n", "connectors/n8n.html", "automation SMS verified community node"],
   ["Keragon", "connectors/keragon.html", "connector workflow healthcare"],
   ["Connectors", "connectors/index.html", "integrations automation"],
+  ["Integrations", "integrations/index.html", "website live chat widget visitor data CRM conversation sync"],
+  ["Install the chat widget", "integrations/widget.html", "website live chat widget embed script CSP nonce Drupal installation"],
+  ["Pass visitor data", "integrations/visitor-data.html", "a5_firstname variables chat link UTM visitor name email custom data"],
+  ["CRM integrations", "integrations/crm.html", "Salesforce HubSpot Dynamics 365 Dataverse JobDiva OAuth scopes field mapping conversation sync"],
   ["API overview", "api/index.html", "base URL resources REST"],
 ];
 function wireSearch() {
@@ -287,7 +301,7 @@ function wireSearch() {
         hits
           .map(
             ([title, path]) =>
-              `<a href="${href(path)}"><span class="search-doc-icon">▤</span><span>${title}<small>${path.startsWith("connectors") ? "Connectors" : "Developer resources"}</small></span><span class="search-enter">↵</span></a>`,
+              `<a href="${href(path)}"><span class="search-doc-icon">▤</span><span>${title}<small>${path.startsWith("connectors") ? "Connectors" : path.startsWith("integrations") ? "Integrations" : "Developer resources"}</small></span><span class="search-enter">↵</span></a>`,
           )
           .join("")
       : `<div class="search-empty">No results for this search.<small>Try “API key”, “SMS”, or “Make”.</small></div>`;
