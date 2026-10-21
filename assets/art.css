@@ -1,0 +1,16 @@
+figure.page-art {
+  margin: 28px 0 32px;
+  border: 1px solid #e2e5eb;
+  border-radius: 12px;
+  background: #f6f9fc;
+  overflow: hidden;
+}
+figure.page-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 960 / 400;
+}
+figure.page-art:empty {
+  display: none;
+}

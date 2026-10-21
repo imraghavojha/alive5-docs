@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="400" viewBox="0 0 960 400" fill="none" stroke="#202534" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round">
+  <title>Authentication — exploded API key module</title>
+  <desc>An orange key card, an X-A5-APIKEY header cartridge, and an api.alive5.com appliance, separated along vertical assembly guides. Keep the key server-side.</desc>
+  <defs>
+    <style>
+      path,rect,circle,ellipse,line,polyline{vector-effect:non-scaling-stroke}
+      .detail{stroke:#657080;stroke-width:.8}
+      .guide{stroke:#9aa3b2;stroke-width:.8;stroke-dasharray:4 4}
+      .label{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.06em;fill:#202534;stroke:none}
+      .engraving{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;fill:#202534;stroke:none}
+    </style>
+    <g id="screw" stroke-width=".8">
+      <circle r="3.1" fill="#fff"/>
+      <path d="M-1.4 0h2.8M0-1.4v2.8" stroke="#657080"/>
+    </g>
+    <rect id="vent" width="2.6" height="14" rx="1.3" fill="#657080" stroke="none"/>
+    <rect id="contact" width="3" height="8" rx=".6" fill="#fff2eb" stroke="#657080" stroke-width=".8"/>
+    <g id="standoff" stroke-width=".8">
+      <path d="M-3-1v7c0 2 6 2 6 0V-1" fill="#e7ebf1"/>
+      <ellipse rx="3" ry="1.7" cy="-1" fill="#fff"/>
+      <ellipse rx="1" ry=".6" cy="-1" stroke="#657080"/>
+    </g>
+  </defs>
+
+  <!-- Registration axes are behind all opaque faces. -->
+  <g class="guide">
+    <path d="M480 118V232M618.56 198v114M438.43 142v114M577 222v114"/>
+    <path d="M480 66v76M558 103v84"/>
+  </g>
+
+  <!-- Appliance: feet, visible side faces, then opaque top. -->
+  <g fill="#e7ebf1">
+    <path d="m420.24 298.5 10.39 6v6l-10.39-6Z"/>
+    <path d="m552.74 375 10.39 6v6l-10.39-6Z"/>
+    <path d="m616.13 338 10.39-6v6l-10.39 6Z"/>
+  </g>
+  <path d="M410.72 260 570.07 352v35l-159.35-92Z" fill="#f3f5f9"/>
+  <path d="m570.07 352 69.28-40v35l-69.28 40Z" fill="#e7ebf1"/>
+  <g transform="matrix(.8660254 .5 0 1 410.718 260)">
+    <path class="detail" d="M0 29H184"/>
+    <use href="#screw" x="8" y="8"/>
+    <use href="#screw" x="176" y="26"/>
+    <text class="engraving" x="25" y="20" font-size="10.5">api.alive5.com</text>
+    <rect x="151" y="10" width="18" height="13" rx="2" fill="#fff" stroke-width=".8"/>
+    <circle cx="160" cy="16.5" r="2.2" fill="#c34c27" stroke-width=".8"/>
+  </g>
+  <g transform="matrix(.8660254 -.5 0 1 570.067 352)">
+    <path class="detail" d="M0 29H80"/>
+    <use href="#vent" x="11" y="9"/><use href="#vent" x="17" y="9"/>
+    <use href="#vent" x="23" y="9"/><use href="#vent" x="29" y="9"/>
+    <use href="#vent" x="35" y="9"/><use href="#vent" x="41" y="9"/>
+    <use href="#vent" x="47" y="9"/><use href="#vent" x="53" y="9"/>
+    <use href="#screw" x="70" y="17"/>
+  </g>
+  <g transform="matrix(.8660254 .5 -.8660254 .5 480 220)">
+    <rect width="184" height="80" fill="#fff"/>
+    <path class="detail" d="M4 4H180V76H4Z"/>
+    <rect x="20" y="24" width="144" height="32" rx="2" fill="#e7ebf1"/>
+    <path d="M23 48V28h138" class="detail"/>
+    <rect x="30" y="36" width="124" height="7" rx="1" fill="#202534" stroke-width=".8"/>
+    <path d="M35 44h114" stroke="#fff" stroke-width=".8"/>
+    <use href="#screw" x="12" y="12"/><use href="#screw" x="172" y="12"/>
+    <use href="#screw" x="12" y="60"/><use href="#screw" x="172" y="60"/>
+    <path class="detail" d="M30 65h35m-35 4h24M132 11h22m-12 4h12"/>
+  </g>
+  <use href="#standoff" x="438.43" y="251"/>
+  <use href="#standoff" x="577" y="331"/>
+
+  <!-- Header cartridge, with a thin machined edge and contact fingers. -->
+  <path d="m421.11 142 159.35 92v8l-159.35-92Z" fill="#f3f5f9"/>
+  <path d="m580.46 234 58.89-34v8l-58.89 34Z" fill="#e7ebf1"/>
+  <g transform="matrix(.8660254 .5 -.8660254 .5 480 108)">
+    <rect width="184" height="68" rx="2" fill="#fff"/>
+    <rect x="22" y="19" width="140" height="30" rx="1.5" fill="#f3f5f9" stroke-width=".8"/>
+    <text class="engraving" x="31" y="39" font-size="13">X-A5-APIKEY</text>
+    <path d="M31 25h22" stroke="#c34c27" stroke-width=".8"/>
+    <path class="detail" d="M27 55h25l7 7h53l7-7h35M139 11h17v7M27 12h13"/>
+    <use href="#screw" x="12" y="12"/><use href="#screw" x="172" y="12"/>
+    <use href="#screw" x="12" y="60"/><use href="#screw" x="172" y="60"/>
+    <use href="#contact" x="66" y="57"/><use href="#contact" x="72" y="57"/>
+    <use href="#contact" x="78" y="57"/><use href="#contact" x="84" y="57"/>
+    <use href="#contact" x="90" y="57"/><use href="#contact" x="96" y="57"/>
+    <use href="#contact" x="102" y="57"/><use href="#contact" x="108" y="57"/>
+  </g>
+
+  <!-- Key card. The chamfer, contact pad and traces belong to the part. -->
+  <path d="m434.97 51 128.17 74v4L434.97 55Z" fill="#fff2eb"/>
+  <path d="m563.14 125 32.91-19v4l-32.91 19Z" fill="#e7ebf1"/>
+  <g transform="matrix(.8660254 .5 -.8660254 .5 480 25)">
+    <path d="M0 0H134l14 14v38H0Z" fill="#c34c27"/>
+    <path d="M6 6h125l11 11v29H6Z" stroke="#fff2eb" stroke-width=".8"/>
+    <rect x="17" y="15" width="32" height="23" rx="3" fill="#fff2eb" stroke-width=".8"/>
+    <path d="M27 15v23m12-23v23M17 26.5h32" stroke-width=".8"/>
+    <text class="engraving" x="64" y="29" font-size="12" style="fill:#fff">API KEY</text>
+    <path d="M64 36h35m6 0h12m-68-2h7l6 6h35m9 0h11l8-8v-9" stroke="#fff2eb" stroke-width=".8"/>
+    <circle cx="125" cy="20" r="2" fill="#fff2eb" stroke-width=".8"/>
+  </g>
+
+  <!-- Factual callouts, kept clear of the assembly. -->
+  <g class="detail">
+    <path d="M171 65h178l91-11"/>
+    <circle cx="440" cy="54" r="2.3" fill="#f6f9fc"/>
+    <path d="M159 188h178l93-37"/>
+    <circle cx="430" cy="151" r="2.3" fill="#f6f9fc"/>
+    <path d="M624 344h114v-61"/>
+    <circle cx="624" cy="344" r="2.3" fill="#f6f9fc"/>
+  </g>
+  <text class="label" x="171" y="52" style="fill:#c34c27">KEEP SERVER-SIDE</text>
+  <text class="label" x="159" y="175">HEADER · X-A5-APIKEY</text>
+  <text class="label" x="684" y="254">HOST</text>
+  <text class="label" x="684" y="272">API.ALIVE5.COM</text>
+</svg>
