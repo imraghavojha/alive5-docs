@@ -2,8 +2,8 @@ const OPS = [
   {
     label: "Preview an SMS",
     cmd: 'alive5 sms send --from +12025550100 --to +12025550123 --channel example_channel --user example_user --message "Hello from Alive5." --dry-run',
-    doc: "api/cli.html#preview",
-    docLabel: "Learn more about the CLI preview",
+    doc: "api/send-a-message.html",
+    docLabel: "Learn more about sending messages",
     res: {
       ok: true,
       data: {
@@ -100,8 +100,8 @@ const OPS = [
   {
     label: "List teammates",
     cmd: "alive5 users list",
-    doc: "api/cli.html#commands",
-    docLabel: "Explore CLI commands",
+    doc: "api/reference.html#users",
+    docLabel: "Explore the users API",
     res: {
       ok: true,
       data: [
@@ -161,8 +161,8 @@ const OPS = [
   {
     label: "List tags",
     cmd: "alive5 tags list",
-    doc: "api/cli.html#commands",
-    docLabel: "Explore CLI commands",
+    doc: "api/reference.html#tags",
+    docLabel: "Explore the tags API",
     res: {
       ok: true,
       data: [
@@ -335,7 +335,7 @@ function wireShell() {
     busy = false;
     form.removeAttribute("aria-busy");
     input.disabled = false;
-    out.innerHTML = `<div class="shell-intro">Welcome to Alive5 Shell!<br>Preview CLI v0.5 commands with fictional data. No account required.<br><br><span class="shell-bullet">–</span> View commands: <button type="button" data-stage="help">alive5 help ▷</button><br><span class="shell-bullet">–</span> List example channels: <button type="button" data-stage="2">alive5 channels list ▷</button><br><span class="shell-bullet">–</span> Preview an SMS: <button type="button" data-stage="0">alive5 sms send ▷</button></div><div class="shell-history"></div>`;
+    out.innerHTML = `<div class="shell-intro">Welcome to Alive5 Shell!<br>Explore API actions as commands with fictional responses. Nothing is sent.<br><br><span class="shell-bullet">–</span> View commands: <button type="button" data-stage="help">alive5 help ▷</button><br><span class="shell-bullet">–</span> List example channels: <button type="button" data-stage="2">alive5 channels list ▷</button><br><span class="shell-bullet">–</span> Preview an SMS: <button type="button" data-stage="0">alive5 sms send ▷</button></div><div class="shell-history"></div>`;
     stage(0, false);
     scroll.scrollTop = 0;
   };

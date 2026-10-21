@@ -59,7 +59,6 @@ const SIDEBAR = [
     items: [
       ["api", "api/index.html", "Overview"],
       ["api-auth", "api/authentication.html", "Authentication"],
-      ["api-cli", "api/cli.html", "CLI developer preview"],
       ["api-errors", "api/errors.html", "Errors and responses"],
     ],
   },
@@ -84,7 +83,6 @@ const SIDEBAR = [
       ["connectors-n8n", "connectors/n8n.html", "n8n"],
       ["connectors-node-red", "connectors/node-red.html", "Node-RED"],
       ["connectors-shuffle", "connectors/shuffle.html", "Shuffle"],
-      ["connectors-mcp", "connectors/mcp.html", "MCP"],
       ["connectors-pipedream", "connectors/pipedream.html", "Pipedream"],
       ["connectors-make", "connectors/make.html", "Make"],
       ["connectors-keragon", "connectors/keragon.html", "Keragon"],
@@ -242,9 +240,7 @@ function wireToc() {
 const SEARCH = [
   ["Build with Node-RED", "connectors/node-red.html", "connector node red nodes npm @imraghavojha/node-red-alive5 flows SMS automation"],
   ["Automate with Shuffle", "connectors/shuffle.html", "connector public app Alive5 SMS security SOAR workflow automation"],
-  ["Connect AI agents with MCP", "connectors/mcp.html", "model context protocol server alive5-mcp npm registry AI assistant tools messaging"],
   ["Build with Zapier", "connectors/zapier.html", "connector Zap SMS chat contacts automation calendar sheets Slack"],
-  ["Alive5 CLI", "api/cli.html", "terminal command JSON agent install dry run preview"],
   [
     "Authentication",
     "api/authentication.html",
