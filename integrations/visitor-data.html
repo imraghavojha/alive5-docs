@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pass visitor data · Alive5 docs</title>
+    <meta
+      name="description"
+      content="Prefill contact details for web chats with widget variables or a chat link, and capture UTM parameters."
+    />
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png" />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="stylesheet" href="../assets/demos.css" />
+    <style>
+      .doc .code pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+    </style>
+  </head>
+  <body data-root="../" data-page="int-visitor" data-section="integrations">
+    <a class="skip" href="#main">Skip to content</a>
+    <header data-header></header>
+    <div class="layout">
+      <nav data-sidebar="" aria-label="Documentation"></nav>
+      <main class="doc" id="main">
+        <p class="crumbs"><a href="../index.html">Home</a><span>/</span><a href="index.html">Integrations</a><span>/</span>Visitor data</p>
+        <h1>Pass visitor data</h1>
+        <p class="sub">Prefill contact details for web chats from your site or a chat link.</p>
+        <figure class="page-art" data-art="visitor-data"></figure>
+
+        <h2 id="widget-variables">Set widget variables</h2>
+        <p>Assign visitor values inside the embed function, before the widget script loads. Replace the placeholders with your visitor data and widget ID.</p>
+        <div class="code">
+          <div class="code-head">
+            <span class="name">HTML</span>
+            <button class="copy" type="button">Copy</button>
+          </div>
+          <pre>&lt;script type="text/javascript"&gt;
+(function(d, s, id) {
+  a5_firstname = 'YOUR_FIRST_NAME';
+  a5_lastname = 'YOUR_LAST_NAME';
+  a5_email = 'YOUR_EMAIL';
+  a5_phone = 'YOUR_PHONE_NUMBER';
+  a5_accountid = 'YOUR_ACCOUNT_ID';
+  a5_company = 'YOUR_COMPANY';
+  a5_title = 'YOUR_TITLE';
+  a5_notes = 'YOUR_NOTES';
+  a5_cartid = 'YOUR_CART_ID';
+  a5_custom0 = 'YOUR_CUSTOM_VALUE_0';
+  a5_custom1 = 'YOUR_CUSTOM_VALUE_1';
+
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) { return; }
+  js = d.createElement(s);
+  js.id = id;
+  js.async = true;
+  js.src = "https://alive5.com/js/a5app.js";
+  js.setAttribute("data-widget_code_id", "YOUR_WIDGET_ID");
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, "script", "a5widget"));
+&lt;/script&gt;</pre>
+        </div>
+        <table class="tbl">
+          <thead><tr><th>Details</th><th>Variables</th></tr></thead>
+          <tbody>
+            <tr><td>Name</td><td><code>a5_firstname</code>, <code>a5_lastname</code></td></tr>
+            <tr><td>Contact</td><td><code>a5_email</code>, <code>a5_phone</code></td></tr>
+            <tr><td>Company</td><td><code>a5_accountid</code>, <code>a5_company</code>, <code>a5_title</code></td></tr>
+            <tr><td>Other</td><td><code>a5_notes</code>, <code>a5_cartid</code>, <code>a5_custom0</code> – <code>a5_custom9</code></td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="chat-link">Prefill from a chat link</h2>
+        <p>Use <code>https://alive5.com/YOUR_SHORT_CODE</code> with these query parameters to pass visitor details. URL-encode each value.</p>
+        <table class="tbl">
+          <thead><tr><th>Parameter</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>firstname</td><td>First name.</td></tr>
+            <tr><td>lastname</td><td>Last name.</td></tr>
+            <tr><td>email</td><td>Email address.</td></tr>
+            <tr><td>notes</td><td>Notes about the visitor.</td></tr>
+            <tr><td>phone</td><td>Phone number. Encode a leading <code>+</code> as <code>%2B</code>.</td></tr>
+          </tbody>
+        </table>
+        <div class="code">
+          <div class="code-head">
+            <span class="name">Chat link</span>
+            <button class="copy" type="button">Copy</button>
+          </div>
+          <pre>https://alive5.com/YOUR_SHORT_CODE<wbr>?firstname=Joe<wbr>&amp;lastname=Smith<wbr>&amp;email=joe%40example.com<wbr>&amp;notes=Client<wbr>&amp;phone=%2B18329995555</pre>
+        </div>
+        <p>Keep sensitive data out of URLs.</p>
+
+        <h2 id="utm-parameters">UTM parameters</h2>
+        <p>Alive5 automatically captures UTM parameters on pages with the widget installed.</p>
+        <div class="code">
+          <div class="code-head">
+            <span class="name">Page URL</span>
+            <button class="copy" type="button">Copy</button>
+          </div>
+          <pre>https://www.example.com/page?utm_campaign=campaign1&amp;utm_medium=social&amp;utm_source=facebook.com&amp;utm_content=banner1</pre>
+        </div>
+
+        <h2 id="where-data-shows-up">Where the data shows up</h2>
+        <p>Visitor variables populate the contact pane and the Conversations CSV.</p>
+        <div class="note"><strong>Web chat only</strong><p>These integrations apply to web chat, not SMS or Facebook conversations.</p></div>
+
+        <div class="pager">
+          <a href="widget.html"><span>Previous</span><strong>← Install the chat widget</strong></a>
+          <a class="next" href="crm.html"><span>Next</span><strong>CRM integrations →</strong></a>
+        </div>
+      </main>
+      <aside data-toc aria-label="On this page"></aside>
+    </div>
+    <footer data-docfoot></footer>
+    <script src="../assets/site.js"></script>
+    <script src="../assets/demos.js"></script>
+  </body>
+</html>
