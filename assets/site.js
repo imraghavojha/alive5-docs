@@ -84,9 +84,6 @@ const SIDEBAR = [
       ["connectors-n8n", "connectors/n8n.html", "n8n"],
       ["connectors-node-red", "connectors/node-red.html", "Node-RED"],
       ["connectors-shuffle", "connectors/shuffle.html", "Shuffle"],
-      ["connectors-pipedream", "connectors/pipedream.html", "Pipedream"],
-      ["connectors-make", "connectors/make.html", "Make"],
-      ["connectors-keragon", "connectors/keragon.html", "Keragon"],
     ],
   },
   {
@@ -266,14 +263,7 @@ const SEARCH = [
   ["Reporting", "api/reporting.html", "analytics bots FAQ"],
   ["Errors and responses", "api/errors.html", "400 401 status failure"],
   ["API reference", "api/reference.html", "endpoint channels API"],
-  [
-    "Pipedream",
-    "connectors/pipedream.html",
-    "connector workflow trigger automation",
-  ],
-  ["Make", "connectors/make.html", "make.com connector scenario automation"],
   ["Build with n8n", "connectors/n8n.html", "automation SMS verified community node"],
-  ["Keragon", "connectors/keragon.html", "connector workflow healthcare"],
   ["Connectors", "connectors/index.html", "integrations automation"],
   ["Integrations", "integrations/index.html", "website live chat widget visitor data CRM conversation sync"],
   ["Install the chat widget", "integrations/widget.html", "website live chat widget embed script CSP nonce Drupal installation"],
@@ -304,7 +294,7 @@ function wireSearch() {
               `<a href="${href(path)}"><span class="search-doc-icon">▤</span><span>${title}<small>${path.startsWith("connectors") ? "Connectors" : path.startsWith("integrations") ? "Integrations" : "Developer resources"}</small></span><span class="search-enter">↵</span></a>`,
           )
           .join("")
-      : `<div class="search-empty">No results for this search.<small>Try “API key”, “SMS”, or “Make”.</small></div>`;
+      : `<div class="search-empty">No results for this search.<small>Try “API key”, “SMS”, or “Zapier”.</small></div>`;
     mark();
   };
   const mark = () =>

@@ -256,11 +256,18 @@ a:hover { text-decoration: none; }
 .browse-group > h3 { font-weight: 600; letter-spacing: 0; margin-bottom: 12px; }
 .browse-group > .rule { height: 1px; }
 .browse-grid { gap: 25px 24px; margin-top: 20px; }
-.browse-grid > a { display: flex; align-items: flex-start; gap: 12px; padding: 3px 0; }
+.browse-grid > a,
+.browse-grid > .soon { display: flex; align-items: flex-start; gap: 12px; padding: 3px 0; }
 .browse-grid strong { font-weight: 600; line-height: 21px; }
 .browse-grid strong em { font-size: 11px; font-weight: 400; font-style: normal; color: #8b94a1; }
 .browse-grid span { margin-top: 3px; }
 .browse-grid a:hover strong { text-decoration: underline; text-underline-offset: 3px; }
+.browse-grid > .soon,
+.connector-card.is-soon { cursor: default; }
+.browse-grid > .soon .connector-logo,
+.connector-card.is-soon .connector-logo { opacity: 0.55; filter: grayscale(1); }
+.browse-grid > .soon strong,
+.connector-card.is-soon h3 { color: var(--muted); }
 .product-icon { display: grid !important; place-items: center; width: 30px; height: 30px; flex: none; color: #b6583c; background: #fff1ea; border-radius: 7px; margin-top: 0 !important; }
 .product-icon svg { width: 19px; height: 19px; }
 .product-icon.chat { color: #477d99; background: #eaf4fa; }
@@ -356,7 +363,7 @@ a:hover { text-decoration: none; }
 .connector-cards { display: grid; gap: 12px; margin-top: 18px; }
 .connector-card { display: flex; gap: 18px; padding: 20px; border: 1px solid var(--line); border-radius: 7px; transition: box-shadow 0.2s,
     border-color 0.2s; }
-.connector-card:hover { border-color: #c6ceda; box-shadow: 0 3px 12px #24324a09; }
+.connector-card:not(.is-soon):hover { border-color: #c6ceda; box-shadow: 0 3px 12px #24324a09; }
 .connector-card > div { flex: 1; }
 .connector-card h3 { display: flex; justify-content: space-between; margin: 0; color: #343c4a; }
 .connector-card h3 > span { font-size: 14px; color: #8892a2; font-weight: 400; }
@@ -759,7 +766,8 @@ h3 { letter-spacing: -0.015em; }
   .home-foot { margin-top: 44px; }
 }
 
-.browse-grid > a { gap: 14px; }
+.browse-grid > a,
+.browse-grid > .soon { gap: 14px; }
 .browse-grid .product-icon,
 .browse-grid .connector-logo { width: 32px; height: 32px; border-radius: 8px; }
 .product-icon svg { width: 18px; height: 18px; }

@@ -33,27 +33,6 @@ const CONNECTOR_VIEWS = {
     action: "Send SMS",
     icon: "↙",
   },
-  pipedream: {
-    eyebrow: "PIPEDREAM WORKFLOW",
-    title: "Connect a source to an action",
-    trigger: "New SMS Received",
-    action: "Send SMS",
-    icon: "≋",
-  },
-  make: {
-    eyebrow: "MAKE SCENARIO",
-    title: "Map messages between modules",
-    trigger: "Watch incoming SMS",
-    action: "Send an SMS",
-    icon: "Ⅲ",
-  },
-  keragon: {
-    eyebrow: "KERAGON WORKFLOW",
-    title: "Keep the conversation moving",
-    trigger: "SMS received",
-    action: "Send SMS",
-    icon: "◇",
-  },
 };
 function wireShowcases() {
   document.querySelectorAll("[data-automation]").forEach((root) => {
