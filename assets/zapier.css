@@ -32,7 +32,7 @@
 .zapier-connection span { display: none; }
 .zapier-result { margin-top: 12px; }
 .zapier-app-icon.result { color: #498875; background: #eff7f3; border-color: #dfeee6; font-size: 17px; }
-.doc .zapier-preview-caption { color: #79818e; font-size: 9px; line-height: 16px; text-align: center; margin-top: 8px; }
+.doc .zapier-preview-caption { color: #79818e; font-size: 12px; line-height: 18px; text-align: center; margin-top: 8px; }
 .zapier-events > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; padding: 17px 0; border-top: 1px solid var(--line); }
 .doc .zapier-events h3 { font-size: 15px; margin: 0; }
 .zapier-events > div > span { align-self: center; font-size: 10px; color: #647185; border: 1px solid #e2e6ec; border-radius: 4px; padding: 0 6px; line-height: 19px; }
