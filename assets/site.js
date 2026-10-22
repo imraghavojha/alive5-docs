@@ -67,6 +67,7 @@ const SIDEBAR = [
     label: "Messaging and data",
     items: [
       ["api-send", "api/send-a-message.html", "Send a message"],
+      ["api-sms-limits", "api/sms-limits.html", "SMS limits"],
       ["api-receive", "api/receive-messages.html", "Read messages"],
       ["api-contacts", "api/contacts.html", "Contacts"],
       ["api-report", "api/reporting.html", "Reporting"],
@@ -254,6 +255,11 @@ const SEARCH = [
     "API key header token settings",
   ],
   ["Send a message", "api/send-a-message.html", "SMS outbound text"],
+  [
+    "SMS limits and compliance",
+    "api/sms-limits.html",
+    "segments 160 70 emoji MMS 500 KB file types opt-out STOP HELP 10DLC consent broadcast limits Canada E.164 NNID",
+  ],
   [
     "Read messages",
     "api/receive-messages.html",
