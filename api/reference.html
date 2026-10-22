@@ -13,6 +13,7 @@
     <link href="../assets/styles.css" rel="stylesheet" />
     <link href="../assets/demos.css" rel="stylesheet" />
     <link href="../assets/reference.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/art.css" />
   </head>
   <body data-page="api-reference" data-root="../" data-section="devres">
     <a class="skip" href="#main">Skip to content</a>
@@ -29,6 +30,7 @@
           API endpoints covered by these guides, grouped by resource. All calls
           require the X-A5-APIKEY header.
         </p>
+        <figure class="page-art"><img src="../assets/art/reference.svg" alt="Exploded view of an API call: host, path, header, body and response plates" width="960" height="400" decoding="async" /></figure>
         <p class="reference-note">
           Replace <code>$ALIVE5_KEY</code> and the other placeholders with your
           own values. Responses are shortened examples with fictional data;
@@ -66,7 +68,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for POST Send SMS"
                 tabindex="0"
@@ -82,7 +84,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"code":</span> <span class="json-value">200</span>,
   <span class="json-key">"data":</span> {
@@ -116,7 +118,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for GET List SMS conversations"
                 tabindex="0"
@@ -129,7 +131,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"code":</span> <span class="json-value">200</span>,
   <span class="json-key">"data":</span> {
@@ -188,7 +190,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for GET List live chat conversations"
                 tabindex="0"
@@ -203,7 +205,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"code":</span> <span class="json-value">200</span>,
   <span class="json-key">"data":</span> {
@@ -248,7 +250,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for GET List Messenger conversations"
                 tabindex="0"
@@ -262,7 +264,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"code":</span> <span class="json-value">200</span>,
   <span class="json-key">"data":</span> {
@@ -303,7 +305,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for GET Conversation summary"
                 tabindex="0"
@@ -317,7 +319,7 @@
               <figcaption>
                 <span>Example error · if a date is missing</span
                 ><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"code":</span> <span class="json-value">400</span>,
   <span class="json-key">"error":</span> {}
@@ -341,7 +343,7 @@
           </div>
           <div aria-label="Examples for GET Account" class="reference-examples">
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for GET Account"
                 tabindex="0"
@@ -353,7 +355,7 @@
               <figcaption>
                 <span>Example response · sensitive fields omitted</span
                 ><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"code":</span> <span class="json-value">200</span>,
   <span class="json-key">"data":</span> {
@@ -384,7 +386,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for GET List channels and users"
                 tabindex="0"
@@ -395,7 +397,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"code":</span> <span class="json-value">200</span>,
   <span class="json-key">"data":</span> {
@@ -432,7 +434,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for GET List users"
                 tabindex="0"
@@ -443,7 +445,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"code":</span> <span class="json-value">200</span>,
   <span class="json-key">"data":</span> [
@@ -474,7 +476,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for GET List contacts"
                 tabindex="0"
@@ -487,7 +489,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"code":</span> <span class="json-value">200</span>,
   <span class="json-key">"data":</span> {
@@ -526,7 +528,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for POST Create contact"
                 tabindex="0"
@@ -545,7 +547,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"code":</span> <span class="json-value">200</span>,
   <span class="json-key">"data":</span> {
@@ -576,7 +578,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for PUT Update contact"
                 tabindex="0"
@@ -589,7 +591,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"code":</span> <span class="json-value">200</span>,
   <span class="json-key">"data":</span> {
@@ -615,7 +617,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for GET List tags"
                 tabindex="0"
@@ -626,7 +628,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"code":</span> <span class="json-value">200</span>,
   <span class="json-key">"data":</span> {
@@ -669,7 +671,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for POST Create a channel"
                 tabindex="0"
@@ -682,7 +684,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"data":</span> {
     <span class="json-key">"code":</span> <span class="json-value">200</span>,
@@ -729,7 +731,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for POST Create a tag"
                 tabindex="0"
@@ -743,7 +745,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"data":</span> {
     <span class="json-key">"code":</span> <span class="json-value">200</span>,
@@ -798,7 +800,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for POST Create a user"
                 tabindex="0"
@@ -814,7 +816,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"data":</span> {
     <span class="json-key">"code":</span> <span class="json-value">200</span>,
@@ -858,7 +860,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for POST Create an FAQ category"
                 tabindex="0"
@@ -872,7 +874,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"data":</span> {
     <span class="json-key">"code":</span> <span class="json-value">200</span>,
@@ -925,7 +927,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for POST Create an FAQ article"
                 tabindex="0"
@@ -940,7 +942,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"data":</span> {
     <span class="json-key">"code":</span> <span class="json-value">200</span>,
@@ -1007,7 +1009,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for POST Create a widget"
                 tabindex="0"
@@ -1026,7 +1028,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"data":</span> {
     <span class="json-key">"code":</span> <span class="json-value">200</span>,
@@ -1081,7 +1083,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for POST Create a bot flow"
                 tabindex="0"
@@ -1097,7 +1099,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"data":</span> {
     <span class="json-key">"code":</span> <span class="json-value">200</span>,
@@ -1139,7 +1141,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for GET Performance report"
                 tabindex="0"
@@ -1153,7 +1155,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"code":</span> <span class="json-value">200</span>,
   <span class="json-key">"data":</span> {
@@ -1192,7 +1194,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for GET Bot report"
                 tabindex="0"
@@ -1206,7 +1208,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"code":</span> <span class="json-value">200</span>,
   <span class="json-key">"data":</span> {
@@ -1244,7 +1246,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for GET Multiple-choice report"
                 tabindex="0"
@@ -1259,7 +1261,7 @@
               <figcaption>
                 <span>Example response · no matches excerpt</span
                 ><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"code":</span> <span class="json-value">404</span>
 }</code></pre>
@@ -1280,7 +1282,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for GET Free-text report"
                 tabindex="0"
@@ -1294,7 +1296,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"code":</span> <span class="json-value">200</span>,
   <span class="json-key">"data":</span> {
@@ -1325,7 +1327,7 @@
             class="reference-examples"
           >
             <figure class="reference-code">
-              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
                 aria-label="curl request for GET FAQ report"
                 tabindex="0"
@@ -1339,7 +1341,7 @@
             <figure class="reference-code reference-response">
               <figcaption>
                 <span>Example response · excerpt</span><span>JSON</span>
-              </figcaption>
+              <button class="copy" type="button">Copy</button></figcaption>
               <pre><code>{
   <span class="json-key">"code":</span> <span class="json-value">200</span>,
   <span class="json-key">"data":</span> [
@@ -1355,17 +1357,92 @@
           </div>
         </div>
         <div class="pager">
-          <a href="receive-messages.html"
-            ><span>Previous</span><strong>← Read messages</strong></a
+          <a href="../api/reporting.html"
+            ><span>Previous</span><strong>← Reporting</strong></a
           >
           <a class="next" href="../connectors/index.html"
             ><span>Next</span><strong>Connectors →</strong></a
           >
         </div>
       </main>
+      <aside class="toc reference-toc" aria-label="API reference navigation">
+        <div class="label">API reference</div>
+        <div class="reference-toc-group">
+          <a class="reference-toc-section" href="#messaging">Messaging</a>
+          <a class="reference-toc-endpoint" href="#send-sms">Send SMS</a>
+          <a class="reference-toc-endpoint" href="#sms-conversations">List SMS conversations</a>
+          <a class="reference-toc-endpoint" href="#livechat-conversations">List live chat conversations</a>
+          <a class="reference-toc-endpoint" href="#messenger-conversations">List Messenger conversations</a>
+          <a class="reference-toc-endpoint" href="#conversation-summary">Conversation summary</a>
+        </div>
+        <div class="reference-toc-group">
+          <a class="reference-toc-section" href="#directory">Directory</a>
+          <a class="reference-toc-endpoint" href="#account">Account</a>
+          <a class="reference-toc-endpoint" href="#channels-and-users">List channels and users</a>
+          <a class="reference-toc-endpoint" href="#users">List users</a>
+          <a class="reference-toc-endpoint" href="#contacts">List contacts</a>
+          <a class="reference-toc-endpoint" href="#create-contact">Create contact</a>
+          <a class="reference-toc-endpoint" href="#update-contact">Update contact</a>
+          <a class="reference-toc-endpoint" href="#tags">List tags</a>
+        </div>
+        <div class="reference-toc-group">
+          <a class="reference-toc-section" href="#account-setup">Account setup</a>
+          <a class="reference-toc-endpoint" href="#create-channel">Create a channel</a>
+          <a class="reference-toc-endpoint" href="#create-tag">Create a tag</a>
+          <a class="reference-toc-endpoint" href="#create-user">Create a user</a>
+          <a class="reference-toc-endpoint" href="#create-faq-category">Create an FAQ category</a>
+          <a class="reference-toc-endpoint" href="#create-faq-article">Create an FAQ article</a>
+          <a class="reference-toc-endpoint" href="#create-widget">Create a widget</a>
+          <a class="reference-toc-endpoint" href="#create-botchain">Create a bot flow</a>
+        </div>
+        <div class="reference-toc-group">
+          <a class="reference-toc-section" href="#reporting">Reporting</a>
+          <a class="reference-toc-endpoint" href="#performance-report">Performance report</a>
+          <a class="reference-toc-endpoint" href="#bot-report">Bot report</a>
+          <a class="reference-toc-endpoint" href="#multiple-choice-report">Multiple-choice report</a>
+          <a class="reference-toc-endpoint" href="#free-text-report">Free-text report</a>
+          <a class="reference-toc-endpoint" href="#faq-report">FAQ report</a>
+        </div>
+      </aside>
     </div>
     <footer data-docfoot=""></footer>
     <script src="../assets/site.js"></script>
     <script src="../assets/demos.js"></script>
+    <script>
+      (() => {
+        const nav = document.querySelector(".reference-toc");
+        const endpoints = [...document.querySelectorAll(".reference-entry[id]")];
+        const links = [...nav.querySelectorAll(".reference-toc-endpoint")];
+        const update = () => {
+          const active = endpoints.filter((entry) => entry.getBoundingClientRect().top <= 161).at(-1) || endpoints[0];
+          links.forEach((link) => {
+            const current = link.hash === `#${active.id}`;
+            link.classList.toggle("on", current);
+            if (current) link.setAttribute("aria-current", "location");
+            else link.removeAttribute("aria-current");
+          });
+          const current = nav.querySelector(".on");
+          if (current && nav.clientHeight) {
+            const top = current.offsetTop;
+            if (top < nav.scrollTop || top + current.offsetHeight > nav.scrollTop + nav.clientHeight) {
+              nav.scrollTop = top - nav.clientHeight / 2;
+            }
+          }
+        };
+        let observer;
+        const observe = () => {
+          if (observer) observer.disconnect();
+          // A narrow band below the header tracks the endpoint being read.
+          observer = new IntersectionObserver(update, {
+            rootMargin: `-160px 0px -${Math.max(0, innerHeight - 162)}px 0px`,
+          });
+          endpoints.forEach((entry) => observer.observe(entry));
+          update();
+        };
+        observe();
+        window.addEventListener("resize", observe);
+        window.addEventListener("load", update);
+      })();
+    </script>
   </body>
 </html>

@@ -1,0 +1,236 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="400" viewBox="0 0 960 400" fill="none" stroke="#202534" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+<title>Anatomy of an Alive5 API call</title>
+<desc>An exploded isometric hardware assembly reads from host to path, API key header, form body, and response. Two host slots are labelled api and api-v2. An orange key insert fits the X-A5-APIKEY cartridge. The HTTP 200 response tray separates the real body envelope into code, data, and error.</desc>
+<defs>
+ <style>
+  path,rect,circle,ellipse,line,polyline,polygon{vector-effect:non-scaling-stroke}
+  .detail{stroke:#657080;stroke-width:.8}
+  .axis{stroke:#9aa3b2;stroke-width:.8;stroke-dasharray:4 4}
+  .label{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.06em;fill:#202534;stroke:none}
+  .engrave{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;fill:#202534;stroke:none}
+ </style>
+ <g id="screw" stroke-width=".8"><circle r="3.2" fill="#fff"/><circle r="2.1" stroke="#657080"/><path d="M-1.3 0h2.6M0-1.3v2.6" stroke="#657080"/></g>
+ <g id="pin" stroke-width=".8"><path d="M-2.4 0v8c0 1.8 4.8 1.8 4.8 0V0" fill="#e7ebf1"/><ellipse rx="2.4" ry="1.4" fill="#fff"/><ellipse rx=".8" ry=".5" stroke="#657080"/></g>
+ <g id="slot" stroke-width=".8">
+ <path d="M0 3Q0 0 3 0H91q3 0 3 3v19q0 3-3 3H3q-3 0-3-3Z" fill="#e7ebf1"/>
+ <path d="M1 3h90v21H3q-2 0-2-2Z" fill="#f3f5f9" stroke="none"/>
+ <path d="M1 3h90l3-3M91 3v21" class="detail"/>
+ </g>
+ <g id="contact" stroke-width=".8"><rect width="3" height="7" rx=".5" fill="#f3f5f9"/><path d="M1.5 1v5" stroke="#657080"/></g>
+ <g id="well" stroke-width=".8">
+ <rect width="67" height="36" rx="1.5" fill="#e7ebf1"/>
+ <!-- The floor sits four screen pixels below the rim: local (-4,+4). -->
+ <path d="M1 4h62v31H1Z" fill="#f3f5f9" stroke="none"/>
+ <path d="M1 4h62l3-3M63 4v31" class="detail"/>
+ <path d="M1 35h62" stroke="#fff"/>
+ </g>
+ <rect id="vent" width="1.7" height="5" rx=".85" fill="#657080" stroke="none"/>
+ <g id="edge-screw" stroke-width=".8"><circle r="1.8" fill="#fff"/><path d="M-.8 0H.8" stroke="#657080"/></g>
+</defs>
+<rect width="960" height="400" fill="#f6f9fc" stroke="none"/>
+<!-- Four assembly guides pass through the matching registration bores. -->
+<g class="axis">
+<path d="M89.32,161.00 L629.32,321.00"/>
+<path d="M284.18,48.50 L824.18,208.50"/>
+<path d="M134.35,187.00 L674.35,347.00"/>
+<path d="M329.21,74.50 L869.21,234.50"/>
+</g>
+<polygon points="838.03,190.50 844.96,190.50 844.96,206.50 838.03,206.50" fill="#e7ebf1"/>
+<polygon points="844.96,190.50 909.05,227.50 909.05,243.50 844.96,206.50" fill="#e7ebf1"/>
+<polygon points="909.05,227.50 909.05,231.50 909.05,247.50 909.05,243.50" fill="#e7ebf1"/>
+<polygon points="909.05,231.50 686.48,360.00 686.48,375.00 909.05,247.50" fill="#f3f5f9"/>
+<polygon points="686.48,360.00 679.55,360.00 679.55,375.00 686.48,375.00" fill="#f3f5f9"/>
+<g transform="matrix(.8660254 -.5 .8660254 .5 612 321)">
+<path d="M4,0 L261,0 L265,4 L265,78 L261,82 L4,82 L0,78 L0,4Z" fill="#fff"/>
+<path class="detail" d="M7 10V7h251v68H7V10"/>
+<text class="engrave" x="38" y="15" font-size="9.5" >RESPONSE</text>
+<use href="#well" x="22" y="24"/>
+<text class="engrave" x="55.5" y="46" font-size="11" text-anchor="middle">CODE</text>
+<path class="detail" d="M34 53h17m5 0h8m5 0h8"/>
+<use href="#well" x="99" y="24"/>
+<text class="engrave" x="132.5" y="46" font-size="11" text-anchor="middle">DATA</text>
+<path class="detail" d="M111 53h17m5 0h8m5 0h8"/>
+<use href="#well" x="176" y="24"/>
+<text class="engrave" x="209.5" y="46" font-size="11" text-anchor="middle">ERROR</text>
+<path class="detail" d="M188 53h17m5 0h8m5 0h8"/>
+<path class="detail" d="M24 68h52m7 0h7m8 0h65m10 0h7m8 0h52"/>
+<use href="#screw" x="10" y="10"/>
+<use href="#screw" x="255" y="10"/>
+<use href="#screw" x="10" y="72"/>
+<use href="#screw" x="255" y="72"/>
+</g>
+<g transform="matrix(.8660254 -.5 0 1 683.01 362.00)">
+<text class="engrave" x="20" y="11" font-size="9" >HTTP 200</text>
+<path class="detail" d="M90 8h98m6 0h40"/>
+</g>
+<g transform="matrix(.8660254 .5 0 1 841.50 188.50)">
+<use href="#vent" x="12" y="6"/>
+<use href="#vent" x="17" y="6"/>
+<use href="#vent" x="22" y="6"/>
+<use href="#vent" x="27" y="6"/>
+<use href="#vent" x="32" y="6"/>
+<use href="#vent" x="37" y="6"/>
+<use href="#vent" x="42" y="6"/>
+<use href="#vent" x="47" y="6"/>
+<use href="#vent" x="52" y="6"/>
+<use href="#vent" x="57" y="6"/>
+<use href="#vent" x="62" y="6"/>
+</g>
+<path d="M548 309C548 345 583 357 620 335L640 321 628 313C596 340 565 340 561 306Z" fill="#f3f5f9" stroke-width=".8"/>
+<g class="detail">
+<path d="M550.1 308.5 C551.0 343.6 585.2 353.6 621.2 332.0 L638.0 319.7"/>
+<path d="M552.2 308.0 C554.0 342.2 587.4 350.2 622.4 329.0 L636.0 318.4"/>
+<path d="M554.3 307.5 C557.0 340.8 589.6 346.8 623.6 326.0 L634.0 317.1"/>
+<path d="M556.4 307.0 C560.0 339.4 591.8 343.4 624.8 323.0 L632.0 315.8"/>
+<path d="M558.5 306.5 C563.0 338.0 594.0 340.0 626.0 320.0 L630.0 314.5"/>
+</g>
+<g transform="matrix(.8660254 -.5 .8660254 .5 625 321)">
+ <path d="M0 0h20v7H0Z" fill="#e7ebf1" stroke-width=".8"/>
+ <path class="detail" d="M3 2h14M3 5h14"/>
+ <circle cx="2" cy="3.5" r=".7" fill="#fff" stroke-width=".8"/>
+ <circle cx="18" cy="3.5" r=".7" fill="#fff" stroke-width=".8"/>
+</g>
+<polygon points="685.71,160.50 692.64,160.50 692.64,170.50 685.71,170.50" fill="#e7ebf1"/>
+<polygon points="692.64,160.50 748.07,192.50 748.07,202.50 692.64,170.50" fill="#e7ebf1"/>
+<polygon points="748.07,192.50 748.07,196.50 748.07,206.50 748.07,202.50" fill="#e7ebf1"/>
+<polygon points="748.07,196.50 542.82,315.00 542.82,325.00 748.07,206.50" fill="#f3f5f9"/>
+<polygon points="542.82,315.00 535.89,315.00 535.89,325.00 542.82,325.00" fill="#f3f5f9"/>
+<g transform="matrix(.8660254 -.5 0 1 539.35 317.00)">
+ <path class="detail" d="M8 7H237"/>
+ <use href="#edge-screw" x="12" y="4"/><use href="#edge-screw" x="233" y="4"/>
+ <rect x="180" y="2.5" width="35" height="3" rx="1" fill="#657080" stroke="none"/>
+ </g>
+<g transform="matrix(.8660254 -.5 .8660254 .5 477 281)">
+<path d="M4,0 L241,0 L245,4 L245,68 L241,72 L4,72 L0,68 L0,4Z" fill="#fff"/>
+<path class="detail" d="M7 10V7h231v58H7V10"/>
+<text class="engrave" x="22" y="15" font-size="9.5" >BODY</text>
+<rect x="22" y="22" width="201" height="11" rx="1" fill="#f3f5f9" stroke-width=".8"/>
+<rect x="22" y="36" width="201" height="11" rx="1" fill="#f3f5f9" stroke-width=".8"/>
+<rect x="22" y="50" width="201" height="11" rx="1" fill="#f3f5f9" stroke-width=".8"/>
+<path class="detail" d="M147 22v11M147 36v11M147 50v11"/>
+<text class="engrave" x="28" y="30" font-size="8">phone_number_from</text>
+<path class="detail" d="M155 27.5h39m5 0h16"/>
+<text class="engrave" x="28" y="44" font-size="8">phone_number_to</text>
+<path class="detail" d="M155 41.5h39m5 0h16"/>
+<text class="engrave" x="28" y="58" font-size="8">message</text>
+<path class="detail" d="M155 55.5h39m5 0h16"/>
+<use href="#screw" x="10" y="10"/>
+<use href="#screw" x="235" y="10"/>
+<use href="#screw" x="10" y="62"/>
+<use href="#screw" x="235" y="62"/>
+</g>
+<polygon points="550.71,120.50 557.64,120.50 557.64,130.50 550.71,130.50" fill="#e7ebf1"/>
+<polygon points="557.64,120.50 613.07,152.50 613.07,162.50 557.64,130.50" fill="#e7ebf1"/>
+<polygon points="613.07,152.50 613.07,156.50 613.07,166.50 613.07,162.50" fill="#e7ebf1"/>
+<polygon points="613.07,156.50 407.82,275.00 407.82,285.00 613.07,166.50" fill="#f3f5f9"/>
+<polygon points="407.82,275.00 400.89,275.00 400.89,285.00 407.82,285.00" fill="#f3f5f9"/>
+<g transform="matrix(.8660254 -.5 0 1 404.35 277.00)">
+ <path class="detail" d="M8 7H237"/>
+ <use href="#edge-screw" x="12" y="4"/><use href="#edge-screw" x="233" y="4"/>
+ <rect x="180" y="2.5" width="35" height="3" rx="1" fill="#657080" stroke="none"/>
+ </g>
+<g transform="matrix(.8660254 -.5 .8660254 .5 342 241)">
+<path d="M4,0 L241,0 L245,4 L245,68 L241,72 L4,72 L0,68 L0,4Z" fill="#fff"/>
+<path class="detail" d="M7 10V7h231v58H7V10"/>
+<text class="engrave" x="22" y="15" font-size="9.5" >HEADER</text>
+<path d="M22 24h137v29H22Z" fill="#f3f5f9" stroke-width=".8"/>
+<text class="engrave" x="30" y="43" font-size="12.5" >X-A5-APIKEY</text>
+<rect x="171" y="24" width="52" height="27" rx="2" fill="#e7ebf1" stroke-width=".8"/><rect x="177" y="31" width="40" height="11" rx="1" fill="#202534" stroke-width=".8"/><path class="detail" d="M27 59h38l7 5h80l7-5h56M30 28h17"/>
+<path d="M69 56h62v10H69Z" fill="#e7ebf1" stroke-width=".8"/>
+<use href="#contact" x="73" y="57"/>
+<use href="#contact" x="80" y="57"/>
+<use href="#contact" x="87" y="57"/>
+<use href="#contact" x="94" y="57"/>
+<use href="#contact" x="101" y="57"/>
+<use href="#contact" x="108" y="57"/>
+<use href="#contact" x="115" y="57"/>
+<use href="#contact" x="122" y="57"/>
+<use href="#screw" x="10" y="10"/>
+<use href="#screw" x="235" y="10"/>
+<use href="#screw" x="10" y="62"/>
+<use href="#screw" x="235" y="62"/>
+</g>
+<g class="axis"><path d="M509 132v35M566 109v35"/></g>
+<path d="M527.05,144.00 L585.94,110.00v3L527.05,147.00Z" fill="#fff2eb" stroke-width=".8"/>
+<g transform="matrix(.8660254 -.5 .8660254 .5 508 133)"><path d="M0 0H62l6 6v16H0Z" fill="#c34c27"/><path d="M4 4h56l4 4v10H4Z" stroke="#fff2eb" stroke-width=".8"/>
+<text class="engrave" x="9" y="14" font-size="9" style="fill:#fff">KEY</text>
+<rect x="39" y="8" width="3" height="10" rx=".4" fill="#fff2eb" stroke-width=".8"/>
+<rect x="45" y="8" width="3" height="10" rx=".4" fill="#fff2eb" stroke-width=".8"/>
+<rect x="51" y="8" width="3" height="10" rx=".4" fill="#fff2eb" stroke-width=".8"/>
+<rect x="57" y="8" width="3" height="10" rx=".4" fill="#fff2eb" stroke-width=".8"/>
+</g>
+<polygon points="415.71,80.50 422.64,80.50 422.64,90.50 415.71,90.50" fill="#e7ebf1"/>
+<polygon points="422.64,80.50 478.07,112.50 478.07,122.50 422.64,90.50" fill="#e7ebf1"/>
+<polygon points="478.07,112.50 478.07,116.50 478.07,126.50 478.07,122.50" fill="#e7ebf1"/>
+<polygon points="478.07,116.50 272.82,235.00 272.82,245.00 478.07,126.50" fill="#f3f5f9"/>
+<polygon points="272.82,235.00 265.89,235.00 265.89,245.00 272.82,245.00" fill="#f3f5f9"/>
+<g transform="matrix(.8660254 -.5 0 1 269.35 237.00)">
+ <path class="detail" d="M8 7H237"/>
+ <use href="#edge-screw" x="12" y="4"/><use href="#edge-screw" x="233" y="4"/>
+ <rect x="180" y="2.5" width="35" height="3" rx="1" fill="#657080" stroke="none"/>
+ </g>
+<g transform="matrix(.8660254 -.5 .8660254 .5 207 201)">
+<path d="M4,0 L241,0 L245,4 L245,68 L241,72 L4,72 L0,68 L0,4Z" fill="#fff"/>
+<path class="detail" d="M7 10V7h231v58H7V10"/>
+<text class="engrave" x="22" y="15" font-size="9.5" >PATH</text>
+<rect x="22" y="24" width="201" height="28" rx="2" fill="#f3f5f9" stroke-width=".8"/><path class="detail" d="M26 48V28h193"/>
+<path d="M22 32h6v12h-6M217 32h6v12h-6" fill="#e7ebf1" stroke-width=".8"/>
+<text class="engrave" x="34" y="43" font-size="14" >/public/1.0/…</text>
+<path class="detail" d="M28 60h82m6 0h10m7 0h82"/>
+<path class="detail" d="M151 57v6"/>
+<path class="detail" d="M159 57v6"/>
+<path class="detail" d="M167 57v6"/>
+<path class="detail" d="M175 57v6"/>
+<path class="detail" d="M183 57v6"/>
+<path class="detail" d="M191 57v6"/>
+<path class="detail" d="M199 57v6"/>
+<path class="detail" d="M207 57v6"/>
+<path class="detail" d="M215 57v6"/>
+<use href="#screw" x="10" y="10"/>
+<use href="#screw" x="235" y="10"/>
+<use href="#screw" x="10" y="62"/>
+<use href="#screw" x="235" y="62"/>
+</g>
+<polygon points="280.71,40.50 287.64,40.50 287.64,52.50 280.71,52.50" fill="#e7ebf1"/>
+<polygon points="287.64,40.50 343.07,72.50 343.07,84.50 287.64,52.50" fill="#e7ebf1"/>
+<polygon points="343.07,72.50 343.07,76.50 343.07,88.50 343.07,84.50" fill="#e7ebf1"/>
+<polygon points="343.07,76.50 137.82,195.00 137.82,207.00 343.07,88.50" fill="#f3f5f9"/>
+<polygon points="137.82,195.00 130.89,195.00 130.89,207.00 137.82,207.00" fill="#f3f5f9"/>
+<g transform="matrix(.8660254 -.5 0 1 134.35 197.00)">
+ <path class="detail" d="M8 9H237"/>
+ <use href="#edge-screw" x="12" y="4"/><use href="#edge-screw" x="233" y="4"/>
+ <rect x="180" y="2.5" width="35" height="3" rx="1" fill="#657080" stroke="none"/>
+ </g>
+<g transform="matrix(.8660254 -.5 .8660254 .5 72 161)">
+<path d="M4,0 L241,0 L245,4 L245,68 L241,72 L4,72 L0,68 L0,4Z" fill="#fff"/>
+<path class="detail" d="M7 10V7h231v58H7V10"/>
+<text class="engrave" x="22" y="15" font-size="9.5" >HOST</text>
+<use href="#slot" x="22" y="27"/><use href="#slot" x="129" y="27"/>
+<text class="engrave" x="69" y="44" font-size="14" text-anchor="middle">api</text>
+<text class="engrave" x="176" y="44" font-size="14" text-anchor="middle">api-v2</text>
+<path class="detail" d="M27 61h39m7 0h11m50 0h39m7 0h11M116 32h13m-13 6h13m-13 6h13"/>
+<use href="#screw" x="10" y="10"/>
+<use href="#screw" x="235" y="10"/>
+<use href="#screw" x="10" y="62"/>
+<use href="#screw" x="235" y="62"/>
+</g>
+<use href="#pin" x="134.35" y="177.00"/>
+<use href="#pin" x="329.21" y="64.50"/>
+<use href="#pin" x="269.35" y="217.00"/>
+<use href="#pin" x="464.21" y="104.50"/>
+<use href="#pin" x="539.35" y="297.00"/>
+<use href="#pin" x="734.21" y="184.50"/>
+<g class="detail">
+ <path d="M32 85h70l62 28"/><circle cx="164" cy="113" r="2.2" fill="#f6f9fc"/>
+ <path d="M550 52h-45l-55 48"/><circle cx="450" cy="100" r="2.2" fill="#f6f9fc"/>
+ <path d="M32 292h229l134-25"/><circle cx="395" cy="267" r="2.2" fill="#f6f9fc"/>
+ <path d="M901 244h28v98H750"/><circle cx="901" cy="244" r="2.2" fill="#f6f9fc"/>
+</g>
+<text class="label" x="32" y="35">HOST</text>
+<text class="label" x="32" y="53">api.alive5.com</text>
+<text class="label" x="32" y="71">api-v2.alive5.com</text>
+<text class="label" x="550" y="39">PATH · /public/1.0/…</text>
+<text class="label" x="32" y="279">HEADER · X-A5-APIKEY</text>
+<text class="label" x="750" y="356">HTTP 200 · STATUS IN BODY</text>
+<text class="label" x="750" y="373">{code, data, error}</text>
+</svg>

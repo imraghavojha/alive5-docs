@@ -150,13 +150,13 @@ function renderDocFooter() {
       icon(
         '<rect x="3" y="1.8" width="10" height="12.4" rx="1.8"/><path d="M5.6 5.3h4.8M5.6 8h4.8M5.6 10.7h2.8"/>',
       ),
-      `Prefer Postman? See the <a href="https://www.alive5.com/api" target="_blank" rel="noreferrer">official API collection</a>.`,
+      `Prefer Postman? See the <a href="https://documenter.getpostman.com/view/12135254/UVsQr3zh" target="_blank" rel="noreferrer">official API collection</a>.`,
     ],
     [
       icon(
         '<circle cx="8" cy="8" r="6.2"/><path d="M6.3 6.2a1.8 1.8 0 1 1 2.5 1.7c-.5.2-.8.6-.8 1.1v.3"/><circle cx="8" cy="11.3" r=".7" fill="currentColor" stroke="none"/>',
       ),
-      `Questions? <a href="https://meet.alive5.com" target="_blank" rel="noreferrer">Contact Sales</a>.`,
+      `Questions? <a href="https://meet.alive5.com" target="_blank" rel="noreferrer">Contact sales</a>.`,
     ],
     [
       icon(
@@ -172,7 +172,7 @@ function renderDocFooter() {
 }
 
 function wireCode() {
-  document.querySelectorAll(".code").forEach((box) => {
+  document.querySelectorAll(".code, .reference-code").forEach((box) => {
     const tabs = [...box.querySelectorAll(".tab")];
     const panes = [...box.querySelectorAll("pre")];
     tabs.forEach((tab, i) =>
@@ -188,7 +188,7 @@ function wireCode() {
       copy.addEventListener("click", async () => {
         const pane = panes.find((p) => !p.hidden) || panes[0];
         try {
-          await navigator.clipboard.writeText(pane.innerText);
+          await navigator.clipboard.writeText((pane.querySelector("code") || pane).textContent);
           copy.textContent = "Copied";
         } catch {
           copy.textContent = "Press ⌘C";
@@ -247,7 +247,7 @@ function wireToc() {
 
 const SEARCH = [
   ["Build with Node-RED", "connectors/node-red.html", "connector node red nodes npm @imraghavojha/node-red-alive5 flows SMS automation"],
-  ["Automate with Shuffle", "connectors/shuffle.html", "connector public app Alive5 SMS security SOAR workflow automation"],
+  ["Build with Shuffle", "connectors/shuffle.html", "connector public app Alive5 SMS security SOAR workflow automation"],
   ["Build with Zapier", "connectors/zapier.html", "connector Zap SMS chat contacts automation calendar sheets Slack"],
   [
     "Authentication",
