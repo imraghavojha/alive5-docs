@@ -27,10 +27,10 @@
         <table class="tbl">
           <thead><tr><th>CRM</th><th>Plan / requirement</th><th>Auth</th><th>Records it links to</th></tr></thead>
           <tbody>
-            <tr><td>Salesforce</td><td>Enterprise or Unlimited; API access and connected app.</td><td>Salesforce account authentication through a connected app.</td><td>Leads, Contacts, Opportunities; custom entities.</td></tr>
-            <tr><td>HubSpot</td><td>Enterprise or Unlimited, as listed in Alive5.</td><td>OAuth.</td><td>Contacts and Companies; custom entity mappings.</td></tr>
-            <tr><td>Microsoft Dynamics 365</td><td>Dynamics instance and credentials for the selected auth mode.</td><td>On Prem, 365 Cloud, or Dataverse Application User.</td><td>Configured entities, using their API names.</td></tr>
-            <tr><td>JobDiva</td><td>JobDiva account with API access.</td><td>Client Id, User Name, Password.</td><td>Existing contacts; Candidates by default.</td></tr>
+            <tr><td>Salesforce</td><td>Enterprise or Unlimited; API access and connected app</td><td>Salesforce account authentication through a connected app</td><td>Leads, Contacts, Opportunities; custom entities</td></tr>
+            <tr><td>HubSpot</td><td>Enterprise or Unlimited, as listed in Alive5</td><td>OAuth</td><td>Contacts and Companies; custom entity mappings</td></tr>
+            <tr><td>Microsoft Dynamics 365</td><td>Dynamics instance and credentials for the selected auth mode</td><td>On Prem, 365 Cloud, or Dataverse Application User</td><td>Configured entities, using their API names</td></tr>
+            <tr><td>JobDiva</td><td>JobDiva account with API access</td><td>Client ID, Username, Password</td><td>Existing contacts; Candidates by default</td></tr>
           </tbody>
         </table>
 
@@ -39,10 +39,10 @@
         <table class="tbl">
           <thead><tr><th>Field group</th><th>Configuration</th></tr></thead>
           <tbody>
-            <tr><td>Export</td><td>Map conversation values to CRM fields.</td></tr>
-            <tr><td>Search</td><td>Set the fields used to find CRM records.</td></tr>
-            <tr><td>Detail</td><td>Set the CRM fields shown for a linked record.</td></tr>
-            <tr><td>Backend</td><td>Set values written to CRM fields and whether to overwrite existing records.</td></tr>
+            <tr><td>Export</td><td>Conversation values mapped to CRM fields</td></tr>
+            <tr><td>Search</td><td>Fields used to find CRM records</td></tr>
+            <tr><td>Detail</td><td>CRM fields shown for a linked record</td></tr>
+            <tr><td>Backend</td><td>Values written to CRM fields and overwrite behavior for existing records</td></tr>
           </tbody>
         </table>
         <p>Value sources are an <strong>Alive5 variable</strong> (<strong>AliveChat Variable</strong> in Dynamics), a <strong>Constant</strong>, or agent input through an <strong>Input Field</strong>. Check the overwrite option before updating existing values.</p>
@@ -50,11 +50,11 @@
 
         <h2 id="salesforce">Salesforce</h2>
         <p>Use Enterprise or Unlimited with Salesforce API access enabled and an API-capable connected app. Authenticate the Salesforce account, then configure the entity and field mappings in Alive5.</p>
-        <ul>
+        <ol class="setup-list">
           <li>Use exact API names, such as <code>Lead.Phone</code>. Custom entities, lookup relationships, required fields, and maximum-length controls are supported.</li>
           <li>Choose channels, entity, mapping fields, and Phone / Email / Account ID matching priority. Auto-sync can create unmatched records or push to all matching records.</li>
-          <li><strong>Live chats push when they end.</strong></li>
-        </ul>
+        </ol>
+        <p><strong>Live chats push when they end.</strong></p>
         <p>To customize an activity subject, add a backend field with <strong>Entity Type: Activity</strong> and <strong>Field Type: Picklist</strong>. Put the subject suffix after <code>|</code>, for example <code>Alive SMS | Customer Support</code>.</p>
         <p><a href="https://support.alive5.com/salesforce" target="_blank" rel="noreferrer">Full guide ↗</a></p>
 
@@ -96,9 +96,9 @@ transactional-email</pre>
         <table class="tbl">
           <thead><tr><th>Auth mode</th><th>Credentials / configuration</th></tr></thead>
           <tbody>
-            <tr><td>On Prem</td><td>Username, Application URL, Password. For IFD, use <code>Domain\username</code>.</td></tr>
-            <tr><td>365 Cloud</td><td>Microsoft authentication and instance URL: <code>https://YOUR_ORG.crm.dynamics.com/</code>.</td></tr>
-            <tr><td>Dataverse Application User</td><td>Application URL, App Id, Client Secret, Tenant Id.</td></tr>
+            <tr><td>On Prem</td><td>Username, Application URL, Password; <code>Domain\username</code> for IFD</td></tr>
+            <tr><td>365 Cloud</td><td>Microsoft authentication and instance URL: <code>https://YOUR_ORG.crm.dynamics.com/</code></td></tr>
+            <tr><td>Dataverse Application User</td><td>Application URL, App ID, Client Secret, Tenant ID</td></tr>
           </tbody>
         </table>
         <h3>Set up a Dataverse application user</h3>
@@ -106,27 +106,26 @@ transactional-email</pre>
           <li><strong>Register the app</strong><p>In Entra ID, open App registrations and register an app.</p></li>
           <li><strong>Add permission and a secret</strong><p>Add the Dynamics CRM permission <code>user_impersonation</code> and create a client secret.</p></li>
           <li><strong>Create the application user</strong><p>In your Power Platform environment, open Application users and add the registered app. Assign its business unit and security roles.</p></li>
-          <li><strong>Connect in Alive5</strong><p>Enter the Application URL, App Id, Client Secret, and Tenant Id.</p></li>
+          <li><strong>Connect in Alive5</strong><p>Enter the Application URL, App ID, Client Secret, and Tenant ID.</p></li>
         </ol>
         <p><a href="https://support.alive5.com/microsoft-dynamics-dataverse-application-user" target="_blank" rel="noreferrer">Dataverse setup guide ↗</a></p>
         <h3>Configure entities and sync</h3>
         <p>Set <strong>Entity Display Name</strong>, <strong>Entity Name (API Name)</strong>, <strong>Primary Field Display Name</strong>, and <strong>Primary Field Name (API Name)</strong>, plus record search and creation permissions.</p>
-        <ul>
+        <ol class="setup-list">
           <li>Select channels, entity, chat-status field, and <strong>Entity Field to Map (API Name)</strong>. Mapping examples include <code>telephone1</code> and <code>emailaddress1</code>.</li>
           <li>Set SMS push intervals to <strong>1, 2, 6, 12, or 24 hours</strong>.</li>
           <li>Store transcripts in <strong>Notes</strong>, <strong>Task</strong>, or a <strong>Custom Activity Type</strong>. Use Task when activities need to be closed. Configure the truncation limit and direction as needed.</li>
-        </ul>
+        </ol>
         <p>Phone searches support <code>+10000000000</code>, <code>(000) 000-0000</code>, <code>000-000-0000</code>, and <code>(000)000-0000</code>.</p>
         <p><a href="https://support.alive5.com/microsoft-dynamics-365" target="_blank" rel="noreferrer">Full guide ↗</a></p>
 
         <h2 id="jobdiva">JobDiva</h2>
-        <p>Obtain JobDiva API access, then connect with <strong>Client Id</strong>, <strong>User Name</strong>, and <strong>Password</strong>.</p>
+        <p>Obtain JobDiva API access, then connect with <strong>Client ID</strong>, <strong>Username</strong>, and <strong>Password</strong>.</p>
         <p><strong>Candidates</strong> is the default searched entity, matched by the visitor’s phone number. Enable <strong>Allow Auto SMS Push</strong> to associate SMS with the first matching JobDiva record. Set <strong>Push SMS By Interval</strong> to <strong>1, 2, 6, 12, or 24 hours</strong>.</p>
         <p><a href="https://support.alive5.com/jobdiva-integration" target="_blank" rel="noreferrer">Full guide ↗</a></p>
 
         <div class="pager">
-          <a href="visitor-data.html"><span>Previous</span><strong>← Pass visitor data</strong></a>
-          <a class="next" href="../api/reference.html"><span>Next</span><strong>API reference →</strong></a>
+          <a href="visitor-data.html"><span>Previous</span><strong>← Visitor data</strong></a>
         </div>
       </main>
       <aside data-toc aria-label="On this page"></aside>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Automate with Shuffle · Alive5 docs</title>
+    <title>Build with Shuffle · Alive5 docs</title>
     <meta
       name="description"
       content="Connect the public Alive5 SMS app in Shuffle to send texts and read recent conversations from your workflows."
@@ -19,9 +19,9 @@
       <nav data-sidebar aria-label="Documentation"></nav>
       <main class="doc" id="main">
         <p class="crumbs"><a href="../index.html">Home</a><span>/</span><a href="index.html">Connectors</a><span>/</span>Shuffle</p>
-        <h1>Automate with Shuffle</h1>
+        <h1>Build with Shuffle</h1>
         <p class="sub">Send SMS and read recent conversations from your Shuffle workflows.</p>
-        <p class="availability"><span class="pill">Public app in Shuffle</span><a href="https://shuffler.io" target="_blank" rel="noreferrer">Open Shuffle ↗</a></p>
+        <p class="availability"><span class="pill">Public app in Shuffle</span><a href="https://shuffler.io" target="_blank" rel="noreferrer">View Alive5 on Shuffle ↗</a></p>
         <figure class="page-art" data-art="shuffle"></figure>
 
         <h2 id="setup">Add the app and authenticate</h2>
@@ -42,7 +42,7 @@
         </table>
 
         <h2 id="send">Send an SMS</h2>
-        <ol>
+        <ol class="setup-list">
           <li>Run <strong>List channels and users</strong>. In <code>data.Items</code>, choose an SMS channel whose <code>channel_label</code> is your business phone number.</li>
           <li>Copy its <code>channel_id</code> and an assigned agent's <code>user_id</code>. Use that channel's business number as <code>phone_number_from</code>.</li>
           <li>Add <strong>Send SMS</strong> after the lookup. Map those three values, set <code>phone_number_to</code> to a number you control, and enter a message such as <strong>Hello from Alive5.</strong> Use E.164 format for both numbers, such as <code>+14155550123</code>.</li>
@@ -66,14 +66,14 @@
 
         <h2 id="resources">Resources</h2>
         <ul>
-          <li><a href="https://shuffler.io" target="_blank" rel="noreferrer">Open Shuffle ↗</a></li>
+          <li><a href="https://shuffler.io" target="_blank" rel="noreferrer">View Alive5 on Shuffle ↗</a></li>
           <li><a href="../api/authentication.html">Authenticate with an Alive5 API key</a></li>
           <li><a href="../api/send-a-message.html">Send a message with the API</a></li>
           <li><a href="../api/errors.html">API errors and responses</a></li>
         </ul>
         <div class="pager">
           <a href="node-red.html"><span>Previous</span><strong>← Node-RED</strong></a>
-          <a class="next" href="../integrations/index.html"><span>Next</span><strong>Integrations →</strong></a>
+          <a class="next" href="../integrations/index.html"><span>Next</span><strong>Integrations overview →</strong></a>
         </div>
       </main>
       <aside data-toc aria-label="On this page"></aside>
