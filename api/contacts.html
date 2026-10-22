@@ -122,6 +122,24 @@
           <code>POST /create/tag</code>.
         </p>
 
+        <h2 id="import-csv">Import contacts from CSV</h2>
+        <p>
+          Import a CSV in the dashboard using the
+          <a href="https://go.alive5.com/csv/alive5-contacts-upload-template.csv">official template</a>:
+          <code>phone</code> (required, US number), <code>first name</code>,
+          <code>last name</code>, <code>email</code>, <code>account id</code>.
+          See <a href="https://support.alive5.com/importing-contacts">Importing Contacts</a>.
+        </p>
+        <div class="code">
+          <div class="code-head">
+            <span class="name">CSV · Example contact</span>
+            <button class="copy" type="button">Copy</button>
+          </div>
+          <pre>phone,first name,last name,email,account id
++12025550123,Alex,Example,alex@example.com,example-account</pre>
+        </div>
+        <p class="note">Only textable numbers work for SMS; contacts are also created automatically when an SMS is sent or received, or a chat captures email or phone.</p>
+
         <div class="pager">
           <a href="receive-messages.html"
             ><span>Previous</span><strong>← Receive messages</strong></a
