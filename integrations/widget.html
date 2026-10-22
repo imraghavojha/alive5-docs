@@ -72,15 +72,28 @@
           <pre>Content-Security-Policy: script-src 'self' https://alive5.com; style-src 'self' 'unsafe-inline'; img-src 'self';</pre>
           <pre hidden>Content-Security-Policy: script-src 'self' 'nonce-RANDOM_NONCE_GENERATED' https://alive5.com; style-src 'self' 'unsafe-inline'; img-src 'self';</pre>
         </div>
-        <p>For the nonce variant, change the inline script’s opening tag:</p>
+        <p>For the nonce variant, generate a fresh nonce in each request handler and pass it to the template:</p>
+        <div class="code">
+          <div class="code-head">
+            <span class="name">Node.js · per-request nonce</span>
+            <button class="copy" type="button">Copy</button>
+          </div>
+          <pre>const crypto = require('crypto');
+
+// Inside your request handler:
+const nonce = crypto.randomBytes(16).toString('base64');
+reply.header('Content-Security-Policy',
+  `script-src 'self' 'nonce-${nonce}' https://alive5.com; style-src 'self' 'unsafe-inline'; img-src 'self';`);
+reply.locals.nonce = nonce;</pre>
+        </div>
+        <p>Use the same nonce in the inline script’s opening tag and load Alive5 scripts over HTTPS:</p>
         <div class="code">
           <div class="code-head">
             <span class="name">HTML · Opening tag with nonce</span>
             <button class="copy" type="button">Copy</button>
           </div>
-          <pre>&lt;script type="text/javascript" nonce="RANDOM_NONCE_GENERATED"&gt;</pre>
+          <pre>&lt;script type="text/javascript" nonce="{{nonce}}"&gt;</pre>
         </div>
-        <p>Generate a fresh nonce per page load, match it in the CSP header and script’s <code>nonce</code> attribute, and load Alive5 scripts over HTTPS.</p>
 
         <h2 id="settings">Widget settings</h2>
         <p>Open your widget's <strong>Settings</strong> to configure these fields.</p>
