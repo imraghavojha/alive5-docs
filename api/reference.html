@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>API reference · Alive5 docs</title>
     <meta
-      content="Documented Alive5 messaging, directory, and reporting endpoints, grouped by resource."
+      content="Documented Alive5 messaging, directory, account setup, and reporting endpoints, grouped by resource."
       name="description"
     />
     <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png" />
@@ -42,7 +42,7 @@
         </p>
         <nav aria-label="API reference sections" class="reference-sections">
           <a href="#messaging">Messaging</a><a href="#directory">Directory</a
-          ><a href="#reporting">Reporting</a>
+          ><a href="#account-setup">Account setup</a><a href="#reporting">Reporting</a>
         </nav>
         <h2 id="messaging">Messaging</h2>
         <p>
@@ -148,6 +148,84 @@
     ],
     <span class="json-key">"page":</span> <span class="json-value">1</span>,
     <span class="json-key">"pages":</span> <span class="json-value">1</span>
+  },
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="livechat-conversations">
+          <div class="reference-description">
+            <h3><span class="method m-get">GET</span>List live chat conversations</h3>
+            <p class="path">/conversations/livechat</p>
+            <p>Returns live chat conversations and their message history.</p>
+            <table class="tbl">
+              <tr>
+                <th>Parameter</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>datetime_from</td>
+                <td>Start date; collection example: <code>02-05-2023</code> (<code>MM-DD-YYYY</code>).</td>
+              </tr>
+              <tr>
+                <td>datetime_to</td>
+                <td>End date; collection example: <code>05-05-2023</code> (<code>MM-DD-YYYY</code>).</td>
+              </tr>
+              <tr>
+                <td>page</td>
+                <td>Page number; collection example: <code>2</code>.</td>
+              </tr>
+              <tr>
+                <td>timezone_offset</td>
+                <td>Timezone offset; see the collection caveat below.</td>
+              </tr>
+            </table>
+            <p class="reference-note">The collection shows both -4:00 and -400; test with your account.</p>
+          </div>
+          <div
+            aria-label="Examples for GET List live chat conversations"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for GET List live chat conversations"
+                tabindex="0"
+              ><code>curl -G \
+  "https://api-v2.alive5.com/public/2.0/conversations/livechat" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --data-urlencode "datetime_from=02-05-2023" \
+  --data-urlencode "datetime_to=05-05-2023" \
+  --data-urlencode "page=2" \
+  --data-urlencode "timezone_offset=-400"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"Items":</span> [
+      {
+        <span class="json-key">"threadData":</span> {
+          <span class="json-key">"thread_id":</span> <span class="json-string">"YOUR_THREAD_ID"</span>,
+          <span class="json-key">"channel_id":</span> <span class="json-string">"YOUR_CHANNEL_ID"</span>,
+          <span class="json-key">"thread_status":</span> <span class="json-string">"active"</span>
+        },
+        <span class="json-key">"threadConversation":</span> [
+          {
+            <span class="json-key">"_source":</span> {
+              <span class="json-key">"message_content":</span> <span class="json-string">"Hello! How can I assist you today?"</span>,
+              <span class="json-key">"message_type":</span> <span class="json-string">"chat"</span>
+            }
+          }
+        ]
+      }
+    ],
+    <span class="json-key">"page":</span> <span class="json-value">2</span>,
+    <span class="json-key">"pages":</span> <span class="json-value">5</span>
   },
   <span class="json-key">"error":</span> <span class="json-value">null</span>
 }</code></pre>
@@ -559,6 +637,484 @@
       </span>}
     ]
   },
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <h2 id="account-setup">Account setup</h2>
+        <p class="reference-note">These calls create real records in your account; there is no delete endpoint in the public collection.</p>
+        <div class="endpoint reference-entry" id="create-channel">
+          <div class="reference-description">
+            <h3><span class="method m-post">POST</span>Create a channel</h3>
+            <p class="path">/create/channel</p>
+            <p>Creates a channel in your organization.</p>
+            <table class="tbl">
+              <tr>
+                <th>Parameter</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>channel_name</td>
+                <td>Channel name.</td>
+              </tr>
+              <tr>
+                <td>org_name</td>
+                <td>Organization name.</td>
+              </tr>
+            </table>
+          </div>
+          <div
+            aria-label="Examples for POST Create a channel"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for POST Create a channel"
+                tabindex="0"
+              ><code>curl -X POST \
+  "https://api.alive5.com/public/1.0/create/channel" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --form-string "channel_name=YOUR_CHANNEL_NAME" \
+  --form-string "org_name=YOUR_ORG_NAME"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"code":</span> <span class="json-value">200</span>,
+    <span class="json-key">"data":</span> {
+      <span class="json-key">"channel_id":</span> <span class="json-string">"YOUR_CHANNEL_ID"</span>,
+      <span class="json-key">"channel_name":</span> <span class="json-string">"YOUR_CHANNEL_NAME"</span>,
+      <span class="json-key">"channel_status":</span> <span class="json-string">"live"</span>,
+      <span class="json-key">"org_name":</span> <span class="json-string">"YOUR_ORG_NAME"</span>
+    },
+    <span class="json-key">"error":</span> <span class="json-value">null</span>
+  },
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="create-tag">
+          <div class="reference-description">
+            <h3><span class="method m-post">POST</span>Create a tag</h3>
+            <p class="path">/create/tag</p>
+            <p>Creates a tag for your organization.</p>
+            <table class="tbl">
+              <tr>
+                <th>Parameter</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>email</td>
+                <td>Email address.</td>
+              </tr>
+              <tr>
+                <td>org_name</td>
+                <td>Organization name.</td>
+              </tr>
+              <tr>
+                <td>name</td>
+                <td>Tag name.</td>
+              </tr>
+            </table>
+          </div>
+          <div
+            aria-label="Examples for POST Create a tag"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for POST Create a tag"
+                tabindex="0"
+              ><code>curl -X POST \
+  "https://api.alive5.com/public/1.0/create/tag" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --form-string "email=YOUR_EMAIL" \
+  --form-string "org_name=YOUR_ORG_NAME" \
+  --form-string "name=YOUR_TAG_NAME"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"code":</span> <span class="json-value">200</span>,
+    <span class="json-key">"data":</span> {
+      <span class="json-key">"tag_id":</span> <span class="json-string">"YOUR_TAG_ID"</span>,
+      <span class="json-key">"tagname":</span> <span class="json-string">"YOUR_TAG_NAME"</span>,
+      <span class="json-key">"org_name":</span> <span class="json-string">"YOUR_ORG_NAME"</span>,
+      <span class="json-key">"email":</span> <span class="json-string">"YOUR_EMAIL"</span>
+    },
+    <span class="json-key">"error":</span> <span class="json-value">null</span>
+  },
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="create-user">
+          <div class="reference-description">
+            <h3><span class="method m-post">POST</span>Create a user</h3>
+            <p class="path">/create/user</p>
+            <p>Creates a user with a pending invitation.</p>
+            <table class="tbl">
+              <tr>
+                <th>Parameter</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>email</td>
+                <td>User email address.</td>
+              </tr>
+              <tr>
+                <td>screenname</td>
+                <td>Display name.</td>
+              </tr>
+              <tr>
+                <td>org_name</td>
+                <td>Organization name.</td>
+              </tr>
+              <tr>
+                <td>role</td>
+                <td>User role.</td>
+              </tr>
+              <tr>
+                <td>channels</td>
+                <td>Channel assignments as a string.</td>
+              </tr>
+            </table>
+          </div>
+          <div
+            aria-label="Examples for POST Create a user"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for POST Create a user"
+                tabindex="0"
+              ><code>curl -X POST \
+  "https://api.alive5.com/public/1.0/create/user" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --form-string "email=YOUR_EMAIL" \
+  --form-string "screenname=YOUR_SCREEN_NAME" \
+  --form-string "org_name=YOUR_ORG_NAME" \
+  --form-string "role=YOUR_ROLE" \
+  --form-string "channels=YOUR_CHANNELS"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"code":</span> <span class="json-value">200</span>,
+    <span class="json-key">"data":</span> {
+      <span class="json-key">"user_status":</span> <span class="json-string">"pending_invite"</span>
+    },
+    <span class="json-key">"error":</span> <span class="json-value">null</span>
+  },
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="create-faq-category">
+          <div class="reference-description">
+            <h3><span class="method m-post">POST</span>Create an FAQ category</h3>
+            <p class="path">/create/faq-category</p>
+            <p>Creates an FAQ category for a channel.</p>
+            <table class="tbl">
+              <tr>
+                <th>Parameter</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>title</td>
+                <td>Category name.</td>
+              </tr>
+              <tr>
+                <td>org_name</td>
+                <td>Organization name.</td>
+              </tr>
+              <tr>
+                <td>channel</td>
+                <td>Channel name; collection example: <code>general</code>.</td>
+              </tr>
+            </table>
+          </div>
+          <div
+            aria-label="Examples for POST Create an FAQ category"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for POST Create an FAQ category"
+                tabindex="0"
+              ><code>curl -X POST \
+  "https://api.alive5.com/public/1.0/create/faq-category" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --form-string "title=YOUR_CATEGORY_NAME" \
+  --form-string "org_name=YOUR_ORG_NAME" \
+  --form-string "channel=YOUR_CHANNEL_NAME"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"code":</span> <span class="json-value">200</span>,
+    <span class="json-key">"data":</span> {
+      <span class="json-key">"category_id":</span> <span class="json-string">"YOUR_CATEGORY_ID"</span>,
+      <span class="json-key">"category_name":</span> <span class="json-string">"YOUR_CATEGORY_NAME"</span>,
+      <span class="json-key">"channel_ids":</span> [
+        <span class="json-string">"YOUR_CHANNEL_ID"</span>
+      ],
+      <span class="json-key">"org_name":</span> <span class="json-string">"YOUR_ORG_NAME"</span>
+    },
+    <span class="json-key">"error":</span> <span class="json-value">null</span>
+  },
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="create-faq-article">
+          <div class="reference-description">
+            <h3><span class="method m-post">POST</span>Create an FAQ article</h3>
+            <p class="path">/create/faq-article</p>
+            <p>Creates an FAQ article using the category name.</p>
+            <table class="tbl">
+              <tr>
+                <th>Parameter</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>title</td>
+                <td>Article title.</td>
+              </tr>
+              <tr>
+                <td>org_name</td>
+                <td>Organization name.</td>
+              </tr>
+              <tr>
+                <td>category</td>
+                <td>Category <strong>name</strong>, not <code>category_id</code>.</td>
+              </tr>
+              <tr>
+                <td>content</td>
+                <td>Article content.</td>
+              </tr>
+            </table>
+          </div>
+          <div
+            aria-label="Examples for POST Create an FAQ article"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for POST Create an FAQ article"
+                tabindex="0"
+              ><code>curl -X POST \
+  "https://api.alive5.com/public/1.0/create/faq-article" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --form-string "title=YOUR_ARTICLE_TITLE" \
+  --form-string "org_name=YOUR_ORG_NAME" \
+  --form-string "category=YOUR_CATEGORY_NAME" \
+  --form-string "content=YOUR_ARTICLE_CONTENT"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"code":</span> <span class="json-value">200</span>,
+    <span class="json-key">"data":</span> {
+      <span class="json-key">"article_id":</span> <span class="json-string">"YOUR_ARTICLE_ID"</span>,
+      <span class="json-key">"title":</span> <span class="json-string">"YOUR_ARTICLE_TITLE"</span>,
+      <span class="json-key">"category_name":</span> <span class="json-string">"YOUR_CATEGORY_NAME"</span>,
+      <span class="json-key">"body":</span> <span class="json-string">"YOUR_ARTICLE_CONTENT"</span>
+    },
+    <span class="json-key">"error":</span> <span class="json-value">null</span>
+  },
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="create-widget">
+          <div class="reference-description">
+            <h3><span class="method m-post">POST</span>Create a widget</h3>
+            <p class="path">/create/widget</p>
+            <p>Creates a live chat widget with a UUID id and numeric widget_id.</p>
+            <table class="tbl">
+              <tr>
+                <th>Parameter</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>widget_type</td>
+                <td>Use <code>liveChat</code> (case-sensitive).</td>
+              </tr>
+              <tr>
+                <td>org_name</td>
+                <td>Organization name.</td>
+              </tr>
+              <tr>
+                <td>botname</td>
+                <td>Bot name.</td>
+              </tr>
+              <tr>
+                <td>accessChannels</td>
+                <td>Channel name.</td>
+              </tr>
+              <tr>
+                <td>channel_id</td>
+                <td>Channel ID.</td>
+              </tr>
+              <tr>
+                <td>shortCode</td>
+                <td>Widget short code.</td>
+              </tr>
+              <tr>
+                <td>widget_name</td>
+                <td>Widget name.</td>
+              </tr>
+              <tr>
+                <td>wimg</td>
+                <td>Widget image URL.</td>
+              </tr>
+            </table>
+          </div>
+          <div
+            aria-label="Examples for POST Create a widget"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for POST Create a widget"
+                tabindex="0"
+              ><code>curl -X POST \
+  "https://api.alive5.com/public/1.0/create/widget" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --form-string "widget_type=liveChat" \
+  --form-string "org_name=YOUR_ORG_NAME" \
+  --form-string "botname=YOUR_BOT_NAME" \
+  --form-string "accessChannels=YOUR_CHANNEL_NAME" \
+  --form-string "channel_id=YOUR_CHANNEL_ID" \
+  --form-string "shortCode=YOUR_SHORT_CODE" \
+  --form-string "widget_name=YOUR_WIDGET_NAME" \
+  --form-string "wimg=YOUR_IMAGE_URL"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"code":</span> <span class="json-value">200</span>,
+    <span class="json-key">"data":</span> {
+      <span class="json-key">"id":</span> <span class="json-string">"00000000-0000-4000-8000-000000000021"</span>,
+      <span class="json-key">"widget_id":</span> <span class="json-value">21</span>,
+      <span class="json-key">"widget_name":</span> <span class="json-string">"YOUR_WIDGET_NAME"</span>,
+      <span class="json-key">"widget_type":</span> <span class="json-string">"liveChat"</span>
+    },
+    <span class="json-key">"error":</span> <span class="json-value">null</span>
+  },
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
+  <span class="json-key">"error":</span> <span class="json-value">null</span>
+}</code></pre>
+            </figure>
+          </div>
+        </div>
+        <div class="endpoint reference-entry" id="create-botchain">
+          <div class="reference-description">
+            <h3><span class="method m-post">POST</span>Create a bot flow</h3>
+            <p class="path">/create/botchain</p>
+            <p>Creates a live chat bot flow for a widget.</p>
+            <table class="tbl">
+              <tr>
+                <th>Parameter</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>widget_id</td>
+                <td>Widget ID.</td>
+              </tr>
+              <tr>
+                <td>org_name</td>
+                <td>Organization name.</td>
+              </tr>
+              <tr>
+                <td>botchain_name</td>
+                <td>Bot flow name.</td>
+              </tr>
+              <tr>
+                <td>bot_type</td>
+                <td>Use lowercase <code>livechat</code>.</td>
+              </tr>
+              <tr>
+                <td>channel_id</td>
+                <td>Channel ID.</td>
+              </tr>
+            </table>
+          </div>
+          <div
+            aria-label="Examples for POST Create a bot flow"
+            class="reference-examples"
+          >
+            <figure class="reference-code">
+              <figcaption><span>Request</span><span>curl</span></figcaption>
+              <pre
+                aria-label="curl request for POST Create a bot flow"
+                tabindex="0"
+              ><code>curl -X POST \
+  "https://api.alive5.com/public/1.0/create/botchain" \
+  -H "X-A5-APIKEY: $ALIVE5_KEY" \
+  --form-string "widget_id=YOUR_WIDGET_ID" \
+  --form-string "org_name=YOUR_ORG_NAME" \
+  --form-string "botchain_name=YOUR_BOT_FLOW_NAME" \
+  --form-string "bot_type=livechat" \
+  --form-string "channel_id=YOUR_CHANNEL_ID"</code></pre>
+            </figure>
+            <figure class="reference-code reference-response">
+              <figcaption>
+                <span>Example response · excerpt</span><span>JSON</span>
+              </figcaption>
+              <pre><code>{
+  <span class="json-key">"data":</span> {
+    <span class="json-key">"code":</span> <span class="json-value">200</span>,
+    <span class="json-key">"data":</span> {
+      <span class="json-key">"botchain_id":</span> <span class="json-string">"YOUR_BOTCHAIN_ID"</span>,
+      <span class="json-key">"botchain_name":</span> <span class="json-string">"YOUR_BOT_FLOW_NAME"</span>,
+      <span class="json-key">"bot_type":</span> <span class="json-string">"livechat"</span>,
+      <span class="json-key">"channel_ids":</span> [
+        <span class="json-string">"YOUR_CHANNEL_ID"</span>
+      ],
+      <span class="json-key">"widget_ids":</span> [
+        <span class="json-string">"YOUR_WIDGET_ID"</span>
+      ]
+    },
+    <span class="json-key">"error":</span> <span class="json-value">null</span>
+  },
+  <span class="json-key">"code":</span> <span class="json-value">200</span>,
   <span class="json-key">"error":</span> <span class="json-value">null</span>
 }</code></pre>
             </figure>
