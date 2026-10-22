@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="400" viewBox="0 0 960 400" fill="none" stroke="#202534" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="background:#f6f9fc">
+  <title>Anatomy of an SMS send — exploded isometric smartphone</title>
+  <desc>Five identical phone footprints separate at equal intervals on one assembly axis: camera back cover, battery, mainboard, midframe, and SMS display. A SIM tray slides sideways from the board. A small message lifts directly from the screen along the assembly axis.</desc>
+  <defs>
+    <style>
+      path,rect,circle,ellipse,line,polyline{vector-effect:non-scaling-stroke}
+      .detail{stroke:#657080;stroke-width:.8}
+      .guide{stroke:#9aa3b2;stroke-width:.8;stroke-dasharray:4 4}
+      .label{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.06em;fill:#202534;stroke:none}
+      .micro{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:5.5px;fill:#657080;stroke:none;letter-spacing:.3px}
+    </style>
+    <rect id="footprint" width="190" height="76" rx="11"/>
+    <g id="screw" stroke-width=".8"><circle r="2.3" fill="#fff"/><path class="detail" d="m-1.1 0h2.2M0-1.1v2.2"/></g>
+    <g id="mounts"><use href="#screw" x="8" y="8"/><use href="#screw" x="182" y="8"/><use href="#screw" x="8" y="68"/><use href="#screw" x="182" y="68"/></g>
+    <g id="smd" class="detail"><rect width="7" height="3" rx=".5" fill="#e7ebf1"/><path d="M1.5 0v3M5.5 0v3"/></g>
+    <g id="chip"><path class="detail" d="M-3 3h3m-3 5h3m-3 5h3m-3 5h3M25 3h3m-3 5h3m-3 5h3m-3 5h3M3-3v3m5-3v3m5-3v3m5-3v3M3 21v3m5-3v3m5-3v3m5-3v3"/><rect width="25" height="21" rx="1.3" fill="#e7ebf1"/><path class="detail" d="M4 4h17v13H4Z"/><circle cx="6" cy="6" r=".7" fill="#657080" stroke="none"/></g>
+    <g id="connector" class="detail"><rect width="29" height="7" rx="1" fill="#e7ebf1"/><path d="M3 1v5m3-5v5m3-5v5m3-5v5m3-5v5m3-5v5m3-5v5m3-5v5"/></g>
+    <g id="lens"><circle r="9" fill="#e7ebf1"/><circle r="6.3" fill="#fff" stroke-width=".8"/><circle r="3.4" fill="#202534" stroke-width=".8"/><path class="detail" d="m-2.8-3 1.5-1"/></g>
+    <path id="frame" fill-rule="evenodd" d="M11 0h168q11 0 11 11v54q0 11-11 11H11Q0 76 0 65V11Q0 0 11 0Zm13 11v54h141V11Z"/>
+    <path id="message" d="M77 32h92q4 0 4 4v16q0 4-4 4h-6l9 9-20-9H77q-4 0-4-4V36q0-4 4-4Z"/>
+  </defs>
+
+  <!-- One axis normal to the vertical phone plane. Origins advance (76, -43.878620). -->
+  <path class="guide" d="M172 361.094 683.272 65.911"/>
+
+  <!-- 1. Camera back cover. Every full layer uses the 190 × 76 footprint. -->
+  <g transform="matrix(.8660254 .5 0 1 212 205)">
+    <use href="#footprint" transform="translate(-4 3)" fill="#e7ebf1"/>
+    <use href="#footprint" fill="#fff"/>
+    <rect x="4" y="4" width="182" height="68" rx="8" class="detail"/>
+    <rect x="12" y="12" width="27" height="52" rx="10" fill="#f3f5f9"/>
+    <use href="#lens" x="25.5" y="26"/><use href="#lens" x="25.5" y="50"/>
+    <circle cx="46" cy="17" r="2" fill="#e7ebf1" class="detail"/>
+    <path class="detail" d="M51 12h117v52H51ZM59 18h102M59 58h102M79 30h62m-62 4h62m-62 4h62M8 27v23M177 27v23"/>
+    <use href="#mounts"/>
+  </g>
+
+  <!-- 2. Full-footprint battery pack, folded perimeter and terminal ribbon. -->
+  <g transform="matrix(.8660254 .5 0 1 288 161.121380)">
+    <use href="#footprint" transform="translate(-3 3)" fill="#e7ebf1"/>
+    <use href="#footprint" fill="#f3f5f9"/>
+    <rect x="7" y="7" width="176" height="62" rx="6" class="detail"/>
+    <path class="detail" d="M12 12h166v52H12ZM12 17h166M17 22v34m156-34v34M23 27h46m-46 5h33M23 48h63m-63 5h43M143 27h20m-20 4h20M156 52h7m-3.5-3.5v7M24 59h8"/>
+    <path d="M69 6V0h24v6M73 0v-5h16v5" fill="#e7ebf1" stroke-width=".8"/>
+    <path class="detail" d="M75-3h12M76 1v4m4-4v4m4-4v4M104 59h33m-33 4h25"/>
+  </g>
+
+  <!-- 3. Full-footprint PCB, SoC, RAM, SIM socket, RF and antenna flex. -->
+  <g transform="matrix(.8660254 .5 0 1 364 117.242760)">
+    <use href="#footprint" transform="translate(-2 2)" fill="#e7ebf1"/>
+    <use href="#footprint" fill="#fff"/>
+    <rect x="4" y="4" width="182" height="68" rx="7" class="detail"/>
+    <use href="#chip" x="24" y="19"/>
+    <text class="micro" x="30" y="32">SoC</text>
+    <rect x="57" y="20" width="19" height="12" rx="1" fill="#e7ebf1"/>
+    <path class="detail" d="M59 17v3m4-3v3m4-3v3m4-3v3m-12 12v3m4-3v3m4-3v3m4-3v3"/>
+    <text class="micro" x="60" y="28">RAM</text>
+    <use href="#smd" x="13" y="19"/><use href="#smd" x="13" y="27"/><use href="#smd" x="13" y="35"/>
+    <use href="#smd" x="27" y="48"/><use href="#smd" x="39" y="48"/><use href="#smd" x="57" y="41"/><use href="#smd" x="69" y="41"/>
+    <use href="#connector" x="93" y="16"/><use href="#connector" x="133" y="57"/>
+    <rect x="91" y="30" width="34" height="21" rx="2" fill="#f3f5f9" class="detail"/>
+    <path class="detail" d="M95 35h26m-26 4h26m-26 4h19M115 30v21M83 15v14l-5 5v17h9M50 40v4H21v10M28 57h28l4-5h12M77 9h46l7 6h25M129 27h12v23h29M164 27v14h10M124 57v8H73M28 12h29v3M13 55v8h12"/>
+    <circle class="detail" cx="87" cy="51" r="1.2"/><circle class="detail" cx="155" cy="15" r="1.2"/><circle class="detail" cx="174" cy="41" r="1.2"/>
+    <path d="M140 7h31v7h-23v25h-8Z" fill="#e7ebf1" stroke-width=".8"/>
+    <path class="detail" d="M144 34V11h23M148 9h18M141 37h6"/>
+    <rect x="1" y="43" width="42" height="17" rx="2" fill="#f3f5f9"/>
+    <path class="detail" d="M5 47h32v9H5ZM9 49v5m5-5v5m5-5v5m5-5v5m5-5v5M1 46v11"/>
+    <rect x="149" y="22" width="23" height="15" rx="1.5" fill="#f3f5f9" class="detail"/>
+    <path class="detail" d="M152 25h17v9h-17ZM153 40h18m-18 4h12M98 61h14m-14 3h14"/>
+    <use href="#smd" x="81" y="58"/><use href="#smd" x="129" y="21"/>
+    <use href="#mounts"/>
+  </g>
+
+  <!-- 4. Open machined midframe, fasteners, contact springs and display flex. -->
+  <g transform="matrix(.8660254 .5 0 1 440 73.364140)">
+    <use href="#frame" transform="translate(-4 3)" fill="#e7ebf1"/>
+    <use href="#frame" fill="#fff"/>
+    <path class="detail" d="M24 11h141v54H24ZM4 19v37M186 19v37M32 5h25m73 0h25M32 71h25m73 0h25"/>
+    <rect x="7" y="25" width="8" height="26" rx="3" fill="#e7ebf1" class="detail"/>
+    <path class="detail" d="M10 29v18M176 26v23m3-23v23M27 16h5v7h-5m0 30h5v7h-5M157 16h5v7h-5m0 30h5v7h-5"/>
+    <path d="M59 65v-9h18v9M63 58v7m4-7v7m4-7v7M87 0v-3h27v3M129 0v-3h13v3" fill="#e7ebf1" stroke-width=".8"/>
+    <path class="detail" d="M38 66v4m4-4v4m4-4v4m4-4v4M133 66v4m4-4v4m4-4v4m4-4v4M168 19h13v5h-13m0 31h13v5h-13"/>
+    <use href="#screw" x="19" y="38"/><use href="#screw" x="170" y="38"/>
+    <use href="#mounts"/>
+  </g>
+
+  <!-- 5. Display and front glass. -->
+  <g transform="matrix(.8660254 .5 0 1 516 29.485520)">
+    <path d="M47 68v17h21V73h18" fill="#e7ebf1" stroke-width=".8"/>
+    <path class="detail" d="M52 72v9h11v-8M55 73v5h5v-5"/>
+    <use href="#footprint" transform="translate(-3 3)" fill="#e7ebf1"/>
+    <use href="#footprint" fill="#fff"/>
+    <rect x="5" y="5" width="180" height="66" rx="7" fill="#f3f5f9"/>
+    <rect x="10" y="28" width="3" height="23" rx="1.5" fill="#202534" stroke="none"/>
+    <circle cx="11.5" cy="19" r="1.3" fill="#202534" stroke="none"/>
+    <path class="detail" d="M25 15h131M25 20h72M163 14v6m4-4v4m4-2v2M25 34h12m-12 6h12M27 57h29"/>
+    <use href="#message" transform="translate(-28 -6)" fill="#fff2eb" stroke="#c34c27"/>
+    <path d="M54 34h80m-80 7h60" stroke="#c34c27" stroke-width=".8"/>
+    <rect x="68" y="65" width="65" height="2" rx="1" fill="#657080" stroke="none"/>
+  </g>
+
+  <!-- SIM tray slides along the phone's long edge, on its own short guide. -->
+  <path class="guide" d="M364.866 169.243 325.895 146.743"/>
+  <g transform="matrix(.8660254 .5 0 1 286.057714 112.742760)">
+    <rect x="-2" y="2" width="46" height="22" rx="2" fill="#e7ebf1"/>
+    <rect width="46" height="22" rx="2" fill="#fff"/>
+    <path d="M7 4h24l6 6v8H7Z" fill="#fff2eb"/>
+    <path class="detail" d="M16 4v14m11-14v14M7 11h30"/>
+    <path d="M-4 0h4v22h-4Z" fill="#f3f5f9"/>
+    <circle cx="-2" cy="11" r=".7" class="detail"/>
+  </g>
+
+  <!-- Same small payload, lifted along the assembly axis from its screen position. -->
+  <g transform="matrix(.8660254 .5 0 1 601 -19.589253)"><g transform="translate(-28 -6)">
+    <use href="#message" transform="translate(-2 2)" fill="#fff2eb"/>
+    <use href="#message" fill="#c34c27"/>
+    <text x="82" y="41" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="6.5" fill="#fff2eb" stroke="none">To</text>
+    <path d="M96 39h64M82 48h62" stroke="#fff2eb" stroke-width=".8"/>
+  </g></g>
+
+  <!-- Callouts stay outside the stack; dots identify their exact attachment. -->
+  <g class="detail">
+    <path d="M55 99h197l48 31"/><circle cx="300" cy="130" r="2.3" fill="#fff2eb"/>
+    <path d="M782 85h-39l-27.69 2.411"/><circle cx="715.31" cy="87.411" r="2.3" fill="#c34c27"/>
+    <path d="M831 252H747L640.707 181V160.486"/><circle cx="640.707" cy="160.486" r="2.3" fill="#fff2eb"/>
+  </g>
+  <text class="label" x="55" y="87">phone_number_from</text>
+  <text class="label" x="782" y="73">phone_number_to</text>
+  <text class="label" x="754" y="240" style="fill:#c34c27">message</text>
+</svg>
