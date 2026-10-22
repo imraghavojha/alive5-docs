@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="400" viewBox="0 0 960 400" fill="none" stroke="#202534" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+<title>Alive5 SMS — a modular n8n workflow</title>
+<desc>An exploded schedule trigger, orange Alive5 SMS Send module, and receiving smartphone on individual DIN-rail mounting plates. Physical cables join circular workflow ports. Separated lids expose screws, circuit boards, sockets, and ribbon contacts.</desc>
+<defs><style>
+path,rect,circle,ellipse,line,polyline{vector-effect:non-scaling-stroke}
+.detail{stroke:#657080;stroke-width:.8}.guide{stroke:#9aa3b2;stroke-width:.8;stroke-dasharray:4 4}
+.label,.engrave{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;fill:#202534;stroke:none}
+.label{font-size:11px;letter-spacing:.06em}.engrave{font-size:9px;letter-spacing:.04em}
+</style>
+<g id="screw" stroke-width=".8"><circle r="3" fill="#fff"/><path d="M-1.4 0h2.8M0-1.4v2.8" stroke="#657080"/></g>
+<g id="post" stroke-width=".8"><path d="M-3-1v8c0 2 6 2 6 0V-1" fill="#e7ebf1"/><ellipse cy="-1" rx="3" ry="1.7" fill="#fff"/><ellipse cy="-1" rx="1" ry=".6" stroke="#657080"/></g>
+<g id="chip"><rect width="25" height="19" rx="1" fill="#e7ebf1" stroke-width=".8"/><path d="M4 4h17v11H4Z" class="detail"/><path d="M4-3v3m5-3v3m5-3v3m5-3v3M4 19v3m5-3v3m5-3v3m5-3v3M-3 4h3m-3 5h3m-3 5h3m25-10h3m-3 5h3m-3 5h3" class="detail"/><circle cx="5" cy="5" r="1" fill="#657080" stroke="none"/></g>
+<g id="smd" stroke-width=".8"><rect width="10" height="5" rx=".6" fill="#e7ebf1"/><path d="M2 0v5m6-5v5" stroke="#657080"/></g>
+<g id="socket"><circle r="8" fill="#f3f5f9"/><circle r="5.4" fill="#fff" stroke-width=".8"/><circle r="2.8" fill="#202534" stroke-width=".8"/><path d="M-10 0h-2m22 0h2" class="detail"/></g>
+<g id="bubble" stroke-width="1.1"><path d="M0 0h27a3 3 0 0 1 3 3v15a3 3 0 0 1-3 3H12l-7 6v-6H3a3 3 0 0 1-3-3V3a3 3 0 0 1 3-3Z"/><path d="M7 8h16M7 13h11" stroke-width=".8"/></g>
+</defs>
+<rect width="960" height="400" fill="#f6f9fc" stroke="none"/>
+
+<!-- Three independent removable DIN mounting plates. -->
+<path d="M108.68 281.50 119.07 287.50v5L108.68 286.50Z" fill="#f3f5f9"/>
+<path d="M127.73 282.50 119.07 287.50v5L127.73 287.50Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 117.33528220000001 276.5)"><rect width="12" height="10" rx="0" fill="#ffffff"/></g>
+<path d="M212.60 341.50 222.99 347.50v5L212.60 346.50Z" fill="#f3f5f9"/>
+<path d="M231.65 342.50 222.99 347.50v5L231.65 347.50Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 221.2583302 336.5)"><rect width="12" height="10" rx="0" fill="#ffffff"/></g>
+<path d="M303.53 289.00 313.92 295.00v5L303.53 294.00Z" fill="#f3f5f9"/>
+<path d="M322.58 290.00 313.92 295.00v5L322.58 295.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 312.19099719999997 284.0)"><rect width="12" height="10" rx="0" fill="#ffffff"/></g>
+<path d="M100.88 274.00 223.86 345.00v6L100.88 280.00Z" fill="#f3f5f9"/>
+<path d="M332.98 282.00 223.86 345.00v6L332.98 288.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 210 211)"><rect width="142" height="126" rx="0" fill="#ffffff"/><path d="M5 5H137V121H5Z" class="detail"/><use href="#screw" x="9" y="9"/><use href="#screw" x="133" y="9"/><use href="#screw" x="9" y="117"/><use href="#screw" x="133" y="117"/><rect x="22" y="106" width="15" height="4" rx="2" fill="#e7ebf1" class="detail"/><rect x="112" y="106" width="15" height="4" rx="2" fill="#e7ebf1" class="detail"/></g>
+<path d="M157.17 250.50 255.90 307.50v5L157.17 255.50Z" fill="#f3f5f9"/>
+<path d="M290.54 287.50 255.90 307.50v5L290.54 292.50Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 191.8134666 230.5)"><rect width="114" height="40" rx="0" fill="#ffffff"/><path d="M0 8h114M0 32h114" class="detail"/></g>
+<path d="M164.97 241.00 263.69 298.00v5L164.97 246.00Z" fill="#f3f5f9"/>
+<path d="M282.75 287.00 263.69 298.00v5L282.75 292.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 184.019238 230.0)"><rect width="114" height="22" rx="0" fill="#e7ebf1"/><path d="M0 3h114M0 19h114" class="detail"/></g>
+<path d="M383.21 275.50 393.60 281.50v5L383.21 280.50Z" fill="#f3f5f9"/>
+<path d="M402.26 276.50 393.60 281.50v5L402.26 281.50Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 391.8711806 270.5)"><rect width="12" height="10" rx="0" fill="#ffffff"/></g>
+<path d="M509.65 348.50 520.04 354.50v5L509.65 353.50Z" fill="#f3f5f9"/>
+<path d="M528.70 349.50 520.04 354.50v5L528.70 354.50Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 518.310889 343.5)"><rect width="12" height="10" rx="0" fill="#ffffff"/></g>
+<path d="M604.05 294.00 614.44 300.00v5L604.05 299.00Z" fill="#f3f5f9"/>
+<path d="M623.10 295.00 614.44 300.00v5L623.10 300.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 612.7076576 289.0)"><rect width="12" height="10" rx="0" fill="#ffffff"/></g>
+<path d="M375.42 268.00 520.91 352.00v6L375.42 274.00Z" fill="#f3f5f9"/>
+<path d="M633.49 287.00 520.91 352.00v6L633.49 293.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 488 203)"><rect width="168" height="130" rx="0" fill="#ffffff"/><path d="M5 5H163V125H5Z" class="detail"/><use href="#screw" x="9" y="9"/><use href="#screw" x="159" y="9"/><use href="#screw" x="9" y="121"/><use href="#screw" x="159" y="121"/><rect x="22" y="110" width="15" height="4" rx="2" fill="#e7ebf1" class="detail"/><rect x="138" y="110" width="15" height="4" rx="2" fill="#e7ebf1" class="detail"/></g>
+<path d="M435.17 242.50 556.42 312.50v5L435.17 247.50Z" fill="#f3f5f9"/>
+<path d="M591.06 292.50 556.42 312.50v5L591.06 297.50Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 469.8134666 222.5)"><rect width="140" height="40" rx="0" fill="#ffffff"/><path d="M0 8h140M0 32h140" class="detail"/></g>
+<path d="M442.97 233.00 564.21 303.00v5L442.97 238.00Z" fill="#f3f5f9"/>
+<path d="M583.26 292.00 564.21 303.00v5L583.26 297.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 462.019238 222.0)"><rect width="140" height="22" rx="0" fill="#e7ebf1"/><path d="M0 3h140M0 19h140" class="detail"/></g>
+<path d="M673.96 289.50 684.35 295.50v5L673.96 294.50Z" fill="#f3f5f9"/>
+<path d="M693.01 290.50 684.35 295.50v5L693.01 295.50Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 682.6224694 284.5)"><rect width="12" height="10" rx="0" fill="#ffffff"/></g>
+<path d="M746.71 331.50 757.10 337.50v5L746.71 336.50Z" fill="#f3f5f9"/>
+<path d="M765.76 332.50 757.10 337.50v5L765.76 337.50Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 755.368603 326.5)"><rect width="12" height="10" rx="0" fill="#ffffff"/></g>
+<path d="M865.35 263.00 875.75 269.00v5L865.35 268.00Z" fill="#f3f5f9"/>
+<path d="M884.41 264.00 875.75 269.00v5L884.41 269.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 874.0140828 258.0)"><rect width="12" height="10" rx="0" fill="#ffffff"/></g>
+<path d="M666.17 282.00 757.97 335.00v6L666.17 288.00Z" fill="#f3f5f9"/>
+<path d="M894.80 256.00 757.97 335.00v6L894.80 262.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 803 203)"><rect width="106" height="158" rx="0" fill="#ffffff"/><path d="M5 5H101V153H5Z" class="detail"/><use href="#screw" x="9" y="9"/><use href="#screw" x="97" y="9"/><use href="#screw" x="9" y="149"/><use href="#screw" x="97" y="149"/><rect x="22" y="138" width="15" height="4" rx="2" fill="#e7ebf1" class="detail"/><rect x="76" y="138" width="15" height="4" rx="2" fill="#e7ebf1" class="detail"/></g>
+<path d="M750.17 242.50 817.72 281.50v5L750.17 247.50Z" fill="#f3f5f9"/>
+<path d="M852.36 261.50 817.72 281.50v5L852.36 266.50Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 784.8134666 222.5)"><rect width="78" height="40" rx="0" fill="#ffffff"/><path d="M0 8h78M0 32h78" class="detail"/></g>
+<path d="M757.97 233.00 825.52 272.00v5L757.97 238.00Z" fill="#f3f5f9"/>
+<path d="M844.57 261.00 825.52 272.00v5L844.57 266.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 777.019238 222.0)"><rect width="78" height="22" rx="0" fill="#e7ebf1"/><path d="M0 3h78M0 19h78" class="detail"/></g>
+<!-- Assembly axes are occluded by all solid surfaces. -->
+<path d="M210.00 86.00v125" class="guide"/>
+<path d="M294.87 135.00v125" class="guide"/>
+<path d="M135.52 129.00v125" class="guide"/>
+<path d="M220.39 178.00v125" class="guide"/>
+<path d="M488.00 75.00v127" class="guide"/>
+<path d="M598.85 139.00v127" class="guide"/>
+<path d="M410.06 120.00v127" class="guide"/>
+<path d="M520.91 184.00v127" class="guide"/>
+<path d="M803.00 86.00v118" class="guide"/>
+<path d="M853.23 115.00v118" class="guide"/>
+<path d="M692.15 150.00v118" class="guide"/>
+<path d="M742.38 179.00v118" class="guide"/>
+<path d="M118.20 243.00 220.39 302.00v25L118.20 268.00Z" fill="#f3f5f9"/>
+<path d="M312.19 249.00 220.39 302.00v25L312.19 274.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 210 190)"><rect width="118" height="106" rx="0" fill="#ffffff"/><path d="M7 7H111V99H7Z" class="detail"/><rect x="16" y="17" width="86" height="71" rx="2" fill="#e7ebf1" stroke-width=".8"/><path d="M22 23H96V82H22Z" class="detail"/><use href="#screw" x="10" y="10"/><use href="#screw" x="108" y="10"/><use href="#screw" x="10" y="96"/><use href="#screw" x="108" y="96"/><rect x="31" y="86" width="56" height="5" rx="1" fill="#202534" stroke-width=".8"/></g>
+<g transform="matrix(.8660254 .5 0 1 118.20 243.00)"><path d="M0 21h118" class="detail"/><text class="engrave" x="35" y="16">TRIGGER</text><use href="#screw" x="110" y="14"/></g>
+<g transform="matrix(-.8660254 .5 0 1 312.19 249.00)"><path d="M0 21h106" class="detail"/><use href="#socket" x="31" y="13"/><path d="M60 7v9m5-9v9m5-9v9m5-9v9m5-9v9" class="detail"/><use href="#screw" x="97" y="14"/></g>
+<use href="#post" x="138.99" y="235.00"/>
+<use href="#post" x="291.41" y="241.00"/>
+<path d="M392.74 237.00 520.91 311.00v25L392.74 262.00Z" fill="#f3f5f9"/>
+<path d="M616.17 256.00 520.91 311.00v25L616.17 281.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 488 182)"><rect width="148" height="110" rx="0" fill="#ffffff"/><path d="M7 7H141V103H7Z" class="detail"/><rect x="16" y="17" width="116" height="75" rx="2" fill="#e7ebf1" stroke-width=".8"/><path d="M22 23H126V86H22Z" class="detail"/><use href="#screw" x="10" y="10"/><use href="#screw" x="138" y="10"/><use href="#screw" x="10" y="100"/><use href="#screw" x="138" y="100"/><rect x="31" y="90" width="86" height="5" rx="1" fill="#202534" stroke-width=".8"/></g>
+<g transform="matrix(.8660254 .5 0 1 392.74 237.00)"><path d="M0 21h148" class="detail"/><text class="engrave" x="35" y="16">ALIVE5</text><use href="#screw" x="140" y="14"/></g>
+<g transform="matrix(-.8660254 .5 0 1 616.17 256.00)"><path d="M0 21h110" class="detail"/><use href="#socket" x="31" y="13"/><path d="M60 7v9m5-9v9m5-9v9m5-9v9m5-9v9" class="detail"/><use href="#screw" x="101" y="14"/></g>
+<g transform="matrix(.8660254 .5 0 1 392.74 237.00)"><use href="#socket" x="18" y="13"/></g>
+<use href="#post" x="413.52" y="229.00"/>
+<use href="#post" x="595.39" y="248.00"/>
+<path d="M678.29 257.00 752.77 300.00v25L678.29 282.00Z" fill="#f3f5f9"/>
+<path d="M877.48 228.00 752.77 300.00v25L877.48 253.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 803 185)"><rect width="86" height="144" rx="0" fill="#ffffff"/><rect x="6" y="7" width="74" height="130" rx="5" fill="#e7ebf1" class="detail"/><path d="M13 105h60v22H13Z" fill="#fff" stroke-width=".8"/><path d="M26 111h34v9H26Z" fill="#202534" stroke-width=".8"/></g>
+<g transform="matrix(.8660254 .5 0 1 678.29 257.00)"><use href="#socket" x="22" y="13"/><path d="M40 8v9m5-9v9m5-9v9m5-9v9" class="detail"/><use href="#screw" x="76" y="15"/></g>
+<!-- Folded board-to-backplane ribbon harnesses behind the raised PCBs. -->
+<g stroke-width=".8">
+<path d="m161.50 202 13.86 8v36l-13.86-8Z" fill="#e7ebf1"/><path d="m164.5 203.7v36m3-34.3v36m3-34.2v36" class="detail"/>
+<path d="m434.31 194 13.86 8v38l-13.86-8Z" fill="#e7ebf1"/><path d="m437.3 195.7v38m3-36.3v38m3-36.3v38" class="detail"/>
+</g>
+<!-- Insulated cables end in the workflow connection-dot sockets. -->
+<g stroke="#202534" stroke-width="7"><path id="wire-a" d="M285.35 277.5l17.32-10c18-10 24 48 53 43 16-3 28-37.5 42-45.5l10.65-6" /><use href="#wire-a" stroke="#e7ebf1" stroke-width="4.4"/><use href="#wire-a" stroke="#657080" stroke-width=".8"/>
+<path id="wire-b" d="M589.32 284.5l16.45-9.5c16-9 20 53 49 48 13-2 23-31 35-38l7.55-4.5" /><use href="#wire-b" stroke="#e7ebf1" stroke-width="4.4"/><use href="#wire-b" stroke="#657080" stroke-width=".8"/>
+</g>
+<g transform="translate(285.35 277.5) rotate(-30)"><path d="M-2-4H9l4 1v6L9 4H-2Z" fill="#f3f5f9" stroke-width=".8"/><path d="M4-4v8m3-8v8M-2-2H1v4H-2" class="detail"/></g>
+<g transform="translate(408.32 259) rotate(150)"><path d="M-2-4H9l4 1v6L9 4H-2Z" fill="#f3f5f9" stroke-width=".8"/><path d="M4-4v8m3-8v8M-2-2H1v4H-2" class="detail"/></g>
+<g transform="translate(589.32 284.5) rotate(-30)"><path d="M-2-4H9l4 1v6L9 4H-2Z" fill="#f3f5f9" stroke-width=".8"/><path d="M4-4v8m3-8v8M-2-2H1v4H-2" class="detail"/></g>
+<g transform="translate(697.32 280.5) rotate(150)"><path d="M-2-4H9l4 1v6L9 4H-2Z" fill="#f3f5f9" stroke-width=".8"/><path d="M4-4v8m3-8v8M-2-2H1v4H-2" class="detail"/></g>
+<path d="M118.20 188.00 220.39 247.00v3L118.20 191.00Z" fill="#f3f5f9"/>
+<path d="M312.19 194.00 220.39 247.00v3L312.19 197.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 210 135)"><rect width="118" height="106" rx="0" fill="#f3f5f9"/><path d="M5 5H113V101H5Z" class="detail"/><use href="#screw" x="10" y="10"/><use href="#screw" x="108" y="10"/><use href="#screw" x="10" y="96"/><use href="#screw" x="108" y="96"/><path d="M20 16h29l9 9h24v12m-60 1h14l8 8h13m-37 5h17v25h17m23-3h17v14h13M28 83h23l9-9h9M86 17v10h13v24h9" class="detail"/>
+<use href="#chip" x="49" y="39"/><use href="#smd" x="22" y="23"/><use href="#smd" x="26" y="66"/><use href="#smd" x="86" y="58"/><use href="#smd" x="83" y="75"/>
+<circle cx="19" cy="51" r="2" fill="#fff" class="detail"/><circle cx="102" cy="36" r="2" fill="#fff" class="detail"/><circle cx="54" cy="76" r="2" fill="#fff" class="detail"/><rect x="39" y="90" width="40" height="8" rx="1" fill="#fff" stroke-width=".8"/><path d="M43 90v8" class="detail"/><path d="M48 90v8" class="detail"/><path d="M53 90v8" class="detail"/><path d="M58 90v8" class="detail"/><path d="M63 90v8" class="detail"/><path d="M68 90v8" class="detail"/><path d="M73 90v8" class="detail"/><path d="M78 90v8" class="detail"/></g>
+<path d="M392.74 180.00 520.91 254.00v3L392.74 183.00Z" fill="#f3f5f9"/>
+<path d="M616.17 199.00 520.91 254.00v3L616.17 202.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 488 125)"><rect width="148" height="110" rx="0" fill="#f3f5f9"/><path d="M5 5H143V105H5Z" class="detail"/><use href="#screw" x="10" y="10"/><use href="#screw" x="138" y="10"/><use href="#screw" x="10" y="100"/><use href="#screw" x="138" y="100"/><path d="M20 16h29l9 9h24v12m-60 1h14l8 8h13m-37 5h17v25h17m23-3h17v14h13M28 83h23l9-9h9M86 17v10h13v24h9" class="detail"/>
+<use href="#chip" x="49" y="39"/><use href="#smd" x="22" y="23"/><use href="#smd" x="26" y="66"/><use href="#smd" x="86" y="58"/><use href="#smd" x="83" y="75"/>
+<circle cx="19" cy="51" r="2" fill="#fff" class="detail"/><circle cx="102" cy="36" r="2" fill="#fff" class="detail"/><circle cx="54" cy="76" r="2" fill="#fff" class="detail"/><rect x="111" y="36" width="22" height="36" rx="1" fill="#f3f5f9" stroke-width=".8"/><path d="M115 40h14v28h-14ZM115 49h14m-14 5h14m-14 5h14" class="detail"/><rect x="39" y="94" width="40" height="8" rx="1" fill="#fff" stroke-width=".8"/><path d="M43 94v8" class="detail"/><path d="M48 94v8" class="detail"/><path d="M53 94v8" class="detail"/><path d="M58 94v8" class="detail"/><path d="M63 94v8" class="detail"/><path d="M68 94v8" class="detail"/><path d="M73 94v8" class="detail"/><path d="M78 94v8" class="detail"/></g>
+<path d="M118.20 129.00 220.39 188.00v6L118.20 135.00Z" fill="#f3f5f9"/>
+<path d="M312.19 135.00 220.39 188.00v6L312.19 141.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 210 76)"><rect width="118" height="106" rx="0" fill="#ffffff"/><path d="M6 6H112V100H6Z" class="detail"/>
+<circle cx="54" cy="49" r="28" fill="#f3f5f9"/><circle cx="54" cy="49" r="23" fill="#fff" class="detail"/>
+<path d="M54 30v-3m19 22h3M54 68v3m-19-22h-3M40 35l-2-2m30 2 2-2M40 63l-2 2m30-2 2 2" class="detail"/>
+<path d="M54 36v13l11 7"/><circle cx="54" cy="49" r="2.4" fill="#202534" stroke-width=".8"/>
+<text class="engrave" x="27" y="89">SCHEDULE</text>
+<path d="M91 34v23m5-23v23m5-23v23" class="detail"/>
+<use href="#screw" x="10" y="10"/><use href="#screw" x="108" y="10"/><use href="#screw" x="10" y="96"/><use href="#screw" x="108" y="96"/></g>
+<path d="M392.74 120.00 520.91 194.00v6L392.74 126.00Z" fill="#fff2eb"/>
+<path d="M616.17 139.00 520.91 194.00v6L616.17 145.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 488 65)"><rect width="148" height="110" rx="0" fill="#c34c27"/><path d="M6 6H142V104H6Z" stroke="#fff2eb" stroke-width=".8"/>
+<g transform="translate(22 34)" fill="#fff2eb"><use href="#bubble"/></g>
+<text class="engrave" x="21" y="25" style="fill:#fff2eb">SMS</text>
+<path d="M88 17h36M88 22h36M88 27h36M88 32h36" stroke="#202534" stroke-width="3.2"/>
+<path d="M90 17h8m8 5h8m-20 5h8m10 5h7" stroke="#e7ebf1" stroke-width=".8"/>
+<rect x="70" y="57" width="58" height="29" rx="3" fill="#fff2eb" stroke-width=".8"/>
+<path d="M75 92h45" stroke="#fff2eb" stroke-width=".8"/>
+<use href="#screw" x="10" y="10"/><use href="#screw" x="138" y="10"/><use href="#screw" x="10" y="100"/><use href="#screw" x="138" y="100"/></g>
+<path d="M482.80 139.00 524.37 163.00v4L482.80 143.00Z" fill="#f3f5f9"/>
+<path d="M541.69 153.00 524.37 163.00v4L541.69 157.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 500.1243556 129.0)"><rect width="48" height="20" rx="2" fill="#ffffff"/><text class="engrave" x="10" y="14">SEND</text></g>
+<path d="M862.76 159.50Q870.55 164.00 862.76 168.50L750.17 233.50Q742.38 238.00 734.58 233.50L682.62 203.50Q674.83 199.00 682.62 194.50L682.62 202.50Q674.83 207.00 682.62 211.50L734.58 241.50Q742.38 246.00 750.17 241.50L862.76 176.50Q870.55 172.00 862.76 167.50Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 803 125)"><rect width="78" height="148" rx="9" fill="#ffffff"/><rect x="5" y="5" width="68" height="138" rx="7" fill="#f3f5f9" class="detail"/>
+<rect x="14" y="45" width="50" height="77" rx="3" fill="#e7ebf1" stroke-width=".8"/><path d="M19 51h40m-40 5h23" class="detail"/>
+<rect x="12" y="14" width="54" height="25" rx="2" fill="#fff" class="detail"/><use href="#chip" x="33" y="17" transform="translate(12 5) scale(.75)"/>
+<circle cx="20" cy="24" r="5" fill="#e7ebf1" stroke-width=".8"/><circle cx="20" cy="24" r="2.5" fill="#202534" stroke-width=".8"/>
+<path d="M17 128h16v9h22v-9h8M15 10h48M15 140h48" class="detail"/>
+</g>
+<g transform="matrix(-.8660254 .5 0 1 870.55 164)" stroke-width=".8"><rect x="35" y="3" width="24" height="3" rx="1.5" fill="#f3f5f9"/><rect x="67" y="3" width="13" height="3" rx="1.5" fill="#f3f5f9"/></g>
+<path d="m730.25 184 12.13 7v49l-12.13-7Z" fill="#e7ebf1" stroke-width=".8"/><path d="m733.25 185.7v49m3-47.3v49m3-47.2v49" class="detail"/>
+<path d="M861.89 110.00Q870.55 115.00 861.89 120.00L751.04 184.00Q742.38 189.00 733.72 184.00L683.49 155.00Q674.83 150.00 683.49 145.00L683.49 150.00Q674.83 155.00 683.49 160.00L733.72 189.00Q742.38 194.00 751.04 189.00L861.89 125.00Q870.55 120.00 861.89 115.00Z" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 803 76)"><rect width="78" height="148" rx="10" fill="#ffffff"/><rect x="4" y="4" width="70" height="140" rx="8" fill="#f3f5f9" stroke-width=".8"/>
+<rect x="9" y="14" width="60" height="118" rx="3" fill="#fff" class="detail"/>
+<rect x="28" y="7" width="22" height="3" rx="1.5" fill="#202534" stroke="none"/>
+<circle cx="23" cy="8.5" r="1.4" fill="#202534" stroke="none"/>
+<path d="M15 22h8m-8 4h25m13-7v6m4-8v8m4-10v10" class="detail"/>
+<path d="M16 43h46v34H35l-8 7v-7H16Z" fill="#fff2eb" stroke="#c34c27" stroke-width=".8"/>
+<text class="engrave" x="23" y="57" style="fill:#c34c27">SMS</text><path d="M23 64h31m-31 5h21" class="detail"/>
+<path d="M17 100h42m-42 5h30" class="detail"/>
+<rect x="16" y="115" width="45" height="9" rx="4.5" fill="#f3f5f9" class="detail"/><path d="M29 137h20" class="detail"/>
+</g>
+<g class="detail">
+<path d="M72 36h89l30 56"/><circle cx="191" cy="92" r="2.2" fill="#f6f9fc"/>
+<path d="M380 48h52l31 41"/><circle cx="463" cy="89" r="2.2" fill="#fff2eb"/>
+
+<path d="M730 44h103l-11 44"/><circle cx="822" cy="88" r="2.2" fill="#fff"/>
+</g>
+<text class="label" x="72" y="24">SCHEDULE TRIGGER</text>
+<text class="label" x="380" y="15" style="fill:#c34c27">RESOURCE · SMS</text>
+<text class="label" x="380" y="33">OPERATION · SEND</text>
+<text class="label" x="730" y="29">TO · E.164 NUMBER</text>
+</svg>
