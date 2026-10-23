@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="400" viewBox="0 0 960 400" fill="none" stroke="#202534" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+<title>Passing visitor data into Alive5 web chat</title>
+<desc>A query-string ticket separates into three type blocks. Dashed transfer and vertical assembly axes carry firstname, email, and phone into a five-field contact plate above an Alive5 chat layer. UTM parameters are captured automatically.</desc>
+<defs><style>
+path,rect,circle,ellipse,line,polyline{vector-effect:non-scaling-stroke}
+.detail{stroke:#657080;stroke-width:.8}.guide{stroke:#9aa3b2;stroke-width:.8;stroke-dasharray:4 4}
+.label,.type{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;fill:#202534;stroke:none}
+.label{font-size:11px;letter-spacing:.06em}.type{font-size:8px;letter-spacing:.025em}
+</style>
+<g id="screw" stroke-width=".8"><circle r="2.8" fill="#fff"/><path d="M-1.2 0h2.4M0-1.2v2.4" stroke="#657080"/></g>
+<g id="pin" stroke-width=".8"><rect width="3" height="7" rx=".4" fill="#e7ebf1"/></g>
+<g id="register" class="detail"><circle r="2.1" fill="#fff"/><path d="M-1 0h2M0-1v2"/></g>
+<g id="slot"><rect width="119" height="16" rx="1.2" fill="#e7ebf1" stroke-width=".8"/><rect x="4" y="3" width="111" height="9" rx=".7" fill="#f3f5f9" class="detail"/><path d="M8 6h14m-14 3h14M97 6h10m-10 3h10" class="detail"/></g>
+</defs>
+<rect width="960" height="400" fill="#f6f9fc" stroke="none"/>
+<path d="M372.32 229.5 661.34 62.64V114" class="guide"/>
+<path d="M670 144v42M856.20 251.50v42M540.10 219v42M726.29 326.50v42" class="guide"/>
+<path d="M174.00 98.00v23" class="guide"/>
+<path d="M387.04 221.00v23" class="guide"/>
+<path d="M108.18 136.00v23" class="guide"/>
+<path d="M321.22 259.00v23" class="guide"/>
+<path d="M326.42 241v86.27l86.2-49.77M526.93 316.5l102.07-58.93" class="guide"/>
+
+<g transform="translate(0 -18)">
+<polygon points="540.10,279.00 726.29,386.50 726.29,390.50 540.10,283.00" fill="#f3f5f9"/>
+<polygon points="856.20,311.50 726.29,386.50 726.29,390.50 856.20,315.50" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 670 204)">
+<rect width="215" height="150" rx="1" fill="#fff"/>
+<path d="M6 6H209V144H6Z" class="detail"/>
+<use href="#screw" x="9" y="9"/>
+<use href="#screw" x="206" y="9"/>
+<use href="#screw" x="9" y="141"/>
+<use href="#screw" x="206" y="141"/>
+<rect x="15" y="17" width="133" height="122" rx="3" fill="#fff" stroke-width=".8"/><path d="M18 17h127a3 3 0 0 1 3 3v17H15V20a3 3 0 0 1 3-3Z" fill="#f3f5f9" stroke-width=".8"/>
+<text class="type" x="25" y="30" font-size="9">Alive5</text>
+<path d="M126 27h5m5-2 4 4m0-4-4 4" class="detail"/>
+<path d="M27 48h91v25H43l-8 7v-7h-8Z" fill="#f3f5f9" stroke-width=".8"/>
+<path d="M36 56h69m-69 7h51" class="detail"/>
+<path d="M54 88h81v20H63l-9-7Z" fill="#fff" stroke-width=".8"/>
+<path d="M63 95h59m-59 6h42M15 116h133" class="detail"/>
+<rect x="23" y="124" width="116" height="7" rx="3" fill="#f3f5f9" class="detail"/>
+<circle cx="185" cy="127" r="14" fill="#c34c27"/>
+<path d="M179 122h13v9h-6l-5 4v-4h-2Z" stroke="#fff" stroke-width="1.2"/>
+<path d="M183 126h5" stroke="#fff" stroke-width=".8"/>
+<path d="M166 26h36m-36 5h24M167 41h34m-34 5h29m-29 5h34M166 139h37" class="detail"/>
+</g>
+</g>
+<polygon points="540.10,219.00 726.29,326.50 726.29,331.50 540.10,224.00" fill="#f3f5f9"/>
+<polygon points="856.20,251.50 726.29,326.50 726.29,331.50 856.20,256.50" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 670 144)">
+<rect width="215" height="150" rx="1" fill="#fff"/>
+<path d="M6 6H209V144H6Z" class="detail"/>
+<use href="#screw" x="9" y="9"/>
+<use href="#screw" x="206" y="9"/>
+<use href="#screw" x="9" y="141"/>
+<use href="#screw" x="206" y="141"/>
+<text class="type" x="20" y="22" font-size="10">CONTACT</text>
+<path d="M20 27h175" class="detail"/>
+<text class="type" x="17" y="45" font-size="8">NAME</text>
+<use href="#slot" x="79" y="34"/>
+<text class="type" x="17" y="68" font-size="8">EMAIL</text>
+<use href="#slot" x="79" y="57"/>
+<text class="type" x="17" y="91" font-size="8">PHONE</text>
+<use href="#slot" x="79" y="80"/>
+<text class="type" x="17" y="114" font-size="8">COMPANY</text>
+<use href="#slot" x="79" y="103"/>
+<text class="type" x="17" y="137" font-size="8">NOTES</text>
+<use href="#slot" x="79" y="126"/>
+<path d="M69 38v8m0 15v8m0 15v8m0 15v8m0 15v8" class="detail"/>
+</g>
+<path d="M759.20 170.50V283.50" class="guide"/>
+<circle cx="759.20" cy="283.50" r="1.6" fill="#fff" class="detail"/>
+<path d="M779.12 146.50V272" class="guide"/>
+<circle cx="779.12" cy="272" r="1.6" fill="#fff" class="detail"/>
+<path d="M799.04 122.50V260.50" class="guide"/>
+<circle cx="799.04" cy="260.50" r="1.6" fill="#fff" class="detail"/>
+
+<polygon points="661.34,114.00 757.47,169.50 757.47,177.50 661.34,122.00" fill="#f3f5f9"/>
+<polygon points="771.32,161.50 757.47,169.50 757.47,177.50 771.32,169.50" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 675.1961524 106)">
+<rect width="111" height="16" rx="1" fill="#fff"/>
+<rect x="4" y="3" width="103" height="10" rx=".6" fill="#f3f5f9" class="detail"/>
+<path d="M5 4v8m101-8v8" class="detail"/>
+<text class="type" x="10" y="10.8" font-size="8">a5_phone</text>
+</g>
+<polygon points="681.26,90.00 777.39,145.50 777.39,153.50 681.26,98.00" fill="#f3f5f9"/>
+<polygon points="791.24,137.50 777.39,145.50 777.39,153.50 791.24,145.50" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 695.1147366 82)">
+<rect width="111" height="16" rx="1" fill="#fff"/>
+<rect x="4" y="3" width="103" height="10" rx=".6" fill="#f3f5f9" class="detail"/>
+<path d="M5 4v8m101-8v8" class="detail"/>
+<text class="type" x="10" y="10.8" font-size="8">a5_email</text>
+</g>
+<polygon points="701.18,66.00 797.31,121.50 797.31,129.50 701.18,74.00" fill="#f3f5f9"/>
+<polygon points="811.16,113.50 797.31,121.50 797.31,129.50 811.16,121.50" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 715.0333208 58)">
+<rect width="111" height="16" rx="1" fill="#fff"/>
+<rect x="4" y="3" width="103" height="10" rx=".6" fill="#f3f5f9" class="detail"/>
+<path d="M5 4v8m101-8v8" class="detail"/>
+<text class="type" x="10" y="10.8" font-size="8">a5_firstname</text>
+</g>
+<polygon points="108.18,159.00 321.22,282.00 321.22,288.00 108.18,165.00" fill="#f3f5f9"/>
+<polygon points="387.04,244.00 321.22,282.00 321.22,288.00 387.04,250.00" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 174 121)">
+<rect width="246" height="76" rx="1" fill="#fff"/>
+<path d="M7 7H239V69H7Z" class="detail"/>
+<rect x="18" y="11" width="210" height="52" rx="1" fill="#e7ebf1" class="detail"/>
+<use href="#screw" x="9" y="9"/>
+<use href="#screw" x="237" y="9"/>
+<use href="#screw" x="9" y="67"/>
+<use href="#screw" x="237" y="67"/>
+<use href="#pin" x="179" y="65"/>
+<use href="#pin" x="185" y="65"/>
+<use href="#pin" x="191" y="65"/>
+<use href="#pin" x="197" y="65"/>
+<use href="#pin" x="203" y="65"/>
+<use href="#pin" x="209" y="65"/>
+<use href="#pin" x="215" y="65"/>
+<use href="#pin" x="221" y="65"/>
+</g>
+
+<polygon points="108.18,136.00 321.22,259.00 321.22,262.00 108.18,139.00" fill="#f3f5f9"/>
+<polygon points="387.04,221.00 321.22,259.00 321.22,262.00 387.04,224.00" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 174 98)">
+<rect width="246" height="76" rx="1" fill="#fff"/>
+<path d="M7 7H239V69H7Z" class="detail"/>
+<path d="M31 8v60" class="guide"/>
+<text class="type" x="11" y="43" font-size="8">URL</text>
+<rect x="39" y="10" width="192" height="16" rx="1" fill="#f3f5f9" class="detail"/>
+<text class="type" x="48" y="22" font-size="10">?firstname=…</text>
+<rect x="39" y="29" width="192" height="16" rx="1" fill="#f3f5f9" class="detail"/>
+<text class="type" x="48" y="41" font-size="10">&amp;email=…</text>
+<rect x="39" y="48" width="192" height="16" rx="1" fill="#f3f5f9" class="detail"/>
+<text class="type" x="48" y="60" font-size="10">&amp;utm_source=…</text>
+<path d="M39 28h192M39 47h192" class="detail"/>
+<circle cx="11" cy="14" r="1.2" fill="#e7ebf1" stroke-width=".8"/><circle cx="11" cy="62" r="1.2" fill="#e7ebf1" stroke-width=".8"/>
+<circle cx="16" cy="14" r="1.2" fill="#e7ebf1" stroke-width=".8"/><circle cx="16" cy="62" r="1.2" fill="#e7ebf1" stroke-width=".8"/>
+<circle cx="21" cy="14" r="1.2" fill="#e7ebf1" stroke-width=".8"/><circle cx="21" cy="62" r="1.2" fill="#e7ebf1" stroke-width=".8"/>
+<circle cx="26" cy="14" r="1.2" fill="#e7ebf1" stroke-width=".8"/><circle cx="26" cy="62" r="1.2" fill="#e7ebf1" stroke-width=".8"/>
+</g>
+
+<polygon points="412.62,277.50 503.55,330.00 503.55,335.00 412.62,282.50" fill="#f3f5f9"/>
+<polygon points="526.93,316.50 503.55,330.00 503.55,335.00 526.93,321.50" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 436 264)">
+<rect width="105" height="27" rx="1" fill="#fff2eb"/>
+<path d="M4 4H101V23H4Z" stroke="#c34c27" stroke-width=".8"/>
+<text class="type" x="10" y="17" font-size="9" style="fill:#c34c27">utm_source</text>
+<use href="#pin" x="78" y="23"/>
+<use href="#pin" x="83" y="23"/>
+<use href="#pin" x="88" y="23"/>
+<use href="#pin" x="93" y="23"/>
+</g>
+<g class="detail">
+<path d="M60 61h112l23 51"/><circle cx="195" cy="112" r="2.3" fill="#fff"/>
+<path d="M464 47h376v54l-28.84 17"/><circle cx="811.16" cy="118" r="2.3" fill="#fff"/>
+<path d="M60 357h260l110-72"/><circle cx="430" cy="285" r="2.3" fill="#fff2eb"/>
+</g>
+<text class="label" x="60" y="49">?firstname=&amp;email=</text>
+<text class="label" x="464" y="35">a5_firstname · a5_email · a5_phone</text>
+<text class="label" x="60" y="345" style="fill:#c34c27">UTM CAPTURED AUTOMATICALLY</text>
+</svg>

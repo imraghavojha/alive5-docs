@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="400" viewBox="0 0 960 400" fill="none" stroke="#202534" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" style="background:#f6f9fc">
+<title>CRM integrations — conversations mapped into CRM records</title>
+<desc>An exploded isometric records cabinet with Lead, Contact, and Account drawers. An Alive5 conversation feeds a patch panel mapping PHONE to telephone1, EMAIL to emailaddress1, and ACCOUNT ID to a field by API name. Patch cables connect mapped values to record cards; a transcript is attached as a note or task.</desc>
+<defs>
+<style>
+path,rect,circle,ellipse,line,polyline,polygon{vector-effect:non-scaling-stroke}
+.detail{stroke:#657080;stroke-width:.8}
+.axis{stroke:#9aa3b2;stroke-width:.8;stroke-dasharray:4 4}
+.label{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.06em;fill:#202534;stroke:none}
+.type{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;fill:#202534;stroke:none}
+</style>
+<g id="screw" stroke-width=".8"><circle r="3.1" fill="#fff"/><path class="detail" d="M-1.5 0h3M0-1.5v3"/></g>
+<g id="socket" stroke-width=".8"><circle r="5.3" fill="#e7ebf1"/><circle r="3.1" fill="#fff"/><circle r="1.4" fill="#202534" stroke="none"/></g>
+<g id="rail" stroke-width=".8"><path d="M0 0h76v5H0Z" fill="#f3f5f9"/><path class="detail" d="M4 2.5h68"/><circle cx="8" cy="2.5" r=".8" fill="#657080" stroke="none"/><circle cx="67" cy="2.5" r=".8" fill="#657080" stroke="none"/></g>
+<g id="plug" stroke-width=".8"><path d="m-8-3 8-4 8 4v6L0 7l-8-4Z" fill="#f3f5f9"/><path class="detail" d="m-8-3 8 4 8-4M0 1v6m-4-11 8 4"/></g>
+<g id="floating-screw" stroke-width=".8">
+<path d="M-1.5 0v9l1.5 1 1.5-1V0" fill="#e7ebf1"/>
+<path class="detail" d="m-1.5 3 3-1m-3 4 3-1m-3 4 3-1"/>
+<ellipse cy="-1" rx="3.4" ry="2" fill="#fff"/>
+<path class="detail" d="m-1.5-2 3 1.8m-3 0 3-1.8"/>
+</g>
+</defs>
+<g class="axis">
+<path d="M711.88 88 656.88 119.75M711.88 137 621.88 188.96M711.88 186 590.88 255.86M559 327 767 207"/>
+<path d="M730.93 99.00L675.93 130.75" />
+<path d="M855.64 171.00L800.64 202.75" />
+<path d="M730.93 148.00L640.93 199.96" />
+<path d="M855.64 220.00L765.64 271.96" />
+<path d="M730.93 197.00L609.93 266.86" />
+<path d="M855.64 269.00L734.64 338.86" />
+<path d="M737.86 65.00v20" />
+<path d="M862.56 137.00v20" />
+<path d="M801.94 28.00v20" />
+<path d="M926.65 100.00v20" />
+</g>
+<polygon points="735.26,255.50 742.26,259.50 742.26,267.50 735.26,263.50 729.26,259.50 729.26,251.50" fill="#e7ebf1" />
+<polygon points="857.37,326.00 864.37,330.00 864.37,338.00 857.37,334.00 851.37,330.00 851.37,322.00" fill="#e7ebf1" />
+<polygon points="923.19,288.00 930.19,292.00 930.19,300.00 923.19,296.00 917.19,292.00 917.19,284.00" fill="#e7ebf1" />
+<polygon points="724.00,85.00 862.56,165.00 862.56,333.00 724.00,253.00" fill="#f3f5f9" />
+<polygon points="862.56,165.00 940.51,120.00 940.51,288.00 862.56,333.00" fill="#e7ebf1" />
+<polygon points="724.00,85.00 862.56,165.00 940.51,120.00 801.94,40.00" fill="#fff" />
+<g transform="matrix(0.8660254037844386 0.5 -0.8660254037844386 0.5 801.94 40.00)">
+<rect x="7" y="7" width="146" height="76" fill="#e7ebf1" stroke-width=".8"/><path class="detail" d="M11 72V12h138v60M16 65h128M16 61h128"/>
+<use href="#screw" x="12" y="12"/>
+<use href="#screw" x="148" y="12"/>
+<use href="#screw" x="12" y="78"/>
+<use href="#screw" x="148" y="78"/>
+</g>
+<g transform="matrix(0.8660254037844386 0.5 0 1 724.00 85.00)">
+<rect x="7" y="8" width="146" height="40" rx="1" fill="#e7ebf1" stroke-width=".8"/>
+<path d="M10 45v-34h140v34M10 42h140" class="detail"/>
+<path d="M12 13h6v28h-6Zm130 0h6v28h-6Z" fill="#f3f5f9" stroke-width=".8"/>
+<rect x="7" y="57" width="146" height="40" rx="1" fill="#e7ebf1" stroke-width=".8"/>
+<path d="M10 94v-34h140v34M10 91h140" class="detail"/>
+<path d="M12 62h6v28h-6Zm130 0h6v28h-6Z" fill="#f3f5f9" stroke-width=".8"/>
+<rect x="7" y="106" width="146" height="40" rx="1" fill="#e7ebf1" stroke-width=".8"/>
+<path d="M10 143v-34h140v34M10 140h140" class="detail"/>
+<path d="M12 111h6v28h-6Zm130 0h6v28h-6Z" fill="#f3f5f9" stroke-width=".8"/>
+<path d="M4 153h152M8 159h144" class="detail"/>
+<use href="#screw" x="4" y="4"/>
+<use href="#screw" x="156" y="4"/>
+<use href="#screw" x="4" y="163"/>
+<use href="#screw" x="156" y="163"/>
+</g>
+<g transform="matrix(0.8660254037844386 -0.5 0 1 862.56 165.00)">
+<path d="M7 7h76v154H7ZM11 151h67M76 11v135M15 18h49v28H15Z" class="detail"/>
+<text class="type" x="22" y="36" font-size="10">CRM</text>
+<path d="M17 82h46" class="detail"/>
+<path d="M17 89h46" class="detail"/>
+<path d="M17 96h46" class="detail"/>
+<path d="M17 103h46" class="detail"/>
+<path d="M17 110h46" class="detail"/>
+<path d="M17 117h46" class="detail"/>
+<path d="M17 135h15m4 0h12M17 140h22" class="detail"/>
+<use href="#screw" x="12" y="12"/>
+<use href="#screw" x="78" y="12"/>
+<use href="#screw" x="12" y="155"/>
+<use href="#screw" x="78" y="155"/>
+</g>
+<use href="#floating-screw" x="732.5" y="74"/><use href="#floating-screw" x="931.85" y="108"/>
+<g transform="translate(0 -10)">
+<polygon points="724.00,65.00 862.56,145.00 862.56,151.00 724.00,71.00" fill="#f3f5f9" />
+<polygon points="862.56,145.00 940.51,100.00 940.51,106.00 862.56,151.00" fill="#e7ebf1" />
+<polygon points="724.00,65.00 862.56,145.00 940.51,100.00 801.94,20.00" fill="#fff" />
+<g transform="matrix(0.8660254037844386 0.5 -0.8660254037844386 0.5 801.94 20.00)">
+<path d="M6 6h148v78H6ZM17 19h85v23H17Z" class="detail"/>
+<text class="type" x="26" y="35" font-size="10">RECORDS</text>
+<path d="M17 52h48m-48 5h31M116 25h24m-24 5h24m-24 5h24m-24 5h24M17 70h9m4 0h9" class="detail"/>
+<use href="#screw" x="11" y="11"/>
+<use href="#screw" x="149" y="11"/>
+<use href="#screw" x="11" y="79"/>
+<use href="#screw" x="149" y="79"/>
+</g>
+</g>
+<g transform="matrix(0.8660254037844386 -0.5 0 1 614.26 267.36)"><use href="#rail"/></g>
+<g transform="matrix(0.8660254037844386 -0.5 0 1 745.03 342.86)"><use href="#rail"/></g>
+<polygon points="668.82,224.86 807.38,304.86 807.38,326.86 668.82,246.86" fill="#e7ebf1" />
+<polygon points="603.00,280.86 741.56,360.86 807.38,322.86 668.82,242.86" fill="#f3f5f9" />
+<polygon points="603.00,262.86 668.82,224.86 668.82,246.86 603.00,284.86" fill="#f3f5f9" />
+<path d="M606.00 267.86l58.89 -34.00" class="detail"/>
+<g transform="matrix(0.8660254037844386 0.5 -0.8660254037844386 0.5 673.15 232.36)">
+<path d="M-2-2h129v49H-2Z" fill="#e7ebf1" stroke-width=".8"/><path d="M0 0h129v49H0Z" fill="#f3f5f9" stroke-width=".8"/><path d="M3 3h125v47H3Z" fill="#fff"/>
+<path d="M8 3v-7h57v7" fill="#fff" stroke-width=".8"/><text class="type" x="12" y="22" font-size="11">ACCOUNT</text>
+<path d="M12 28h93M12 34h45m8 0h40M12 40h26m8 0h59M12 46h74" class="detail"/>
+<text class="type" x="105" y="20" font-size="7">03</text>
+<use href="#socket" x="10" y="44"/>
+</g>
+<polygon points="741.56,342.86 807.38,304.86 807.38,326.86 741.56,364.86" fill="#e7ebf1" />
+<polygon points="603.00,262.86 741.56,342.86 741.56,364.86 603.00,284.86" fill="#fff" />
+<g transform="matrix(0.8660254037844386 0.5 0 1 603.00 262.86)">
+<path d="M5 4h150M5 18h150" class="detail"/>
+<rect x="20" y="7" width="17" height="9" rx=".5" fill="#f3f5f9" stroke-width=".8"/><circle cx="51" cy="11" r="1.5" fill="#fff" stroke-width=".8"/><circle cx="109" cy="11" r="1.5" fill="#fff" stroke-width=".8"/><path class="detail" d="M50 11h2m56 0h2"/><rect x="56" y="6" width="48" height="10" rx="1" fill="#e7ebf1" stroke-width=".8"/><path d="M61 10h38v3H61Z" fill="#fff" stroke-width=".8"/>
+<use href="#screw" x="10" y="11"/>
+<use href="#screw" x="150" y="11"/>
+<text class="type" x="22" y="14" font-size="7">03</text>
+</g>
+<g transform="matrix(0.8660254037844386 -0.5 0 1 645.26 200.46)"><use href="#rail"/></g>
+<g transform="matrix(0.8660254037844386 -0.5 0 1 776.03 275.96)"><use href="#rail"/></g>
+<polygon points="699.82,157.96 838.38,237.96 838.38,259.96 699.82,179.96" fill="#e7ebf1" />
+<polygon points="634.00,213.96 772.56,293.96 838.38,255.96 699.82,175.96" fill="#f3f5f9" />
+<polygon points="634.00,195.96 699.82,157.96 699.82,179.96 634.00,217.96" fill="#f3f5f9" />
+<path d="M637.00 200.96l58.89 -34.00" class="detail"/>
+<g transform="matrix(0.8660254037844386 0.5 -0.8660254037844386 0.5 704.15 165.46)">
+<path d="M-2-2h129v49H-2Z" fill="#e7ebf1" stroke-width=".8"/><path d="M0 0h129v49H0Z" fill="#f3f5f9" stroke-width=".8"/><path d="M3 3h125v47H3Z" fill="#fff"/>
+<path d="M8 3v-7h57v7" fill="#fff" stroke-width=".8"/><text class="type" x="12" y="17" font-size="11">CONTACT</text>
+<path d="M12 23h93M12 29h45m8 0h40M12 35h26m8 0h59M12 41h74" class="detail"/>
+<text class="type" x="105" y="15" font-size="7">02</text>
+<use href="#socket" x="10" y="44"/>
+</g>
+
+<polygon points="772.56,275.96 838.38,237.96 838.38,259.96 772.56,297.96" fill="#e7ebf1" />
+<polygon points="634.00,195.96 772.56,275.96 772.56,297.96 634.00,217.96" fill="#fff" />
+<g transform="matrix(0.8660254037844386 0.5 0 1 634.00 195.96)">
+<path d="M5 4h150M5 18h150" class="detail"/>
+<rect x="20" y="7" width="17" height="9" rx=".5" fill="#f3f5f9" stroke-width=".8"/><circle cx="51" cy="11" r="1.5" fill="#fff" stroke-width=".8"/><circle cx="109" cy="11" r="1.5" fill="#fff" stroke-width=".8"/><path class="detail" d="M50 11h2m56 0h2"/><rect x="56" y="6" width="48" height="10" rx="1" fill="#e7ebf1" stroke-width=".8"/><path d="M61 10h38v3H61Z" fill="#fff" stroke-width=".8"/>
+<use href="#screw" x="10" y="11"/>
+<use href="#screw" x="150" y="11"/>
+<text class="type" x="22" y="14" font-size="7">02</text>
+</g>
+<g transform="matrix(0.8660254037844386 -0.5 0 1 680.26 131.25)"><use href="#rail"/></g>
+<g transform="matrix(0.8660254037844386 -0.5 0 1 811.03 206.75)"><use href="#rail"/></g>
+<polygon points="734.82,88.75 873.38,168.75 873.38,190.75 734.82,110.75" fill="#e7ebf1" />
+<polygon points="669.00,144.75 807.56,224.75 873.38,186.75 734.82,106.75" fill="#f3f5f9" />
+<polygon points="669.00,126.75 734.82,88.75 734.82,110.75 669.00,148.75" fill="#f3f5f9" />
+<path d="M672.00 131.75l58.89 -34.00" class="detail"/>
+<g transform="matrix(0.8660254037844386 0.5 -0.8660254037844386 0.5 739.15 96.25)">
+<path d="M-2-2h129v49H-2Z" fill="#e7ebf1" stroke-width=".8"/><path d="M0 0h129v49H0Z" fill="#f3f5f9" stroke-width=".8"/><path d="M3 3h125v47H3Z" fill="#fff"/>
+<path d="M8 3v-7h57v7" fill="#fff" stroke-width=".8"/><text class="type" x="12" y="17" font-size="11">LEAD</text>
+<path d="M12 23h93M12 29h45m8 0h40M12 35h26m8 0h59M12 41h74" class="detail"/>
+<text class="type" x="105" y="15" font-size="7">01</text>
+<use href="#socket" x="10" y="44"/>
+</g>
+<polygon points="807.56,206.75 873.38,168.75 873.38,190.75 807.56,228.75" fill="#e7ebf1" />
+<polygon points="669.00,126.75 807.56,206.75 807.56,228.75 669.00,148.75" fill="#fff" />
+<g transform="matrix(0.8660254037844386 0.5 0 1 669.00 126.75)">
+<path d="M5 4h150M5 18h150" class="detail"/>
+<rect x="20" y="7" width="17" height="9" rx=".5" fill="#f3f5f9" stroke-width=".8"/><circle cx="51" cy="11" r="1.5" fill="#fff" stroke-width=".8"/><circle cx="109" cy="11" r="1.5" fill="#fff" stroke-width=".8"/><path class="detail" d="M50 11h2m56 0h2"/><rect x="56" y="6" width="48" height="10" rx="1" fill="#e7ebf1" stroke-width=".8"/><path d="M61 10h38v3H61Z" fill="#fff" stroke-width=".8"/>
+<use href="#screw" x="10" y="11"/>
+<use href="#screw" x="150" y="11"/>
+<text class="type" x="22" y="14" font-size="7">01</text>
+</g>
+<polygon points="317.34,152.00 523.46,271.00 523.46,278.00 317.34,159.00" fill="#f3f5f9" />
+<polygon points="523.46,271.00 629.11,210.00 629.11,217.00 523.46,278.00" fill="#e7ebf1" />
+<polygon points="423.00,91.00 629.11,210.00 523.46,271.00 317.34,152.00" fill="#fff" />
+<g transform="matrix(0.8660254037844386 0.5 -0.8660254037844386 0.5 423.00 91.00)">
+<path d="M5 5h228v112H5ZM25 13h188M25 109h188" class="detail"/>
+<rect x="26" y="20" width="185" height="24" rx="1" fill="#f3f5f9" stroke-width=".8"/>
+<text class="type" x="34" y="36" font-size="10.5">PHONE → telephone1</text>
+<use href="#socket" x="14" y="31"/><use href="#socket" x="222" y="31"/>
+<path d="M19 31h7m185 0h6" class="detail"/>
+<rect x="26" y="50" width="185" height="24" rx="1" fill="#f3f5f9" stroke-width=".8"/>
+<text class="type" x="34" y="66" font-size="10.5">EMAIL → emailaddress1</text>
+<use href="#socket" x="14" y="61"/><use href="#socket" x="222" y="61"/>
+<path d="M19 61h7m185 0h6" class="detail"/>
+<rect x="26" y="80" width="185" height="24" rx="1" fill="#f3f5f9" stroke-width=".8"/>
+<text class="type" x="34" y="96" font-size="10.5">ACCOUNT ID → api name</text>
+<use href="#socket" x="14" y="91"/><use href="#socket" x="222" y="91"/>
+<path d="M19 91h7m185 0h6" class="detail"/>
+<use href="#screw" x="10" y="10"/>
+<use href="#screw" x="228" y="10"/>
+<use href="#screw" x="10" y="112"/>
+<use href="#screw" x="228" y="112"/>
+</g>
+<path d="M230 269C278 297 280 261 286 226C292 191 308 183 333 168" stroke="#202534" stroke-width="7"/>
+<path d="M230 269C278 297 280 261 286 226C292 191 308 183 333 168" stroke="#e7ebf1" stroke-width="4.5"/>
+<path d="M230 269C278 297 280 261 286 226C292 191 308 183 333 168" stroke="#657080" stroke-width=".8"/>
+<path d="m320 173 7 4m-10-2 7 4" stroke="#657080" stroke-width=".8"/><use href="#plug" x="333" y="168"/>
+<g transform="matrix(0.8660254037844386 0.5 0 1 75.00 91.00)">
+<path d="M4-3h175l6 6v145l-6 4H4Z" fill="#e7ebf1"/><path d="M0 0h175v148H0Z" fill="#fff2eb"/><path d="M6 6h163v136H6Z" stroke="#c34c27" stroke-width=".8"/>
+<text class="type" x="16" y="23" font-size="11" style="fill:#c34c27">ALIVE5 / CHAT</text>
+<path d="M15 31h145" class="detail"/>
+<path d="M16 42h119v29H31l-9 7v-7h-6Z" fill="#fff" stroke="#c34c27" stroke-width=".8"/><path d="M43 83h116v28h-6v7l-9-7H43Z" fill="#fff" stroke="#c34c27" stroke-width=".8"/>
+<path d="M27 51h85m-85 7h62M55 92h89m-89 7h65M16 126h80m-80 6h50" class="detail"/>
+<rect x="164" y="51" width="2" height="51" rx="1" fill="#e7ebf1" stroke="none"/><rect x="164" y="51" width="2" height="17" rx="1" fill="#c34c27" stroke="none"/>
+<use href="#screw" x="9" y="9"/>
+<use href="#screw" x="166" y="139"/>
+<use href="#socket" x="176" y="88"/>
+</g>
+<path d="M588.41 217.50C621.41 236.50 680.70 106.25 709.70 123.25" stroke="#202534" stroke-width="4.5"/>
+<path d="M588.41 217.50C621.41 236.50 680.70 106.25 709.70 123.25" stroke="#c34c27" stroke-width="2.6"/>
+<use href="#plug" x="588.41" y="217.50"/><use href="#plug" x="709.70" y="123.25"/>
+<path d="M562.43 232.50C595.43 251.50 645.70 175.46 674.70 192.46" stroke="#202534" stroke-width="4.5"/>
+<path d="M562.43 232.50C595.43 251.50 645.70 175.46 674.70 192.46" stroke="#c34c27" stroke-width="2.6"/>
+<use href="#plug" x="562.43" y="232.50"/><use href="#plug" x="674.70" y="192.46"/>
+<path d="M536.45 247.50C569.45 266.50 614.70 242.36 643.70 259.36" stroke="#202534" stroke-width="4.5"/>
+<path d="M536.45 247.50C569.45 266.50 614.70 242.36 643.70 259.36" stroke="#e7ebf1" stroke-width="2.6"/>
+<use href="#plug" x="536.45" y="247.50"/><use href="#plug" x="643.70" y="259.36"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 489 286)">
+<path d="M2 3h91v48H2Z" fill="#e7ebf1" stroke-width=".8"/>
+<path d="M0 0h79l12 12v36H0Z" fill="#fff"/>
+<path class="detail" d="M79 0v12h12M8 22h73M8 28h64M8 34h43M8 40h58"/>
+<text class="type" x="8" y="15" font-size="10">NOTE / TASK</text>
+<path class="detail" d="M8 43h8m4 0h8"/>
+</g>
+<g class="detail"><path d="M70 50h235l123 42"/><circle cx="428" cy="92" r="2.3" fill="#f6f9fc"/><path d="M480 43h212l38 51"/><circle cx="730" cy="94" r="2.3" fill="#f6f9fc"/><path d="M70 371h293l84-60"/><circle cx="447" cy="311" r="2.3" fill="#f6f9fc"/></g>
+<text class="label" x="70" y="38" style="fill:#c34c27">MAP BY API NAME</text><text class="label" x="480" y="31">MATCH · PHONE › EMAIL › ACCOUNT ID</text><text class="label" x="70" y="359">PUSH TRANSCRIPT AS NOTE / TASK</text>
+</svg>
