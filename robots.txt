@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://imraghavojha.github.io/alive5-docs/sitemap.xml

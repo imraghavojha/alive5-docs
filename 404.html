@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>(()=>{let t;try{t=localStorage.getItem("a5-theme")}catch{}document.documentElement.dataset.theme=t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";const b=document.createElement("base");b.href=/^\/alive5-docs(?:\/|$)/.test(location.pathname)?"/alive5-docs/":"/";document.head.append(b)})();</script>
+    <meta name="color-scheme" content="light dark" />
+    <title>Page not found · Alive5 Docs</title>
+    <meta name="description" content="Find your way back to the Alive5 documentation, API reference, and connectors." />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://imraghavojha.github.io/alive5-docs/404.html" />
+    <meta property="og:title" content="Page not found · Alive5 Docs" />
+    <meta property="og:description" content="Find your way back to the Alive5 documentation, API reference, and connectors." />
+    <meta property="og:url" content="https://imraghavojha.github.io/alive5-docs/404.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Alive5 Docs" />
+    <meta property="og:image" content="https://imraghavojha.github.io/alive5-docs/assets/images/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Alive5 Developer Documentation. Build messaging into your applications." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Page not found · Alive5 Docs" />
+    <meta name="twitter:description" content="Find your way back to the Alive5 documentation, API reference, and connectors." />
+    <meta name="twitter:image" content="https://imraghavojha.github.io/alive5-docs/assets/images/og.png" />
+    <meta name="twitter:image:alt" content="Alive5 Developer Documentation. Build messaging into your applications." />
+    <script>
+      (() => {
+        const root = document.querySelector("base").getAttribute("href");
+        const style = document.createElement("link");
+        style.rel = "stylesheet";
+        style.href = root + "assets/styles.css";
+        const icon = document.createElement("link");
+        icon.rel = "icon";
+        icon.type = "image/png";
+        icon.sizes = "48x48";
+        icon.href = root + "assets/images/favicon.png";
+        document.head.append(style, icon);
+        document.addEventListener("DOMContentLoaded", () => {
+          const script = document.createElement("script");
+          script.src = root + "assets/site.js";
+          document.head.append(script);
+        }, { once: true });
+      })();
+    </script>
+    <style>
+      .not-found { min-height: 50vh; padding-top: 72px; padding-bottom: 32px; }
+      .not-found h1 { font-size: 32px; line-height: 40px; color: var(--ink-str); font-weight: 650; letter-spacing: -0.7px; }
+      .not-found .sub { font-size: 20px; line-height: 30px; margin-top: 10px; }
+      .not-found .resource-links { align-items: center; gap: 24px; }
+      .not-found .searchbox { margin-top: 28px; }
+    </style>
+  </head>
+  <body data-page="not-found">
+    <script>document.body.dataset.root=document.querySelector("base").getAttribute("href");</script>
+    <a class="skip" href="#main">Skip to content</a>
+    <header data-header></header>
+    <main class="wrap not-found" id="main">
+      <p class="crumbs">404</p>
+      <h1>Page not found</h1>
+      <p class="sub">The page you’re looking for may have moved or doesn’t exist.</p>
+      <nav class="resource-links" aria-label="Find documentation">
+        <a class="btn-primary" href="index.html">Get started <span aria-hidden="true">›</span></a>
+        <a class="link-arrow" href="api/reference.html">API reference</a>
+        <a class="link-arrow" href="connectors/index.html">Connectors</a>
+      </nav>
+      <button class="searchbox" type="button" data-search>
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.6"/><path d="M10.6 10.6 14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Search docs<span class="kbd">⌘ K</span>
+      </button>
+    </main>
+    <footer class="home-foot" data-docfoot></footer>
+    <script>document.querySelector(".skip").href=location.pathname+location.search+"#main";</script>
+  </body>
+</html>

@@ -214,29 +214,77 @@ function renderDocFooter() {
 }
 
 function wireCode() {
-  document.querySelectorAll(".code, .reference-code").forEach((box) => {
+  document.querySelectorAll(".code, .reference-code").forEach((box, boxIndex) => {
     const tabs = [...box.querySelectorAll(".tab")];
     const panes = [...box.querySelectorAll("pre")];
-    tabs.forEach((tab, i) =>
-      tab.addEventListener("click", () => {
-        tabs.forEach((t, j) =>
-          t.setAttribute("aria-selected", String(i === j)),
-        );
-        panes.forEach((p, j) => (p.hidden = i !== j));
-      }),
-    );
+    const heading = box.closest(".reference-entry")?.querySelector("h3") ||
+      [...document.querySelectorAll("h2, h3")].filter((h) =>
+        h.compareDocumentPosition(box) & Node.DOCUMENT_POSITION_FOLLOWING).at(-1);
+    const context = heading?.textContent.trim() || "Code example";
+    panes.forEach((pane) => {
+      // Preformatted examples can overflow; keyboard readers must be able to scroll them.
+      pane.tabIndex = 0;
+      pane.setAttribute("role", "region");
+      if (!pane.hasAttribute("aria-label")) pane.setAttribute("aria-label",
+        `${context}: ${box.querySelector("figcaption > span, .name")?.textContent.trim() || `code example ${boxIndex + 1}`}`);
+    });
+    if (tabs.length) {
+      const tablist = document.createElement("div");
+      tablist.className = "code-tabs";
+      tablist.setAttribute("role", "tablist");
+      tablist.setAttribute("aria-label", `${context} language`);
+      tabs[0].before(tablist);
+      tabs.forEach((tab, i) => {
+        tablist.append(tab);
+        tab.id = `code-tab-${boxIndex}-${i}`;
+        tab.setAttribute("role", "tab");
+        tab.setAttribute("aria-controls", `code-panel-${boxIndex}-${i}`);
+        panes[i].id = `code-panel-${boxIndex}-${i}`;
+        panes[i].setAttribute("role", "tabpanel");
+        panes[i].removeAttribute("aria-label");
+        panes[i].setAttribute("aria-labelledby", tab.id);
+      });
+      const select = (index) => {
+        tabs.forEach((tab, i) => {
+          tab.setAttribute("aria-selected", String(i === index));
+          tab.tabIndex = i === index ? 0 : -1;
+          panes[i].hidden = i !== index;
+        });
+      };
+      tabs.forEach((tab, i) => {
+        tab.addEventListener("click", () => select(i));
+        tab.addEventListener("keydown", (e) => {
+          if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) return;
+          e.preventDefault();
+          const next = e.key === "Home" ? 0 : e.key === "End" ? tabs.length - 1 :
+            (i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+          select(next);
+          tabs[next].focus();
+        });
+      });
+      select(Math.max(0, tabs.findIndex((tab) => tab.getAttribute("aria-selected") === "true")));
+    }
     const copy = box.querySelector(".copy");
-    if (copy)
+    if (copy) {
+      const copyLabel = `Copy ${box.querySelector("figcaption > span")?.textContent.toLowerCase() || "code"}: ${context}`;
+      copy.setAttribute("aria-label", copyLabel);
+      copy.setAttribute("aria-live", "polite");
       copy.addEventListener("click", async () => {
         const pane = panes.find((p) => !p.hidden) || panes[0];
         try {
           await navigator.clipboard.writeText((pane.querySelector("code") || pane).textContent);
           copy.textContent = "Copied";
+          copy.setAttribute("aria-label", `Copied: ${context}`);
         } catch {
-          copy.textContent = "Press ⌘C";
+          copy.textContent = "Copy unavailable";
+          copy.setAttribute("aria-label", `Copy unavailable: ${context}`);
         }
-        setTimeout(() => (copy.textContent = "Copy"), 1500);
+        setTimeout(() => {
+          copy.textContent = "Copy";
+          copy.setAttribute("aria-label", copyLabel);
+        }, 1500);
       });
+    }
   });
 }
 
@@ -323,17 +371,20 @@ function wireSearch() {
   const dialog = document.createElement("dialog");
   dialog.className = "search-dialog";
   dialog.setAttribute("aria-label", "Search documentation");
-  dialog.innerHTML = `<div class="search-input-row"><span aria-hidden="true">⌕</span><input aria-label="Search documentation" placeholder="Search guides, endpoints, connectors…" autocomplete="off"><button type="button" aria-label="Close search">Esc</button></div><div class="search-results"></div><div class="search-hint">↑ ↓ Navigate <span>↵ Open</span><span>esc Close</span></div>`;
+  dialog.setAttribute("aria-modal", "true");
+  dialog.innerHTML = `<div class="search-input-row"><span aria-hidden="true">⌕</span><input aria-label="Search documentation" aria-controls="search-results" aria-describedby="search-hint" placeholder="Search guides, endpoints, connectors…" autocomplete="off"><button type="button" aria-label="Esc — Close search">Esc</button></div><div class="search-results" id="search-results"></div><div class="search-hint" id="search-hint">↑ ↓ Navigate <span>↵ Open</span><span>esc Close</span></div><span class="sr-only" role="status" data-search-status></span>`;
   document.body.append(dialog);
   const input = dialog.querySelector("input"),
     results = dialog.querySelector(".search-results");
   let active = 0;
+  let returnFocus;
   const draw = () => {
     const q = input.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
     const hits = SEARCH.filter((row) =>
       q.every((term) => row.join(" ").toLowerCase().includes(term)),
     );
     active = 0;
+    dialog.querySelector("[data-search-status]").textContent = `${hits.length} documentation results`;
     results.innerHTML = hits.length
       ? `<p>${q.length ? "Results" : "Explore the docs"}</p>` +
         hits
@@ -345,27 +396,52 @@ function wireSearch() {
       : `<div class="search-empty">No results for this search.<small>Try “API key”, “SMS”, or “Zapier”.</small></div>`;
     mark();
   };
-  const mark = () =>
-    [...results.querySelectorAll("a")].forEach((a, i) =>
+  const mark = () => {
+    const links = [...results.querySelectorAll("a")];
+    links.forEach((a, i) =>
       a.classList.toggle("selected", i === active),
     );
+    input.setAttribute("aria-description", links[active] ? `Selected result: ${links[active].innerText.replaceAll("\n", " ")}` : "No matching results");
+  };
   const open = () => {
     if (dialog.open) return;
+    returnFocus = document.activeElement;
     input.value = "";
     draw();
     dialog.showModal();
     input.focus();
   };
+  const close = () => {
+    dialog.close();
+    if (returnFocus?.isConnected) returnFocus.focus({ preventScroll: true });
+  };
+  dialog.addEventListener("cancel", (e) => { e.preventDefault(); close(); });
   input.addEventListener("input", draw);
   dialog
     .querySelector("button")
-    .addEventListener("click", () => dialog.close());
+    .addEventListener("click", close);
   dialog.addEventListener("click", (e) => {
-    if (e.target === dialog) dialog.close();
+    if (e.target === dialog) close();
   });
   dialog.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      close();
+      return;
+    }
+    if (e.key === "Tab") {
+      const focusable = [...dialog.querySelectorAll("input, button, a[href]")];
+      const first = focusable[0], last = focusable.at(-1);
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
     const links = [...results.querySelectorAll("a")];
-    if (["ArrowDown", "ArrowUp"].includes(e.key)) {
+    if (["ArrowDown", "ArrowUp"].includes(e.key) && (e.target === input || e.target.closest(".search-results"))) {
       e.preventDefault();
       active =
         (active +
@@ -374,6 +450,7 @@ function wireSearch() {
         Math.max(1, links.length);
       mark();
       links[active]?.scrollIntoView({ block: "nearest" });
+      if (e.target !== input) links[active]?.focus();
     }
     if (e.key === "Enter" && e.target === input) {
       e.preventDefault();
@@ -385,8 +462,9 @@ function wireSearch() {
     .forEach((b) => b.addEventListener("click", open));
   document.addEventListener("keydown", (e) => {
     if (
-      ((e.metaKey || e.ctrlKey) && e.key === "k") ||
-      (e.key === "/" && !/input|textarea/i.test(document.activeElement.tagName))
+      ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") ||
+      (e.key === "/" && !e.metaKey && !e.ctrlKey && !e.altKey &&
+        !document.activeElement.closest("input, textarea, select, [contenteditable]:not([contenteditable=false])"))
     ) {
       e.preventDefault();
       open();
@@ -395,12 +473,26 @@ function wireSearch() {
 }
 
 function enhanceDocs() {
-  document.querySelectorAll("table.tbl").forEach((table) => {
+  const main = document.querySelector("main");
+  if (main) main.tabIndex = -1;
+  document.querySelector(".skip")?.addEventListener("click", () => main?.focus());
+  document.querySelectorAll(".info-tip").forEach((tip) => {
+    tip.addEventListener("pointerenter", () => tip.classList.remove("is-dismissed"));
+    tip.addEventListener("focusin", () => tip.classList.remove("is-dismissed"));
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") document.querySelectorAll(".info-tip").forEach((tip) =>
+      tip.classList.add("is-dismissed"));
+  });
+  document.querySelectorAll("table.tbl").forEach((table, index) => {
     const wrap = document.createElement("div");
     wrap.className = "table-scroll";
     wrap.tabIndex = 0;
     wrap.setAttribute("role", "region");
-    wrap.setAttribute("aria-label", "Scrollable data table");
+    const heading = table.closest(".reference-entry")?.querySelector("h3") ||
+      [...document.querySelectorAll("h2, h3")].filter((h) =>
+        h.compareDocumentPosition(table) & Node.DOCUMENT_POSITION_FOLLOWING).at(-1);
+    wrap.setAttribute("aria-label", `${heading?.textContent.trim() || "Documentation"}: data table ${index + 1}`);
     table.before(wrap);
     wrap.append(table);
   });

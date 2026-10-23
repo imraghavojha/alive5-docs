@@ -73,11 +73,12 @@ if (root) {
   }
   function schedule() {
     clearTimeout(timer);
-    const label = paused ? "Play animation" : "Pause animation";
+    button.disabled = reduced.matches;
+    const label = reduced.matches ? "Animation disabled by reduced motion preference" : paused ? "Play animation" : "Pause animation";
     button.setAttribute("aria-label", label);
     button.title = label;
     button.querySelector("span").textContent = paused ? "▷" : "Ⅱ";
-    if (paused || !visible || document.hidden) {
+    if (reduced.matches || paused || !visible || document.hidden) {
       previous = 0;
       return;
     }
@@ -90,6 +91,7 @@ if (root) {
     }, 167);
   }
   button.addEventListener("click", () => {
+    if (reduced.matches) return;
     paused = !paused;
     schedule();
   });

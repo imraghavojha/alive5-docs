@@ -84,8 +84,8 @@
   caret-color: var(--link);
 }
 .shell-prompt textarea:focus-visible {
-  outline: none;
-  box-shadow: var(--shadow-card);
+  outline: 2px solid var(--a5);
+  outline-offset: 2px;
 }
 .shell-status {
   display: flex;
@@ -102,6 +102,8 @@
   font: 11px var(--mono);
 }
 .shell-status button {
+  min-width: 24px;
+  min-height: 24px;
   color: var(--ink);
   border: 0;
   background: none;
@@ -242,6 +244,8 @@
   display: inline-flex;
 }
 .info-trigger {
+  min-width: 24px;
+  min-height: 24px;
   display: grid;
   place-items: center;
   border: 0;
@@ -284,7 +288,10 @@
   opacity: 1;
   visibility: visible;
   transform: none;
+  pointer-events: auto;
 }
+.info-tip.is-dismissed .info-bubble { opacity: 0; visibility: hidden; pointer-events: none; }
+.shell-scroll:focus-visible { outline-offset: -3px; }
 .shell-scroll-cue {
   display: none;
 }

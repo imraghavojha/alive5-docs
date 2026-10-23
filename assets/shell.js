@@ -307,6 +307,9 @@ function wireShell() {
       `<button type="button" role="tab" id="shell-tab-${i}" aria-controls="shell-panel" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}">${op.label}</button>`,
   ).join("");
   const buttons = [...list.querySelectorAll("button")];
+  scroll.tabIndex = 0;
+  scroll.setAttribute("role", "region");
+  scroll.setAttribute("aria-label", "Terminal output and command prompt");
   const fit = () => {
     input.style.height = "auto";
     input.style.height = Math.max(26, input.scrollHeight) + "px";
@@ -397,7 +400,7 @@ function wireShell() {
     scroll.scrollTop = scroll.scrollHeight;
   };
   buttons.forEach((button, i) => {
-    button.addEventListener("click", () => stage(i));
+    button.addEventListener("click", () => stage(i, false));
     button.addEventListener("keydown", (e) => {
       if (
         [
@@ -473,6 +476,7 @@ function wireShell() {
 
   const shell = root.querySelector(".shell"),
     grip = root.querySelector("[data-shell-resize]");
+  grip.setAttribute("aria-controls", shell.id);
   let extra = 0;
   const baseHeight = () =>
     narrow.matches ? 480 : Math.round(list.getBoundingClientRect().height);
@@ -504,9 +508,10 @@ function wireShell() {
     grip.addEventListener("pointercancel", end, { once: true });
   });
   grip.addEventListener("keydown", (e) => {
-    if (!["ArrowUp", "ArrowDown"].includes(e.key)) return;
+    if (!["ArrowUp", "ArrowDown", "Home", "End"].includes(e.key)) return;
     e.preventDefault();
-    extra += e.key === "ArrowDown" ? 40 : -40;
+    extra = e.key === "Home" ? 0 : e.key === "End" ? 480 :
+      extra + (e.key === "ArrowDown" ? 40 : -40);
     size();
   });
   grip.addEventListener("dblclick", () => {

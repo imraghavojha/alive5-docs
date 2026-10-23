@@ -34,6 +34,8 @@ const CONNECTOR_VIEWS = {
     icon: "↙",
   },
 };
+const motionIcon = (paused) => `<svg class="sc-play-icon" viewBox="0 0 10 12" aria-hidden="true" fill="currentColor">${paused ? '<path d="m2 1 7 5-7 5Z"/>' : '<path d="M2 1h2v10H2zM6 1h2v10H6z"/>'}</svg>`;
+
 function wireShowcases() {
   document.querySelectorAll("[data-automation]").forEach((root) => {
     const platform = root.dataset.automation;
@@ -51,15 +53,15 @@ function wireShowcases() {
     let drag = null;
     const moved = new Map();
     root.classList.add("flow-showcase");
-    root.innerHTML = `<div class="sc-heading"><div><span class="sc-eyebrow">${view.eyebrow}</span><strong>${view.title}</strong></div><button class="sc-play" type="button" aria-label="${paused ? "Play animation" : "Pause animation"}">${paused ? "▷ Play" : "Ⅱ Pause"}</button></div>
+    root.innerHTML = `<div class="sc-heading"><div><span class="sc-eyebrow">${view.eyebrow}</span><h2>${view.title}</h2></div><button class="sc-play" type="button" aria-label="${paused ? "Play animation" : "Pause animation"}">${motionIcon(paused)} ${paused ? "Play" : "Pause"}</button></div>
     <div class="sc-samples" role="tablist" aria-label="Sample configurations">${SCENARIOS.map((s, i) => `<button id="sample-${platform}-${i}" type="button" role="tab" aria-controls="scene-${platform}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-example="${i}">${s.label}</button>`).join("")}</div>
     <p class="sc-explanation">Replies are fixed examples you configure. These samples do not classify incoming messages.</p>
     <div class="sc-scroll"><div class="sc-scene" id="scene-${platform}" role="tabpanel" aria-labelledby="sample-${platform}-0" data-layout="${platform}">
       <svg class="sc-wires" aria-hidden="true"><path data-edge="0"/><path data-edge="1"/>${[0, 1].map((i) => `<circle class="sc-port" data-port="${i}-0" r="3"/><circle class="sc-port" data-port="${i}-1" r="3"/><circle class="sc-packet" data-packet="${i}" r="4"/>`).join("")}</svg>
-      <article class="sc-card sc-incoming" data-card="0"><div class="sc-card-head"><span class="sc-icon">${view.icon}</span><span>01 · TRIGGER</span><button type="button" class="sc-grip" aria-label="Move incoming SMS card" aria-describedby="drag-${platform}">⠿</button></div><h3>${view.trigger}</h3><div class="sc-message" data-incoming></div><div class="sc-source"><span>Example sender</span><code>+1 202 555 0123</code></div><span class="sc-card-state">Sample message</span></article>
-      <article class="sc-card sc-config" data-card="1"><div class="sc-card-head"><span class="sc-icon">⌘</span><span>02 · YOUR SETUP</span><button type="button" class="sc-grip" aria-label="Move configuration card" aria-describedby="drag-${platform}">⠿</button></div><h3>Configure the reply</h3><div class="sc-mapping"><span>Recipient</span><span>← Sender's number</span></div><div class="sc-mapping"><span>From number</span><span>Your SMS line</span></div><div class="sc-mapping"><span>Sending user</span><span>Assigned user</span></div><div class="sc-template"><span>Message</span><p data-template></p></div></article>
-      <article class="sc-card sc-outgoing" data-card="2"><div class="sc-card-head"><span class="sc-icon">↗</span><span>03 · ACTION</span><button type="button" class="sc-grip" aria-label="Move Send SMS card" aria-describedby="drag-${platform}">⠿</button></div><h3>${view.action}</h3><div class="sc-reply" data-reply></div><div class="sc-destination"><span>To</span><code>+1 202 555 0123</code></div><span class="sc-preview-label">Example reply · not sent</span></article>
-    </div></div><div class="sc-footer"><span class="sc-stage">Sample configuration</span><button type="button" class="sc-reset" aria-label="Reset card positions">↺ Reset layout</button></div><div class="sc-hint"><span class="sc-pan-hint">Swipe horizontally to explore →</span><span>Drag the card headers to rearrange.</span><span>Illustration only · nothing sent</span></div><span class="sc-sr" id="drag-${platform}">Drag this card's header, or focus its move button and use arrow keys. Home restores its position.</span><span class="sc-sr sc-announcement" aria-live="polite"></span>`;
+      <article class="sc-card sc-incoming" data-card="0"><div class="sc-card-head"><span class="sc-icon" aria-hidden="true">${view.icon}</span><span>01 · TRIGGER</span><button type="button" class="sc-grip" aria-label="Move incoming SMS card" aria-describedby="drag-${platform}"><span aria-hidden="true">⠿</span></button></div><h3>${view.trigger}</h3><div class="sc-message" data-incoming></div><div class="sc-source"><span>Example sender</span><code>+1 202 555 0123</code></div><span class="sc-card-state">Sample message</span></article>
+      <article class="sc-card sc-config" data-card="1"><div class="sc-card-head"><span class="sc-icon" aria-hidden="true">⌘</span><span>02 · YOUR SETUP</span><button type="button" class="sc-grip" aria-label="Move configuration card" aria-describedby="drag-${platform}"><span aria-hidden="true">⠿</span></button></div><h3>Configure the reply</h3><div class="sc-mapping"><span>Recipient</span><span>← Sender's number</span></div><div class="sc-mapping"><span>From number</span><span>Your SMS line</span></div><div class="sc-mapping"><span>Sending user</span><span>Assigned user</span></div><div class="sc-template"><span>Message</span><p data-template></p></div></article>
+      <article class="sc-card sc-outgoing" data-card="2"><div class="sc-card-head"><span class="sc-icon" aria-hidden="true">↗</span><span>03 · ACTION</span><button type="button" class="sc-grip" aria-label="Move Send SMS card" aria-describedby="drag-${platform}"><span aria-hidden="true">⠿</span></button></div><h3>${view.action}</h3><div class="sc-reply" data-reply></div><div class="sc-destination"><span>To</span><code>+1 202 555 0123</code></div><span class="sc-preview-label">Example reply · not sent</span></article>
+    </div></div><div class="sc-footer"><span class="sc-stage">Sample configuration</span><button type="button" class="sc-reset" aria-label="Reset layout"><span aria-hidden="true">↺</span> Reset layout</button></div><div class="sc-hint"><span class="sc-pan-hint">Swipe horizontally to explore →</span><span>Drag the card headers to rearrange.</span><span>Illustration only · nothing sent</span></div><span class="sc-sr" id="drag-${platform}">Drag this card's header, or focus its move button and use arrow keys. Home restores its position.</span><span class="sc-sr sc-announcement" aria-live="polite"></span>`;
     const scene = root.querySelector(".sc-scene"),
       svg = root.querySelector(".sc-wires");
     const cards = [...root.querySelectorAll(".sc-card")];
@@ -218,7 +220,7 @@ function wireShowcases() {
     play.addEventListener("click", () => {
       if (!motion.matches) return;
       paused = !paused;
-      play.textContent = paused ? "▷ Play" : "Ⅱ Pause";
+      play.innerHTML = `${motionIcon(paused)} ${paused ? "Play" : "Pause"}`;
       play.setAttribute(
         "aria-label",
         paused ? "Play animation" : "Pause animation",
@@ -360,8 +362,8 @@ function wireShowcases() {
         phase = -1;
         drawPhase();
       }
-      play.textContent = paused ? "▷ Play" : "Ⅱ Pause";
-      play.setAttribute("aria-label", motion.matches ? (paused ? "Play animation" : "Pause animation") : "Animation disabled by reduced motion preference");
+      play.innerHTML = `${motionIcon(paused)} ${paused ? "Play" : "Pause"}`;
+      play.setAttribute("aria-label", motion.matches ? (paused ? "Play animation" : "Pause animation") : "Play animation disabled by reduced motion preference");
     }
     motion.addEventListener("change", syncMotion);
     choose(0);
