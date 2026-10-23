@@ -29,18 +29,18 @@
   --syntax-key: #556b8d;
   --syntax-str: #176b58;
   --syntax-num: #946631;
-  --syntax-punc: #69778c;
+  --syntax-punc: #657388;
   --blue: #477d99;
   --blue-tint: #eaf4fa;
   --purple: #7b65ac;
   --purple-tint: #f1edfa;
-  --green: #398878;
+  --green: #328071;
   --green-tint: #ebf6f2;
   --red: #8f0000;
   --red-tint: #fbeeee;
   --pink: #cf4669;
   --pink-tint: #fff0f3;
-  --orange: #b6583c;
+  --orange: #af5338;
   --orange-tint: #fff1ea;
   --amber: #a0692a;
   --amber-tint: #fbf2e3;
@@ -91,7 +91,7 @@
   --ink: #c7cfda;
   --ink-str: #e8edf3;
   --muted: #9aa3b0;
-  --faint: #7d8696;
+  --faint: #8790a0;
   --a5: #e2693f;
   --a5-dark: #f08a64;
   --a5-light: rgba(226,105,63,.14);
@@ -870,11 +870,6 @@ h3 { letter-spacing: -0.015em; }
   .n8n-example .example-arrow { text-align: center; transform: rotate(90deg); }
 }
 
-.section-head > .pill { flex-shrink: 0; white-space: nowrap; }
-@media (max-width: 360px) {
-  [aria-labelledby="cli-heading"] .section-head { flex-wrap: wrap; }
-}
-
 .hero-art { height: 296px; }
 .keycard { background: var(--glass); border-color: var(--line); -webkit-backdrop-filter: blur(6px) saturate(1.4); backdrop-filter: blur(6px) saturate(1.4); }
 .hero .linecard { top: 132px; padding-top: 42px; overflow: hidden; transform: rotate(-3deg); box-shadow: var(--shadow-card); }
@@ -1011,6 +1006,18 @@ h3 { letter-spacing: -0.015em; }
 .code-head button.tab[aria-selected="true"] { background: var(--code-active); }
 .code pre { color: var(--ink); }
 .mobile-nav { background: var(--bg); }
+/* Text links remain identifiable without relying on hue. */
+:is(.doc p, .doc li, .doc td, .note, .help-list) a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.code-tabs { display: flex; align-items: center; gap: 2px; }
+.code pre:focus-visible { outline-offset: -3px; }
+.search-input-row input:focus-visible { outline: 2px solid var(--a5); outline-offset: 3px; }
+input::placeholder, textarea::placeholder { color: var(--faint); opacity: 1; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.copy, .code-head button.tab, .search-input-row button { min-width: 24px; min-height: 24px; }
 /* Dark outlines and muted text retain enough separation inside tinted panels. */
 [data-theme="dark"] .connector-logo.node-red svg { fill: var(--surface); }
 [data-theme="dark"] .connector-logo.keragon img { filter: brightness(1.65); }
