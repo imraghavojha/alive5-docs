@@ -38,7 +38,8 @@ function wireShowcases() {
   document.querySelectorAll("[data-automation]").forEach((root) => {
     const platform = root.dataset.automation;
     const view = CONNECTOR_VIEWS[platform];
-    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const motion = matchMedia("(prefers-reduced-motion: no-preference)");
+    const reduced = !motion.matches;
     let selected = 0,
       elapsed = reduced ? 3200 : 0,
       phase = -1,
@@ -49,7 +50,7 @@ function wireShowcases() {
       lastFrame = 0;
     let drag = null;
     const moved = new Map();
-    root.className = "flow-showcase";
+    root.classList.add("flow-showcase");
     root.innerHTML = `<div class="sc-heading"><div><span class="sc-eyebrow">${view.eyebrow}</span><strong>${view.title}</strong></div><button class="sc-play" type="button" aria-label="${paused ? "Play animation" : "Pause animation"}">${paused ? "▷ Play" : "Ⅱ Pause"}</button></div>
     <div class="sc-samples" role="tablist" aria-label="Sample configurations">${SCENARIOS.map((s, i) => `<button id="sample-${platform}-${i}" type="button" role="tab" aria-controls="scene-${platform}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-example="${i}">${s.label}</button>`).join("")}</div>
     <p class="sc-explanation">Replies are fixed examples you configure. These samples do not classify incoming messages.</p>
@@ -195,6 +196,10 @@ function wireShowcases() {
     }
     function tick(time) {
       frame = 0;
+      if (!motion.matches) {
+        syncMotion();
+        return;
+      }
       if (!visible || paused || document.hidden) {
         lastFrame = 0;
         return;
@@ -207,10 +212,11 @@ function wireShowcases() {
       frame = requestAnimationFrame(tick);
     }
     function schedule() {
-      if (!frame && visible && !paused && !document.hidden)
+      if (motion.matches && !frame && visible && !paused && !document.hidden)
         frame = requestAnimationFrame(tick);
     }
     play.addEventListener("click", () => {
+      if (!motion.matches) return;
       paused = !paused;
       play.textContent = paused ? "▷ Play" : "Ⅱ Pause";
       play.setAttribute(
@@ -343,7 +349,23 @@ function wireShowcases() {
       lastFrame = 0;
       schedule();
     });
+    function syncMotion() {
+      play.disabled = !motion.matches;
+      if (!motion.matches) {
+        paused = true;
+        cancelAnimationFrame(frame);
+        frame = 0;
+        lastFrame = 0;
+        elapsed = 3200;
+        phase = -1;
+        drawPhase();
+      }
+      play.textContent = paused ? "▷ Play" : "Ⅱ Pause";
+      play.setAttribute("aria-label", motion.matches ? (paused ? "Play animation" : "Pause animation") : "Animation disabled by reduced motion preference");
+    }
+    motion.addEventListener("change", syncMotion);
     choose(0);
+    syncMotion();
     schedule();
   });
 }
