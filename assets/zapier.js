@@ -2,7 +2,7 @@
   const product = document.querySelector('.zapier-product');
   if (!product) return;
   const icon = (kind) => {
-    if (kind === 'alive5') return '<img src="../assets/images/alive5-logo.png" alt="" />';
+    if (kind === 'alive5') return '<img src="../assets/images/alive5-logo-small.png" alt="" width="28" height="25" />';
     const paths = {
       calendar: '<rect x="4" y="5" width="16" height="16" rx="3"/><path d="M8 3v4m8-4v4M4 11h16m-11 4h2m2 0h2m-6 3h2"/>',
       sheets: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8h8M8 12h8m-8 4h8M12 8v8"/>',

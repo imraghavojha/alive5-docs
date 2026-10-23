@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="../assets/styles.css" />
     <link rel="stylesheet" href="../assets/demos.css" />
     <link rel="stylesheet" href="../assets/art.css" />
+    <script defer src="../assets/site.js"></script>
+    <script type="speculationrules">
+      {"prefetch":[{"where":{"and":[{"href_matches":"../{*.html}","relative_to":"document"},{"not":{"selector_matches":"[target=_blank], [href*=\"#\"], [download]"}}]},"eagerness":"moderate"}]}
+    </script>
   </head>
   <body data-root="../" data-page="api-auth" data-section="devres">
     <a class="skip" href="#main">Skip to content</a>
@@ -129,7 +133,5 @@
       <aside data-toc aria-label="On this page"></aside>
     </div>
     <footer data-docfoot></footer>
-    <script src="../assets/site.js"></script>
-    <script src="../assets/demos.js"></script>
   </body>
 </html>

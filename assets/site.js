@@ -20,7 +20,7 @@ function renderHeader() {
     <div class="topbar">
       <div class="topbar-in">
         <a class="logo" href="${href("index.html")}">
-          <span class="word">alive5</span><img class="mobile-brand" src="${href("assets/images/alive5-logo.png")}" alt="Alive5" width="55" height="32"><span class="kind">DOCS</span>
+          <span class="word">alive5</span><img class="mobile-brand" src="${href("assets/images/alive5-logo-small.png")}" alt="Alive5" width="55" height="32"><span class="kind">DOCS</span>
         </a>
         <div class="topbar-mid">
           <button class="searchbox" type="button" data-search>
