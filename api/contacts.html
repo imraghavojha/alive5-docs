@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>(()=>{let t;try{t=localStorage.getItem("a5-theme")}catch{}document.documentElement.dataset.theme=t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"})();</script>
+    <meta name="color-scheme" content="light dark">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Contacts · Alive5 docs</title>
@@ -76,8 +78,9 @@
         <h2 id="update">Update a contact</h2>
         <p>
           Replace <code>YOUR_CONTACT_ID</code> with an ID returned by your
-          contact list and <code>YOUR_TAG_ID</code> with a tag from your
-          account. Send the changes as JSON to the original API host.
+          contact list and <code>YOUR_TAG_NAME</code> with a tag label from your
+          account. Pass tag labels in <code>tags</code>. Send the changes as JSON
+          to the original API host.
         </p>
         <div class="code">
           <div class="code-head">
@@ -87,7 +90,7 @@
           <pre><span class="tok-cmd">curl</span> <span class="tok-flag">-X</span> PUT https://api.alive5.com/public/1.0/contact/update-contact \
   <span class="tok-flag">-H</span> <span class="tok-str">"X-A5-APIKEY: $ALIVE5_KEY"</span> \
   -H "Content-Type: application/json" \
-  --data '{"crm_id":"YOUR_CONTACT_ID","tags":["YOUR_TAG_ID"]}'</pre>
+  --data '{"crm_id":"YOUR_CONTACT_ID","tags":["YOUR_TAG_NAME"]}'</pre>
         </div>
         <div class="note">
           <strong>Confirm the write.</strong> This endpoint can return code

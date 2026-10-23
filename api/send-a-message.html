@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>(()=>{let t;try{t=localStorage.getItem("a5-theme")}catch{}document.documentElement.dataset.theme=t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"})();</script>
+    <meta name="color-scheme" content="light dark">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Send a message · Alive5 docs</title>
@@ -133,7 +135,7 @@ form<span class="tok-punc">.</span><span class="tok-cmd">set</span><span class="
           <tr>
             <td>message</td>
             <td class="t">string</td>
-            <td>Up to 1,600 characters; longer texts split into segments</td>
+            <td>SMS text. See <a href="sms-limits.html">SMS limits</a> for credit calculation.</td>
           </tr>
           <tr>
             <td>channel_id</td>
@@ -169,11 +171,11 @@ form<span class="tok-punc">.</span><span class="tok-cmd">set</span><span class="
   "data": {
     "data": {
       "message_id": "example_message",
-      "message_status": "queued",
+      "message_status": "sent",
       "thread_id": "example_thread",
       "From": "+12025550100",
       "To": "+12025550123",
-      "direction": "outbound",
+      "direction": "Outbound",
       "message_content": "Hello from Alive5."
     }
   },

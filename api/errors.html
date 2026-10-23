@@ -93,7 +93,7 @@ function isOk(body, httpStatus) {
           </tr>
           <tr>
             <td>404</td>
-            <td>Not found or no matching records</td>
+            <td>Not found</td>
             <td>Verify the endpoint, filters, and response body</td>
           </tr>
         </table>
@@ -106,12 +106,11 @@ function isOk(body, httpStatus) {
           Check required fields before attempting the request again.
         </p>
 
-        <h2 id="404">Empty 404s</h2>
+        <h2 id="404">Not-found responses</h2>
         <p>
-          Some conversation and report examples use code <code>404</code> for no
-          matching records. A 404 can also indicate a wrong endpoint or
-          resource. Keep the error visible until the endpoint and filter have
-          been verified; do not convert every 404 into a successful empty list.
+          Check <code>code</code> and <code>error</code> in the response body.
+          Verify the endpoint and requested resource before deciding how to
+          handle a not-found response.
         </p>
 
         <div class="pager">

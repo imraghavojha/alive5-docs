@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>(()=>{let t;try{t=localStorage.getItem("a5-theme")}catch{}document.documentElement.dataset.theme=t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"})();</script>
+    <meta name="color-scheme" content="light dark">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>API overview · Alive5 docs</title>
@@ -65,6 +67,8 @@
         <div class="note">
           Use the API key, SMS number, channel ID, and user ID from your own
           Alive5 account. Sample responses use fictional data.
+          <a href="https://alive5.com/pricing-new.html">Pricing</a> lists API
+          access under the Premium plan. Confirm your plan includes it.
         </div>
         <h2 id="base-urls">Base URLs</h2>
         <p>
@@ -119,7 +123,8 @@
         <p>
           Every call carries the <code>X-A5-APIKEY</code> header. The examples
           on each endpoint page show its request format. Responses are JSON
-          wrapped in an envelope:
+          wrapped in an envelope. Endpoint-specific fields inside
+          <code>data</code> are omitted from this example:
         </p>
         <div class="code">
           <div class="code-head">
@@ -128,7 +133,7 @@
           </div>
           <pre><span class="tok-punc">{</span>
   <span class="tok-key">"code"</span><span class="tok-punc">:</span> <span class="tok-num">200</span><span class="tok-punc">,</span>
-  <span class="tok-key">"data"</span><span class="tok-punc">:</span> <span class="tok-punc">{ … }</span><span class="tok-punc">,</span>
+  <span class="tok-key">"data"</span><span class="tok-punc">:</span> <span class="tok-punc">{}</span><span class="tok-punc">,</span>
   <span class="tok-key">"error"</span><span class="tok-punc">:</span> <span class="tok-punc">{}</span>
 <span class="tok-punc">}</span></pre>
         </div>

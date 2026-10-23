@@ -335,7 +335,7 @@ function wireShell() {
     busy = false;
     form.removeAttribute("aria-busy");
     input.disabled = false;
-    out.innerHTML = `<div class="shell-intro">Welcome to Alive5 Shell!<br>Explore API actions as commands with fictional responses. Nothing is sent.<br><br><span class="shell-bullet">–</span> View commands: <button type="button" data-stage="help">alive5 help ▷</button><br><span class="shell-bullet">–</span> List example channels: <button type="button" data-stage="2">alive5 channels list ▷</button><br><span class="shell-bullet">–</span> Preview an SMS: <button type="button" data-stage="0">alive5 sms send ▷</button></div><div class="shell-history"></div>`;
+    out.innerHTML = `<div class="shell-intro">Welcome to the Alive5 CLI preview!<br>The CLI is not yet released. Explore API actions as commands with fictional output. Nothing is sent.<br><br><span class="shell-bullet">–</span> View commands: <button type="button" data-stage="help">alive5 help ▷</button><br><span class="shell-bullet">–</span> List example channels: <button type="button" data-stage="2">alive5 channels list ▷</button><br><span class="shell-bullet">–</span> Preview an SMS: <button type="button" data-stage="0">alive5 sms send ▷</button></div><div class="shell-history"></div>`;
     stage(0, false);
     scroll.scrollTop = 0;
   };

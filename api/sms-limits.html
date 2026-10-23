@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>(()=>{let t;try{t=localStorage.getItem("a5-theme")}catch{}document.documentElement.dataset.theme=t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"})();</script>
+    <meta name="color-scheme" content="light dark">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SMS limits and compliance · Alive5 docs</title>
@@ -89,7 +91,7 @@
         <ul>
           <li>Send to US and Canadian phone numbers, including mobile and VoIP numbers.</li>
           <li>Use E.164 format, including the country code, such as <code>+12025550123</code>.</li>
-          <li>Each channel has one phone number in a one-to-one relationship. Channel membership grants users send and receive access.</li>
+          <li>An SMS phone number is tied to its assigned channel in a one-to-one relationship. Channel membership grants users send and receive access.</li>
           <li>The sending number must be assigned to the channel used in the API request. Check Settings → Messaging → Phone Numbers &amp; Accounts → Assign to channel.</li>
         </ul>
 

@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>(()=>{let t;try{t=localStorage.getItem("a5-theme")}catch{}document.documentElement.dataset.theme=t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"})();</script>
+    <meta name="color-scheme" content="light dark">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Reporting · Alive5 docs</title>
@@ -35,10 +37,8 @@
           <code>from_datetime</code> and <code>to_datetime</code>.
         </p>
         <div class="note">
-          Some saved examples return code <code>404</code> for no matching
-          records. Check the response body, date range, and endpoint before
-          interpreting it as an empty result; not every 404 means "nothing in
-          range". See <a href="errors.html">Errors and responses</a>.
+          Check <code>code</code> and <code>error</code> in the body; see
+          <a href="errors.html">Errors and responses</a>.
         </div>
 
         <h2 id="performance">Performance</h2>

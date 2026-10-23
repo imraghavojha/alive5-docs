@@ -2,6 +2,8 @@
 
 <html lang="en">
   <head>
+    <script>(()=>{let t;try{t=localStorage.getItem("a5-theme")}catch{}document.documentElement.dataset.theme=t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"})();</script>
+    <meta name="color-scheme" content="light dark">
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>API reference · Alive5 docs</title>
@@ -95,7 +97,8 @@
     <span class="json-key">"code":</span> <span class="json-value">200</span>,
     <span class="json-key">"data":</span> {
       <span class="json-key">"message_id":</span> <span class="json-string">"example_message"</span>,
-      <span class="json-key">"message_status":</span> <span class="json-string">"queued"</span>,
+      <span class="json-key">"message_status":</span> <span class="json-string">"sent"</span>,
+      <span class="json-key">"direction":</span> <span class="json-string">"Outbound"</span>,
       <span class="json-key">"From":</span> <span class="json-string">"+12025550100"</span>,
       <span class="json-key">"To":</span> <span class="json-string">"+12025550123"</span>,
       <span class="json-key">"message_content":</span> <span class="json-string">"Hello from Alive5."
@@ -164,7 +167,8 @@
           <div class="reference-description">
             <h3><span class="method m-get">GET</span>List live chat conversations</h3>
             <p class="path">/conversations/livechat</p>
-            <p>Returns live chat conversations and their message history.</p>
+            <p>Returns live chat conversations and their message history.
+              The collection does not define the date format.</p>
             <table class="tbl">
               <tr>
                 <th>Parameter</th>
@@ -172,11 +176,11 @@
               </tr>
               <tr>
                 <td>datetime_from</td>
-                <td>Start date; collection example: <code>02-05-2023</code> (<code>MM-DD-YYYY</code>).</td>
+                <td>Start date; collection example: <code>02-05-2023</code>.</td>
               </tr>
               <tr>
                 <td>datetime_to</td>
-                <td>End date; collection example: <code>05-05-2023</code> (<code>MM-DD-YYYY</code>).</td>
+                <td>End date; collection example: <code>05-05-2023</code>.</td>
               </tr>
               <tr>
                 <td>page</td>
@@ -246,7 +250,8 @@
             <p class="path">/conversations/fbm</p>
             <p>
               Same shape as the SMS list, for Facebook Messenger channels.
-              Returns code <code>404</code> when the account has none.
+              Check <code>code</code> and <code>error</code> in the body; see
+              <a href="errors.html">Errors and responses</a>.
             </p>
           </div>
           <div
@@ -295,23 +300,22 @@
         </div>
         <div class="endpoint reference-entry" id="conversation-summary">
           <div class="reference-description">
-            <h3><span class="method m-get">GET</span>Conversation summary</h3>
+            <h3><span class="method m-get">GET</span>Facebook Messenger summary</h3>
             <p class="path">/conversations/summary</p>
             <p>
-              Aggregate conversation counts. Pass <code>from_datetime</code> and
+              Pass <code>from_datetime</code> and
               <code>date_end</code> on the v2 host, using the parameter names
-              from the public collection. The example error applies if either
-              date is omitted; the example request includes both.
+              from the public collection.
             </p>
           </div>
           <div
-            aria-label="Examples for GET Conversation summary"
+            aria-label="Examples for GET Facebook Messenger summary"
             class="reference-examples"
           >
             <figure class="reference-code">
               <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
               <pre
-                aria-label="curl request for GET Conversation summary"
+                aria-label="curl request for GET Facebook Messenger summary"
                 tabindex="0"
               ><code>curl -G \
   "https://api-v2.alive5.com/public/1.0/conversations/summary" \
@@ -319,16 +323,7 @@
   --data-urlencode "from_datetime=09-01-2026" \
   --data-urlencode "date_end=09-10-2026"</code></pre>
             </figure>
-            <figure class="reference-code reference-response">
-              <figcaption>
-                <span>Example error · if a date is missing</span
-                ><span>JSON</span>
-              <button class="copy" type="button">Copy</button></figcaption>
-              <pre><code>{
-  <span class="json-key">"code":</span> <span class="json-value">400</span>,
-  <span class="json-key">"error":</span> {}
-}</code></pre>
-            </figure>
+            <p>The collection has no saved response for this request.</p>
           </div>
         </div>
         <h2 id="directory">Directory</h2>
@@ -573,7 +568,7 @@
             <p>
               Updates an existing contact on the original API host. Send JSON
               with the contact ID and fields to change. This example updates
-              tags. Re-read the contact to confirm the write; code
+              tags; pass tag labels in <code>tags</code>. Re-read the contact to confirm the write; code
               <code>200</code> alone does not confirm every update.
             </p>
           </div>
@@ -590,7 +585,7 @@
   "https://api.alive5.com/public/1.0/contact/update-contact" \
   -H "X-A5-APIKEY: $ALIVE5_KEY" \
   -H "Content-Type: application/json" \
-  --data '{"crm_id":"YOUR_CONTACT_ID","tags":["YOUR_TAG_ID"]}'</code></pre>
+  --data '{"crm_id":"YOUR_CONTACT_ID","tags":["YOUR_TAG_NAME"]}'</code></pre>
             </figure>
             <figure class="reference-code reference-response">
               <figcaption>
@@ -1241,8 +1236,8 @@
             <p class="path">/get-multiplequestion-reporting</p>
             <p>
               Answers to multiple-choice bot questions, same parameters as the
-              bot report. Returns code <code>404</code> when there are no
-              matches.
+              bot report. Check <code>code</code> and <code>error</code> in the
+              body; see <a href="errors.html">Errors and responses</a>.
             </p>
           </div>
           <div
@@ -1260,15 +1255,6 @@
   --data-urlencode "from_datetime=09-01-2026" \
   --data-urlencode "to_datetime=09-10-2026" \
   --data-urlencode "botflowFilter=All"</code></pre>
-            </figure>
-            <figure class="reference-code reference-response">
-              <figcaption>
-                <span>Example response · no matches excerpt</span
-                ><span>JSON</span>
-              <button class="copy" type="button">Copy</button></figcaption>
-              <pre><code>{
-  <span class="json-key">"code":</span> <span class="json-value">404</span>
-}</code></pre>
             </figure>
           </div>
         </div>
@@ -1377,7 +1363,7 @@
           <a class="reference-toc-endpoint" href="#sms-conversations">List SMS conversations</a>
           <a class="reference-toc-endpoint" href="#livechat-conversations">List live chat conversations</a>
           <a class="reference-toc-endpoint" href="#messenger-conversations">List Messenger conversations</a>
-          <a class="reference-toc-endpoint" href="#conversation-summary">Conversation summary</a>
+          <a class="reference-toc-endpoint" href="#conversation-summary">Facebook Messenger summary</a>
         </div>
         <div class="reference-toc-group">
           <a class="reference-toc-section" href="#directory">Directory</a>

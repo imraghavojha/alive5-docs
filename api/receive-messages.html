@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>(()=>{let t;try{t=localStorage.getItem("a5-theme")}catch{}document.documentElement.dataset.theme=t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"})();</script>
+    <meta name="color-scheme" content="light dark">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Read messages · Alive5 docs</title>
@@ -51,8 +53,11 @@
         <h2 id="processing">Process new messages</h2>
         <p>
           Keep a record of the messages you have processed. Use a stable message
-          ID when available; otherwise combine the conversation ID, timestamp,
-          sender, and content to avoid processing the same message twice.
+          ID when available; otherwise count occurrences of each
+          (thread, sender, timestamp, content) tuple, as the
+          <a href="../connectors/node-red.html">Node-RED node</a> does. Track how
+          many occurrences you have processed rather than treating the tuple as
+          unique: separate messages can have identical values.
         </p>
         <div class="note">
           Follow the response pagination to read additional pages. The older

@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>(()=>{let t;try{t=localStorage.getItem("a5-theme")}catch{}document.documentElement.dataset.theme=t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"})();</script>
+    <meta name="color-scheme" content="light dark">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Alive5 Developer documentation</title>
@@ -119,11 +121,12 @@
       <section class="wrap" aria-labelledby="cli-heading">
         <div class="section-head tryout-head">
           <h2 id="cli-heading">Try it out</h2>
+          <span class="pill">CLI preview · Coming soon</span>
           <span class="info-tip">
             <button
               type="button"
               class="info-trigger"
-              aria-label="About these examples"
+              aria-label="About this unreleased CLI preview with fictional output"
               aria-describedby="tryout-info"
             >
               <svg width="13" height="13" viewBox="0 0 12 12" aria-hidden="true">
@@ -133,7 +136,8 @@
               </svg>
             </button>
             <span class="info-bubble" role="tooltip" id="tryout-info"
-              >Common Alive5 API actions shown as commands with fictional responses.
+              >The CLI is not yet released. This preview shows common Alive5 API
+              actions as commands with fictional output.
               Everything runs in your browser; nothing is sent.</span
             >
           </span>
