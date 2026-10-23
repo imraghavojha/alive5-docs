@@ -1011,7 +1011,10 @@ h3 { letter-spacing: -0.015em; }
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
 }
+:is(.doc p, .doc li, .doc td, .note, .help-list) a:hover { text-decoration-color: currentColor; }
+.doc .crumbs a { text-decoration: none; }
 .code-tabs { display: flex; align-items: center; gap: 2px; }
 .code pre:focus-visible { outline-offset: -3px; }
 .search-input-row input:focus-visible { outline: 2px solid var(--a5); outline-offset: 3px; }
