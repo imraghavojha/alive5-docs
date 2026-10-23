@@ -1,43 +1,43 @@
 .doc { container-type: inline-size; }
-.zapier-product { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 22px; align-items: center; background: #f6f7fa; border: 1px solid #eceef3; border-radius: 12px; margin: 24px 0 34px; overflow: hidden; }
+.zapier-product { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 22px; align-items: center; background: var(--tint); border: 1px solid var(--line-2); border-radius: 12px; margin: 24px 0 34px; overflow: hidden; }
 .zapier-product-copy { padding: 0; min-width: 0; }
-.zapier-brand { display: flex; align-items: center; gap: 9px; color: #59616e; line-height: 18px; font-size: 12px; font-weight: 600; }
+.zapier-brand { display: flex; align-items: center; gap: 9px; color: var(--ink); line-height: 18px; font-size: 12px; font-weight: 600; }
 .zapier-brand .connector-logo { width: 25px; height: 25px; background: transparent; font-size: 29px !important; }
 .doc .zapier-product h2 { font-size: 22px; line-height: 28px; margin: 10px 0 8px; letter-spacing: -.65px; }
-.doc .zapier-product-copy > p { color: #66707e; font-size: 13px; line-height: 21px; margin-top: 0; max-width: 290px; }
+.doc .zapier-product-copy > p { color: var(--muted); font-size: 13px; line-height: 21px; margin-top: 0; max-width: 290px; }
 .zapier-choices { border: 0; padding: 0; margin: 16px 0; display: grid; gap: 10px; }
 .zapier-choices legend, .zapier-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .zapier-choices label { display: flex; align-items: start; gap: 10px; cursor: pointer; }
-.zapier-choices input { accent-color: #ba4828; width: 16px; height: 16px; margin: 3px 0 0; flex: none; }
-.zapier-choices strong { display: block; color: #303744; font-size: 13px; line-height: 21px; font-weight: 600; }
-.zapier-choices small { display: block; color: #687281; font-size: 12px; line-height: 18px; margin-top: 0; }
-.zapier-cta { display: inline-flex; align-items: center; gap: 13px; background: #ae4125; color: white; padding: 8px 12px; border-radius: 6px; font-size: 13px; line-height: 20px; font-weight: 600; }
-.zapier-cta:hover { background: #91361e; color: white; }
+.zapier-choices input { accent-color: var(--a5); width: 16px; height: 16px; margin: 3px 0 0; flex: none; }
+.zapier-choices strong { display: block; color: var(--ink-str); font-size: 13px; line-height: 21px; font-weight: 600; }
+.zapier-choices small { display: block; color: var(--muted); font-size: 12px; line-height: 18px; margin-top: 0; }
+.zapier-cta { display: inline-flex; align-items: center; gap: 13px; background: var(--a5); color: var(--on-brand); padding: 8px 12px; border-radius: 6px; font-size: 13px; line-height: 20px; font-weight: 600; }
+.zapier-cta:hover { background: var(--a5-dark); color: var(--on-brand); }
 .zapier-product-visual { align-self: center; min-width: 0; padding: 0; }
-.zapier-preview-heading { display: flex; align-items: center; gap: 6px; font-size: 10px; line-height: 16px; color: #707989; margin: 0 0 12px; }
-.zapier-preview-dot { width: 5px; height: 5px; border-radius: 50%; background: #929bac; }
-.zapier-preview-badge { margin-left: auto; font-size: 9px; border: 1px solid #dce1e8; border-radius: 4px; padding: 2px 5px; color: #637083; }
-.zapier-step, .zapier-result { display: grid; grid-template-columns: 35px minmax(0, 1fr); align-items: center; gap: 11px; width: 100%; height: 84px; background: #fff; border: 1px solid #e0e4ec; border-radius: 8px; padding: 10px 12px; box-shadow: 0 2px 5px #24334d04; margin: 0; }
+.zapier-preview-heading { display: flex; align-items: center; gap: 6px; font-size: 10px; line-height: 16px; color: var(--muted); margin: 0 0 12px; }
+.zapier-preview-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--faint); }
+.zapier-preview-badge { margin-left: auto; font-size: 9px; border: 1px solid var(--line); border-radius: 4px; padding: 2px 5px; color: var(--muted); }
+.zapier-step, .zapier-result { display: grid; grid-template-columns: 35px minmax(0, 1fr); align-items: center; gap: 11px; width: 100%; height: 84px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; box-shadow: var(--shadow-card); margin: 0; }
 .zapier-step > div, .zapier-result > div { min-width: 0; }
-.zapier-step small, .zapier-result small { display: block; font-size: 10px; color: #6a7382; line-height: 16px; }
-.zapier-step strong, .zapier-result strong { display: block; color: #303949; font-size: 13px; line-height: 19px; font-weight: 600; }
-.zapier-app-icon { width: 35px; height: 35px; flex: none; display: grid; place-items: center; border: 1px solid #e8ebf0; border-radius: 8px; background: #fff; }
+.zapier-step small, .zapier-result small { display: block; font-size: 10px; color: var(--muted); line-height: 16px; }
+.zapier-step strong, .zapier-result strong { display: block; color: var(--ink-str); font-size: 13px; line-height: 19px; font-weight: 600; }
+.zapier-app-icon { width: 35px; height: 35px; flex: none; display: grid; place-items: center; border: 1px solid var(--line-2); border-radius: 8px; background: var(--surface); }
 .zapier-app-icon svg { width: 23px; height: 23px; }
 .zapier-app-icon img { width: 28px; height: 25px; object-fit: contain; }
-.zapier-app-icon.calendar { color: #3f79c5; background: #f5f9ff; }
-.zapier-app-icon.sheets { color: #208453; background: #f0faf4; }
-.zapier-app-icon.slack { color: #6e427e; background: #f9f3fb; }
+.zapier-app-icon.calendar { color: var(--blue); background: var(--blue-tint); }
+.zapier-app-icon.sheets { color: var(--green); background: var(--green-tint); }
+.zapier-app-icon.slack { color: var(--purple); background: var(--purple-tint); }
 .zapier-connection { height: 12px; position: relative; }
-.zapier-connection::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: #d9dee6; }
+.zapier-connection::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--line-hover); }
 .zapier-connection span { display: none; }
 .zapier-result { margin-top: 12px; }
-.zapier-app-icon.result { color: #498875; background: #eff7f3; border-color: #dfeee6; font-size: 17px; }
-.doc .zapier-preview-caption { color: #79818e; font-size: 12px; line-height: 18px; text-align: center; margin-top: 8px; }
+.zapier-app-icon.result { color: var(--green); background: var(--green-tint); border-color: var(--line); font-size: 17px; }
+.doc .zapier-preview-caption { color: var(--muted); font-size: 12px; line-height: 18px; text-align: center; margin-top: 8px; }
 .zapier-events > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; padding: 17px 0; border-top: 1px solid var(--line); }
 .doc .zapier-events h3 { font-size: 15px; margin: 0; }
-.zapier-events > div > span { align-self: center; font-size: 10px; color: #647185; border: 1px solid #e2e6ec; border-radius: 4px; padding: 0 6px; line-height: 19px; }
-.doc .zapier-events p { grid-column: 1 / -1; font-size: 14px; line-height: 24px; margin: 0; color: #667182; }
-.doc .zapier-source { font-size: 12px; line-height: 21px; color: #748092; margin-top: 24px; }
+.zapier-events > div > span { align-self: center; font-size: 10px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 6px; line-height: 19px; }
+.doc .zapier-events p { grid-column: 1 / -1; font-size: 14px; line-height: 24px; margin: 0; color: var(--muted); }
+.doc .zapier-source { font-size: 12px; line-height: 21px; color: var(--muted); margin-top: 24px; }
 @container (max-width: 560px) {
   .zapier-product { grid-template-columns: 1fr; gap: 22px; padding: 20px; }
   .zapier-product-copy { padding: 0; }

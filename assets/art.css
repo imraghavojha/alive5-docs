@@ -1,8 +1,8 @@
 figure.page-art {
   margin: 28px 0 32px;
-  border: 1px solid #e2e5eb;
+  border: 1px solid var(--line);
   border-radius: 12px;
-  background: #f6f9fc;
+  background: var(--tint);
   overflow: hidden;
 }
 figure.page-art img {
@@ -14,3 +14,7 @@ figure.page-art img {
 figure.page-art:empty {
   display: none;
 }
+
+/* Blueprint treatment preserves orange accents and fine strokes on dark panels. */
+[data-theme="dark"] figure.page-art { background: var(--tint); border-color: var(--line); }
+[data-theme="dark"] figure.page-art img { filter: invert(1) hue-rotate(180deg) brightness(.92) contrast(.92); }

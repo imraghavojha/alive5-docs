@@ -1,4 +1,4 @@
-import { drawLogo, theme } from "./cli-art.js";
+import { drawLogo, theme, syncTheme } from "./cli-art.js";
 
 const root = document.querySelector("[data-cli-preview]");
 if (root) {
@@ -41,6 +41,7 @@ if (root) {
     context.fillText(ch, (x + 0.5) * cellWidth, y * cellHeight + 11, cellWidth);
   }
   function render() {
+    syncTheme();
     context.textAlign = "center";
     context.fillStyle = theme.bg;
     context.fillRect(0, 0, canvas.width, canvas.height);
@@ -99,6 +100,10 @@ if (root) {
     schedule();
   });
   document.addEventListener("visibilitychange", schedule);
+  new MutationObserver(render).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
   new ResizeObserver(resize).observe(root);
   new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;

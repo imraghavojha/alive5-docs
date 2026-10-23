@@ -3,13 +3,11 @@
   flex-direction: column;
   height: 420px;
   min-height: 420px;
-  background: #fff;
-  color: #313747;
-  border: 1px solid #eceef2;
+  background: var(--surface);
+  color: var(--ink-str);
+  border: 1px solid var(--line-2);
   border-radius: 14px;
-  box-shadow:
-    0 9px 24px #1f263015,
-    0 2px 7px #1f26300a;
+  box-shadow: var(--shadow-card);
   overflow: hidden;
 }
 .shell-scroll {
@@ -19,7 +17,7 @@
   min-height: 0;
   overflow: auto;
   scrollbar-width: thin;
-  scrollbar-color: #c4c9d1 transparent;
+  scrollbar-color: var(--line-hover) transparent;
 }
 .shell-logo {
   display: block;
@@ -30,12 +28,12 @@
   padding: 0;
   overflow: visible;
   font: 12px/20px var(--mono);
-  color: #313747;
+  color: var(--ink-str);
   white-space: normal;
 }
 .shell-intro {
   font: 12px/20px var(--mono);
-  color: #303746;
+  color: var(--ink-str);
 }
 .shell-intro button,
 .shell-help-list button {
@@ -43,7 +41,7 @@
   border: 0;
   background: none;
   padding: 0;
-  color: #aa492d;
+  color: var(--link);
   font: 600 12px/20px var(--mono);
   text-align: left;
   cursor: pointer;
@@ -54,14 +52,14 @@
   text-underline-offset: 3px;
 }
 .shell-bullet {
-  color: #747e8c;
+  color: var(--muted);
 }
 .shell-prompt {
   display: flex;
   align-items: flex-start;
   gap: 6px;
   margin-top: 18px;
-  color: #424b59;
+  color: var(--ink);
   font: 12px/21px var(--mono);
 }
 .shell-prompt > span {
@@ -74,20 +72,20 @@
   min-height: 27px;
   height: 45px;
   border: 0;
-  border-bottom: 1px solid #edf0f5;
+  border-bottom: 1px solid var(--line-2);
   border-radius: 0;
   background: transparent;
-  color: #313747;
+  color: var(--ink-str);
   padding: 2px 0;
   margin: 0;
   font: 12px/21px var(--mono);
   overflow: hidden;
   outline: none;
-  caret-color: #aa492d;
+  caret-color: var(--link);
 }
 .shell-prompt textarea:focus-visible {
   outline: none;
-  box-shadow: 0 1px #aab3c2;
+  box-shadow: var(--shadow-card);
 }
 .shell-status {
   display: flex;
@@ -98,13 +96,13 @@
   min-height: 34px;
   flex: none;
   padding: 5px 12px;
-  background: #f5f6f9;
-  border-top: 1px solid #eceef2;
-  color: #626d7e;
+  background: var(--tint);
+  border-top: 1px solid var(--line-2);
+  color: var(--ink);
   font: 11px var(--mono);
 }
 .shell-status button {
-  color: #626d7e;
+  color: var(--ink);
   border: 0;
   background: none;
   padding: 3px;
@@ -115,7 +113,7 @@
   font: 15px var(--sans);
 }
 .stripe-shell button:focus-visible {
-  outline: 2px solid #b14c2c;
+  outline: 2px solid var(--a5);
   outline-offset: 2px;
 }
 .shell-history-entry {
@@ -126,7 +124,7 @@
   white-space: pre-wrap;
 }
 .shell-history-command > span {
-  color: #858b96;
+  color: var(--faint);
 }
 .shell-response {
   margin-top: 8px;
@@ -138,33 +136,33 @@
   overflow-wrap: anywhere;
 }
 .stripe-shell .key {
-  color: #486083;
+  color: var(--syntax-key);
 }
 .stripe-shell .str {
-  color: #2d7b65;
+  color: var(--syntax-str);
 }
 .stripe-shell .num {
-  color: #8a672e;
+  color: var(--syntax-num);
 }
 .shell-result-label {
-  color: #337964;
+  color: var(--green);
   font-size: 11px;
 }
 .shell-result-label > span {
-  color: #697687;
+  color: var(--muted);
 }
 .shell-error {
-  color: #b14335;
+  color: var(--danger);
 }
 .shell-working {
-  color: #6b7380;
+  color: var(--muted);
 }
 .shell-help-list {
   display: grid;
   gap: 0;
 }
 .shell-help-list span {
-  color: #6c7685;
+  color: var(--muted);
   font-size: 11px;
   margin-bottom: 6px;
 }
@@ -215,16 +213,16 @@
   width: 40px;
   height: 4px;
   border-radius: 2px;
-  background: #c6ccd5;
+  background: var(--line-hover);
   transition: background 0.15s;
 }
 .shell-resize:hover::before,
 .shell-resize:focus-visible::before,
 .is-resizing .shell-resize::before {
-  background: #8b94a3;
+  background: var(--faint);
 }
 .shell-resize:focus-visible {
-  outline: 2px solid #b14c2c;
+  outline: 2px solid var(--a5);
   outline-offset: -2px;
 }
 .is-resizing,
@@ -249,7 +247,7 @@
   border: 0;
   background: none;
   padding: 4px;
-  color: #7a8494;
+  color: var(--muted);
   border-radius: 4px;
 }
 .info-trigger:hover {
@@ -262,13 +260,11 @@
   top: calc(100% + 6px);
   width: min(320px, 100%);
   padding: 12px 14px;
-  background: #fff;
-  border: 1px solid #e1e5eb;
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 8px;
-  box-shadow:
-    0 12px 30px #1820301a,
-    0 2px 6px #1820300d;
-  color: #4a5261;
+  box-shadow: var(--shadow-card);
+  color: var(--ink);
   font-size: 13px;
   line-height: 20px;
   letter-spacing: 0;
@@ -322,7 +318,7 @@
   }
   .shell-scroll-cue {
     display: block;
-    color: #737e90;
+    color: var(--muted);
     font-size: 11px;
   }
   .stripe-shell {

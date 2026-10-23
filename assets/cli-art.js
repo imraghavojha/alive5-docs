@@ -1,9 +1,10 @@
-export const theme = {
-  bg: "#ffffff",
-  ink: "#313747",
-  muted: "#657080",
-  orange: "#c64c27",
-};
+export const theme = {};
+export function syncTheme() {
+  const styles = getComputedStyle(document.documentElement);
+  for (const [key, token] of Object.entries({ bg: "surface", ink: "ink", muted: "muted", orange: "a5" })) {
+    theme[key] = styles.getPropertyValue(`--${token}`).trim();
+  }
+}
 const mix = (a, b, t) => {
   const rgb = (c) => [1, 3, 5].map((i) => parseInt(c.slice(i, i + 2), 16));
   const x = rgb(a),

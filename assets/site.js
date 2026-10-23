@@ -33,6 +33,10 @@ function renderHeader() {
           <a class="askai" href="https://www.alive5.com" target="_blank" rel="noreferrer">Alive5.com ↗</a>
         </div>
         <div class="topbar-right">
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark theme" aria-pressed="false">
+            <svg class="theme-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 13.1A8.8 8.8 0 0 1 10.9 3.2a8.8 8.8 0 1 0 9.9 9.9Z"/></svg>
+            <svg class="theme-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3.7"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          </button>
           <a class="create" href="https://meet.alive5.com" target="_blank" rel="noreferrer">Book a demo</a>
           <a class="signin" href="https://app.alive5.com" target="_blank" rel="noreferrer">Sign in <span aria-hidden="true">↗</span></a>
         </div>
@@ -52,6 +56,44 @@ function renderHeader() {
         </div>
       </div>
     </div>`;
+}
+
+function wireTheme() {
+  const root = document.documentElement;
+  const button = document.querySelector("[data-theme-toggle]");
+  const system = matchMedia("(prefers-color-scheme: dark)");
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+  let choice = null;
+  let transitionTimer;
+  try {
+    const saved = localStorage.getItem("a5-theme");
+    if (saved === "light" || saved === "dark") choice = saved;
+  } catch { /* The theme still works when storage is unavailable. */ }
+  const apply = (animate = false) => {
+    if (animate && !reduced.matches) {
+      clearTimeout(transitionTimer);
+      document.body.classList.add("theme-switching");
+      // Establish the transition before changing the inherited palette.
+      getComputedStyle(document.body).backgroundColor;
+      transitionTimer = setTimeout(() => document.body.classList.remove("theme-switching"), 170);
+    }
+    const dark = (choice || (system.matches ? "dark" : "light")) === "dark";
+    root.dataset.theme = dark ? "dark" : "light";
+    button?.setAttribute("aria-label", `Switch to ${dark ? "light" : "dark"} theme`);
+    button?.setAttribute("aria-pressed", String(dark));
+  };
+  button?.addEventListener("click", () => {
+    choice = root.dataset.theme === "dark" ? "light" : "dark";
+    try { localStorage.setItem("a5-theme", choice); } catch {}
+    apply(true);
+  });
+  system.addEventListener("change", () => { if (!choice) apply(); });
+  window.addEventListener("storage", (event) => {
+    if (event.key !== "a5-theme" && event.key !== null) return;
+    choice = event.newValue === "light" || event.newValue === "dark" ? event.newValue : null;
+    apply();
+  });
+  apply();
 }
 
 const SIDEBAR = [
@@ -389,6 +431,7 @@ function enhanceDocs() {
   });
 }
 renderHeader();
+wireTheme();
 const sectionBar = document.querySelector(".menubar-in");
 const selectedSection = sectionBar?.querySelector("[aria-current]");
 if (sectionBar) {
