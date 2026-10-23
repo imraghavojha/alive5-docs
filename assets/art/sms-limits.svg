@@ -1,0 +1,240 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="400" viewBox="0 0 960 400" fill="none" stroke="#202534" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" style="background:#f6f9fc">
+<title>SMS limits and compliance — exploded message cartridge</title>
+<desc>A segmented GSM message cartridge and a shorter Unicode strip float above engraved calibration rails. An attachment tray holds a small MMS file and a larger file converting into a link tag. An orange STOP keyswitch opens the message circuit.</desc>
+<defs>
+<style>path,rect,circle,ellipse,line,polyline{vector-effect:non-scaling-stroke}.detail{stroke:#657080;stroke-width:.8}.guide{stroke:#9aa3b2;stroke-width:.8;stroke-dasharray:4 4}.label{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.06em;fill:#202534;stroke:none}.engraving{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;fill:#202534;stroke:none}.micro{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:5.5px;fill:#657080;stroke:none}</style>
+<g id="screw" stroke-width=".8"><circle r="2.8" fill="#fff"/><path class="detail" d="M-1.3 0h2.6M0-1.3v2.6"/></g>
+<g id="pin" stroke-width=".8"><path d="M-1.5 0v11l1.5 1 1.5-1V0" fill="#e7ebf1"/><path class="detail" d="m-1.5 4 3-1m-3 4 3-1m-3 4 3-1"/><ellipse rx="3.4" ry="2" fill="#fff"/><path class="detail" d="m-1.5-.8 3 1.6"/></g>
+<g id="boss" stroke-width=".8"><path d="M-4-2v9c0 3 8 3 8 0v-9" fill="#e7ebf1"/><ellipse cy="-2" rx="4" ry="2.3" fill="#fff"/><ellipse cy="-2" rx="1.4" ry=".8" class="detail"/></g>
+<g id="contact" class="detail"><rect width="4" height="10" rx=".5" fill="#fff"/><path d="M1 2h2M1 8h2"/></g>
+<g id="segment"><rect width="144" height="27" rx="2" fill="#fff"/><path class="detail" d="M5 5h134v17H5ZM12 10h109m-109 5h84M131 8v11"/><use href="#screw" x="5" y="13.5"/><use href="#screw" x="139" y="13.5"/></g>
+<g id="mounts"><use href="#screw" x="7" y="7"/><use href="#screw" x="313" y="7"/><use href="#screw" x="7" y="77"/><use href="#screw" x="313" y="77"/></g>
+</defs>
+<path class="guide" d="M719.870 96.000V147.000"/>
+<path class="guide" d="M776.162 144.500V195.500"/>
+<path class="guide" d="M225.000 52.000V162.000"/>
+<path class="guide" d="M490.004 205.000V315.000"/>
+<path class="guide" d="M164.378 87.000V197.000"/>
+<path class="guide" d="M429.382 240.000V350.000"/>
+<path class="guide" d="M634.134 136.500V205.500"/>
+<path class="guide" d="M658.383 193.500V262.500"/>
+<path class="guide" d="M723.335 146.000V257.000"/>
+<path class="guide" d="M751.047 211.000V322.000"/>
+<path class="guide" transform="translate(23 0)" d="M850.000 195.000V273.000"/>
+<path class="guide" transform="translate(23 0)" d="M893.301 220.000V298.000"/>
+<path class="guide" transform="translate(23 0)" d="M811.895 217.000V295.000"/>
+<path class="guide" transform="translate(23 0)" d="M855.196 242.000V320.000"/>
+<polygon points="152.254,189.000 429.382,349.000 429.382,364.000 152.254,204.000" fill="#f3f5f9"/>
+<polygon points="502.128,307.000 429.382,349.000 429.382,364.000 502.128,322.000" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 225 147)">
+<rect x="0" y="0" width="320" height="84" fill="#fff"/>
+</g>
+<g transform="matrix(.8660254 .5 -.8660254 .5 225 147)">
+<path d="M9 9H311V75H9Z" fill="#e7ebf1" class="detail"/><path d="M15 17H305V68H15Z" fill="#f3f5f9" class="detail"/>
+<rect x="20" y="25" width="280" height="8" rx="1" fill="#fff" class="detail"/><path class="detail" d="M25 29h270"/>
+<rect x="20" y="54" width="280" height="8" rx="1" fill="#fff" class="detail"/><path class="detail" d="M25 58h270"/>
+<path class="detail" d="M36 19v44m4-44v44"/><rect x="32" y="36" width="12" height="10" fill="#fff" class="detail"/>
+<path class="detail" d="M151 19v44m4-44v44"/><rect x="147" y="36" width="12" height="10" fill="#fff" class="detail"/>
+<path class="detail" d="M276 19v44m4-44v44"/><rect x="272" y="36" width="12" height="10" fill="#fff" class="detail"/>
+<path class="detail" d="M59 68h46m-46 3h29M211 68h46m-46 3h29M21 13h23m233 0h23"/></g>
+<use href="#boss" x="225.000" y="154.000"/>
+<use href="#boss" x="490.004" y="307.000"/>
+<use href="#boss" x="164.378" y="189.000"/>
+<use href="#boss" x="429.382" y="342.000"/>
+<g transform="matrix(.8660254 .5 0 1 152.254 189)"><path class="detail" d="M6 10h308"/><text class="engraving" x="96" y="11" font-size="7">SMS / SEGMENT CARRIER</text><use href="#screw" x="10" y="8"/><use href="#screw" x="309" y="8"/></g>
+<polygon points="152.254,143.000 429.382,303.000 429.382,308.000 152.254,148.000" fill="#f3f5f9"/>
+<polygon points="502.128,261.000 429.382,303.000 429.382,308.000 502.128,266.000" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 225 101)">
+<rect x="0" y="0" width="320" height="84" fill="#fff"/>
+</g>
+<g transform="matrix(.8660254 .5 -.8660254 .5 225 101)">
+<path class="detail" d="M4 4H316V80H4Z"/><use href="#mounts"/><rect x="13" y="13" width="127" height="22" rx="1" fill="#f3f5f9" class="detail"/><rect x="12" y="43" width="296" height="29" rx="1" fill="#f3f5f9" class="detail"/>
+<path class="detail" d="M15 72v-7"/>
+<path class="detail" d="M23 72v-3.5"/>
+<path class="detail" d="M31 72v-3.5"/>
+<path class="detail" d="M39 72v-3.5"/>
+<path class="detail" d="M47 72v-7"/>
+<path class="detail" d="M55 72v-3.5"/>
+<path class="detail" d="M63 72v-3.5"/>
+<path class="detail" d="M71 72v-3.5"/>
+<path class="detail" d="M79 72v-7"/>
+<path class="detail" d="M87 72v-3.5"/>
+<path class="detail" d="M95 72v-3.5"/>
+<path class="detail" d="M103 72v-3.5"/>
+<path class="detail" d="M111 72v-7"/>
+<path class="detail" d="M119 72v-3.5"/>
+<path class="detail" d="M127 72v-3.5"/>
+<path class="detail" d="M135 72v-3.5"/>
+<path class="detail" d="M143 72v-7"/>
+<text class="engraving" x="15" y="61" font-size="7">0 · 160 (GSM)</text>
+<path class="detail" d="M169 72v-7"/>
+<path class="detail" d="M177 72v-3.5"/>
+<path class="detail" d="M185 72v-3.5"/>
+<path class="detail" d="M193 72v-3.5"/>
+<path class="detail" d="M201 72v-7"/>
+<path class="detail" d="M209 72v-3.5"/>
+<path class="detail" d="M217 72v-3.5"/>
+<path class="detail" d="M225 72v-3.5"/>
+<path class="detail" d="M233 72v-7"/>
+<path class="detail" d="M241 72v-3.5"/>
+<path class="detail" d="M249 72v-3.5"/>
+<path class="detail" d="M257 72v-3.5"/>
+<path class="detail" d="M265 72v-7"/>
+<path class="detail" d="M273 72v-3.5"/>
+<path class="detail" d="M281 72v-3.5"/>
+<path class="detail" d="M289 72v-3.5"/>
+<path class="detail" d="M297 72v-7"/>
+<text class="engraving" x="169" y="61" font-size="7">0 · 160 (GSM)</text>
+<path class="detail" d="M19 35v-6"/>
+<path class="detail" d="M34 35v-3"/>
+<path class="detail" d="M49 35v-3"/>
+<path class="detail" d="M64 35v-3"/>
+<path class="detail" d="M79 35v-3"/>
+<path class="detail" d="M94 35v-3"/>
+<path class="detail" d="M109 35v-3"/>
+<path class="detail" d="M124 35v-6"/>
+<text class="engraving" x="21" y="26" font-size="7">0 · 70</text><path class="detail" d="M145 43h6v29h-6M163 43h-2v29h2"/><path class="detail" d="M153 12v62M160 12v62M166 14h133M166 19h112M177 27h17v7h-17ZM202 27h17v7h-17Z"/><text class="micro" x="232" y="33">GSM / UNICODE</text>
+<rect x="240" y="22" width="55" height="5" rx=".7" fill="#e7ebf1" class="detail"/>
+<path class="detail" d="M244 22v5m5-5v5m5-5v5m5-5v5m5-5v5m5-5v5m5-5v5m5-5v5m5-5v5m5-5v5"/>
+<path class="detail" d="M171 26h-3v8h3m53-8h3v8h-3"/></g>
+<use href="#pin" x="164.378" y="169.000"/>
+<use href="#pin" x="490.004" y="287.000"/>
+<use href="#pin" x="429.382" y="322.000"/>
+<polygon points="167.842,89.000 292.550,161.000 292.550,165.000 167.842,93.000" fill="#f3f5f9"/>
+<polygon points="315.933,147.500 292.550,161.000 292.550,165.000 315.933,151.500" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 225 47)">
+<rect x="9" y="48" width="144" height="27" fill="#fff"/>
+</g>
+<g transform="matrix(.8660254 .5 -.8660254 .5 225 47)">
+<use href="#segment" x="9" y="48"/>
+<use href="#contact" x="24" y="75"/>
+<use href="#contact" x="35" y="75"/>
+<use href="#contact" x="46" y="75"/>
+<use href="#contact" x="57" y="75"/>
+<use href="#contact" x="68" y="75"/>
+<use href="#contact" x="79" y="75"/>
+<use href="#contact" x="90" y="75"/>
+<use href="#contact" x="101" y="75"/>
+<use href="#contact" x="112" y="75"/>
+<use href="#contact" x="123" y="75"/>
+</g>
+<polygon points="303.808,167.500 428.516,239.500 428.516,243.500 303.808,171.500" fill="#f3f5f9"/>
+<polygon points="451.899,226.000 428.516,239.500 428.516,243.500 451.899,230.000" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 225 47)">
+<rect x="166" y="48" width="144" height="27" fill="#fff"/>
+</g>
+<g transform="matrix(.8660254 .5 -.8660254 .5 225 47)">
+<use href="#segment" x="166" y="48"/>
+<use href="#contact" x="181" y="75"/>
+<use href="#contact" x="192" y="75"/>
+<use href="#contact" x="203" y="75"/>
+<use href="#contact" x="214" y="75"/>
+<use href="#contact" x="225" y="75"/>
+<use href="#contact" x="236" y="75"/>
+<use href="#contact" x="247" y="75"/>
+<use href="#contact" x="258" y="75"/>
+<use href="#contact" x="269" y="75"/>
+<use href="#contact" x="280" y="75"/>
+</g>
+<polygon points="205.081,67.500 314.201,130.500 314.201,134.500 205.081,71.500" fill="#f3f5f9"/>
+<polygon points="337.583,117.000 314.201,130.500 314.201,134.500 337.583,121.000" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 225 47)">
+<rect x="9" y="5" width="126" height="27" fill="#fff"/>
+</g>
+<g transform="matrix(.8660254 .5 -.8660254 .5 225 47)">
+<rect x="14" y="9" width="116" height="19" rx="1" fill="#f3f5f9" class="detail"/><text class="engraving" x="21" y="21" font-size="6.5">70 (EMOJI / UNICODE)</text><use href="#screw" x="14" y="18"/><use href="#screw" x="130" y="18"/>
+<use href="#contact" x="20" y="32"/>
+<use href="#contact" x="32" y="32"/>
+<use href="#contact" x="44" y="32"/>
+<use href="#contact" x="56" y="32"/>
+<use href="#contact" x="68" y="32"/>
+<use href="#contact" x="80" y="32"/>
+<use href="#contact" x="92" y="32"/>
+<use href="#contact" x="104" y="32"/>
+<use href="#contact" x="116" y="32"/>
+</g>
+<polygon points="557.058,229.000 737.191,333.000 737.191,347.000 557.058,243.000" fill="#f3f5f9"/>
+<polygon points="815.133,288.000 737.191,333.000 737.191,347.000 815.133,302.000" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 635 184)">
+<rect x="0" y="0" width="208" height="90" fill="#fff"/>
+</g>
+<g transform="matrix(.8660254 .5 -.8660254 .5 635 184)">
+<path d="M7 7H201V83H7Z" fill="#e7ebf1" class="detail"/><path d="M12 12H96V78H12ZM106 12H196V78H106Z" fill="#f3f5f9" class="detail"/><path class="detail" d="M20 20h68v47H20ZM114 20h74v47H114ZM100 10v70M23 72h59m34 0h64"/>
+<path class="detail" d="M19 26h8v25h-8m70-25h-8v25h8M113 26h8v25h-8m70-25h-8v25h8"/>
+<rect x="36" y="22" width="35" height="6" fill="#fff" class="detail"/>
+<rect x="131" y="22" width="35" height="6" fill="#fff" class="detail"/>
+<path class="detail" d="M40 22v6m5-6v6m5-6v6m5-6v6m5-6v6m5-6v6M135 22v6m5-6v6m5-6v6m5-6v6m5-6v6m5-6v6"/>
+<path d="M23 69v-7h8v7" fill="#fff" class="detail"/><path class="detail" d="M25 65h4"/>
+<path d="M78 69v-7h8v7" fill="#fff" class="detail"/><path class="detail" d="M80 65h4"/>
+<path d="M119 69v-7h8v7" fill="#fff" class="detail"/><path class="detail" d="M121 65h4"/>
+<path d="M179 69v-7h8v7" fill="#fff" class="detail"/><path class="detail" d="M181 65h4"/>
+<use href="#screw" x="6.000" y="6.000"/>
+<use href="#screw" x="202.000" y="6.000"/>
+<use href="#screw" x="6.000" y="84.000"/>
+<use href="#screw" x="202.000" y="84.000"/>
+</g>
+<g transform="matrix(.8660254 .5 0 1 557.058 229)"><path class="detail" d="M7 10h193"/><text class="engraving" x="51" y="10" font-size="7">ATTACHMENT / ROUTING</text>
+<use href="#screw" x="10" y="7"/><use href="#screw" x="197" y="7"/>
+<path class="detail" d="M18 4h3m3 0h3m3 0h3m141 0h3m3 0h3m3 0h3"/></g>
+<polygon points="590.833,157.500 660.115,197.500 660.115,201.500 590.833,161.500" fill="#f3f5f9"/>
+<polygon points="702.550,173.000 660.115,197.500 660.115,201.500 702.550,177.000" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 635 120)">
+<rect x="12" y="14" width="80" height="49" fill="#fff"/>
+</g>
+<g transform="matrix(.8660254 .5 -.8660254 .5 635 120)">
+<path class="detail" d="M17 19h70v39H17ZM23 25h44m-44 5h32M72 19v9h15"/><text class="engraving" x="19" y="48" font-size="7">&lt; 500 KB → MMS</text><path class="detail" d="M23 53h19m20 0h19"/>
+<use href="#contact" x="23" y="63"/>
+<use href="#contact" x="31" y="63"/>
+<use href="#contact" x="39" y="63"/>
+<use href="#contact" x="47" y="63"/>
+<use href="#contact" x="55" y="63"/>
+<use href="#contact" x="63" y="63"/>
+<use href="#contact" x="71" y="63"/>
+</g>
+<polygon points="667.909,172.000 746.717,217.500 746.717,221.500 667.909,176.000" fill="#f3f5f9"/>
+<polygon points="799.545,187.000 746.717,217.500 746.717,221.500 799.545,191.000" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 635 80)">
+<rect x="111" y="12" width="91" height="61" fill="#fff"/>
+</g>
+<g transform="matrix(.8660254 .5 -.8660254 .5 635 80)">
+<path class="detail" d="M116 17h68l13 13v38h-81ZM184 17v13h13M123 27h42m-42 5h32M123 42h61m-61 5h61m-61 5h43"/><text class="engraving" x="124" y="63" font-size="8">&gt; 500 KB</text></g>
+<g transform="matrix(.8660254 .5 -.8660254 .5 635 29)">
+<path d="M111 12h83l8 8v12l-8 8h-83Z" transform="translate(0 3)" fill="#e7ebf1"/><path d="M111 12h83l8 8v12l-8 8h-83Z" fill="#fff"/><circle cx="194" cy="26" r="2.8" class="detail"/><path class="detail" d="M116 17h68M116 35h68"/><text class="engraving" x="117" y="29" font-size="6.5">&gt; 500 KB → LINK</text></g>
+<g transform="translate(23 0)">
+<polygon points="799.771,291.000 855.196,323.000 855.196,334.000 799.771,302.000" fill="#f3f5f9"/>
+<polygon points="905.426,294.000 855.196,323.000 855.196,334.000 905.426,305.000" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 850 262)">
+<rect x="0" y="0" width="64" height="58" fill="#fff"/>
+</g>
+<g transform="matrix(.8660254 .5 -.8660254 .5 850 262)">
+<rect x="6" y="6" width="52" height="46" fill="#f3f5f9" class="detail"/><rect x="13" y="15" width="38" height="29" rx="2" fill="#e7ebf1"/><path class="detail" d="M18 21h9v9h-9ZM37 21h9v9h-9ZM19 38h9m9 0h9M31 13v30"/>
+<path class="detail" d="M18 25h-7v17h9m26-17h7v17h-9M14 47h12v-5m24 5H38v-5"/>
+<circle cx="20" cy="42" r="1.2" fill="#fff" class="detail"/>
+<circle cx="44" cy="42" r="1.2" fill="#fff" class="detail"/>
+<use href="#screw" x="7.000" y="7.000"/>
+<use href="#screw" x="57.000" y="7.000"/>
+<use href="#screw" x="7.000" y="51.000"/>
+<use href="#screw" x="57.000" y="51.000"/>
+</g>
+<polygon points="828.349,263.500 852.598,277.500 852.598,282.500 828.349,268.500" fill="#f3f5f9"/>
+<polygon points="875.115,264.500 852.598,277.500 852.598,282.500 875.115,269.500" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 850 233)">
+<rect x="18" y="17" width="28" height="26" fill="#fff"/>
+</g>
+<g transform="matrix(.8660254 .5 -.8660254 .5 850 233)">
+<path class="detail" d="M22 22h20v15H22ZM26 26h12M26 32h12"/></g>
+<polygon points="840.474,233.500 852.598,240.500 852.598,260.500 840.474,253.500" fill="#f3f5f9"/>
+<polygon points="862.990,234.500 852.598,240.500 852.598,260.500 862.990,254.500" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 850 203)">
+<rect x="25" y="24" width="14" height="12" fill="#fff"/>
+</g>
+<polygon points="808.431,212.000 855.196,239.000 855.196,248.000 808.431,221.000" fill="#f3f5f9"/>
+<polygon points="896.765,215.000 855.196,239.000 855.196,248.000 896.765,224.000" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 .5 -.8660254 .5 850 183)">
+<rect x="5" y="5" width="54" height="48" fill="#c34c27"/>
+</g>
+<g transform="matrix(.8660254 .5 -.8660254 .5 850 183)">
+<rect x="10" y="10" width="44" height="38" rx="1" stroke="#fff2eb" stroke-width=".8"/><text class="engraving" x="18" y="32" font-size="12" style="fill:#fff2eb">STOP</text><path d="M18 38h27" stroke="#fff2eb" stroke-width=".8"/></g>
+</g>
+<g class="detail"><path d="M43 86h100l40.864-1.25"/><circle cx="183.864" cy="84.75" r="2.2" fill="#fff"/><path d="M399 45h-36l-25.417 72"/><circle cx="337.583" cy="117" r="2.2" fill="#fff"/><path d="M676 365h268V239l-24.235-24"/><circle cx="919.765" cy="215" r="2.2" fill="#c34c27"/></g><text class="label" x="43" y="74">160 CHARS · GSM</text><text class="label" x="399" y="33">70 · EMOJI / UNICODE</text><text class="label" x="676" y="382" style="fill:#c34c27">STOP · HONOR IMMEDIATELY</text>
+</svg>

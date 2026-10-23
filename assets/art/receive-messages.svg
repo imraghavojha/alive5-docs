@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="400" viewBox="0 0 960 400" fill="none" stroke="#202534" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" style="background:#f6f9fc">
+<title>READING SMS HISTORY — EXPLODED CONVERSATION DRAWERS</title>
+<desc>Three sequential page trays slide from an isometric card-file server. Each holds inbound message cards. A lifted thread reveals its chat_conversation messages; an engraved caliper sets date_start and date_end. The GET endpoint uses api-v2.alive5.com/public/1.0/conversations/sms.</desc>
+<defs>
+<style>
+path,rect,circle,ellipse,line,polyline,polygon{vector-effect:non-scaling-stroke}
+.detail{stroke:#657080;stroke-width:.8}
+.axis{stroke:#9aa3b2;stroke-width:.8;stroke-dasharray:4 4}
+.label{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.06em;fill:#202534;stroke:none}
+.engrave{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;fill:#202534;stroke:none}
+</style>
+<g id="screw" stroke-width=".8"><circle r="3.1" fill="#fff"/><circle r="1.95" class="detail"/><path d="M-1.2 0h2.4M0-1.2v2.4" class="detail"/></g>
+<g id="eye" stroke-width=".8"><circle r="2.3" fill="#fff"/><circle r=".9" class="detail"/></g>
+<g id="pin" stroke-width=".8"><path d="M-2.3 0v10c0 1.8 4.6 1.8 4.6 0V0" fill="#e7ebf1"/><ellipse rx="2.3" ry="1.33" fill="#fff"/><ellipse rx=".8" ry=".5" class="detail"/><path d="M-1 4v4" class="detail"/></g>
+<g id="screw-lift" stroke-width=".8"><path d="M-1.3 0v10l1.3 1 1.3-1V0" fill="#e7ebf1"/><ellipse cy="-1" rx="3" ry="1.73" fill="#fff"/><path d="M-1.3-1.7 1.3-.3M-1.3-.3 1.3-1.7M-1.3 4l2.6-1m-2.6 4 2.6-1" class="detail"/></g>
+<g id="bubble" stroke-width=".8"><path d="M4 0h50q3 0 3 3v11q0 3-3 3H10l-7 5v-6Q0 16 0 13V4q0-4 4-4Z" fill="#fff"/><path d="M8 6h39M8 11h27" class="detail"/></g>
+<g id="thread-card">
+<rect width="157" height="61" fill="#fff"/>
+<path d="M5 5h147v10H5Z" fill="#f3f5f9" stroke-width=".8"/>
+<text x="10" y="12.5" class="engrave" font-size="6.8">chat_conversation</text>
+<path d="M136 8h10m-10 3h10" class="detail"/>
+<use href="#bubble" x="10" y="21"/>
+<use href="#bubble" x="83" y="21"/>
+<path d="M12 49h52m21 0h52M7 56h40m8 0h17m8 0h20m7 0h40" class="detail"/>
+<use href="#eye" x="3" y="3"/><use href="#eye" x="154" y="3"/>
+<use href="#eye" x="3" y="58"/><use href="#eye" x="154" y="58"/>
+</g>
+<g id="drawer">
+ <path d="M0 0h185v99H0Z" fill="#fff"/>
+ <path d="M8 9h169v80H8Z" fill="#e7ebf1" stroke-width=".8"/>
+ <path d="M12 14h161v69H12Z" fill="#f3f5f9" stroke-width=".8"/>
+ <path d="M12 14v6h161v-6M20 24v51m145-51v51" class="detail"/>
+ <path d="M17 29h7m-7 9h7m-7 9h7m-7 9h7m-7 9h7m137-36h7m-7 9h7m-7 9h7m-7 9h7m-7 9h7" class="detail"/>
+ <rect x="17" y="25" width="157" height="61" fill="#e7ebf1" stroke-width=".8"/>
+ <rect x="15" y="22" width="157" height="61" fill="#fff" stroke-width=".8"/>
+ <use href="#thread-card" x="13" y="19"/>
+ <path d="M21 21v-6h7v6m63 0v-6h7v6m62 0v-6h7v6" fill="#fff" stroke-width=".8"/>
+ <path d="M26 84v6h59v-6m15 0v6h59v-6" fill="#fff" stroke-width=".8"/>
+ <path d="M31 87h49m25 0h49M70 94h45" class="detail"/>
+ <use href="#screw" x="5" y="5"/><use href="#screw" x="180" y="5"/>
+ <use href="#screw" x="5" y="94"/><use href="#screw" x="180" y="94"/>
+</g>
+</defs>
+<rect width="960" height="400" fill="#f6f9fc" stroke="none"/>
+<!-- Matching rails and registration holes define the exploded pagination axis. -->
+<g class="axis"><path d="M88.66 187 303.66 228 503.66 274 703.66 320M240.21 99.5 455.21 140.5 655.21 186.5 855.21 232.5M165.74 231.5 380.74 272.5 580.74 318.5 780.74 364.5M317.29 144 532.29 185 732.29 231 932.29 277"/><path d="M105 139v50M251 55v48M319 96v49"/></g>
+
+<polygon points="165.74,236.50 325.95,144.00 325.95,168.00 165.74,260.50" fill="#f3f5f9"/>
+<polygon points="325.95,144.00 240.21,94.50 240.21,118.50 325.95,168.00" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 -.5 .8660254 .5 80 187)"><rect width="185" height="99" fill="#fff"/>
+<rect x="8" y="9" width="169" height="80" fill="#e7ebf1" stroke-width=".8"/>
+<path d="M14 15h157v66H14Z" fill="#f3f5f9" stroke-width=".8"/>
+<path d="M21 22h143v7H21Zm0 20h143v7H21Zm0 20h143v7H21Z" fill="#fff" stroke-width=".8"/>
+<path d="M29 25h126M29 45h126M29 65h126" class="detail"/>
+<use href="#screw" x="5" y="5"/><use href="#screw" x="180" y="5"/>
+<use href="#screw" x="5" y="94"/><use href="#screw" x="180" y="94"/></g>
+<polygon points="80.00,187.00 240.21,94.50 240.21,56.50 80.00,149.00" fill="#f3f5f9"/>
+<g transform="matrix(.8660254 -.5 0 1 80 149)"><path d="M7 7h171v24H7Z" class="detail"/>
+<path d="M16 12h139" class="detail"/><circle cx="168" cy="12" r="1.7" fill="#e7ebf1" stroke-width=".8"/>
+<path d="M16 21h139" class="detail"/><circle cx="168" cy="21" r="1.7" fill="#e7ebf1" stroke-width=".8"/>
+<path d="M16 30h139" class="detail"/><circle cx="168" cy="30" r="1.7" fill="#e7ebf1" stroke-width=".8"/>
+</g>
+<g transform="matrix(.8660254 -.5 0 1 165.7365 236.5)"><path d="M10 5h165v14H10Z" fill="#fff" stroke-width=".8"/><path d="M65 9h56v6H65Z" fill="#e7ebf1" stroke-width=".8"/><use href="#screw" x="17" y="12"/><use href="#screw" x="168" y="12"/></g>
+<polygon points="165.74,177.50 325.95,85.00 325.95,91.00 165.74,183.50" fill="#f3f5f9"/>
+<polygon points="325.95,85.00 240.21,35.50 240.21,41.50 325.95,91.00" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 -.5 .8660254 .5 80 128)"><rect width="185" height="99" fill="#fff"/>
+<path d="M7 7h171v85H7Z" class="detail"/>
+<path d="M16 17h153v33H16Z" fill="#f3f5f9" stroke-width=".8"/>
+<text x="23" y="31" font-size="8.8" class="engrave">api-v2.alive5.com</text>
+<text x="23" y="43" font-size="7.3" class="engrave">/public/1.0</text>
+<use href="#screw" x="5" y="5"/><use href="#screw" x="180" y="5"/><use href="#screw" x="5" y="94"/><use href="#screw" x="180" y="94"/>
+<rect x="21" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="28" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="35" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="42" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="49" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="56" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="63" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="70" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="77" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="84" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="91" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="98" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="105" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="112" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="119" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="126" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="133" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="140" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="147" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="154" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><rect x="161" y="60" width="3" height="20" rx="1.5" fill="#657080" stroke="none"/><path d="M17 87h32m90 0h30" class="detail"/></g>
+<use href="#screw-lift" x="92" y="148"/><use href="#screw-lift" x="246" y="60"/><use href="#screw-lift" x="313" y="103"/>
+<g class="axis"><path d="M375.20 135 327.91 231M505.97 59.5 458.68 155.5M422.83 162.5 375.54 258.5M553.60 87 506.31 183"/></g>
+<polygon points="380.74,277.50 540.95,185.00 540.95,196.00 380.74,288.50" fill="#f3f5f9"/>
+<polygon points="540.95,185.00 455.21,135.50 455.21,146.50 540.95,196.00" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 -.5 .8660254 .5 295 228)"><use href="#drawer"/></g>
+<g transform="matrix(.8660254 -.5 0 1 380.7365 277.5000)"><path d="M9 4h42m86 0h39" class="detail"/><path d="M64 3h59v10H64Z" fill="#fff" stroke-width=".8"/><path d="M70 6h47v4H70Z" fill="#e7ebf1" stroke-width=".8"/><circle cx="58" cy="7" r="1.2" class="detail"/><circle cx="129" cy="7" r="1.2" class="detail"/></g>
+<g transform="matrix(.8660254 -.5 .8660254 .5 295 228)"><path d="M118 99v16h56V99Z" fill="#fff"/><path d="M122 103h48v8h-48Z" stroke="#657080" stroke-width=".8"/><text x="146" y="109" text-anchor="middle" class="engrave" font-size="9" fill="#202534" style="fill:#202534">page 1</text></g>
+<polygon points="580.74,323.50 740.95,231.00 740.95,242.00 580.74,334.50" fill="#f3f5f9"/>
+<polygon points="740.95,231.00 655.21,181.50 655.21,192.50 740.95,242.00" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 -.5 .8660254 .5 495 274)"><use href="#drawer"/></g>
+<g transform="matrix(.8660254 -.5 0 1 580.7365 323.5000)"><path d="M9 4h42m86 0h39" class="detail"/><path d="M64 3h59v10H64Z" fill="#fff" stroke-width=".8"/><path d="M70 6h47v4H70Z" fill="#e7ebf1" stroke-width=".8"/><circle cx="58" cy="7" r="1.2" class="detail"/><circle cx="129" cy="7" r="1.2" class="detail"/></g>
+<g transform="matrix(.8660254 -.5 .8660254 .5 495 274)"><path d="M118 99v16h56V99Z" fill="#fff"/><path d="M122 103h48v8h-48Z" stroke="#657080" stroke-width=".8"/><text x="146" y="109" text-anchor="middle" class="engrave" font-size="9" fill="#202534" style="fill:#202534">page 2</text></g>
+<polygon points="780.74,369.50 940.95,277.00 940.95,288.00 780.74,380.50" fill="#f3f5f9"/>
+<polygon points="940.95,277.00 855.21,227.50 855.21,238.50 940.95,288.00" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 -.5 .8660254 .5 695 320)"><use href="#drawer"/></g>
+<g transform="matrix(.8660254 -.5 0 1 780.7365 369.5000)"><path d="M9 4h42m86 0h39" class="detail"/><path d="M64 3h59v10H64Z" fill="#fff" stroke-width=".8"/><path d="M70 6h47v4H70Z" fill="#e7ebf1" stroke-width=".8"/><circle cx="58" cy="7" r="1.2" class="detail"/><circle cx="129" cy="7" r="1.2" class="detail"/></g>
+<g transform="matrix(.8660254 -.5 .8660254 .5 695 320)"><path d="M118 99v16h56V99Z" fill="#c34c27"/><path d="M122 103h48v8h-48Z" stroke="#fff2eb" stroke-width=".8"/><text x="146" y="109" text-anchor="middle" class="engrave" font-size="9" fill="#fff" style="fill:#fff">page 3</text></g>
+<!-- The lifted thread has the same footprint and registration holes as the stored cards. -->
+
+<polygon points="422.83,165.50 558.79,87.00 558.79,91.00 422.83,169.50" fill="#f3f5f9"/>
+<polygon points="558.79,87.00 505.97,56.50 505.97,60.50 558.79,91.00" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 -.5 .8660254 .5 370 135)">
+<rect width="157" height="61" fill="#fff"/>
+<path d="M5 5h147v13H5Z" fill="#c34c27" stroke="#c34c27" stroke-width=".8"/>
+<text x="11" y="14.2" font-size="8.2" class="engrave" style="fill:#fff">chat_conversation</text>
+<path d="M136 9h10m-10 4h10" stroke="#fff2eb" stroke-width=".8"/>
+<path d="M11 23H7v29h4m135-29h4v29h-4" class="detail"/>
+<use href="#bubble" x="15" y="24"/>
+<use href="#bubble" x="86" y="24"/>
+<text x="18" y="52" font-size="6.4" class="engrave">created_at</text>
+<text x="89" y="52" font-size="6.4" class="engrave">created_at</text>
+<path d="M8 57h36m8 0h17m9 0h25m7 0h36" class="detail"/>
+<use href="#eye" x="3" y="3"/><use href="#eye" x="154" y="3"/>
+<use href="#eye" x="3" y="58"/><use href="#eye" x="154" y="58"/>
+</g>
+<polygon points="97.38,344.50 279.25,239.50 279.25,244.50 97.38,349.50" fill="#f3f5f9"/>
+<polygon points="279.25,239.50 255.87,226.00 255.87,231.00 279.25,244.50" fill="#e7ebf1"/>
+<g transform="matrix(.8660254 -.5 .8660254 .5 74 331)"><path d="M0 0h210v27H0Z" fill="#fff"/>
+<path d="M7 5h194v16H7Z" fill="#f3f5f9" stroke-width=".8"/>
+<text x="32" y="15" class="engrave" font-size="8.1">date_start · date_end</text>
+<path d="M11 0v-21h10v21M187 0v-21h10v21" fill="#fff"/>
+<path d="M14-19v10m180-10v10" class="detail"/>
+<path d="M181-3h22v31h-22Z" fill="#fff2eb" stroke="#c34c27"/>
+<path d="M184 0h16v24h-16Z" stroke="#c34c27" stroke-width=".8"/>
+<use href="#screw" x="191.5" y="10"/>
+<path d="M28 22v4" class="detail"/><path d="M35 22v2" class="detail"/><path d="M42 22v2" class="detail"/><path d="M49 22v2" class="detail"/><path d="M56 22v2" class="detail"/><path d="M63 22v4" class="detail"/><path d="M70 22v2" class="detail"/><path d="M77 22v2" class="detail"/><path d="M84 22v2" class="detail"/><path d="M91 22v2" class="detail"/><path d="M98 22v4" class="detail"/><path d="M105 22v2" class="detail"/><path d="M112 22v2" class="detail"/><path d="M119 22v2" class="detail"/><path d="M126 22v2" class="detail"/><path d="M133 22v4" class="detail"/><path d="M140 22v2" class="detail"/><path d="M147 22v2" class="detail"/><path d="M154 22v2" class="detail"/><path d="M161 22v2" class="detail"/><path d="M168 22v4" class="detail"/><use href="#screw" x="5" y="13"/>
+<path d="M211 5h9v15h-9Z" fill="#e7ebf1" stroke-width=".8"/><path d="M214 6v13m3-13v13" class="detail"/></g>
+<g class="detail"><path d="M647 64h-61l-32 28"/><circle cx="554" cy="92" r="2.5" fill="#f6f9fc"/>
+<path d="M398 365h-49l-100.5-124.75"/><circle cx="248.5" cy="240.25" r="2.5" fill="#f6f9fc"/>
+<path d="M758 164h193v121l-5.72 5.5"/><circle cx="945.28" cy="290.5" r="2.5" fill="#f6f9fc"/></g>
+<text x="647" y="54" class="label">GET /conversations/sms</text>
+<text x="398" y="355" class="label">date_start · date_end</text>
+<text x="758" y="154" class="label">FOLLOW page</text>
+</svg>
