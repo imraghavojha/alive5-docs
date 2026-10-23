@@ -378,23 +378,98 @@ function wireSearch() {
     results = dialog.querySelector(".search-results");
   let active = 0;
   let returnFocus;
+  let index = [];
+  let indexRequest;
+  let indexFailed = false;
+  const normalize = (value) => value.toLowerCase().replace(/[–—]/g, "-");
+  const escape = (value) => value.replace(/[&<>"']/g, (char) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
+  const curated = SEARCH.map(([title, path, keywords]) => ({ title, path, keywords, heading: "", snippet: "", text: "" }));
+  const rank = (row, query, terms) => {
+    const title = normalize(row.title), heading = normalize(row.heading);
+    const keywords = normalize(`${row.id || ""} ${row.endpoint || ""} ${row.keywords || ""}`);
+    const body = normalize(row.text);
+    const all = `${title} ${heading} ${keywords} ${body}`;
+    if (!terms.every((term) => all.includes(term))) return 0;
+    const contains = (field) => terms.every((term) => field.includes(term));
+    // Curated keywords also identify the section that actually documents them.
+    const sectionKeywords = row.id && contains(body) && contains(normalize(row.pageKeywords || ""));
+    const score = (!row.id && title === query) || heading === query || normalize(row.id || "") === query ? 1000
+      : contains(row.id ? heading : title) ? 800
+      : contains(keywords) || sectionKeywords ? 500 : 200;
+    return score + (row.id ? 30 : row.keywords ? 10 : 0)
+      + (contains(normalize(row.snippet)) ? 20 : 0)
+      + (body.includes(query) ? 10 / (1 + body.indexOf(query)) : 0);
+  };
   const draw = () => {
-    const q = input.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
-    const hits = SEARCH.filter((row) =>
-      q.every((term) => row.join(" ").toLowerCase().includes(term)),
-    );
+    const query = normalize(input.value.trim());
+    const terms = [...new Set(query.split(/\s+/).filter(Boolean))];
+    const highlight = (value) => {
+      if (!terms.length) return escape(value);
+      const pattern = new RegExp(terms.slice().sort((a, b) => b.length - a.length)
+        .map((term) => {
+          const literal = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+          return term.length === 1 && /\w/.test(term) ? `\\b${literal}\\b` : literal;
+        }).join("|"), "gi");
+      let output = "", start = 0;
+      for (const match of value.matchAll(pattern)) {
+        output += escape(value.slice(start, match.index)) + `<mark>${escape(match[0])}</mark>`;
+        start = match.index + match[0].length;
+      }
+      return output + escape(value.slice(start));
+    };
+    const ranked = terms.length ? [...curated, ...index]
+      .map((row) => ({ ...row, score: rank(row, query, terms) }))
+      .filter((row) => row.score).sort((a, b) => b.score - a.score) : curated;
+    // Keep each page together, ordered by its strongest match; show eight links total.
+    const groups = new Map();
+    for (const row of ranked) {
+      if (!groups.has(row.path)) groups.set(row.path, []);
+      const group = groups.get(row.path);
+      if (!group.some((hit) => (hit.id || "") === (row.id || ""))) group.push(row);
+    }
+    let count = 0;
+    const content = [];
+    for (const rows of groups.values()) {
+      const hits = rows.slice(0, 8 - count);
+      if (!hits.length) break;
+      count += hits.length;
+      content.push(`<p>${highlight(hits[0].title)}</p>` + hits.map((row) => {
+        const label = row.heading || row.title;
+        const context = row.heading ? `${row.title} › ${row.heading}` : row.title;
+        const body = normalize(row.text);
+        const position = Math.min(...terms.map((term) => body.indexOf(term)).filter((pos) => pos >= 0));
+        const start = position >= 140 && Number.isFinite(position) ? Math.max(0, position - 40) : 0;
+        const snippet = start ? row.text.slice(start, start + 140) : row.snippet;
+        const anchorMatch = row.id && terms.some((term) => normalize(row.id).includes(term));
+        return `<a href="${escape(href(row.path + (row.id ? "#" + encodeURIComponent(row.id) : "")))}"><span class="search-doc-icon" aria-hidden="true">▤</span><span class="search-result-copy">${highlight(label)}<small>${highlight(context)}</small>${row.endpoint || anchorMatch ? `<small>${highlight(row.endpoint || "#" + row.id)}</small>` : ""}${snippet ? `<small class="search-snippet">${start ? "…" : ""}${highlight(snippet)}${row.text.length > start + 140 ? "…" : ""}</small>` : ""}</span><span class="search-enter" aria-hidden="true">↵</span></a>`;
+      }).join(""));
+    }
     active = 0;
-    dialog.querySelector("[data-search-status]").textContent = `${hits.length} documentation results`;
-    results.innerHTML = hits.length
-      ? `<p>${q.length ? "Results" : "Explore the docs"}</p>` +
-        hits
-          .map(
-            ([title, path]) =>
-              `<a href="${href(path)}"><span class="search-doc-icon">▤</span><span>${title}<small>${path.startsWith("connectors") ? "Connectors" : path.startsWith("integrations") ? "Integrations" : "Developer resources"}</small></span><span class="search-enter">↵</span></a>`,
-          )
-          .join("")
-      : `<div class="search-empty">No results for this search.<small>Try “API key”, “SMS”, or “Zapier”.</small></div>`;
+    dialog.querySelector("[data-search-status]").textContent = `${count} documentation results${indexFailed ? "; section search unavailable" : ""}`;
+    results.innerHTML = content.length ? content.join("")
+      : `<div class="search-empty">No results for “${escape(input.value.trim())}”<small>${indexRequest && !index.length && !indexFailed ? "Loading section search…" : "Try “API key”, “SMS”, or “Zapier”."}</small></div>`;
+    if (indexFailed) results.insertAdjacentHTML("beforeend", '<div class="search-empty"><small>Section search is unavailable. Reopen search to retry.</small></div>');
     mark();
+  };
+  const loadIndex = () => {
+    if (indexRequest) return;
+    indexFailed = false;
+    indexRequest = fetch(href("assets/search-index.json"))
+      .then((response) => {
+        if (!response.ok) throw new Error("Search index unavailable");
+        return response.json();
+      })
+      .then((pages) => {
+        index = pages.flatMap((page) => {
+          const entry = curated.find((row) => row.path === page.path);
+          return page.sections.map((section) => ({ ...section, path: page.path,
+            heading: section.id ? section.heading : "", title: page.h1,
+            keywords: section.id ? "" : entry?.keywords || "", pageKeywords: entry?.keywords || "" }));
+        });
+      })
+      .catch(() => { indexFailed = true; indexRequest = undefined; })
+      .finally(() => { if (dialog.open) draw(); });
   };
   const mark = () => {
     const links = [...results.querySelectorAll("a")];
@@ -407,6 +482,7 @@ function wireSearch() {
     if (dialog.open) return;
     returnFocus = document.activeElement;
     input.value = "";
+    loadIndex();
     draw();
     dialog.showModal();
     input.focus();
@@ -422,6 +498,16 @@ function wireSearch() {
     .addEventListener("click", close);
   dialog.addEventListener("click", (e) => {
     if (e.target === dialog) close();
+  });
+  results.addEventListener("click", (e) => {
+    if (e.target.closest("a")) close();
+  });
+  results.addEventListener("focusin", (e) => {
+    const link = e.target.closest("a");
+    if (link) {
+      active = [...results.querySelectorAll("a")].indexOf(link);
+      mark();
+    }
   });
   dialog.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {

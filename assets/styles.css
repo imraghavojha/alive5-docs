@@ -548,6 +548,11 @@ a:hover { text-decoration: none; }
 .search-results > a { display: flex; align-items: center; gap: 13px; padding: 10px 12px; border-radius: 6px; color: var(--ink); }
 .search-results > a.selected { background: var(--a5-light); color: var(--link); }
 .search-results > a small { display: block; color: var(--faint); line-height: 18px; }
+.search-result-copy { min-width: 0; overflow-wrap: anywhere; }
+.search-results .search-snippet { margin-top: 4px; color: var(--ink); }
+.search-results mark { background: var(--a5-light); color: var(--link); border-radius: 2px; font-weight: 600; }
+.search-results > a:hover { background: var(--a5-light); }
+.search-results > a:focus-visible { outline: 2px solid var(--a5); outline-offset: -2px; }
 .search-doc-icon { font-size: 20px; color: var(--faint); }
 .search-enter { margin-left: auto; opacity: 0; }
 .selected .search-enter { opacity: 1; }
