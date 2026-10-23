@@ -9,12 +9,17 @@ figure.page-art img {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 960 / 400;
 }
 figure.page-art:empty {
   display: none;
 }
 
-/* Blueprint treatment preserves orange accents and fine strokes on dark panels. */
-[data-theme="dark"] figure.page-art { background: var(--tint); border-color: var(--line); }
-[data-theme="dark"] figure.page-art img { filter: invert(1) hue-rotate(180deg) brightness(.92) contrast(.92); }
+/* Illustrations remain light printed cards in either theme. */
+[data-theme="dark"] figure.page-art { background: #f6f9fc; border-color: rgba(255,255,255,.06); }
+
+figure.page-art.page-art--bleed {
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  overflow: hidden;
+}
