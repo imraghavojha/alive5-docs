@@ -6,9 +6,6 @@
 .reference-layout .doc {
   max-width: none;
 }
-.reference-layout .page-art {
-  max-width: 100%;
-}
 .reference-layout .reference-toc {
   display: block;
   top: 24px;
