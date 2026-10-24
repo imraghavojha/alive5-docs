@@ -23,14 +23,14 @@
       action: ['sheets', 'Google Sheets', 'Create Spreadsheet Row'],
       label: 'Conversation log',
       footer: 'A new row in your shared spreadsheet',
-      path: 'google-sheets',
+      path: 'google-sheets/348381/add-new-alive5-text-messages-to-rows-in-google-sheets',
     },
     notify: {
       trigger: ['alive5', 'Alive5', 'Chat Start'],
       action: ['slack', 'Slack', 'Send Channel Message'],
       label: '#customer-conversations',
       footer: 'Keep your team up to date',
-      path: 'slack',
+      path: 'slack/342344/send-slack-messages-for-new-alive5-live-chats',
     },
   };
   const setText = (name, text) => { product.querySelector(`[data-${name}]`).textContent = text; };
