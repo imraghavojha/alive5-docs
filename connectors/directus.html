@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>(()=>{let t;try{t=localStorage.getItem("a5-theme")}catch{}document.documentElement.dataset.theme=t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"})();</script>
+    <meta name="color-scheme" content="light dark">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Build with Directus · Alive5 Docs</title>
+    <meta name="description" content="Send an SMS from an Alive5 business number in a Directus Flow." />
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png" />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <script defer src="../assets/site.js"></script>
+    <script type="speculationrules">
+      {"prefetch":[{"where":{"and":[{"href_matches":"../{*.html}","relative_to":"document"},{"not":{"selector_matches":"[target=_blank], [href*=\"#\"], [download]"}}]},"eagerness":"moderate"}]}
+    </script>
+    <link rel="canonical" href="https://imraghavojha.github.io/alive5-docs/connectors/directus.html" />
+    <meta property="og:title" content="Build with Directus · Alive5 Docs" />
+    <meta property="og:description" content="Send an SMS from an Alive5 business number in a Directus Flow." />
+    <meta property="og:url" content="https://imraghavojha.github.io/alive5-docs/connectors/directus.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Alive5 Docs" />
+    <meta property="og:image" content="https://imraghavojha.github.io/alive5-docs/assets/images/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Alive5 Developer Documentation. Build messaging into your applications." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Build with Directus · Alive5 Docs" />
+    <meta name="twitter:description" content="Send an SMS from an Alive5 business number in a Directus Flow." />
+    <meta name="twitter:image" content="https://imraghavojha.github.io/alive5-docs/assets/images/og.png" />
+    <meta name="twitter:image:alt" content="Alive5 Developer Documentation. Build messaging into your applications." />
+  </head>
+  <body data-root="../" data-page="connectors-directus" data-section="connectors">
+    <a class="skip" href="#main">Skip to content</a>
+    <header data-header></header>
+    <div class="layout">
+      <nav data-sidebar aria-label="Documentation"></nav>
+      <main class="doc" id="main">
+        <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="index.html">Connectors</a></li><li aria-current="page">Directus</li></ol></nav>
+        <h1>Build with Directus</h1>
+        <p class="sub">Send an SMS from an Alive5 business number in a Directus Flow.</p>
+        <p class="availability"><a href="https://www.npmjs.com/package/@imraghavojha/directus-extension-alive5-sms" target="_blank" rel="noreferrer">View the Alive5 extension on npm ↗</a></p>
+        <h2 id="install">Install</h2>
+        <p>In Directus, open <strong>Settings → Marketplace</strong>, search for <strong>Alive5 SMS</strong>, and verify the package scope <code>@imraghavojha</code>. Or install <code>@imraghavojha/directus-extension-alive5-sms</code> from npm. The extension supports Directus 10.10 and later 10.x releases, and Directus 11.x.</p>
+        <p>For a self-hosted instance, copy the package’s <code>package.json</code> and <code>dist</code> directory into <code>extensions/directus-extension-alive5-sms</code>, then restart Directus.</p>
+
+        <h2 id="setup">Connect your account</h2>
+        <ol class="setup-list">
+          <li><strong>Get your API key</strong><p>In Alive5, open <strong>Integrations → API Key</strong>. Copy or generate your <a href="../api/authentication.html">API key</a>.</p></li>
+          <li><strong>Find your sender details</strong><p>Use <a href="../api/reference.html#channels-and-users"><code>channels-and-users/list</code></a> with your API key. In <code>data.Items</code>, choose the SMS channel whose <code>channel_label</code> matches your business number. Copy its <code>channel_id</code> and an assigned agent’s <code>agents[].user_id</code>. The sender and channel must be enabled for SMS.</p></li>
+        </ol>
+
+        <h2 id="send">Send an SMS</h2>
+        <p>Create a Flow, add <strong>Send SMS (Alive5)</strong>, and give it the operation key <code>send_sms</code>. All six options are required:</p>
+        <table class="tbl"><thead><tr><th>Option</th><th>Value</th></tr></thead><tbody>
+          <tr><td>API key / <code>apiKey</code></td><td>Your Alive5 API key or <code>{{$env.ALIVE5_API_KEY}}</code>.</td></tr>
+          <tr><td>Channel ID / <code>channelId</code></td><td>The SMS channel associated with the sender number.</td></tr>
+          <tr><td>User ID / <code>userId</code></td><td>An agent assigned to that channel.</td></tr>
+          <tr><td>From number / <code>from</code></td><td>Your Alive5 business SMS number in E.164 format.</td></tr>
+          <tr><td>To number / <code>to</code></td><td>An E.164 recipient number or a Flow expression such as <code>{{$trigger.payload.phone}}</code>.</td></tr>
+          <tr><td>Message / <code>message</code></td><td>Nonblank SMS text, optionally including Flow expressions. Whitespace is preserved.</td></tr>
+        </tbody></table>
+        <p>For a POST Webhook trigger, set the message to <code>Hello {{$trigger.payload.name}}, your request was received.</code> Protect the webhook, then trigger it with a payload containing <code>phone</code> and <code>name</code>. Connect the resolve path to your next operation and the reject path to error handling.</p>
+
+        <h2 id="api-key">Keep the API key out of the database</h2>
+        <p>On self-hosted Directus 11, set these server environment variables and restart Directus:</p>
+        <div class="code">
+          <div class="code-head"><span class="name">Environment</span><button class="copy" type="button">Copy</button></div>
+          <pre>ALIVE5_API_KEY=your-alive5-api-key
+FLOWS_ENV_ALLOW_LIST=ALIVE5_API_KEY</pre>
+        </div>
+        <p>Set the operation’s <strong>API key</strong> option to <code>{{$env.ALIVE5_API_KEY}}</code>. If other variables are already allowed, add <code>ALIVE5_API_KEY</code> to the comma-separated <code>FLOWS_ENV_ALLOW_LIST</code>. The operation stores the expression instead of the key.</p>
+        <div class="note"><strong>API key storage</strong><p>The masked input is a display setting. A directly entered key is stored in operation options and revisions. Restrict Flow access and rotate any key previously stored there; replacing it does not erase older revisions.</p></div>
+
+        <h2 id="results">Check the result</h2>
+        <p>Read <code>{{send_sms.messageId}}</code> and <code>{{send_sms.conversationId}}</code> in later operations. The conversation ID is empty if absent. Success confirms submission, not delivery.</p>
+        <p>HTTP failures and Alive5 response errors follow the reject path. The operation does not retry. Check conversation history before retrying a transport failure or unclear response to avoid duplicate texts.</p>
+
+        <h2 id="resources">Resources</h2>
+        <ul>
+          <li><a href="https://www.npmjs.com/package/@imraghavojha/directus-extension-alive5-sms" target="_blank" rel="noreferrer">View the Alive5 extension on npm ↗</a></li>
+          <li><a href="../api/authentication.html">Authenticate with an Alive5 API key</a></li>
+          <li><a href="../api/send-a-message.html">Send a message with the API</a></li>
+        </ul>
+        <div class="pager">
+          <a href="apify.html"><span>Previous</span><strong>← Apify</strong></a>
+          <a class="next" href="../integrations/index.html"><span>Next</span><strong>Integrations overview →</strong></a>
+        </div>
+      </main>
+      <aside data-toc aria-label="On this page"></aside>
+    </div>
+    <footer data-docfoot></footer>
+  </body>
+</html>
