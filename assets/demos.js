@@ -25,20 +25,10 @@ const SCENARIOS = [
     reply: "Thanks. Please share the invoice number so our team can help.",
   },
 ];
-const CONNECTOR_VIEWS = {
-  overview: {
-    title: "A text in. A configured reply out.",
-    trigger: "Incoming SMS",
-    action: "Send SMS",
-    icon: "↙",
-  },
-};
 const motionIcon = (paused) => `<svg class="sc-play-icon" viewBox="0 0 10 12" aria-hidden="true" fill="currentColor">${paused ? '<path d="m2 1 7 5-7 5Z"/>' : '<path d="M2 1h2v10H2zM6 1h2v10H6z"/>'}</svg>`;
 
 function wireShowcases() {
   document.querySelectorAll("[data-automation]").forEach((root) => {
-    const platform = root.dataset.automation;
-    const view = CONNECTOR_VIEWS[platform];
     const motion = matchMedia("(prefers-reduced-motion: no-preference)");
     const reduced = !motion.matches;
     let selected = 0,
@@ -52,19 +42,16 @@ function wireShowcases() {
     let drag = null;
     const moved = new Map();
     root.classList.add("flow-showcase");
-    root.innerHTML = `<div class="sc-heading"><div><h2>${view.title}</h2><p class="sc-explanation">Example workflow with a fixed reply.</p></div><button class="sc-play" type="button" aria-label="${paused ? "Play animation" : "Pause animation"}">${motionIcon(paused)} ${paused ? "Play" : "Pause"}</button></div>
-    <div class="sc-samples" role="tablist" aria-label="Sample configurations">${SCENARIOS.map((s, i) => `<button id="sample-${platform}-${i}" type="button" role="tab" aria-controls="scene-${platform}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-example="${i}">${s.label}</button>`).join("")}</div>
-    <div class="sc-scroll"><div class="sc-scene" id="scene-${platform}" role="tabpanel" aria-labelledby="sample-${platform}-0" data-layout="${platform}">
-      <svg class="sc-wires" aria-hidden="true"><path data-edge="0"/><path data-edge="1"/>${[0, 1].map((i) => `<circle class="sc-port" data-port="${i}-0" r="3"/><circle class="sc-port" data-port="${i}-1" r="3"/><circle class="sc-packet" data-packet="${i}" r="4"/>`).join("")}</svg>
-      <article class="sc-card sc-incoming" data-card="0"><div class="sc-card-head"><span class="sc-icon" aria-hidden="true">${view.icon}</span><span>01 · TRIGGER</span><button type="button" class="sc-grip" aria-label="Move incoming SMS card" aria-describedby="drag-${platform}"><span aria-hidden="true">⠿</span></button></div><h3>${view.trigger}</h3><div class="sc-message" data-incoming></div><div class="sc-source"><span>Example sender</span><code>+1 202 555 0123</code></div></article>
-      <article class="sc-card sc-config" data-card="1"><div class="sc-card-head"><span class="sc-icon" aria-hidden="true">⌘</span><span>02 · YOUR SETUP</span><button type="button" class="sc-grip" aria-label="Move configuration card" aria-describedby="drag-${platform}"><span aria-hidden="true">⠿</span></button></div><h3>Configure the reply</h3><div class="sc-mapping"><span>Recipient</span><span>← Sender's number</span></div><div class="sc-mapping"><span>From number</span><span>Your SMS line</span></div><div class="sc-mapping"><span>Sending user</span><span>Assigned user</span></div><div class="sc-template"><span>Message</span><p data-template></p></div></article>
-      <article class="sc-card sc-outgoing" data-card="2"><div class="sc-card-head"><span class="sc-icon" aria-hidden="true">↗</span><span>03 · ACTION</span><button type="button" class="sc-grip" aria-label="Move Send SMS card" aria-describedby="drag-${platform}"><span aria-hidden="true">⠿</span></button></div><h3>${view.action}</h3><div class="sc-reply" data-reply></div><div class="sc-destination"><span>To</span><code>+1 202 555 0123</code></div></article>
-    </div></div><div class="sc-footer"><button type="button" class="sc-reset" aria-label="Reset layout"><span aria-hidden="true">↺</span> Reset layout</button></div><span class="sc-sr" id="drag-${platform}">Drag this card's header, or focus its move button and use arrow keys. Home restores its position.</span><span class="sc-sr sc-announcement" aria-live="polite"></span>`;
+    // The initial markup is in HTML so hydration preserves the responsive size.
     const scene = root.querySelector(".sc-scene"),
       svg = root.querySelector(".sc-wires");
     const cards = [...root.querySelectorAll(".sc-card")];
     const paths = [...svg.querySelectorAll("path")],
       packets = [...svg.querySelectorAll(".sc-packet")];
+    const ports = [...svg.querySelectorAll(".sc-port")];
+    let connectionFrame = 0,
+      packetFrame = 0,
+      pathsReady = false;
     const tabs = [...root.querySelectorAll("[data-example]")];
     const play = root.querySelector(".sc-play");
     const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
@@ -75,76 +62,106 @@ function wireShowcases() {
       x = clamp(x, 12, maxX);
       y = clamp(y, 12, maxY);
       moved.set(index, { x: x / maxX, y: y / maxY });
-      card.style.left = x + "px";
-      card.style.top = y + "px";
       connect();
     }
     function connect() {
-      svg.setAttribute(
-        "viewBox",
-        `0 0 ${scene.clientWidth} ${scene.clientHeight}`,
-      );
-      cards.forEach((card, index) => {
+      pathsReady = false;
+      if (!connectionFrame)
+        connectionFrame = requestAnimationFrame(updateConnections);
+    }
+    function updateConnections() {
+      connectionFrame = 0;
+      // Read every box before changing card positions or SVG geometry.
+      const width = scene.clientWidth,
+        height = scene.clientHeight;
+      const boxes = cards.map((card, index) => {
+        const box = {
+          left: card.offsetLeft,
+          top: card.offsetTop,
+          width: card.offsetWidth,
+          height: card.offsetHeight,
+        };
         const pos = moved.get(index);
-        if (!pos) return;
-        const maxX = Math.max(12, scene.clientWidth - card.offsetWidth - 12),
-          maxY = Math.max(12, scene.clientHeight - card.offsetHeight - 12);
-        card.style.left = clamp(pos.x * maxX, 12, maxX) + "px";
-        card.style.top = clamp(pos.y * maxY, 12, maxY) + "px";
+        if (pos) {
+          const maxX = Math.max(12, width - box.width - 12),
+            maxY = Math.max(12, height - box.height - 12);
+          box.left = clamp(pos.x * maxX, 12, maxX);
+          box.top = clamp(pos.y * maxY, 12, maxY);
+        }
+        return box;
+      });
+      svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+      cards.forEach((card, index) => {
+        if (!moved.has(index)) return;
+        card.style.left = boxes[index].left + "px";
+        card.style.top = boxes[index].top + "px";
       });
       for (let i = 0; i < 2; i++) {
-        const a = cards[i],
-          b = cards[i + 1];
+        const a = boxes[i],
+          b = boxes[i + 1];
         const ac = [
-            a.offsetLeft + a.offsetWidth / 2,
-            a.offsetTop + a.offsetHeight / 2,
+            a.left + a.width / 2,
+            a.top + a.height / 2,
           ],
           bc = [
-            b.offsetLeft + b.offsetWidth / 2,
-            b.offsetTop + b.offsetHeight / 2,
+            b.left + b.width / 2,
+            b.top + b.height / 2,
           ];
         const vertical = Math.abs(bc[1] - ac[1]) > Math.abs(bc[0] - ac[0]);
         let start, end, path;
         if (vertical) {
           const down = bc[1] >= ac[1];
-          start = [ac[0], a.offsetTop + (down ? a.offsetHeight : 0)];
-          end = [bc[0], b.offsetTop + (down ? 0 : b.offsetHeight)];
+          start = [ac[0], a.top + (down ? a.height : 0)];
+          end = [bc[0], b.top + (down ? 0 : b.height)];
           const mid = (start[1] + end[1]) / 2;
           path = `M${start} C${start[0]},${mid} ${end[0]},${mid} ${end}`;
         } else {
           const right = bc[0] >= ac[0];
-          start = [a.offsetLeft + (right ? a.offsetWidth : 0), ac[1]];
-          end = [b.offsetLeft + (right ? 0 : b.offsetWidth), bc[1]];
+          start = [a.left + (right ? a.width : 0), ac[1]];
+          end = [b.left + (right ? 0 : b.width), bc[1]];
           const mid = (start[0] + end[0]) / 2;
           path = `M${start} C${mid},${start[1]} ${mid},${end[1]} ${end}`;
         }
         paths[i].setAttribute("d", path);
         [start, end].forEach((point, j) => {
-          const port = svg.querySelector(`[data-port="${i}-${j}"]`);
+          const port = ports[i * 2 + j];
           port.setAttribute("cx", point[0]);
           port.setAttribute("cy", point[1]);
         });
       }
-      drawPackets();
+      // Measure the new paths after the browser has rendered these writes.
+      cancelAnimationFrame(packetFrame);
+      packetFrame = requestAnimationFrame(() => {
+        packetFrame = 0;
+        pathsReady = true;
+        drawPackets();
+      });
     }
     function drawPackets() {
-      [
+      if (!pathsReady) return;
+      const points = [
         [700, 1600],
         [1800, 2700],
-      ].forEach(([from, to], i) => {
-        const fraction = (elapsed - from) / (to - from),
-          packet = packets[i];
-        packet.style.opacity = fraction >= 0 && fraction <= 1 ? "1" : "0";
+      ].map(([from, to], i) => {
+        const fraction = (elapsed - from) / (to - from);
         if (fraction >= 0 && fraction <= 1 && paths[i].getAttribute("d")) {
-          const point = paths[i].getPointAtLength(
+          return paths[i].getPointAtLength(
             fraction * paths[i].getTotalLength(),
           );
+        }
+        return null;
+      });
+      points.forEach((point, i) => {
+        const packet = packets[i];
+        packet.style.opacity = point ? "1" : "0";
+        if (point) {
           packet.setAttribute("cx", point.x);
           packet.setAttribute("cy", point.y);
         }
       });
     }
     function drawPhase() {
+      drawPackets();
       const next = elapsed < 1600 ? 0 : elapsed < 2700 ? 1 : 2;
       if (next !== phase) {
         phase = next;
@@ -165,7 +182,6 @@ function wireShowcases() {
             ),
           );
       }
-      drawPackets();
     }
     function choose(index, announce = false) {
       if (announce) autoAdvance = false;

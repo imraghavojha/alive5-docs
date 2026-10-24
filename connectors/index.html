@@ -40,17 +40,23 @@
     <div class="layout">
       <nav data-sidebar aria-label="Documentation"></nav>
       <main class="doc" id="main">
-        <p class="crumbs">
-          <a href="../index.html">Home</a><span>/</span
-          ><a href="index.html">Connectors</a>
-        </p>
+        <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li aria-current="page"><a href="index.html">Connectors</a></li></ol></nav>
         <h1>Connectors</h1>
         <p class="sub">Put business messaging into your workflows.</p>
         <section
           class="automation-lab"
           data-automation="overview"
           aria-label="Interactive SMS workflow"
-        ></section>
+        >
+          <div class="sc-heading"><div><h2>A text in. A configured reply out.</h2><p class="sc-explanation">Example workflow with a fixed reply.</p></div><button class="sc-play" type="button" aria-label="Pause animation"><svg class="sc-play-icon" viewBox="0 0 10 12" aria-hidden="true" fill="currentColor"><path d="M2 1h2v10H2zM6 1h2v10H6z"/></svg> Pause</button></div>
+          <div class="sc-samples" role="tablist" aria-label="Sample configurations"><button id="sample-overview-0" type="button" role="tab" aria-controls="scene-overview" aria-selected="true" tabindex="0" data-example="0">Appointment</button><button id="sample-overview-1" type="button" role="tab" aria-controls="scene-overview" aria-selected="false" tabindex="-1" data-example="1">Opening hours</button><button id="sample-overview-2" type="button" role="tab" aria-controls="scene-overview" aria-selected="false" tabindex="-1" data-example="2">Support request</button></div>
+          <div class="sc-scroll"><div class="sc-scene" id="scene-overview" role="tabpanel" aria-labelledby="sample-overview-0" data-layout="overview">
+            <svg class="sc-wires" aria-hidden="true"><path data-edge="0"/><path data-edge="1"/><circle class="sc-port" data-port="0-0" r="3"/><circle class="sc-port" data-port="0-1" r="3"/><circle class="sc-packet" data-packet="0" r="4"/><circle class="sc-port" data-port="1-0" r="3"/><circle class="sc-port" data-port="1-1" r="3"/><circle class="sc-packet" data-packet="1" r="4"/></svg>
+            <article class="sc-card sc-incoming" data-card="0"><div class="sc-card-head"><span class="sc-icon" aria-hidden="true">↙</span><span>01 · TRIGGER</span><button type="button" class="sc-grip" aria-label="Move incoming SMS card" aria-describedby="drag-overview"><span aria-hidden="true">⠿</span></button></div><h3>Incoming SMS</h3><div class="sc-message" data-incoming>Could I reschedule my appointment?</div><div class="sc-source"><span>Example sender</span><code>+1 202 555 0123</code></div></article>
+            <article class="sc-card sc-config" data-card="1"><div class="sc-card-head"><span class="sc-icon" aria-hidden="true">⌘</span><span>02 · YOUR SETUP</span><button type="button" class="sc-grip" aria-label="Move configuration card" aria-describedby="drag-overview"><span aria-hidden="true">⠿</span></button></div><h3>Configure the reply</h3><div class="sc-mapping"><span>Recipient</span><span>← Sender's number</span></div><div class="sc-mapping"><span>From number</span><span>Your SMS line</span></div><div class="sc-mapping"><span>Sending user</span><span>Assigned user</span></div><div class="sc-template"><span>Message</span><p data-template>Thanks for getting in touch. Which day works for you?</p></div></article>
+            <article class="sc-card sc-outgoing" data-card="2"><div class="sc-card-head"><span class="sc-icon" aria-hidden="true">↗</span><span>03 · ACTION</span><button type="button" class="sc-grip" aria-label="Move Send SMS card" aria-describedby="drag-overview"><span aria-hidden="true">⠿</span></button></div><h3>Send SMS</h3><div class="sc-reply" data-reply>Thanks for getting in touch. Which day works for you?</div><div class="sc-destination"><span>To</span><code>+1 202 555 0123</code></div></article>
+          </div></div><div class="sc-footer"><button type="button" class="sc-reset" aria-label="Reset layout"><span aria-hidden="true">↺</span> Reset layout</button></div><span class="sc-sr" id="drag-overview">Drag this card's header, or focus its move button and use arrow keys. Home restores its position.</span><span class="sc-sr sc-announcement" aria-live="polite"></span>
+        </section>
         <h2 id="platforms">Choose your platform</h2>
         <h3>Available now</h3>
         <div class="connector-cards">
