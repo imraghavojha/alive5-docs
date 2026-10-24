@@ -863,12 +863,15 @@ h3 { letter-spacing: -0.015em; }
 .n8n-example .example-step small { display: block; color: var(--muted); margin-bottom: 6px; }
 .n8n-example p { margin-bottom: 0; font-size: 13px; }
 @media (max-width: 600px) {
-  table.tbl { table-layout: fixed; }
+  table.tbl { table-layout: auto; min-width: 480px; }
+  table.tbl:has(tr > :nth-child(3)) { min-width: 660px; }
+  table.tbl:has(tr > :nth-child(4)) { min-width: 800px; }
   table.tbl th,
-  table.tbl td { min-width: 0; overflow-wrap: anywhere; }
-  table.tbl th { padding: 9px 8px !important; }
+  table.tbl td { min-width: 140px; word-break: normal; overflow-wrap: normal; }
+  table.tbl th { white-space: nowrap; padding: 9px 8px !important; }
   table.tbl td { padding: 12px 8px !important; }
-  table.tbl td:first-child { white-space: normal; overflow-wrap: anywhere; }
+  table.tbl td:first-child { white-space: normal; }
+  table.tbl td code { word-break: normal; overflow-wrap: normal; }
   .trio { grid-template-columns: 1fr; }
   .trio > div:last-child { grid-column: auto; }
   .n8n-example .example-steps { flex-direction: column; align-items: stretch; }

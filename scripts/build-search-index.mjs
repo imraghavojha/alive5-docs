@@ -65,9 +65,12 @@ for (const file of await crawl(root)) {
     const start = main.indexOf(">", close) + 1;
     const end = Math.min(eligible[index + 1]?.start ?? main.length, heading.endpoint?.end ?? main.length);
     const body = text(main.slice(start, end));
-    const endpoint = heading.endpoint ? text(main.slice(start, end).match(/<p\b[^>]*class=["']path["'][^>]*>([^]*?)<\/p>/i)?.[1] || "") : "";
+    const path = heading.endpoint ? text(main.slice(start, end).match(/<p\b[^>]*class=["']path["'][^>]*>([^]*?)<\/p>/i)?.[1] || "") : "";
+    const method = path ? text(main.slice(heading.content, close).match(/<span\b[^>]*class=["'][^"']*\bmethod\b[^"']*["'][^>]*>([^]*?)<\/span>/i)?.[1] || "") : "";
+    const endpoint = [method, path].filter(Boolean).join(" ");
     return { id: heading.id || heading.endpoint?.id || "", heading: headingText(heading),
-      ...(endpoint ? { endpoint } : {}), snippet: body.slice(0, 140), text: body };
+      ...(endpoint ? { endpoint, keywords: `${method} ${path.split(/[\/_-]+/).filter(Boolean).join(" ")}`.trim() } : {}),
+      snippet: body.slice(0, 140), text: body };
   });
   pages.push({ path: relative(root, file).replaceAll("\\", "/"), title, h1: h1 ? headingText(h1) : title, sections });
 }

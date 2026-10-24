@@ -210,35 +210,40 @@
       {
         "id": "send-sms",
         "heading": "Send SMS",
-        "endpoint": "/conversations/sms/send",
+        "endpoint": "POST /conversations/sms/send",
+        "keywords": "POST conversations sms send",
         "snippet": "/conversations/sms/send Sends a text from a business line. Requires phone_number_from, phone_number_to, message, channel_id, and user_id as ",
         "text": "/conversations/sms/send Sends a text from a business line. Requires phone_number_from, phone_number_to, message, channel_id, and user_id as form fields. See Send a message. Request curl curl -X POST \\ \"https://api.alive5.com/public/1.0/conversations/sms/send\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --form-string \"phone_number_from=$ALIVE5_FROM_NUMBER\" \\ --form-string \"phone_number_to=$RECIPIENT_NUMBER\" \\ --form-string \"message=Hello from Alive5.\" \\ --form-string \"channel_id=$CHANNEL_ID\" \\ --form-string \"user_id=$USER_ID\" Example response · excerpt JSON { \"code\": 200, \"data\": { \"code\": 200, \"data\": { \"message_id\": \"example_message\", \"message_status\": \"sent\", \"direction\": \"Outbound\", \"From\": \"+12025550100\", \"To\": \"+12025550123\", \"message_content\": \"Hello from Alive5.\" }, \"error\": null }, \"error\": null }"
       },
       {
         "id": "sms-conversations",
         "heading": "List SMS conversations",
-        "endpoint": "/conversations/sms",
+        "endpoint": "GET /conversations/sms",
+        "keywords": "GET conversations sms",
         "snippet": "/conversations/sms Returns SMS conversations with message history under chat_conversation. The public collection uses the v2 host and date_s",
         "text": "/conversations/sms Returns SMS conversations with message history under chat_conversation. The public collection uses the v2 host and date_start/date_end parameters. Request curl curl -G \\ \"https://api-v2.alive5.com/public/1.0/conversations/sms\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --data-urlencode \"date_start=09-01-2026\" \\ --data-urlencode \"date_end=09-10-2026\" Example response · excerpt JSON { \"code\": 200, \"data\": { \"Items\": [ { \"alive5_sessionID\": \"example_conversation\", \"contacts_first_name\": \"Alex\", \"chat_conversation\": [ { \"message_content\": \"Can I move my appointment?\", \"created_by\": \"+12025550123\", \"created_at\": 1788278400000 } ] } ], \"page\": 1, \"pages\": 1 }, \"error\": null }"
       },
       {
         "id": "livechat-conversations",
         "heading": "List live chat conversations",
-        "endpoint": "/conversations/livechat",
+        "endpoint": "GET /conversations/livechat",
+        "keywords": "GET conversations livechat",
         "snippet": "/conversations/livechat Returns live chat conversations and their message history. The collection does not define the date format. Parameter",
         "text": "/conversations/livechat Returns live chat conversations and their message history. The collection does not define the date format. Parameter Description datetime_from Start date; collection example: 02-05-2023. datetime_to End date; collection example: 05-05-2023. page Page number; collection example: 2. timezone_offset Timezone offset; see the collection caveat below. The collection shows both -4:00 and -400; test with your account. Request curl curl -G \\ \"https://api-v2.alive5.com/public/2.0/conversations/livechat\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --data-urlencode \"datetime_from=02-05-2023\" \\ --data-urlencode \"datetime_to=05-05-2023\" \\ --data-urlencode \"page=2\" \\ --data-urlencode \"timezone_offset=-400\" Example response · excerpt JSON { \"code\": 200, \"data\": { \"Items\": [ { \"threadData\": { \"thread_id\": \"YOUR_THREAD_ID\", \"channel_id\": \"YOUR_CHANNEL_ID\", \"thread_status\": \"active\" }, \"threadConversation\": [ { \"_source\": { \"message_content\": \"Hello! How can I assist you today?\", \"message_type\": \"chat\" } } ] } ], \"page\": 2, \"pages\": 5 }, \"error\": null }"
       },
       {
         "id": "messenger-conversations",
         "heading": "List Messenger conversations",
-        "endpoint": "/conversations/fbm",
+        "endpoint": "GET /conversations/fbm",
+        "keywords": "GET conversations fbm",
         "snippet": "/conversations/fbm Same shape as the SMS list, for Facebook Messenger channels. Check code and error in the body; see Errors and responses. ",
         "text": "/conversations/fbm Same shape as the SMS list, for Facebook Messenger channels. Check code and error in the body; see Errors and responses. Request curl curl -G \\ \"https://api-v2.alive5.com/public/1.0/conversations/fbm\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --data-urlencode \"date_start=09-01-2026\" \\ --data-urlencode \"date_end=09-10-2026\" \\ --data-urlencode \"page=1\" Example response · excerpt JSON { \"code\": 200, \"data\": { \"Items\": [ { \"alive5_sessionID\": \"example_messenger_conversation\", \"channel_name\": \"Example Messenger channel\", \"contacts_first_name\": \"Alex\", \"chat_conversation\": [ { \"message_content\": \"What are your opening hours?\", \"created_at\": 1788278400000 } ] } ], \"page\": 1, \"pages\": 1 }, \"error\": null }"
       },
       {
         "id": "conversation-summary",
         "heading": "Facebook Messenger summary",
-        "endpoint": "/conversations/summary",
+        "endpoint": "GET /conversations/summary",
+        "keywords": "GET conversations summary",
         "snippet": "/conversations/summary Pass from_datetime and date_end on the v2 host, using the parameter names from the public collection. Request curl cu",
         "text": "/conversations/summary Pass from_datetime and date_end on the v2 host, using the parameter names from the public collection. Request curl curl -G \\ \"https://api-v2.alive5.com/public/1.0/conversations/summary\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --data-urlencode \"from_datetime=09-01-2026\" \\ --data-urlencode \"date_end=09-10-2026\" The collection has no saved response for this request."
       },
@@ -251,49 +256,56 @@
       {
         "id": "account",
         "heading": "Account",
-        "endpoint": "/account",
+        "endpoint": "GET /account",
+        "keywords": "GET account",
         "snippet": "/account Account profile and plan. Treat responses as sensitive and avoid logging raw payloads. Request curl curl \\ \"https://api.alive5.com/",
         "text": "/account Account profile and plan. Treat responses as sensitive and avoid logging raw payloads. Request curl curl \\ \"https://api.alive5.com/public/1.0/account\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" Example response · sensitive fields omittedJSON { \"code\": 200, \"data\": { \"org_name\": \"Example workspace\", \"email\": \"team@example.com\", \"user_role\": \"admin\" }, \"error\": null }"
       },
       {
         "id": "channels-and-users",
         "heading": "List channels and users",
-        "endpoint": "/objects/channels-and-users/list",
+        "endpoint": "GET /objects/channels-and-users/list",
+        "keywords": "GET objects channels and users list",
         "snippet": "/objects/channels-and-users/list Channels with their assigned agents. The only call that returns both channel_id and user_id, so it is the s",
         "text": "/objects/channels-and-users/list Channels with their assigned agents. The only call that returns both channel_id and user_id, so it is the starting point for sending. Request curl curl \\ \"https://api-v2.alive5.com/public/1.0/objects/channels-and-users/list\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" Example response · excerpt JSON { \"code\": 200, \"data\": { \"Items\": [ { \"channel_id\": \"example_channel\", \"channel_label\": \"+12025550100\", \"agents\": [ { \"user_id\": \"example_user\", \"screen_name\": \"Alex Example\", \"email\": \"alex@example.com\" } ] } ] }, \"error\": null }"
       },
       {
         "id": "users",
         "heading": "List users",
-        "endpoint": "/get/users",
+        "endpoint": "GET /get/users",
+        "keywords": "GET get users",
         "snippet": "/get/users Account teammates. Does not include the user IDs a send requires. Use the channels call for those. Request curl curl \\ \"https://a",
         "text": "/get/users Account teammates. Does not include the user IDs a send requires. Use the channels call for those. Request curl curl \\ \"https://api-v2.alive5.com/public/1.0/get/users\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" Example response · excerpt JSON { \"code\": 200, \"data\": [ { \"agent_email\": \"alex@example.com\", \"agent_first_name\": \"Alex\", \"agent_last_name\": \"Example\", \"agent_role\": \"admin\" } ], \"error\": null }"
       },
       {
         "id": "contacts",
         "heading": "List contacts",
-        "endpoint": "/objects/contact/get-all",
+        "endpoint": "GET /objects/contact/get-all",
+        "keywords": "GET objects contact get all",
         "snippet": "/objects/contact/get-all Paginated contact records. Accepts page and limit; pagination metadata comes back with the results. Request curl cu",
         "text": "/objects/contact/get-all Paginated contact records. Accepts page and limit; pagination metadata comes back with the results. Request curl curl -G \\ \"https://api-v2.alive5.com/public/1.0/objects/contact/get-all\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --data-urlencode \"page=1\" \\ --data-urlencode \"limit=1\" Example response · excerpt JSON { \"code\": 200, \"data\": { \"Items\": [ { \"crm_id\": \"example_contact\", \"first_name\": \"Alex\", \"last_name\": \"Example\", \"email\": \"alex@example.com\", \"phone_mobile\": \"+12025550123\" } ], \"page\": 1, \"totalPages\": 1, \"totalRecord\": 1 }, \"error\": null }"
       },
       {
         "id": "create-contact",
         "heading": "Create contact",
-        "endpoint": "/contact/create-new",
+        "endpoint": "POST /contact/create-new",
+        "keywords": "POST contact create new",
         "snippet": "/contact/create-new Adds a contact on the original API host. The public collection sends contact fields as query parameters with a POST requ",
         "text": "/contact/create-new Adds a contact on the original API host. The public collection sends contact fields as query parameters with a POST request. Use your own organization and account values. In curl, -G puts the fields in the query string while -X POST sets the method. Request curl curl -G -X POST \\ \"https://api.alive5.com/public/1.0/contact/create-new\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --data-urlencode \"email=alex@example.com\" \\ --data-urlencode \"org_name=$ALIVE5_ORG_NAME\" \\ --data-urlencode \"first_name=Alex\" \\ --data-urlencode \"phone_mobile=$CONTACT_NUMBER\" \\ --data-urlencode \"last_name=Example\" \\ --data-urlencode \"account_id=$ACCOUNT_ID\" \\ --data-urlencode \"title=Customer\" \\ --data-urlencode \"company=Example company\" Example response · excerpt JSON { \"code\": 200, \"data\": { \"crm_id\": \"example_contact\", \"first_name\": \"Alex\", \"last_name\": \"Example\", \"email\": \"alex@example.com\", \"phone_mobile\": \"+12025550123\" }, \"error\": null }"
       },
       {
         "id": "update-contact",
         "heading": "Update contact",
-        "endpoint": "/contact/update-contact",
+        "endpoint": "PUT /contact/update-contact",
+        "keywords": "PUT contact update contact",
         "snippet": "/contact/update-contact Updates an existing contact on the original API host. Send JSON with the contact ID and fields to change. This examp",
         "text": "/contact/update-contact Updates an existing contact on the original API host. Send JSON with the contact ID and fields to change. This example updates tags; pass tag labels in tags. Re-read the contact to confirm the write; code 200 alone does not confirm every update. Request curl curl -X PUT \\ \"https://api.alive5.com/public/1.0/contact/update-contact\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ -H \"Content-Type: application/json\" \\ --data '{\"crm_id\":\"YOUR_CONTACT_ID\",\"tags\":[\"YOUR_TAG_NAME\"]}' Example response · excerpt JSON { \"code\": 200, \"data\": { \"first_name\": \"Alex\", \"last_name\": \"Example\", \"email\": \"alex@example.com\", \"phone_mobile\": \"+12025550123\", \"updated_at\": 1788278400000 }, \"error\": null }"
       },
       {
         "id": "tags",
         "heading": "List tags",
-        "endpoint": "/objects/tags/list",
+        "endpoint": "GET /objects/tags/list",
+        "keywords": "GET objects tags list",
         "snippet": "/objects/tags/list Tags available for conversations and contacts. Request curl curl \\ \"https://api-v2.alive5.com/public/1.0/objects/tags/lis",
         "text": "/objects/tags/list Tags available for conversations and contacts. Request curl curl \\ \"https://api-v2.alive5.com/public/1.0/objects/tags/list\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" Example response · excerpt JSON { \"code\": 200, \"data\": { \"Items\": [ { \"tag_id\": \"example_tag\", \"tag_label\": \"Follow up\" } ] }, \"error\": null }"
       },
@@ -306,49 +318,56 @@
       {
         "id": "create-channel",
         "heading": "Create a channel",
-        "endpoint": "/create/channel",
+        "endpoint": "POST /create/channel",
+        "keywords": "POST create channel",
         "snippet": "/create/channel Creates a channel in your organization. Parameter Description channel_name Channel name. org_name Organization name. Request",
         "text": "/create/channel Creates a channel in your organization. Parameter Description channel_name Channel name. org_name Organization name. Request curl curl -X POST \\ \"https://api.alive5.com/public/1.0/create/channel\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --form-string \"channel_name=YOUR_CHANNEL_NAME\" \\ --form-string \"org_name=YOUR_ORG_NAME\" Example response · excerpt JSON { \"data\": { \"code\": 200, \"data\": { \"channel_id\": \"YOUR_CHANNEL_ID\", \"channel_name\": \"YOUR_CHANNEL_NAME\", \"channel_status\": \"live\", \"org_name\": \"YOUR_ORG_NAME\" }, \"error\": null }, \"code\": 200, \"error\": null }"
       },
       {
         "id": "create-tag",
         "heading": "Create a tag",
-        "endpoint": "/create/tag",
+        "endpoint": "POST /create/tag",
+        "keywords": "POST create tag",
         "snippet": "/create/tag Creates a tag for your organization. Parameter Description email Email address. org_name Organization name. name Tag name. Reque",
         "text": "/create/tag Creates a tag for your organization. Parameter Description email Email address. org_name Organization name. name Tag name. Request curl curl -X POST \\ \"https://api.alive5.com/public/1.0/create/tag\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --form-string \"email=YOUR_EMAIL\" \\ --form-string \"org_name=YOUR_ORG_NAME\" \\ --form-string \"name=YOUR_TAG_NAME\" Example response · excerpt JSON { \"data\": { \"code\": 200, \"data\": { \"tag_id\": \"YOUR_TAG_ID\", \"tagname\": \"YOUR_TAG_NAME\", \"org_name\": \"YOUR_ORG_NAME\", \"email\": \"YOUR_EMAIL\" }, \"error\": null }, \"code\": 200, \"error\": null }"
       },
       {
         "id": "create-user",
         "heading": "Create a user",
-        "endpoint": "/create/user",
+        "endpoint": "POST /create/user",
+        "keywords": "POST create user",
         "snippet": "/create/user Creates a user with a pending invitation. Parameter Description email User email address. screenname Display name. org_name Org",
         "text": "/create/user Creates a user with a pending invitation. Parameter Description email User email address. screenname Display name. org_name Organization name. role User role. channels Channel assignments as a string. Request curl curl -X POST \\ \"https://api.alive5.com/public/1.0/create/user\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --form-string \"email=YOUR_EMAIL\" \\ --form-string \"screenname=YOUR_SCREEN_NAME\" \\ --form-string \"org_name=YOUR_ORG_NAME\" \\ --form-string \"role=YOUR_ROLE\" \\ --form-string \"channels=YOUR_CHANNELS\" Example response · excerpt JSON { \"data\": { \"code\": 200, \"data\": { \"user_status\": \"pending_invite\" }, \"error\": null }, \"code\": 200, \"error\": null }"
       },
       {
         "id": "create-faq-category",
         "heading": "Create an FAQ category",
-        "endpoint": "/create/faq-category",
+        "endpoint": "POST /create/faq-category",
+        "keywords": "POST create faq category",
         "snippet": "/create/faq-category Creates an FAQ category for a channel. Parameter Description title Category name. org_name Organization name. channel C",
         "text": "/create/faq-category Creates an FAQ category for a channel. Parameter Description title Category name. org_name Organization name. channel Channel name; collection example: general. Request curl curl -X POST \\ \"https://api.alive5.com/public/1.0/create/faq-category\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --form-string \"title=YOUR_CATEGORY_NAME\" \\ --form-string \"org_name=YOUR_ORG_NAME\" \\ --form-string \"channel=YOUR_CHANNEL_NAME\" Example response · excerpt JSON { \"data\": { \"code\": 200, \"data\": { \"category_id\": \"YOUR_CATEGORY_ID\", \"category_name\": \"YOUR_CATEGORY_NAME\", \"channel_ids\": [ \"YOUR_CHANNEL_ID\" ], \"org_name\": \"YOUR_ORG_NAME\" }, \"error\": null }, \"code\": 200, \"error\": null }"
       },
       {
         "id": "create-faq-article",
         "heading": "Create an FAQ article",
-        "endpoint": "/create/faq-article",
+        "endpoint": "POST /create/faq-article",
+        "keywords": "POST create faq article",
         "snippet": "/create/faq-article Creates an FAQ article using the category name. Parameter Description title Article title. org_name Organization name. c",
         "text": "/create/faq-article Creates an FAQ article using the category name. Parameter Description title Article title. org_name Organization name. category Category name, not category_id. content Article content. Request curl curl -X POST \\ \"https://api.alive5.com/public/1.0/create/faq-article\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --form-string \"title=YOUR_ARTICLE_TITLE\" \\ --form-string \"org_name=YOUR_ORG_NAME\" \\ --form-string \"category=YOUR_CATEGORY_NAME\" \\ --form-string \"content=YOUR_ARTICLE_CONTENT\" Example response · excerpt JSON { \"data\": { \"code\": 200, \"data\": { \"article_id\": \"YOUR_ARTICLE_ID\", \"title\": \"YOUR_ARTICLE_TITLE\", \"category_name\": \"YOUR_CATEGORY_NAME\", \"body\": \"YOUR_ARTICLE_CONTENT\" }, \"error\": null }, \"code\": 200, \"error\": null }"
       },
       {
         "id": "create-widget",
         "heading": "Create a widget",
-        "endpoint": "/create/widget",
+        "endpoint": "POST /create/widget",
+        "keywords": "POST create widget",
         "snippet": "/create/widget Creates a live chat widget with a UUID id and numeric widget_id. Parameter Description widget_type Use liveChat (case-sensiti",
         "text": "/create/widget Creates a live chat widget with a UUID id and numeric widget_id. Parameter Description widget_type Use liveChat (case-sensitive). org_name Organization name. botname Bot name. accessChannels Channel name. channel_id Channel ID. shortCode Widget short code. widget_name Widget name. wimg Widget image URL. Request curl curl -X POST \\ \"https://api.alive5.com/public/1.0/create/widget\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --form-string \"widget_type=liveChat\" \\ --form-string \"org_name=YOUR_ORG_NAME\" \\ --form-string \"botname=YOUR_BOT_NAME\" \\ --form-string \"accessChannels=YOUR_CHANNEL_NAME\" \\ --form-string \"channel_id=YOUR_CHANNEL_ID\" \\ --form-string \"shortCode=YOUR_SHORT_CODE\" \\ --form-string \"widget_name=YOUR_WIDGET_NAME\" \\ --form-string \"wimg=YOUR_IMAGE_URL\" Example response · excerpt JSON { \"data\": { \"code\": 200, \"data\": { \"id\": \"00000000-0000-4000-8000-000000000021\", \"widget_id\": 21, \"widget_name\": \"YOUR_WIDGET_NAME\", \"widget_type\": \"liveChat\" }, \"error\": null }, \"code\": 200, \"error\": null }"
       },
       {
         "id": "create-botchain",
         "heading": "Create a bot flow",
-        "endpoint": "/create/botchain",
+        "endpoint": "POST /create/botchain",
+        "keywords": "POST create botchain",
         "snippet": "/create/botchain Creates a live chat bot flow for a widget. Parameter Description widget_id Widget ID. org_name Organization name. botchain_",
         "text": "/create/botchain Creates a live chat bot flow for a widget. Parameter Description widget_id Widget ID. org_name Organization name. botchain_name Bot flow name. bot_type Use lowercase livechat. channel_id Channel ID. Request curl curl -X POST \\ \"https://api.alive5.com/public/1.0/create/botchain\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --form-string \"widget_id=YOUR_WIDGET_ID\" \\ --form-string \"org_name=YOUR_ORG_NAME\" \\ --form-string \"botchain_name=YOUR_BOT_FLOW_NAME\" \\ --form-string \"bot_type=livechat\" \\ --form-string \"channel_id=YOUR_CHANNEL_ID\" Example response · excerpt JSON { \"data\": { \"code\": 200, \"data\": { \"botchain_id\": \"YOUR_BOTCHAIN_ID\", \"botchain_name\": \"YOUR_BOT_FLOW_NAME\", \"bot_type\": \"livechat\", \"channel_ids\": [ \"YOUR_CHANNEL_ID\" ], \"widget_ids\": [ \"YOUR_WIDGET_ID\" ] }, \"error\": null }, \"code\": 200, \"error\": null }"
       },
@@ -361,35 +380,40 @@
       {
         "id": "performance-report",
         "heading": "Performance report",
-        "endpoint": "/performance-reporting",
+        "endpoint": "GET /performance-reporting",
+        "keywords": "GET performance reporting",
         "snippet": "/performance-reporting Volume and response metrics. Takes date_start, date_end, and timezone_offset. Request curl curl -G \\ \"https://api-v2.",
         "text": "/performance-reporting Volume and response metrics. Takes date_start, date_end, and timezone_offset. Request curl curl -G \\ \"https://api-v2.alive5.com/public/1.0/performance-reporting\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --data-urlencode \"date_start=09-01-2026\" \\ --data-urlencode \"date_end=09-10-2026\" \\ --data-urlencode \"timezone_offset=-500\" Example response · excerpt JSON { \"code\": 200, \"data\": { \"channelsReport\": [ { \"channel_name\": \"Example SMS channel\", \"total\": 12, \"total_completed\": 10, \"total_missed\": 2 } ], \"agentsReport\": [ { \"screen_name\": \"Alex Example\", \"total_completed\": 10 } ], \"tagsReport\": [] }, \"error\": null }"
       },
       {
         "id": "bot-report",
         "heading": "Bot report",
-        "endpoint": "/get-bots-reporting",
+        "endpoint": "GET /get-bots-reporting",
+        "keywords": "GET get bots reporting",
         "snippet": "/get-bots-reporting Bot flow activity. Takes from_datetime, to_datetime, and botflowFilter. Request curl curl -G \\ \"https://api-v2.alive5.co",
         "text": "/get-bots-reporting Bot flow activity. Takes from_datetime, to_datetime, and botflowFilter. Request curl curl -G \\ \"https://api-v2.alive5.com/public/1.0/get-bots-reporting\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --data-urlencode \"from_datetime=09-01-2026\" \\ --data-urlencode \"to_datetime=09-10-2026\" \\ --data-urlencode \"botflowFilter=All\" Example response · excerpt JSON { \"code\": 200, \"data\": { \"Items\": { \"example_thread\": [ { \"botchain_name\": \"Example welcome flow\", \"bot_message\": \"How can we help?\", \"user_reply\": \"I have a question.\", \"bot_timestamp\": 1788278400000 } ] }, \"page\": 1, \"totalPages\": 1, \"totalRecord\": 1 }, \"error\": null }"
       },
       {
         "id": "multiple-choice-report",
         "heading": "Multiple-choice report",
-        "endpoint": "/get-multiplequestion-reporting",
+        "endpoint": "GET /get-multiplequestion-reporting",
+        "keywords": "GET get multiplequestion reporting",
         "snippet": "/get-multiplequestion-reporting Answers to multiple-choice bot questions, same parameters as the bot report. Check code and error in the bod",
         "text": "/get-multiplequestion-reporting Answers to multiple-choice bot questions, same parameters as the bot report. Check code and error in the body; see Errors and responses. Request curl curl -G \\ \"https://api-v2.alive5.com/public/1.0/get-multiplequestion-reporting\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --data-urlencode \"from_datetime=09-01-2026\" \\ --data-urlencode \"to_datetime=09-10-2026\" \\ --data-urlencode \"botflowFilter=All\""
       },
       {
         "id": "free-text-report",
         "heading": "Free-text report",
-        "endpoint": "/get-freetext-reporting",
+        "endpoint": "GET /get-freetext-reporting",
+        "keywords": "GET get freetext reporting",
         "snippet": "/get-freetext-reporting Free-text answers captured by bot flows, same parameters as the bot report. Request curl curl -G \\ \"https://api-v2.a",
         "text": "/get-freetext-reporting Free-text answers captured by bot flows, same parameters as the bot report. Request curl curl -G \\ \"https://api-v2.alive5.com/public/1.0/get-freetext-reporting\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --data-urlencode \"from_datetime=09-01-2026\" \\ --data-urlencode \"to_datetime=09-10-2026\" \\ --data-urlencode \"botflowFilter=All\" Example response · excerpt JSON { \"code\": 200, \"data\": { \"Items\": { \"example_thread\": [ { \"botchain_name\": \"Example support flow\", \"bot_message\": \"What would you like help with?\", \"user_reply\": \"Rescheduling an appointment.\", \"bot_timestamp\": 1788278400000 } ] } }, \"error\": null }"
       },
       {
         "id": "faq-report",
         "heading": "FAQ report",
-        "endpoint": "/get-faq-reporting",
+        "endpoint": "GET /get-faq-reporting",
+        "keywords": "GET get faq reporting",
         "snippet": "/get-faq-reporting FAQ article hits over a date range. Request curl curl -G \\ \"https://api-v2.alive5.com/public/1.0/get-faq-reporting\" \\ -H ",
         "text": "/get-faq-reporting FAQ article hits over a date range. Request curl curl -G \\ \"https://api-v2.alive5.com/public/1.0/get-faq-reporting\" \\ -H \"X-A5-APIKEY: $ALIVE5_KEY\" \\ --data-urlencode \"from_datetime=09-01-2026\" \\ --data-urlencode \"to_datetime=09-10-2026\" \\ --data-urlencode \"botflowFilter=All\" Example response · excerpt JSON { \"code\": 200, \"data\": [ { \"botflow\": \"Example support flow\", \"visitor_question\": \"When are you open?\", \"bot_response\": \"Monday to Friday, 9am to 5pm.\" } ], \"error\": null }"
       }

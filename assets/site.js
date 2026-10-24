@@ -381,7 +381,9 @@ function wireSearch() {
   let index = [];
   let indexRequest;
   let indexFailed = false;
-  const normalize = (value) => value.toLowerCase().replace(/[–—]/g, "-");
+  const normalize = (value) => value.toLowerCase().replace(/[–—]/g, "-")
+    .replace(/(?:^|\s)\/?public\/\d+\.\d+(?=\/|\s|$)/g, " ")
+    .replace(/\//g, " ").replace(/\s+/g, " ").trim();
   const escape = (value) => value.replace(/[&<>"']/g, (char) =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
   const curated = SEARCH.map(([title, path, keywords]) => ({ title, path, keywords, heading: "", snippet: "", text: "" }));
@@ -389,12 +391,16 @@ function wireSearch() {
     const title = normalize(row.title), heading = normalize(row.heading);
     const keywords = normalize(`${row.id || ""} ${row.endpoint || ""} ${row.keywords || ""}`);
     const body = normalize(row.text);
+    const endpoint = normalize(row.endpoint || "");
+    const endpointPath = endpoint.replace(/^(get|post|put|patch|delete|head|options)\s+/, "");
     const all = `${title} ${heading} ${keywords} ${body}`;
     if (!terms.every((term) => all.includes(term))) return 0;
     const contains = (field) => terms.every((term) => field.includes(term));
     // Curated keywords also identify the section that actually documents them.
     const sectionKeywords = row.id && contains(body) && contains(normalize(row.pageKeywords || ""));
-    const score = (!row.id && title === query) || heading === query || normalize(row.id || "") === query ? 1000
+    const score = endpoint && (endpoint === query || endpointPath === query) ? 1200
+      : endpoint && terms.length > 1 && contains(endpoint) ? 1100
+      : (!row.id && title === query) || heading === query || normalize(row.id || "") === query ? 1000
       : contains(row.id ? heading : title) ? 800
       : contains(keywords) || sectionKeywords ? 500 : 200;
     return score + (row.id ? 30 : row.keywords ? 10 : 0)
@@ -465,7 +471,7 @@ function wireSearch() {
           const entry = curated.find((row) => row.path === page.path);
           return page.sections.map((section) => ({ ...section, path: page.path,
             heading: section.id ? section.heading : "", title: page.h1,
-            keywords: section.id ? "" : entry?.keywords || "", pageKeywords: entry?.keywords || "" }));
+            keywords: section.keywords || (section.id ? "" : entry?.keywords || ""), pageKeywords: entry?.keywords || "" }));
         });
       })
       .catch(() => { indexFailed = true; indexRequest = undefined; })

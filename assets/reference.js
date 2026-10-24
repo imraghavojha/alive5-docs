@@ -1,9 +1,16 @@
 (() => {
   const nav = document.querySelector(".reference-toc");
   const endpoints = [...document.querySelectorAll(".reference-entry[id]")];
+  if (!nav || !endpoints.length) return;
   const links = [...nav.querySelectorAll(".reference-toc-endpoint")];
+  let clickedActive;
+  let userScrollPending = false;
+  let scheduled = false;
   const update = () => {
-    const active = endpoints.filter((entry) => entry.getBoundingClientRect().top <= 161).at(-1) || endpoints[0];
+    scheduled = false;
+    const atBottom = scrollY > 0 && scrollY + innerHeight >= document.documentElement.scrollHeight - 8;
+    const active = clickedActive || (atBottom ? endpoints.at(-1)
+      : endpoints.filter((entry) => entry.getBoundingClientRect().top <= 161).at(-1) || endpoints[0]);
     links.forEach((link) => {
       const current = link.hash === `#${active.id}`;
       link.classList.toggle("on", current);
@@ -18,17 +25,37 @@
       }
     }
   };
-  let observer;
-  const observe = () => {
-    if (observer) observer.disconnect();
-    // A narrow band below the header tracks the endpoint being read.
-    observer = new IntersectionObserver(update, {
-      rootMargin: `-160px 0px -${Math.max(0, innerHeight - 162)}px 0px`,
-    });
-    endpoints.forEach((entry) => observer.observe(entry));
+  links.forEach((link) => link.addEventListener("click", (event) => {
+    if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    clickedActive = endpoints.find((entry) => link.hash === `#${entry.id}`);
+    userScrollPending = false;
     update();
-  };
-  observe();
-  window.addEventListener("resize", observe);
+  }));
+  // Anchor navigation (including smooth scrolling) must not undo a clicked selection.
+  // Release it only when the user scrolls with a wheel, touch, keys, or scrollbar.
+  window.addEventListener("wheel", () => { userScrollPending = true; }, { passive: true });
+  window.addEventListener("touchmove", () => { userScrollPending = true; }, { passive: true });
+  window.addEventListener("pointerdown", (event) => {
+    if (event.target === document.documentElement) userScrollPending = true;
+  });
+  window.addEventListener("keydown", (event) => {
+    if (!event.defaultPrevented && !event.metaKey && !event.ctrlKey && !event.altKey &&
+      !event.target.closest("input, textarea, select, [contenteditable], button") &&
+      ["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].includes(event.key)) {
+      userScrollPending = true;
+    }
+  });
+  window.addEventListener("scroll", () => {
+    if (userScrollPending) {
+      clickedActive = undefined;
+      userScrollPending = false;
+    }
+    if (!scheduled) {
+      scheduled = true;
+      requestAnimationFrame(update);
+    }
+  }, { passive: true });
+  update();
+  window.addEventListener("resize", update);
   window.addEventListener("load", update);
 })();
