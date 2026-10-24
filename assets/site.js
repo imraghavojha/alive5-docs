@@ -39,6 +39,9 @@ function renderHeader() {
           </button>
           <a class="create" href="https://meet.alive5.com" target="_blank" rel="noreferrer">Book a demo</a>
           <a class="signin" href="https://app.alive5.com" target="_blank" rel="noreferrer">Sign in <span aria-hidden="true">↗</span></a>
+          <button class="mobile-menu-toggle" type="button" aria-label="Documentation menu" aria-expanded="false" aria-controls="mobile-menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
         </div>
       </div>
     </div>
@@ -55,7 +58,53 @@ function renderHeader() {
           <a href="https://support.alive5.com" target="_blank" rel="noreferrer">Help ↗</a>
         </div>
       </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <nav aria-label="Sections">
+        ${MENU.map(([id, path, label]) =>
+          `<a href="${href(path)}"${id === section ? ' aria-current="page"' : ""}>${label}</a>`,
+        ).join("")}
+      </nav>
+      <nav data-mobile-sidebar aria-label="Documentation"></nav>
     </div>`;
+  const button = host.querySelector(".mobile-menu-toggle");
+  const panel = host.querySelector(".mobile-menu");
+  const mobile = matchMedia("(max-width: 720px)");
+  const close = (restoreFocus = false) => {
+    panel.hidden = true;
+    button.setAttribute("aria-expanded", "false");
+    if (restoreFocus) button.focus({ preventScroll: true });
+  };
+  button.addEventListener("click", () => {
+    if (!panel.hidden) return close(true);
+    panel.hidden = false;
+    button.setAttribute("aria-expanded", "true");
+    panel.querySelector("a")?.focus({ preventScroll: true });
+    panel.scrollTop = 0;
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !panel.hidden) {
+      event.preventDefault();
+      close(true);
+    }
+  });
+  document.addEventListener("click", (event) => {
+    if (!panel.hidden && !panel.contains(event.target) && !button.contains(event.target)) {
+      close(panel.contains(document.activeElement));
+    }
+  });
+  panel.addEventListener("click", (event) => {
+    if (event.target.closest("a")) close(true);
+  });
+  host.addEventListener("focusout", (event) => {
+    if (!panel.hidden && !panel.contains(event.relatedTarget) && event.relatedTarget !== button) close();
+  });
+  mobile.addEventListener("change", () => {
+    const active = document.activeElement;
+    const wasInMenu = panel.contains(active) || active === button;
+    close();
+    if (wasInMenu) host.querySelector(".logo").focus({ preventScroll: true });
+  });
 }
 
 function wireTheme() {
@@ -146,7 +195,7 @@ function renderSidebar() {
   host.className = "sidebar";
   host.id = "docs-navigation";
   host.innerHTML =
-    `<button class="mobile-nav" type="button" aria-expanded="false" aria-controls="sidebar-items">Browse documentation <span>⌄</span></button><div id="sidebar-items">` +
+    `<div id="sidebar-items">` +
     SIDEBAR.map(
       (g) => `
     <div class="sidebar-group">
@@ -160,19 +209,25 @@ function renderSidebar() {
     </div>`,
     ).join("") +
     `</div>`;
-  host.querySelector(".mobile-nav").addEventListener("click", (e) => {
-    const b = e.currentTarget;
-    b.setAttribute(
-      "aria-expanded",
-      String(b.getAttribute("aria-expanded") !== "true"),
-    );
-  });
+  const items = host.querySelector("#sidebar-items");
+  const mobileHost = document.querySelector("[data-mobile-sidebar]");
+  if (mobileHost) {
+    const mobile = matchMedia("(max-width: 720px)");
+    const place = () => {
+      const hadFocus = items.contains(document.activeElement);
+      (mobile.matches ? mobileHost : host).append(items);
+      if (hadFocus) document.querySelector(mobile.matches ? ".mobile-menu-toggle" : '.logo').focus({ preventScroll: true });
+    };
+    mobile.addEventListener("change", place);
+    place();
+  }
 }
 
 function renderDocFooter() {
   const host = document.querySelector("[data-docfoot]");
   if (!host) return;
   host.classList.add("docfoot");
+  document.querySelector(".doc")?.append(host);
   const icon = (paths) =>
     `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
   const rows = [
