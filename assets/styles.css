@@ -241,7 +241,9 @@ button { font-family: inherit; }
 .doc { min-width: 0; }
 .crumbs { font-size: 13px; color: var(--faint); margin-bottom: 8px; }
 .crumbs a:hover { color: var(--muted); }
-.crumbs span { padding: 0 5px; }
+.crumbs ol, .doc .crumbs ol { display: flex; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; }
+.crumbs li, .doc .crumbs li { display: block; margin: 0; font-size: inherit; line-height: inherit; }
+.crumbs li + li::before { content: "/" / ""; padding: 0 5px; }
 .doc h1 { line-height: 40px; }
 .doc h3 { line-height: 24px; margin: 28px 0 6px; }
 .doc p { margin-top: 14px; }
