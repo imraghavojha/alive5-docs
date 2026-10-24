@@ -10,9 +10,6 @@ figure.page-art img {
   width: 100%;
   height: auto;
 }
-figure.page-art:empty {
-  display: none;
-}
 
 /* Illustrations remain light printed cards in either theme. */
 [data-theme="dark"] figure.page-art { background: #f6f9fc; border-color: rgba(255,255,255,.06); }

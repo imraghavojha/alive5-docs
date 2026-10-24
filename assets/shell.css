@@ -1,8 +1,8 @@
 .stripe-shell {
   display: flex;
   flex-direction: column;
-  height: 420px;
-  min-height: 420px;
+  height: auto;
+  min-height: 0;
   background: var(--surface);
   color: var(--ink-str);
   border: 1px solid var(--line-2);
@@ -58,7 +58,7 @@
   display: flex;
   align-items: flex-start;
   gap: 6px;
-  margin-top: 18px;
+  margin-top: 12px;
   color: var(--ink);
   font: 12px/21px var(--mono);
 }
@@ -181,18 +181,11 @@
   padding: 12px 14px;
   margin: 2px 0;
 }
-.stripe-shell {
-  height: auto;
-  min-height: 0;
-}
 .shell-scroll {
   padding-top: 14px;
 }
 .shell-logo {
   margin-bottom: 8px;
-}
-.shell-prompt {
-  margin-top: 12px;
 }
 .shell-status {
   position: relative;
