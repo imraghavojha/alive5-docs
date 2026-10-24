@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Build with GitHub Actions · Alive5 Docs</title>
-    <meta name="description" content="Send an SMS from your GitHub Actions workflows." />
+    <meta name="description" content="Send SMS from your GitHub Actions workflows." />
     <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png" />
     <link rel="stylesheet" href="../assets/styles.css" />
     <script defer src="../assets/site.js"></script>
@@ -15,7 +15,7 @@
     </script>
     <link rel="canonical" href="https://imraghavojha.github.io/alive5-docs/connectors/github-actions.html" />
     <meta property="og:title" content="Build with GitHub Actions · Alive5 Docs" />
-    <meta property="og:description" content="Send an SMS from your GitHub Actions workflows." />
+    <meta property="og:description" content="Send SMS from your GitHub Actions workflows." />
     <meta property="og:url" content="https://imraghavojha.github.io/alive5-docs/connectors/github-actions.html" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Alive5 Docs" />
@@ -25,7 +25,7 @@
     <meta property="og:image:alt" content="Alive5 Developer Documentation. Build messaging into your applications." />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Build with GitHub Actions · Alive5 Docs" />
-    <meta name="twitter:description" content="Send an SMS from your GitHub Actions workflows." />
+    <meta name="twitter:description" content="Send SMS from your GitHub Actions workflows." />
     <meta name="twitter:image" content="https://imraghavojha.github.io/alive5-docs/assets/images/og.png" />
     <meta name="twitter:image:alt" content="Alive5 Developer Documentation. Build messaging into your applications." />
   </head>
@@ -37,7 +37,7 @@
       <main class="doc" id="main">
         <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="index.html">Connectors</a></li><li aria-current="page">GitHub Actions</li></ol></nav>
         <h1>Build with GitHub Actions</h1>
-        <p class="sub">Send an SMS from your GitHub Actions workflows.</p>
+        <p class="sub">Send SMS from your GitHub Actions workflows.</p>
         <p class="availability"><a href="https://github.com/marketplace/actions/alive5-sms" target="_blank" rel="noreferrer">View Alive5 on GitHub Marketplace ↗</a></p>
         <h2 id="setup">Connect your account</h2>
         <ol class="setup-list">
@@ -46,7 +46,23 @@
         </ol>
 
         <h2 id="send">Send an SMS</h2>
-        <p>Save this workflow in <code>.github/workflows/</code>. Replace the recipient number, then run it manually. The action needs no <code>GITHUB_TOKEN</code> permissions.</p>
+        <p id="inputs">Configure the action with these required inputs:</p>
+        <table class="tbl"><thead><tr><th>Input</th><th>Value</th></tr></thead><tbody>
+          <tr><td><code>api-key</code></td><td>Your Alive5 API key, supplied through a GitHub secret.</td></tr>
+          <tr><td><code>from</code></td><td>Your Alive5 business SMS number in E.164 format.</td></tr>
+          <tr><td><code>channel-id</code></td><td>The SMS channel associated with the sender number.</td></tr>
+          <tr><td><code>user-id</code></td><td>An agent assigned to that channel.</td></tr>
+          <tr><td><code>to</code></td><td>The recipient in E.164 format, such as <code>+14155550123</code>.</td></tr>
+          <tr><td><code>message</code></td><td>Nonblank SMS text. Whitespace is preserved.</td></tr>
+        </tbody></table>
+
+        <h2 id="example">Example workflow</h2>
+        <ol class="setup-list">
+          <li>Save your API key as <code>ALIVE5_API_KEY</code> and your sender details as <code>ALIVE5_FROM</code>, <code>ALIVE5_CHANNEL_ID</code>, and <code>ALIVE5_USER_ID</code> in repository settings.</li>
+          <li>Save the workflow below in <code>.github/workflows/</code>. Replace the recipient number and message.</li>
+          <li>Run the workflow manually to send an SMS. The action needs no <code>GITHUB_TOKEN</code> permissions.</li>
+          <li>Check the <strong>Send SMS</strong> step result. Read <code>${{ steps.sms.outputs.message-id }}</code> and <code>${{ steps.sms.outputs.conversation-id }}</code> in later steps.</li>
+        </ol>
         <div class="code">
           <div class="code-head"><span class="name">YAML</span><button class="copy" type="button">Copy</button></div>
           <pre>name: Send SMS
@@ -67,20 +83,11 @@ jobs:
           to: &#x27;+14155550123&#x27;
           message: &#x27;Your workflow has completed.&#x27;</pre>
         </div>
-        <p>The action runs on Node.js 24. Self-hosted runners need version 2.327.1 or later. The <code>v1</code> tag follows compatible releases; pin a full commit SHA for strict reproducibility.</p>
-
-        <h2 id="inputs">Required inputs</h2>
-        <table class="tbl"><thead><tr><th>Input</th><th>Value</th></tr></thead><tbody>
-          <tr><td><code>api-key</code></td><td>Your Alive5 API key, supplied through a GitHub secret.</td></tr>
-          <tr><td><code>from</code></td><td>Your Alive5 business SMS number in E.164 format.</td></tr>
-          <tr><td><code>channel-id</code></td><td>The SMS channel associated with the sender number.</td></tr>
-          <tr><td><code>user-id</code></td><td>An agent assigned to that channel.</td></tr>
-          <tr><td><code>to</code></td><td>The recipient in E.164 format, such as <code>+14155550123</code>.</td></tr>
-          <tr><td><code>message</code></td><td>Nonblank SMS text. Whitespace is preserved.</td></tr>
-        </tbody></table>
 
         <h2 id="outputs">Check the result</h2>
         <p>Read <code>${{ steps.sms.outputs.message-id }}</code> and <code>${{ steps.sms.outputs.conversation-id }}</code> in later steps. The conversation ID is empty if absent. Success confirms submission, not delivery.</p>
+        <h2 id="limits">Limits</h2>
+        <p>The action runs on Node.js 24. Self-hosted runners need version 2.327.1 or later. The <code>v1</code> tag follows compatible releases; pin a full commit SHA for strict reproducibility.</p>
         <p>HTTP failures and Alive5 response errors fail the step. Requests time out after 20 seconds, with no automatic retries. Check conversation history before retrying an unclear result to avoid duplicate texts.</p>
 
         <h2 id="resources">Resources</h2>

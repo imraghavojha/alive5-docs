@@ -448,8 +448,15 @@ table.tbl tr:last-child td { border-bottom: 0; }
 /* The source mark is a square with the flow glyph knocked out. Reverse its fills. */
 .connector-logo.node-red svg { background: currentColor; fill: var(--red-tint); border-radius: 12.5%; }
 .connector-logo.shuffle { background: var(--orange-tint); color: var(--orange); }
+/* Primer Octicons workflow-24 (MIT), Apify brand symbol, and Directus rabbit mark. */
+.connector-logo.github-actions { background: var(--blue-tint); color: var(--blue); }
+.connector-logo.apify { background: var(--green-tint); color: var(--green); }
+.connector-logo.directus { background: var(--purple-tint); color: var(--purple); }
 .connector-logo.node-red svg,
-.connector-logo.shuffle svg { width: 27px; height: 27px; }
+.connector-logo.shuffle svg,
+.connector-logo.github-actions svg,
+.connector-logo.apify svg,
+.connector-logo.directus svg { width: 27px; height: 27px; }
 .connector-logo.pipedream { background: var(--green-tint); color: var(--green); }
 .connector-logo.pipedream i { width: 4px; background: var(--green); border-radius: 2px; height: 17px; transform: skewY(-30deg); }
 .connector-logo.pipedream i:nth-child(2) { height: 24px; }

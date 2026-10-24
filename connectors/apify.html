@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Build with Apify · Alive5 Docs</title>
-    <meta name="description" content="Send the same SMS to one or more recipients with an Apify Actor." />
+    <meta name="description" content="Send SMS to one or many recipients from Apify." />
     <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png" />
     <link rel="stylesheet" href="../assets/styles.css" />
     <script defer src="../assets/site.js"></script>
@@ -15,7 +15,7 @@
     </script>
     <link rel="canonical" href="https://imraghavojha.github.io/alive5-docs/connectors/apify.html" />
     <meta property="og:title" content="Build with Apify · Alive5 Docs" />
-    <meta property="og:description" content="Send the same SMS to one or more recipients with an Apify Actor." />
+    <meta property="og:description" content="Send SMS to one or many recipients from Apify." />
     <meta property="og:url" content="https://imraghavojha.github.io/alive5-docs/connectors/apify.html" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Alive5 Docs" />
@@ -25,7 +25,7 @@
     <meta property="og:image:alt" content="Alive5 Developer Documentation. Build messaging into your applications." />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Build with Apify · Alive5 Docs" />
-    <meta name="twitter:description" content="Send the same SMS to one or more recipients with an Apify Actor." />
+    <meta name="twitter:description" content="Send SMS to one or many recipients from Apify." />
     <meta name="twitter:image" content="https://imraghavojha.github.io/alive5-docs/assets/images/og.png" />
     <meta name="twitter:image:alt" content="Alive5 Developer Documentation. Build messaging into your applications." />
   </head>
@@ -37,7 +37,7 @@
       <main class="doc" id="main">
         <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="index.html">Connectors</a></li><li aria-current="page">Apify</li></ol></nav>
         <h1>Build with Apify</h1>
-        <p class="sub">Send the same SMS to one or more recipients with an Apify Actor.</p>
+        <p class="sub">Send SMS to one or many recipients from Apify.</p>
         <p class="availability"><a href="https://apify.com/imraghavojha/alive5-sms" target="_blank" rel="noreferrer">View Alive5 on Apify ↗</a></p>
         <h2 id="setup">Connect your account</h2>
         <ol class="setup-list">
@@ -45,7 +45,7 @@
           <li><strong>Find your sender details</strong><p>Use <a href="../api/reference.html#channels-and-users"><code>channels-and-users/list</code></a> with your API key. In <code>data.Items</code>, choose the SMS channel whose <code>channel_label</code> matches your business number. Copy its <code>channel_id</code> and an assigned agent’s <code>agents[].user_id</code>. Enter the business number, channel ID, and assigned user ID in the Actor.</p></li>
         </ol>
 
-        <h2 id="send">Send messages</h2>
+        <h2 id="send">Send an SMS</h2>
         <p>Open the Alive5 SMS Sender Actor, fill in all six required fields, and run it. Each recipient receives a separate SMS submission.</p>
         <table class="tbl"><thead><tr><th>Input</th><th>Value</th></tr></thead><tbody>
           <tr><td><code>apiKey</code></td><td>Your Alive5 API key. Apify encrypts this secret input on the platform.</td></tr>
@@ -55,7 +55,13 @@
           <tr><td><code>to</code></td><td>An array of unique E.164 recipient numbers, even for one recipient.</td></tr>
           <tr><td><code>message</code></td><td>Nonblank SMS text sent unchanged to every recipient.</td></tr>
         </tbody></table>
-        <p>For JSON input, replace these example credentials and numbers before running:</p>
+        <h2 id="example">Example run</h2>
+        <ol class="setup-list">
+          <li>Open the Alive5 SMS Sender Actor and enter your API key, business SMS number, channel ID, and assigned user ID.</li>
+          <li>Add a recipient in E.164 format to <code>to</code> and enter your message. For JSON input, replace the example credentials and numbers below.</li>
+          <li>Run the Actor to submit a separate SMS for each recipient.</li>
+          <li>Open <strong>Output → SMS submission results</strong> and check every recipient’s <code>status</code>, <code>messageId</code>, and <code>error</code>.</li>
+        </ol>
         <div class="code">
           <div class="code-head"><span class="name">JSON</span><button class="copy" type="button">Copy</button></div>
           <pre>{
