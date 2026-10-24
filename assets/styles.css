@@ -531,7 +531,8 @@ table.tbl tr:last-child td { border-bottom: 0; }
   .topbar-mid { margin-left: auto; }
   .topbar-right { margin-left: 0; }
   .signin { height: 30px; padding: 0 9px; font-size: 11px; }
-  .searchbox { width: 32px; justify-content: center; padding: 0; font-size: 0; height: 30px; }
+  .searchbox { width: 32px; justify-content: center; padding: 0; height: 30px; }
+  .searchbox .search-label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
   .searchbox .kbd { display: none; }
   .menubar-in { padding: 0 20px; overflow-x: auto; scrollbar-width: none; }
   .menubar nav { white-space: nowrap; flex: none; }
@@ -703,7 +704,7 @@ table.tbl td.t { font-size: 12px; }
   .code pre { font-size: 12px; line-height: 22px; padding: 15px; }
   table.tbl td { font-size: 13px; }
   table.tbl td:first-child { font-size: 12px; }
-  table.tbl th { font-size: 11px; }
+  table.tbl th { font-size: 12px; }
   .doc .note,
   .doc .note p { font-size: 13px; line-height: 24px; }
   .path { font-size: 12px; line-height: 21px; }
@@ -711,7 +712,7 @@ table.tbl td.t { font-size: 12px; }
   .setup-list p { font-size: 14px; line-height: 24px; }
   .resource-links { font-size: 13px; }
   .availability { flex-wrap: wrap; }
-  .dashboard-figure figcaption { font-size: 10px; }
+  .dashboard-figure figcaption { font-size: 12px; }
   .search-hint { font-size: 11px; }
 }
 .linecard .sub { font-size: 12px; }
@@ -732,7 +733,7 @@ table.tbl td.t { font-size: 12px; }
   .shell-scroll-cue { display: block; font-size: 11px; line-height: 17px; color: var(--muted); text-align: right; margin-top: -5px; margin-bottom: -5px; }
   .section-head h2 { white-space: nowrap; }
   .dashboard-figure { max-width: 430px; }
-  .dashboard-figure figcaption { font-size: 11px; }
+  .dashboard-figure figcaption { font-size: 12px; }
   .code-head .name { min-width: 0; white-space: normal; }
   .code-head .copy { flex: none; }
 }
@@ -791,7 +792,7 @@ table.tbl td.t { font-size: 12px; }
 }
 @media (max-width: 720px) {
   .doc .devres-copy p { font-size: 16px; line-height: 26px; }
-  .devres-term { height: auto; font-size: 11px; line-height: 20px; }
+  .devres-term { height: auto; font-size: 12px; line-height: 20px; }
   .devres-term pre { padding: 6px 16px 0; }
 }
 
@@ -920,4 +921,14 @@ input::placeholder, textarea::placeholder { color: var(--faint); opacity: 1; }
   .mobile-menu a[aria-current] { color: var(--link); background: var(--a5-light); }
   .mobile-menu [data-mobile-sidebar]:not(:empty) { margin-top: 16px; padding-top: 20px; border-top: 1px solid var(--line); }
   .mobile-menu #sidebar-items { display: block; padding: 0; }
+}
+
+@media (max-width: 720px) {
+  .coming-soon small,
+  .browse-grid strong em,
+  .method,
+  .doc .masked-key code { font-size: 12px; }
+  .doc p code,
+  .doc li code,
+  .doc td code { font-size: max(12px, 0.875em); }
 }

@@ -73,12 +73,15 @@
             <div class="linecard">
               <div class="message-brand">
                 <div class="num">Hello from</div>
-                <img
-                  src="assets/images/alive5-logo-small.png"
-                  alt="Alive5 logo"
-                  width="56"
-                  height="40"
-                />
+                <picture style="display: contents">
+                  <source hidden media="(max-width: 720px)" srcset="assets/images/alive5-logo-small-3x.webp" />
+                  <img
+                    src="assets/images/alive5-logo-small.png"
+                    alt="Alive5 logo"
+                    width="56"
+                    height="40"
+                  />
+                </picture>
               </div>
               <p class="sub">Your application → their inbox</p>
             </div>

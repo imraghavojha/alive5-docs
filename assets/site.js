@@ -20,7 +20,7 @@ function renderHeader() {
     <div class="topbar">
       <div class="topbar-in">
         <a class="logo" href="${href("index.html")}">
-          <span class="word">alive5</span><img class="mobile-brand" src="${href("assets/images/alive5-logo-small.png")}" alt="Alive5" width="55" height="32"><span class="kind">DOCS</span>
+          <span class="word">alive5</span><img class="mobile-brand" src="${href("assets/images/alive5-logo-small.png")}" srcset="${href("assets/images/alive5-logo-small-1x.webp")} 1x, ${href("assets/images/alive5-logo-small-2x.webp")} 2x, ${href("assets/images/alive5-logo-small-3x.webp")} 3x" alt="Alive5" width="55" height="32"><span class="kind">DOCS</span>
         </a>
         <div class="topbar-mid">
           <button class="searchbox" type="button" data-search>
@@ -28,7 +28,7 @@ function renderHeader() {
               <circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.6"/>
               <path d="M10.6 10.6 14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
             </svg>
-            Search docs<span class="kbd">⌘ K</span>
+            <span class="search-label">Search docs</span><span class="kbd">⌘ K</span>
           </button>
           <a class="askai" href="https://www.alive5.com" target="_blank" rel="noreferrer">Alive5.com ↗</a>
         </div>
