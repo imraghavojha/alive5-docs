@@ -314,6 +314,12 @@ function wireShell() {
     input.style.height = "auto";
     input.style.height = Math.max(26, input.scrollHeight) + "px";
   };
+  let inputWidth;
+  new ResizeObserver(([entry]) => {
+    if (entry.contentRect.width === inputWidth) return;
+    inputWidth = entry.contentRect.width;
+    fit();
+  }).observe(input);
   const stage = (index, focus = true) => {
     const op = OPS[index];
     buttons.forEach((b, i) => {
@@ -502,10 +508,14 @@ function wireShell() {
     const end = () => {
       document.documentElement.classList.remove("is-resizing");
       grip.removeEventListener("pointermove", move);
+      grip.removeEventListener("pointerup", end);
+      grip.removeEventListener("pointercancel", end);
+      grip.removeEventListener("lostpointercapture", end);
     };
     grip.addEventListener("pointermove", move);
     grip.addEventListener("pointerup", end, { once: true });
     grip.addEventListener("pointercancel", end, { once: true });
+    grip.addEventListener("lostpointercapture", end, { once: true });
   });
   grip.addEventListener("keydown", (e) => {
     if (!["ArrowUp", "ArrowDown", "Home", "End"].includes(e.key)) return;

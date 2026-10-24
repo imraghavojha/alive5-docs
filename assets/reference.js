@@ -25,14 +25,21 @@
       }
     }
   };
-  links.forEach((link) => link.addEventListener("click", (event) => {
-    if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    clickedActive = endpoints.find((entry) => link.hash === `#${entry.id}`);
+  const navigate = (hash) => {
+    clickedActive = endpoints.find((entry) => hash === `#${encodeURIComponent(entry.id)}`);
     userScrollPending = false;
     update();
-  }));
-  // Anchor navigation (including smooth scrolling) must not undo a clicked selection.
-  // Release it only when the user scrolls with a wheel, touch, keys, or scrollbar.
+  };
+  document.addEventListener("click", (event) => {
+    if (event.defaultPrevented || event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest("a[href]");
+    if (link && link.hash && link.origin === location.origin &&
+      link.pathname === location.pathname && link.search === location.search &&
+      !link.download && (!link.target || link.target === "_self")) navigate(link.hash);
+  });
+  window.addEventListener("hashchange", () => navigate(location.hash));
+  window.addEventListener("popstate", () => navigate(location.hash));
+  // Keep the navigated endpoint selected during smooth scrolling, until the user scrolls.
   window.addEventListener("wheel", () => { userScrollPending = true; }, { passive: true });
   window.addEventListener("touchmove", () => { userScrollPending = true; }, { passive: true });
   window.addEventListener("pointerdown", (event) => {

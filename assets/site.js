@@ -463,6 +463,9 @@ function wireSearch() {
       + (body.includes(query) ? 10 / (1 + body.indexOf(query)) : 0);
   };
   const draw = () => {
+    const selected = results.querySelectorAll("a")[active];
+    const selectedURL = selected?.href;
+    const restoreFocus = selected && document.activeElement === selected;
     const query = normalize(input.value.trim());
     const terms = [...new Set(query.split(/\s+/).filter(Boolean))];
     const highlight = (value) => {
@@ -506,12 +509,14 @@ function wireSearch() {
         return `<a href="${escape(href(row.path + (row.id ? "#" + encodeURIComponent(row.id) : "")))}"><span class="search-doc-icon" aria-hidden="true">▤</span><span class="search-result-copy">${highlight(label)}<small>${highlight(context)}</small>${row.endpoint || anchorMatch ? `<small>${highlight(row.endpoint || "#" + row.id)}</small>` : ""}${snippet ? `<small class="search-snippet">${start ? "…" : ""}${highlight(snippet)}${row.text.length > start + 140 ? "…" : ""}</small>` : ""}</span><span class="search-enter" aria-hidden="true">↵</span></a>`;
       }).join(""));
     }
-    active = 0;
     dialog.querySelector("[data-search-status]").textContent = `${count} documentation results${indexFailed ? "; section search unavailable" : ""}`;
     results.innerHTML = content.length ? content.join("")
       : `<div class="search-empty">No results for “${escape(input.value.trim())}”<small>${indexRequest && !index.length && !indexFailed ? "Loading section search…" : "Try “API key”, “SMS”, or “Zapier”."}</small></div>`;
     if (indexFailed) results.insertAdjacentHTML("beforeend", '<div class="search-empty"><small>Section search is unavailable. Reopen search to retry.</small></div>');
+    const links = [...results.querySelectorAll("a")];
+    active = Math.max(0, links.findIndex((link) => link.href === selectedURL));
     mark();
+    if (restoreFocus) links[active]?.focus({ preventScroll: true });
   };
   const loadIndex = () => {
     if (indexRequest) return;
@@ -671,22 +676,6 @@ function enhanceDocs() {
 }
 renderHeader();
 wireTheme();
-const sectionBar = document.querySelector(".menubar-in");
-const selectedSection = sectionBar?.querySelector("[aria-current]");
-if (sectionBar) {
-  const cue = () =>
-    sectionBar.parentElement.classList.toggle(
-      "has-left",
-      sectionBar.scrollLeft > 8,
-    );
-  sectionBar.addEventListener("scroll", cue, { passive: true });
-}
-if (sectionBar && selectedSection && matchMedia("(max-width: 720px)").matches) {
-  sectionBar.scrollLeft = Math.max(
-    0,
-    selectedSection.offsetLeft - sectionBar.clientWidth / 2,
-  );
-}
 renderSidebar();
 renderDocFooter();
 wireCode();

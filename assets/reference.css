@@ -188,10 +188,3 @@
   outline: 2px solid var(--a5);
   outline-offset: -2px;
 }
-
-@media (min-width: 721px) {
-  body[data-page="api-reference"] .docfoot:not(.home-foot) .docfoot-in.wrap { max-width: 1600px; padding-left: 276px; }
-}
-@media (min-width: 721px) and (max-width: 1199px) {
-  body[data-page="api-reference"] .docfoot:not(.home-foot) .docfoot-in.wrap { padding-left: 233px; }
-}

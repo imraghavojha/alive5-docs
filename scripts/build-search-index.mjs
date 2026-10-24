@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Run from any directory: node scripts/build-search-index.mjs
+// Run from any directory: node scripts/build-search-index.mjs [--check]
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -74,5 +74,18 @@ for (const file of await crawl(root)) {
   });
   pages.push({ path: relative(root, file).replaceAll("\\", "/"), title, h1: h1 ? headingText(h1) : title, sections });
 }
-await writeFile(join(root, "assets/search-index.json"), JSON.stringify(pages, null, 2) + "\n");
-console.log(`Indexed ${pages.length} pages and ${pages.reduce((sum, page) => sum + page.sections.length, 0)} headings.`);
+const output = join(root, "assets/search-index.json");
+const json = JSON.stringify(pages) + "\n";
+if (process.argv.includes("--check")) {
+  const existing = await readFile(output, "utf8").catch((error) => {
+    if (error.code !== "ENOENT") throw error;
+    return null;
+  });
+  if (existing !== json) {
+    console.error("Search index is stale. Run node scripts/build-search-index.mjs.");
+    process.exitCode = 1;
+  } else console.log("Search index is up to date.");
+} else {
+  await writeFile(output, json);
+  console.log(`Indexed ${pages.length} pages and ${pages.reduce((sum, page) => sum + page.sections.length, 0)} headings.`);
+}
