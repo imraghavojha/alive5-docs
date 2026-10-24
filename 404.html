@@ -28,6 +28,8 @@
         const root = document.querySelector("base").getAttribute("href");
         const style = document.createElement("link");
         style.rel = "stylesheet";
+        // Dynamically inserted stylesheets must explicitly block the first paint.
+        style.setAttribute("blocking", "render");
         style.href = root + "assets/styles.css";
         const icon = document.createElement("link");
         icon.rel = "icon";
