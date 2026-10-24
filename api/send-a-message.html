@@ -98,6 +98,7 @@
           above uses <code>api-v2.alive5.com</code>. Send the fields as
           multipart form data.
         </p>
+        <p>This sends a real SMS; test with a number you control.</p>
         <div class="code">
           <div class="code-head">
             <button class="tab" aria-selected="true" type="button">curl</button>
@@ -162,39 +163,31 @@ form<span class="tok-punc">.</span><span class="tok-cmd">set</span><span class="
             <td>Teammate credited with the send</td>
           </tr>
         </table>
-        <div class="note">
-          <strong>This sends a real text.</strong> Test against a number you
-          control. Attachments are not supported on this endpoint.
-        </div>
-
         <h2 id="verify">Check API acceptance</h2>
         <p>
-          The response returns a message ID, a status, and the thread ID. The
-          same thread is what your team sees in the shared inbox, so a reply
-          continues the conversation rather than opening a new one.
+          The response includes the message ID, status, and thread ID.
         </p>
 
         <div class="code">
           <div class="code-head">
-            <span class="name">Example response</span
+            <span class="name">Response</span
             ><button class="copy" type="button">Copy</button>
           </div>
-          <pre>
-{
-  "code": 200,
-  "data": {
-    "data": {
-      "message_id": "example_message",
-      "message_status": "sent",
-      "thread_id": "example_thread",
-      "From": "+12025550100",
-      "To": "+12025550123",
-      "direction": "Outbound",
-      "message_content": "Hello from Alive5."
-    }
-  },
-  "error": {}
-}</pre
+          <pre><span class="tok-punc">{</span>
+  <span class="tok-key">"code"</span><span class="tok-punc">:</span> <span class="tok-num">200</span><span class="tok-punc">,</span>
+  <span class="tok-key">"data"</span><span class="tok-punc">: {</span>
+    <span class="tok-key">"data"</span><span class="tok-punc">: {</span>
+      <span class="tok-key">"message_id"</span><span class="tok-punc">:</span> <span class="tok-str">"example_message"</span><span class="tok-punc">,</span>
+      <span class="tok-key">"message_status"</span><span class="tok-punc">:</span> <span class="tok-str">"sent"</span><span class="tok-punc">,</span>
+      <span class="tok-key">"thread_id"</span><span class="tok-punc">:</span> <span class="tok-str">"example_thread"</span><span class="tok-punc">,</span>
+      <span class="tok-key">"From"</span><span class="tok-punc">:</span> <span class="tok-str">"+12025550100"</span><span class="tok-punc">,</span>
+      <span class="tok-key">"To"</span><span class="tok-punc">:</span> <span class="tok-str">"+12025550123"</span><span class="tok-punc">,</span>
+      <span class="tok-key">"direction"</span><span class="tok-punc">:</span> <span class="tok-str">"Outbound"</span><span class="tok-punc">,</span>
+      <span class="tok-key">"message_content"</span><span class="tok-punc">:</span> <span class="tok-str">"Hello from Alive5."</span>
+    <span class="tok-punc">}</span>
+  <span class="tok-punc">},</span>
+  <span class="tok-key">"error"</span><span class="tok-punc">: {}</span>
+<span class="tok-punc">}</span></pre
           >
         </div>
         <p>API acceptance does not confirm carrier delivery.</p>
