@@ -451,6 +451,7 @@ table.tbl tr:last-child td { border-bottom: 0; }
 /* Primer Octicons workflow-24 (MIT), Apify brand symbol, and Directus rabbit mark. */
 .connector-logo.github-actions { background: var(--blue-tint); color: var(--blue); }
 .connector-logo.apify { background: var(--green-tint); color: var(--green); }
+.connector-logo.apify svg { fill: none; stroke: currentColor; }
 .connector-logo.directus { background: var(--purple-tint); color: var(--purple); }
 .connector-logo.node-red svg,
 .connector-logo.shuffle svg,
