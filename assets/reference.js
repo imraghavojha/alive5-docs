@@ -5,26 +5,62 @@
   const links = [...nav.querySelectorAll(".reference-toc-endpoint")];
   let clickedActive;
   let userScrollPending = false;
-  let scheduled = false;
+  const doc = endpoints[0].closest(".doc");
+  const visible = new Set();
+  let atBottom = false;
+  let observer;
+  let activeLink;
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.target === activeLink && entry.intersectionRatio < 1 && entry.rootBounds.height) {
+        nav.scrollBy({
+          top: entry.boundingClientRect.top - entry.rootBounds.top - entry.rootBounds.height / 2,
+          behavior: "instant",
+        });
+      }
+    });
+  }, { root: nav, threshold: 1 });
   const update = () => {
-    scheduled = false;
-    const atBottom = scrollY > 0 && scrollY + innerHeight >= document.documentElement.scrollHeight - 8;
-    const active = clickedActive || (atBottom ? endpoints.at(-1)
-      : endpoints.filter((entry) => entry.getBoundingClientRect().top <= 161).at(-1) || endpoints[0]);
+    const active = clickedActive || (atBottom && scrollY > 0 ? endpoints.at(-1)
+      : endpoints.findLast((entry) => visible.has(entry)) || endpoints[0]);
+    const current = links.find((link) => link.hash === `#${active.id}`);
+    if (current === activeLink) return;
+    if (activeLink) navObserver.unobserve(activeLink);
+    activeLink = current;
     links.forEach((link) => {
-      const current = link.hash === `#${active.id}`;
-      link.classList.toggle("on", current);
-      if (current) link.setAttribute("aria-current", "location");
+      const selected = link === current;
+      link.classList.toggle("on", selected);
+      if (selected) link.setAttribute("aria-current", "location");
       else link.removeAttribute("aria-current");
     });
-    const current = nav.querySelector(".on");
-    if (current && nav.clientHeight) {
-      const top = current.offsetTop;
-      if (top < nav.scrollTop || top + current.offsetHeight > nav.scrollTop + nav.clientHeight) {
-        nav.scrollTop = top - nav.clientHeight / 2;
-      }
-    }
+    if (current) navObserver.observe(current);
   };
+  const sentinel = document.createElement("div");
+  sentinel.setAttribute("aria-hidden", "true");
+  sentinel.style.cssText = "height:0; width:1px; pointer-events:none";
+  doc.append(sentinel);
+  const bottomObserver = new IntersectionObserver(([entry]) => {
+    atBottom = entry.isIntersecting;
+    update();
+  }, { rootMargin: "0px 0px 8px 0px" });
+  bottomObserver.observe(sentinel);
+  const resizeObserver = new ResizeObserver(([entry]) => {
+    observer?.disconnect();
+    visible.clear();
+    // Observe every endpoint above the activation line, including endpoints
+    // skipped by a large scroll jump and gaps between resource groups.
+    observer = new IntersectionObserver((entries) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (isIntersecting) visible.add(target);
+        else visible.delete(target);
+      });
+      update();
+    }, { rootMargin: `${Math.ceil(entry.borderBoxSize[0].blockSize)}px 0px ${161 - innerHeight}px 0px` });
+    endpoints.forEach((endpoint) => observer.observe(endpoint));
+    const paddingBottom = entry.borderBoxSize[0].blockSize - entry.contentRect.height - entry.contentRect.y;
+    sentinel.style.transform = `translateY(${paddingBottom}px)`;
+  });
+  resizeObserver.observe(doc);
   const navigate = (hash) => {
     clickedActive = endpoints.find((entry) => hash === `#${encodeURIComponent(entry.id)}`);
     userScrollPending = false;
@@ -57,12 +93,11 @@
       clickedActive = undefined;
       userScrollPending = false;
     }
-    if (!scheduled) {
-      scheduled = true;
-      requestAnimationFrame(update);
-    }
+    update();
   }, { passive: true });
   update();
-  window.addEventListener("resize", update);
-  window.addEventListener("load", update);
+  window.addEventListener("resize", () => {
+    resizeObserver.unobserve(doc);
+    resizeObserver.observe(doc);
+  });
 })();

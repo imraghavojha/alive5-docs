@@ -362,32 +362,52 @@ function wireToc() {
       if (heads[i] === active) link.setAttribute("aria-current", "location");
       else link.removeAttribute("aria-current");
     });
-  let scheduled = false;
-  const update = () => {
-    scheduled = false;
-    const atBottom =
-      window.scrollY > 0 &&
-      window.scrollY + innerHeight >= document.documentElement.scrollHeight - 8;
-    const active = atBottom
-      ? heads.at(-1)
-      : heads.filter((h) => h.getBoundingClientRect().top <= 160).at(-1) ||
-        heads[0];
-    activate(active);
-  };
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (!scheduled) {
-        scheduled = true;
-        requestAnimationFrame(update);
-      }
-    },
-    { passive: true },
-  );
+  const doc = heads[0].closest(".doc");
+  const visible = new Set();
+  let atBottom = false;
+  let observer;
+  const update = () => activate(atBottom && window.scrollY > 0
+    ? heads.at(-1)
+    : heads.findLast((head) => visible.has(head)) || heads[0]);
+  const sentinel = document.createElement("div");
+  sentinel.setAttribute("aria-hidden", "true");
+  sentinel.style.cssText = "height:0; width:1px; pointer-events:none";
+  doc.append(sentinel);
+  const bottomObserver = new IntersectionObserver(([entry]) => {
+    atBottom = entry.isIntersecting;
+    update();
+  }, { rootMargin: "0px 0px 8px 0px" });
+  bottomObserver.observe(sentinel);
+  const resizeObserver = new ResizeObserver(([entry]) => {
+    observer?.disconnect();
+    visible.clear();
+    // Include the whole document above the activation line. A narrow band can
+    // miss headings skipped by an anchor jump or leave gaps between sections.
+    observer = new IntersectionObserver((entries) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (isIntersecting) visible.add(target);
+        else visible.delete(target);
+      });
+      update();
+    }, { rootMargin: `${Math.ceil(entry.borderBoxSize[0].blockSize)}px 0px ${160 - innerHeight}px 0px` });
+    heads.forEach((head) => observer.observe(head));
+    // Move the zero-height marker through the bottom padding, without changing
+    // document height, so it represents the page end rather than the footer.
+    const paddingBottom = entry.borderBoxSize[0].blockSize - entry.contentRect.height - entry.contentRect.y;
+    sentinel.style.transform = `translateY(${paddingBottom}px)`;
+  });
+  resizeObserver.observe(doc);
+  window.addEventListener("resize", () => {
+    resizeObserver.unobserve(doc);
+    resizeObserver.observe(doc);
+  });
+  window.addEventListener("scroll", () => {
+    if (atBottom) update();
+  }, { passive: true });
   links.forEach((link, i) =>
     link.addEventListener("click", () => activate(heads[i])),
   );
-  update();
+  activate(heads[0]);
 }
 
 const SEARCH = [
