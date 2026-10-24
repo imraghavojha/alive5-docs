@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+<title id="title">Alive5 API terminal</title><desc id="desc">Three gently exploded layers: one lavender api screen in a cream bezel, thirty lavender keyboard keys, and a plain base with four screw bosses. Dashed vertical guides align the layers.</desc>
+<defs><style>.main,.detail{stroke:#2a2a2e;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}.main{stroke-width:2.5}.detail{stroke-width:1.5}</style>
+<g id="key"><path class="detail" fill="#f7f6f3" d="M0 0H36V27H0Z"/><path class="detail" fill="#d7d2ea" d="M0 0H36V20H0Z"/><path class="detail" fill="none" d="M0 20H36M30 20V27"/></g>
+<g id="boss"><path class="detail" fill="#f7f6f3" d="M-8 0V-12H8V0C8 6-8 6-8 0Z"/><ellipse class="detail" cx="0" cy="-12" rx="8" ry="5" fill="#f7f6f3"/><ellipse class="detail" cx="0" cy="-12" rx="2.6" ry="1.7" fill="none"/></g>
+</defs><rect width="1200" height="500" fill="#eeedeb"/>
+
+<path class="detail" d="M341.80 98.44V383.44" fill="none" stroke-dasharray="4 7" opacity=".45"/>
+<path class="detail" d="M817.80 50.84V335.84" fill="none" stroke-dasharray="4 7" opacity=".45"/>
+<path class="detail" d="M382.20 171.16V456.16" fill="none" stroke-dasharray="4 7" opacity=".45"/>
+<path class="detail" d="M858.20 123.56V408.56" fill="none" stroke-dasharray="4 7" opacity=".45"/>
+<g transform="matrix(1 -0.1 0.4 0.72 325.0 376)">
+<path class="main" d="M0 0H500V125H0Z" fill="#f7f6f3" />
+<path class="main" d="M0 125V137H500V125 M500 0V12" fill="none" />
+<path class="main" d="M0 125H500V137H0Z" fill="#f7f6f3" />
+<path class="main" d="M500 0 508 5V130L500 137Z" fill="#f7f6f3" />
+<path class="detail" d="M12 12H488V113H12Z" fill="#eeedeb" />
+<use href="#boss" x="27" y="30"/>
+<use href="#boss" x="473" y="30"/>
+<use href="#boss" x="27" y="98"/>
+<use href="#boss" x="473" y="98"/>
+</g>
+<g transform="matrix(1 -0.1 0.4 0.72 325.0 236)">
+<path class="main" d="M0 0H500V125H0Z" fill="#f7f6f3" />
+<path class="main" d="M0 125H500V133H0Z" fill="#f7f6f3" />
+<path class="main" d="M500 0 506 4V129L500 133Z" fill="#f7f6f3" />
+<use href="#key" x="27.0" y="15"/>
+<use href="#key" x="72.5" y="15"/>
+<use href="#key" x="118.0" y="15"/>
+<use href="#key" x="163.5" y="15"/>
+<use href="#key" x="209.0" y="15"/>
+<use href="#key" x="254.5" y="15"/>
+<use href="#key" x="300.0" y="15"/>
+<use href="#key" x="345.5" y="15"/>
+<use href="#key" x="391.0" y="15"/>
+<use href="#key" x="436.5" y="15"/>
+<use href="#key" x="27.0" y="47"/>
+<use href="#key" x="72.5" y="47"/>
+<use href="#key" x="118.0" y="47"/>
+<use href="#key" x="163.5" y="47"/>
+<use href="#key" x="209.0" y="47"/>
+<use href="#key" x="254.5" y="47"/>
+<use href="#key" x="300.0" y="47"/>
+<use href="#key" x="345.5" y="47"/>
+<use href="#key" x="391.0" y="47"/>
+<use href="#key" x="436.5" y="47"/>
+<use href="#key" x="27.0" y="79"/>
+<use href="#key" x="72.5" y="79"/>
+<use href="#key" x="118.0" y="79"/>
+<use href="#key" x="163.5" y="79"/>
+<use href="#key" x="209.0" y="79"/>
+<use href="#key" x="254.5" y="79"/>
+<use href="#key" x="300.0" y="79"/>
+<use href="#key" x="345.5" y="79"/>
+<use href="#key" x="391.0" y="79"/>
+<use href="#key" x="436.5" y="79"/>
+</g>
+<g transform="matrix(1 -0.1 0.4 0.72 325.0 91)">
+<path class="main" d="M0 0H500V125H0Z" fill="#f7f6f3" />
+<path class="main" d="M0 125H500V134H0Z" fill="#f7f6f3" />
+<path class="main" d="M500 0 506 4V130L500 134Z" fill="#f7f6f3" />
+<rect class="main" x="19" y="15" width="462" height="95" rx="2" fill="#d7d2ea"/>
+<g fill="#2a2a2e" aria-label="api">
+<rect x="175.00" y="48.50" width="8" height="8"/>
+<rect x="185.00" y="48.50" width="8" height="8"/>
+<rect x="195.00" y="48.50" width="8" height="8"/>
+<rect x="205.00" y="58.50" width="8" height="8"/>
+<rect x="175.00" y="68.50" width="8" height="8"/>
+<rect x="185.00" y="68.50" width="8" height="8"/>
+<rect x="195.00" y="68.50" width="8" height="8"/>
+<rect x="205.00" y="68.50" width="8" height="8"/>
+<rect x="165.00" y="78.50" width="8" height="8"/>
+<rect x="205.00" y="78.50" width="8" height="8"/>
+<rect x="175.00" y="88.50" width="8" height="8"/>
+<rect x="185.00" y="88.50" width="8" height="8"/>
+<rect x="195.00" y="88.50" width="8" height="8"/>
+<rect x="205.00" y="88.50" width="8" height="8"/>
+<rect x="225.00" y="48.50" width="8" height="8"/>
+<rect x="235.00" y="48.50" width="8" height="8"/>
+<rect x="245.00" y="48.50" width="8" height="8"/>
+<rect x="255.00" y="48.50" width="8" height="8"/>
+<rect x="225.00" y="58.50" width="8" height="8"/>
+<rect x="265.00" y="58.50" width="8" height="8"/>
+<rect x="225.00" y="68.50" width="8" height="8"/>
+<rect x="235.00" y="68.50" width="8" height="8"/>
+<rect x="245.00" y="68.50" width="8" height="8"/>
+<rect x="255.00" y="68.50" width="8" height="8"/>
+<rect x="225.00" y="78.50" width="8" height="8"/>
+<rect x="225.00" y="88.50" width="8" height="8"/>
+<rect x="305.00" y="28.50" width="8" height="8"/>
+<rect x="295.00" y="48.50" width="8" height="8"/>
+<rect x="305.00" y="48.50" width="8" height="8"/>
+<rect x="305.00" y="58.50" width="8" height="8"/>
+<rect x="305.00" y="68.50" width="8" height="8"/>
+<rect x="305.00" y="78.50" width="8" height="8"/>
+<rect x="295.00" y="88.50" width="8" height="8"/>
+<rect x="305.00" y="88.50" width="8" height="8"/>
+<rect x="315.00" y="88.50" width="8" height="8"/>
+</g></g></svg>
