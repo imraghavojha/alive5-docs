@@ -12,7 +12,7 @@ Every Alive5 developer guide in one place: the REST API, connectors, chat widget
 
 <img src=".github/media/home.png" alt="The docs home page with quickstart links for developers, automation and messaging">
 
-<img src=".github/media/home.gif" width="800" alt="The Try it out terminal running example Alive5 commands">
+<img src=".github/media/home.gif" alt="The Try it out terminal running example Alive5 commands">
 
 <table>
   <tr>
