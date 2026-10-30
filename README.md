@@ -24,3 +24,7 @@ Every Alive5 developer guide in one place: the REST API, connectors, chat widget
     <td><img src=".github/media/search.png" alt="Search results for sms"></td>
   </tr>
 </table>
+
+## Updating the CLI preview
+
+Run `node scripts/sync-cli-art.mjs /path/to/alive5-cli` to refresh the shared wordmark renderer and mascot frames. The browser adapter uses the docs theme and keeps the preview local to the page.

@@ -21,6 +21,11 @@ if (root) {
     context.fillStyle = fg;
     // Terminal box-drawing characters join at cell boundaries, independent of font metrics.
     const box = {
+      "┌": [0, 1, 0, 1],
+      "┐": [1, 0, 0, 1],
+      "└": [0, 1, 1, 0],
+      "┘": [1, 0, 1, 0],
+      "┬": [1, 1, 0, 1],
       "─": [1, 1, 0, 0],
       "│": [0, 0, 1, 1],
       "╭": [0, 1, 0, 1],
@@ -46,7 +51,11 @@ if (root) {
     context.fillStyle = theme.bg;
     context.fillRect(0, 0, canvas.width, canvas.height);
     drawLogo(
-      { put: paintCell },
+      {
+        put: (x, y, text, ...style) =>
+          [...text].forEach((ch, col) => paintCell(x + col, y, ch, ...style)),
+        theme,
+      },
       {
         x: 1,
         y: 1,
@@ -54,12 +63,13 @@ if (root) {
         height: 5,
         time,
         motion: paused ? "off" : "full",
+        section: root.dataset.cliSection || undefined,
       },
     );
   }
   function resize() {
     const available = root.querySelector(".shell-scroll").clientWidth - 32;
-    width = Math.max(28, Math.floor(available / 9));
+    width = Math.max(28, Math.min(80, Math.floor(available / 9)));
     cellWidth = Math.min(10, available / width);
     const logicalWidth = width * cellWidth;
     const logicalHeight = cellHeight * 7;
@@ -74,7 +84,11 @@ if (root) {
   function schedule() {
     clearTimeout(timer);
     button.disabled = reduced.matches;
-    const label = reduced.matches ? "Animation disabled by reduced motion preference" : paused ? "Play animation" : "Pause animation";
+    const label = reduced.matches
+      ? "Animation disabled by reduced motion preference"
+      : paused
+        ? "Play animation"
+        : "Pause animation";
     button.setAttribute("aria-label", label);
     button.title = label;
     button.querySelector("span").textContent = paused ? "▷" : "Ⅱ";
@@ -90,6 +104,11 @@ if (root) {
       schedule();
     }, 167);
   }
+  root.addEventListener("cli-section-change", () => {
+    time = 0;
+    render();
+    schedule();
+  });
   button.addEventListener("click", () => {
     if (reduced.matches) return;
     paused = !paused;
