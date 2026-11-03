@@ -1,5 +1,7 @@
 import { escape, plain, renderRich, signature, slug, siteURL, fragment, walk, text } from './html.mjs';
 
+import { widgetNotes } from './widgets.mjs';
+
 const keys = node => typeof node === 'string' ? [] : node.key ? [node.key] : (node.parts || []).flatMap(keys);
 const live = blocks => blocks.filter(b => !b.archived && !b.in_trash);
 export function renderBlocks(blocks, template = { leaves: {} }, path = template.path || 'index.html', listTag) {
@@ -42,11 +44,11 @@ function renderBlock(b, template, path) {
   const same = leaf?.type === b.type;
   const unchanged = same && leaf.signature === signature(b);
   const sub = live(d.children || []);
-  if (leaf?.widget && plain(d.rich_text) === `⟦${leaf.widget}⟧`) return leaf.html;
-  if (b.type === 'callout' && /^⟦.*⟧$/.test(plain(d.rich_text))) {
-    const widget = Object.values(template.leaves).find(l => l.widget && `⟦${l.widget}⟧` === plain(d.rich_text));
-    if (!widget) throw new Error(`Unknown widget marker: ${plain(d.rich_text)}`);
-    return widget.html;
+  if (leaf?.widget && b.type === 'callout') return leaf.html;
+  if (b.type === 'callout') {
+    const widget = Object.values(template.leaves).find(l => l.widget && [widgetNotes[l.widget], `⟦${l.widget}⟧`].includes(plain(d.rich_text)));
+    if (widget) return widget.html;
+    if (/^⟦.*⟧$/.test(plain(d.rich_text))) throw new Error(`Unknown widget marker: ${plain(d.rich_text)}`);
   }
   if (b.type === 'table') {
     if (unchanged && sub.length === leaf.rows.length && sub.every((r, i) => r.id === leaf.rows[i].key && signature(r) === leaf.rows[i].signature)) return leaf.html;

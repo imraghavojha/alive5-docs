@@ -45,8 +45,8 @@ export function requestBlock(block) {
   if (block.type === 'table') data.children = children.slice(0, 100).map(requestBlock);
   return { object: 'block', type: block.type, [block.type]: data };
 }
-export async function seedBlocks(client, parent, source, bindings, save, media) {
-  const existing = await listChildren(client, parent);
+export async function seedBlocks(client, parent, source, bindings, save, media, ignoredIds = []) {
+  const existing = (await listChildren(client, parent)).filter(b => !ignoredIds.includes(b.id));
   if (existing.length > source.length) throw new Error('An unfinished seed page was edited. Move it out of the root before retrying seed.');
   for (let offset = 0; offset < source.length; ) {
     if (offset >= existing.length) {
@@ -61,7 +61,7 @@ export async function seedBlocks(client, parent, source, bindings, save, media) 
     if (signature(local) !== signature(remote)) throw new Error(`An unfinished seed block was edited (${local.type}). Refusing to overwrite it.`);
     bindings[local.id] = remote.id;
     await save();
-    if (local[local.type].children?.length) await seedBlocks(client, remote.id, local[local.type].children, bindings, save, media);
+    if (local[local.type].children?.length) await seedBlocks(client, remote.id, local[local.type].children, bindings, save, media, ignoredIds);
     offset++;
   }
 }

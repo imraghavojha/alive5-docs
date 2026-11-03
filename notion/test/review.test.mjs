@@ -206,7 +206,7 @@ test('re-check 2: existing articles require meaningful rendered body content', a
     assert.ok((await build(tree)).output.has('api/authentication.html'));
   }
   const tree = structuredClone(fixture.tree);
-  tree[4].articles[1].blocks = tree[4].articles[1].blocks.filter(b => b.type === 'callout' && b.callout.rich_text.some(r => r.text?.content === '⟦zapier-previews⟧'));
+  tree[4].articles[1].blocks = tree[4].articles[1].blocks.filter(b => b.type === 'callout' && b.callout.rich_text.some(r => r.text?.content.startsWith('Interactive Zapier previews')));
   assert.ok((await build(tree)).output.has('connectors/zapier.html'));
 });
 

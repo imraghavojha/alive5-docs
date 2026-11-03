@@ -81,17 +81,34 @@
                       "parts": [
                         "\n              ",
                         {
-                          "key": "block-4",
-                          "type": "paragraph",
                           "open": "<div class=\"head\">",
                           "close": "</div>",
-                          "html": "<div class=\"head\">\n                <span>DEVELOPER QUICKSTART</span\n                ><span class=\"env\">REST API</span>\n              </div>",
-                          "inner": "\n                <span>DEVELOPER QUICKSTART</span\n                ><span class=\"env\">REST API</span>\n              ",
-                          "signature": "b609834cd97ea610f8420ce255998c5520f9eea19a3df70e132bd7aa75fbb138"
+                          "parts": [
+                            "\n                ",
+                            {
+                              "key": "block-4",
+                              "type": "heading_2",
+                              "open": "<span>",
+                              "close": "</span\n                >",
+                              "html": "<span>DEVELOPER QUICKSTART</span\n                >",
+                              "inner": "DEVELOPER QUICKSTART",
+                              "signature": "e161ad6814b88b3668c02d2a869976ed4c0c529e42b066c30476cdec3c6bfc2b"
+                            },
+                            {
+                              "key": "block-5",
+                              "type": "paragraph",
+                              "open": "<span class=\"env\">",
+                              "close": "</span>",
+                              "html": "<span class=\"env\">REST API</span>",
+                              "inner": "REST API",
+                              "signature": "b388805e0ef2c1f23eecc4c6ab4056f3f48fa2d80f3bb8b58054f28b04df1a7e"
+                            },
+                            "\n              "
+                          ]
                         },
                         "\n              ",
                         {
-                          "key": "block-5",
+                          "key": "block-6",
                           "type": "paragraph",
                           "open": "<a href=\"api/authentication.html\"\n                >",
                           "close": "</a\n              >",
@@ -100,7 +117,7 @@
                           "signature": "e967b75ba0263ff6f570353c16cc611842f956fa613c6667ab98bd266021d8ff"
                         },
                         {
-                          "key": "block-6",
+                          "key": "block-7",
                           "type": "paragraph",
                           "open": "<a href=\"api/send-a-message.html\"\n                >",
                           "close": "</a\n              >",
@@ -112,17 +129,34 @@
                         "<div class=\"keycard-divider\"></div>",
                         "\n              ",
                         {
-                          "key": "block-7",
-                          "type": "paragraph",
                           "open": "<div class=\"head\">",
                           "close": "</div>",
-                          "html": "<div class=\"head\">\n                <span>ACCOUNT</span><span class=\"env\">Sign up</span>\n              </div>",
-                          "inner": "\n                <span>ACCOUNT</span><span class=\"env\">Sign up</span>\n              ",
-                          "signature": "1c4ab163dce012d803b7290e0153580a2b753ee30739932a3a7b7f3efc0b0a1d"
+                          "parts": [
+                            "\n                ",
+                            {
+                              "key": "block-8",
+                              "type": "heading_2",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>ACCOUNT</span>",
+                              "inner": "ACCOUNT",
+                              "signature": "4db92b5b824cc59712fb173c00de10fa1539a1cc1328271857a11ef2d6b97a36"
+                            },
+                            {
+                              "key": "block-9",
+                              "type": "paragraph",
+                              "open": "<span class=\"env\">",
+                              "close": "</span>",
+                              "html": "<span class=\"env\">Sign up</span>",
+                              "inner": "Sign up",
+                              "signature": "a91d7502e63d0834c5cfe785741bcb8a15bae648533af9c37164ce45d9abd6bf"
+                            },
+                            "\n              "
+                          ]
                         },
                         "\n              ",
                         {
-                          "key": "block-8",
+                          "key": "block-10",
                           "type": "paragraph",
                           "open": "<a href=\"https://signup.alive5.com/\" target=\"_blank\" rel=\"noreferrer\"\n                >",
                           "close": "</a\n              >",
@@ -134,61 +168,7 @@
                       ]
                     },
                     "\n            ",
-                    {
-                      "open": "<div class=\"linecard\">",
-                      "close": "</div>",
-                      "parts": [
-                        "\n              ",
-                        {
-                          "open": "<div class=\"message-brand\">",
-                          "close": "</div>",
-                          "parts": [
-                            "\n                ",
-                            {
-                              "key": "block-9",
-                              "type": "paragraph",
-                              "open": "<div class=\"num\">",
-                              "close": "</div>",
-                              "html": "<div class=\"num\">Hello from</div>",
-                              "inner": "Hello from",
-                              "signature": "699688d4b4eaf7f61e512d472862d53f4db5777f0da22b53b67da57b246e4b20"
-                            },
-                            "\n                ",
-                            {
-                              "open": "<picture style=\"display: contents\">",
-                              "close": "</picture>",
-                              "parts": [
-                                "\n                  ",
-                                "<source hidden media=\"(max-width: 720px)\" srcset=\"assets/images/alive5-logo-small-3x.webp\" />",
-                                "\n                  ",
-                                {
-                                  "key": "block-10",
-                                  "type": "image",
-                                  "open": "<img\n                    src=\"assets/images/alive5-logo-small.png\"\n                    alt=\"Alive5 logo\"\n                    width=\"56\"\n                    height=\"40\"\n                  />",
-                                  "close": "",
-                                  "html": "<img\n                    src=\"assets/images/alive5-logo-small.png\"\n                    alt=\"Alive5 logo\"\n                    width=\"56\"\n                    height=\"40\"\n                  />",
-                                  "inner": "",
-                                  "signature": "1dae59e1a61c8bb8c9580426cbe93d31197cffdc9f0a843189cb3c20773ec060"
-                                },
-                                "\n                "
-                              ]
-                            },
-                            "\n              "
-                          ]
-                        },
-                        "\n              ",
-                        {
-                          "key": "block-11",
-                          "type": "paragraph",
-                          "open": "<p class=\"sub\">",
-                          "close": "</p>",
-                          "html": "<p class=\"sub\">Your application → their inbox</p>",
-                          "inner": "Your application → their inbox",
-                          "signature": "d9bb25a6f8555497c0d3be7b9a35c15f367e85181ebddb9b391858a96d4baa03"
-                        },
-                        "\n            "
-                      ]
-                    },
+                    "<div class=\"linecard\">\n              <div class=\"message-brand\">\n                <div class=\"num\">Hello from</div>\n                <picture style=\"display: contents\">\n                  <source hidden media=\"(max-width: 720px)\" srcset=\"assets/images/alive5-logo-small-3x.webp\" />\n                  <img\n                    src=\"assets/images/alive5-logo-small.png\"\n                    alt=\"Alive5 logo\"\n                    width=\"56\"\n                    height=\"40\"\n                  />\n                </picture>\n              </div>\n              <p class=\"sub\">Your application → their inbox</p>\n            </div>",
                     "\n          "
                   ]
                 },
@@ -210,7 +190,7 @@
               "parts": [
                 "\n          ",
                 {
-                  "key": "block-12",
+                  "key": "block-11",
                   "type": "heading_2",
                   "open": "<h2>",
                   "close": "</h2>",
@@ -225,7 +205,7 @@
                   "parts": [
                     "\n            ",
                     {
-                      "key": "block-13",
+                      "key": "block-12",
                       "type": "bulleted_list_item",
                       "open": "<li>",
                       "close": "</li>",
@@ -237,7 +217,7 @@
                     },
                     "\n            ",
                     {
-                      "key": "block-14",
+                      "key": "block-13",
                       "type": "bulleted_list_item",
                       "open": "<li>",
                       "close": "</li>",
@@ -249,7 +229,7 @@
                     },
                     "\n            ",
                     {
-                      "key": "block-15",
+                      "key": "block-14",
                       "type": "bulleted_list_item",
                       "open": "<li>",
                       "close": "</li>",
@@ -261,27 +241,23 @@
                     },
                     "\n            ",
                     {
-                      "key": "block-16",
+                      "key": "block-15",
                       "type": "bulleted_list_item",
                       "open": "<li class=\"coming-soon\">",
                       "close": "</li>",
                       "html": "<li class=\"coming-soon\">\n              <span>Alive5 CLI</span><small>Coming soon</small>\n            </li>",
                       "inner": "\n              <span>Alive5 CLI</span><small>Coming soon</small>\n            ",
-                      "signature": "a8d8c2b1dd193e2fa17c6ad6260bdd8d7dbd8b5d68b4680a8f69cd08214adb19",
-                      "subLayout": [],
-                      "head": "\n              <span>Alive5 CLI</span><small>Coming soon</small>\n            "
+                      "signature": "c69d6e281f7ee960ec5c375cf1ec5b0abba14e734d4b632e20fc97a6716dbadb"
                     },
                     "\n            ",
                     {
-                      "key": "block-17",
+                      "key": "block-16",
                       "type": "bulleted_list_item",
                       "open": "<li class=\"coming-soon\">",
                       "close": "</li>",
                       "html": "<li class=\"coming-soon\">\n              <span>Alive5 MCP</span><small>Coming soon</small>\n            </li>",
                       "inner": "\n              <span>Alive5 MCP</span><small>Coming soon</small>\n            ",
-                      "signature": "782486aface99b75cfb998f61f4b53acf92c02e73bc91441ae1fb17d472cd7d8",
-                      "subLayout": [],
-                      "head": "\n              <span>Alive5 MCP</span><small>Coming soon</small>\n            "
+                      "signature": "0b888a1a60294f243dbfc2ca1bcab79e2746d3abcaecb677467b9911512e2468"
                     },
                     "\n          "
                   ]
@@ -296,7 +272,7 @@
               "parts": [
                 "\n          ",
                 {
-                  "key": "block-18",
+                  "key": "block-17",
                   "type": "heading_2",
                   "open": "<h2>",
                   "close": "</h2>",
@@ -311,7 +287,7 @@
                   "parts": [
                     "\n            ",
                     {
-                      "key": "block-19",
+                      "key": "block-18",
                       "type": "bulleted_list_item",
                       "open": "<li>",
                       "close": "</li>",
@@ -323,7 +299,7 @@
                     },
                     "\n            ",
                     {
-                      "key": "block-20",
+                      "key": "block-19",
                       "type": "bulleted_list_item",
                       "open": "<li>",
                       "close": "</li>",
@@ -335,7 +311,7 @@
                     },
                     "\n            ",
                     {
-                      "key": "block-21",
+                      "key": "block-20",
                       "type": "bulleted_list_item",
                       "open": "<li>",
                       "close": "</li>",
@@ -347,7 +323,7 @@
                     },
                     "\n            ",
                     {
-                      "key": "block-22",
+                      "key": "block-21",
                       "type": "bulleted_list_item",
                       "open": "<li>",
                       "close": "</li>",
@@ -359,7 +335,7 @@
                     },
                     "\n            ",
                     {
-                      "key": "block-23",
+                      "key": "block-22",
                       "type": "bulleted_list_item",
                       "open": "<li>",
                       "close": "</li>",
@@ -371,7 +347,7 @@
                     },
                     "\n            ",
                     {
-                      "key": "block-24",
+                      "key": "block-23",
                       "type": "bulleted_list_item",
                       "open": "<li>",
                       "close": "</li>",
@@ -383,7 +359,7 @@
                     },
                     "\n            ",
                     {
-                      "key": "block-25",
+                      "key": "block-24",
                       "type": "bulleted_list_item",
                       "open": "<li>",
                       "close": "</li>",
@@ -395,15 +371,23 @@
                     },
                     "\n            ",
                     {
-                      "key": "block-26",
+                      "key": "block-25",
                       "type": "bulleted_list_item",
                       "open": "<li class=\"coming-soon\">",
                       "close": "</li>",
                       "html": "<li class=\"coming-soon\">\n              <span>Pipedream</span><small>Coming soon</small>\n            </li>",
                       "inner": "\n              <span>Pipedream</span><small>Coming soon</small>\n            ",
-                      "signature": "e4c2130b5af37c2a9f87ceeccd9b8fe5792db528538a6172377cd2c18435c401",
-                      "subLayout": [],
-                      "head": "\n              <span>Pipedream</span><small>Coming soon</small>\n            "
+                      "signature": "5aa5da807832631c137e518433b3cf017a17ca836f7ad0580ae7f7212360341a"
+                    },
+                    "\n            ",
+                    {
+                      "key": "block-26",
+                      "type": "bulleted_list_item",
+                      "open": "<li class=\"coming-soon\">",
+                      "close": "</li>",
+                      "html": "<li class=\"coming-soon\">\n              <span>Make</span><small>Coming soon</small>\n            </li>",
+                      "inner": "\n              <span>Make</span><small>Coming soon</small>\n            ",
+                      "signature": "22b4fa7bda391058026976b9150f776fcee76cac9397608f27af229a913cade1"
                     },
                     "\n            ",
                     {
@@ -411,23 +395,9 @@
                       "type": "bulleted_list_item",
                       "open": "<li class=\"coming-soon\">",
                       "close": "</li>",
-                      "html": "<li class=\"coming-soon\">\n              <span>Make</span><small>Coming soon</small>\n            </li>",
-                      "inner": "\n              <span>Make</span><small>Coming soon</small>\n            ",
-                      "signature": "903a4b7516f98f230c55f18f3da46fcbeaf481ec40938bd5a057988b07063d3f",
-                      "subLayout": [],
-                      "head": "\n              <span>Make</span><small>Coming soon</small>\n            "
-                    },
-                    "\n            ",
-                    {
-                      "key": "block-28",
-                      "type": "bulleted_list_item",
-                      "open": "<li class=\"coming-soon\">",
-                      "close": "</li>",
                       "html": "<li class=\"coming-soon\">\n              <span>Keragon</span><small>Coming soon</small>\n            </li>",
                       "inner": "\n              <span>Keragon</span><small>Coming soon</small>\n            ",
-                      "signature": "c6225566cd90f886135aa3b78486fb9794fe5261586d637dab33ebc758711ff3",
-                      "subLayout": [],
-                      "head": "\n              <span>Keragon</span><small>Coming soon</small>\n            "
+                      "signature": "b6c9db6ad429b54e6942ba0b010cf480c15209ce8ba509cb1569b569f1affd35"
                     },
                     "\n          "
                   ]
@@ -442,7 +412,7 @@
               "parts": [
                 "\n          ",
                 {
-                  "key": "block-29",
+                  "key": "block-28",
                   "type": "heading_2",
                   "open": "<h2>",
                   "close": "</h2>",
@@ -457,7 +427,7 @@
                   "parts": [
                     "\n            ",
                     {
-                      "key": "block-30",
+                      "key": "block-29",
                       "type": "bulleted_list_item",
                       "open": "<li>",
                       "close": "</li>",
@@ -469,7 +439,7 @@
                     },
                     "\n            ",
                     {
-                      "key": "block-31",
+                      "key": "block-30",
                       "type": "bulleted_list_item",
                       "open": "<li>",
                       "close": "</li>",
@@ -481,7 +451,7 @@
                     },
                     "\n            ",
                     {
-                      "key": "block-32",
+                      "key": "block-31",
                       "type": "bulleted_list_item",
                       "open": "<li>",
                       "close": "</li>",
@@ -502,13 +472,13 @@
         },
         "\n      ",
         {
-          "key": "block-33",
+          "key": "block-32",
           "type": "callout",
           "open": "<section class=\"wrap tryout-section\" aria-labelledby=\"cli-heading\">",
           "close": "</section>",
           "html": "<section class=\"wrap tryout-section\" aria-labelledby=\"cli-heading\">\n        <div class=\"section-head tryout-head\">\n          <h2 id=\"cli-heading\">Try it out</h2>\n          <span class=\"info-tip\">\n            <button\n              type=\"button\"\n              class=\"info-trigger\"\n              aria-label=\"About this unreleased CLI preview with fictional output\"\n              aria-describedby=\"tryout-info\"\n            >\n              <svg width=\"13\" height=\"13\" viewBox=\"0 0 12 12\" aria-hidden=\"true\">\n                <rect x=\"1\" y=\"1\" width=\"10\" height=\"10\" rx=\"2.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\" />\n                <path d=\"M5.2 5.4h1v3.1\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />\n                <circle cx=\"6\" cy=\"3.6\" r=\".75\" fill=\"currentColor\" />\n              </svg>\n            </button>\n            <span class=\"info-bubble\" role=\"tooltip\" id=\"tryout-info\"\n              >The CLI is not yet released. This preview shows common Alive5 API\n              actions as commands with fictional output.\n              Everything runs in your browser; nothing is sent.</span\n            >\n          </span>\n        </div>\n        <div class=\"tryout\" data-shell>\n          <span\n            class=\"shell-announcement\"\n            data-shell-announcement\n            role=\"status\"\n            aria-live=\"polite\"\n          ></span>\n          <div\n            class=\"tryout-list\"\n            role=\"tablist\"\n            aria-orientation=\"vertical\"\n            aria-label=\"Example API commands\"\n          ></div>\n          <span class=\"shell-scroll-cue\">Swipe for more commands →</span>\n          <div\n            class=\"shell stripe-shell\"\n            id=\"shell-panel\"\n            role=\"tabpanel\"\n            data-cli-preview\n          >\n            <div class=\"shell-scroll\">\n              <canvas\n                class=\"shell-logo\"\n                role=\"img\"\n                aria-label=\"Alive5 wordmark with the animated Isometric Desktop mascot and section-specific speech bubbles\"\n                >Alive5</canvas\n              >\n              <div class=\"shell-out\"></div>\n              <form class=\"shell-prompt\" autocomplete=\"off\">\n                <span aria-hidden=\"true\">$</span\n                ><textarea\n                  rows=\"2\"\n                  aria-label=\"Shell input\"\n                  enterkeyhint=\"send\"\n                  spellcheck=\"false\"\n                ></textarea>\n              </form>\n            </div>\n            <div class=\"shell-status\">\n              <span\n                class=\"shell-resize\"\n                data-shell-resize\n                role=\"separator\"\n                aria-orientation=\"horizontal\"\n                aria-label=\"Resize terminal\"\n                tabindex=\"0\"\n                title=\"Drag to resize\"\n              ></span\n              ><button\n                type=\"button\"\n                data-cli-motion\n                aria-label=\"Pause animation\"\n                title=\"Pause animation\"\n              >\n                <span aria-hidden=\"true\">Ⅱ</span></button\n              ><button\n                type=\"button\"\n                data-shell-prompt\n                aria-label=\"Go to prompt\"\n              >\n                ↓</button\n              ><button\n                type=\"button\"\n                data-shell-reset\n                aria-label=\"Clear terminal\"\n              >\n                ↺\n              </button>\n            </div>\n          </div>\n        </div>\n        <div class=\"tryout-foot\">\n          <a href=\"api/send-a-message.html\" data-shell-doc\n            >Learn more about sending messages</a\n          >\n        </div>\n      </section>",
           "inner": "\n        <div class=\"section-head tryout-head\">\n          <h2 id=\"cli-heading\">Try it out</h2>\n          <span class=\"info-tip\">\n            <button\n              type=\"button\"\n              class=\"info-trigger\"\n              aria-label=\"About this unreleased CLI preview with fictional output\"\n              aria-describedby=\"tryout-info\"\n            >\n              <svg width=\"13\" height=\"13\" viewBox=\"0 0 12 12\" aria-hidden=\"true\">\n                <rect x=\"1\" y=\"1\" width=\"10\" height=\"10\" rx=\"2.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\" />\n                <path d=\"M5.2 5.4h1v3.1\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />\n                <circle cx=\"6\" cy=\"3.6\" r=\".75\" fill=\"currentColor\" />\n              </svg>\n            </button>\n            <span class=\"info-bubble\" role=\"tooltip\" id=\"tryout-info\"\n              >The CLI is not yet released. This preview shows common Alive5 API\n              actions as commands with fictional output.\n              Everything runs in your browser; nothing is sent.</span\n            >\n          </span>\n        </div>\n        <div class=\"tryout\" data-shell>\n          <span\n            class=\"shell-announcement\"\n            data-shell-announcement\n            role=\"status\"\n            aria-live=\"polite\"\n          ></span>\n          <div\n            class=\"tryout-list\"\n            role=\"tablist\"\n            aria-orientation=\"vertical\"\n            aria-label=\"Example API commands\"\n          ></div>\n          <span class=\"shell-scroll-cue\">Swipe for more commands →</span>\n          <div\n            class=\"shell stripe-shell\"\n            id=\"shell-panel\"\n            role=\"tabpanel\"\n            data-cli-preview\n          >\n            <div class=\"shell-scroll\">\n              <canvas\n                class=\"shell-logo\"\n                role=\"img\"\n                aria-label=\"Alive5 wordmark with the animated Isometric Desktop mascot and section-specific speech bubbles\"\n                >Alive5</canvas\n              >\n              <div class=\"shell-out\"></div>\n              <form class=\"shell-prompt\" autocomplete=\"off\">\n                <span aria-hidden=\"true\">$</span\n                ><textarea\n                  rows=\"2\"\n                  aria-label=\"Shell input\"\n                  enterkeyhint=\"send\"\n                  spellcheck=\"false\"\n                ></textarea>\n              </form>\n            </div>\n            <div class=\"shell-status\">\n              <span\n                class=\"shell-resize\"\n                data-shell-resize\n                role=\"separator\"\n                aria-orientation=\"horizontal\"\n                aria-label=\"Resize terminal\"\n                tabindex=\"0\"\n                title=\"Drag to resize\"\n              ></span\n              ><button\n                type=\"button\"\n                data-cli-motion\n                aria-label=\"Pause animation\"\n                title=\"Pause animation\"\n              >\n                <span aria-hidden=\"true\">Ⅱ</span></button\n              ><button\n                type=\"button\"\n                data-shell-prompt\n                aria-label=\"Go to prompt\"\n              >\n                ↓</button\n              ><button\n                type=\"button\"\n                data-shell-reset\n                aria-label=\"Clear terminal\"\n              >\n                ↺\n              </button>\n            </div>\n          </div>\n        </div>\n        <div class=\"tryout-foot\">\n          <a href=\"api/send-a-message.html\" data-shell-doc\n            >Learn more about sending messages</a\n          >\n        </div>\n      ",
-          "signature": "143450c4d8bdccd73b831d4216c412d20c29cdf7108e5ebfe0cbfede3fa5e28f",
+          "signature": "490eb49afa3b62e2dceae813d0288aa968a555cdd9387cc30000df9535e69e2a",
           "widget": "cli-preview"
         },
         "\n      ",
@@ -523,7 +493,7 @@
               "parts": [
                 "\n          ",
                 {
-                  "key": "block-34",
+                  "key": "block-33",
                   "type": "heading_2",
                   "open": "<h2>",
                   "close": "</h2>",
@@ -533,7 +503,7 @@
                 },
                 "\n          ",
                 {
-                  "key": "block-35",
+                  "key": "block-34",
                   "type": "paragraph",
                   "open": "<a\n            class=\"small-link\"\n            href=\"https://www.alive5.com\"\n            target=\"_blank\"\n            rel=\"noreferrer\"\n            >",
                   "close": "</a\n          >",
@@ -551,13 +521,13 @@
               "parts": [
                 "\n          ",
                 {
-                  "key": "block-36",
-                  "type": "heading_3",
+                  "key": "block-35",
+                  "type": "heading_2",
                   "open": "<h3>",
                   "close": "</h3>",
                   "html": "<h3>Messaging</h3>",
                   "inner": "Messaging",
-                  "signature": "d33fd938eeeb95b473ab0c754059d744eef28805b93d2dbc1c08116a589970b4"
+                  "signature": "bfae035b7b261fc4bc347dcfb5bde0c24ede2a0155132d9a0e1245c9893bcd9c"
                 },
                 "\n          ",
                 "<div class=\"rule\"></div>",
@@ -581,14 +551,32 @@
                         },
                         "\n              ",
                         {
-                          "key": "block-37",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div>\n                <strong>SMS <em aria-hidden=\"true\">↗</em></strong\n                ><span>Two-way business texting</span>\n              </div>",
-                          "inner": "\n                <strong>SMS <em aria-hidden=\"true\">↗</em></strong\n                ><span>Two-way business texting</span>\n              ",
-                          "signature": "15ac82ed8550ccc4ce8eeb6654a96ed25e74502f84fff16f4f09f42fc7e9ad02",
-                          "inLink": true
+                          "parts": [
+                            "\n                ",
+                            {
+                              "key": "block-36",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong\n                >",
+                              "html": "<strong>SMS <em aria-hidden=\"true\">↗</em></strong\n                >",
+                              "inner": "SMS <em aria-hidden=\"true\">↗</em>",
+                              "signature": "53b904648e08e6f7000e489a320eef7de2a9309c2152e63ae71dddb7aae1808a",
+                              "inLink": true
+                            },
+                            {
+                              "key": "block-37",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Two-way business texting</span>",
+                              "inner": "Two-way business texting",
+                              "signature": "38a028f30975c2a8f9b2e7b939749d99246fa12c3d6c0f39192d82c728ebe1b7",
+                              "inLink": true
+                            },
+                            "\n              "
+                          ]
                         }
                       ]
                     },
@@ -606,14 +594,32 @@
                         },
                         "\n              ",
                         {
-                          "key": "block-38",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div>\n                <strong>Live chat</strong\n                ><span>Website conversations with your team</span>\n              </div>",
-                          "inner": "\n                <strong>Live chat</strong\n                ><span>Website conversations with your team</span>\n              ",
-                          "signature": "72496731172e7537c16e1006c8abcab5dbedbd0d15e6d75715b1533f2ddaf0bc",
-                          "inLink": true
+                          "parts": [
+                            "\n                ",
+                            {
+                              "key": "block-38",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong\n                >",
+                              "html": "<strong>Live chat</strong\n                >",
+                              "inner": "Live chat",
+                              "signature": "970dde0c775db7327eb33884b650f255bb676f21c998dd1dcc15b741964f9fa6",
+                              "inLink": true
+                            },
+                            {
+                              "key": "block-39",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Website conversations with your team</span>",
+                              "inner": "Website conversations with your team",
+                              "signature": "8011ca2e9090aea4188c3cce07ec7a7fe84ff81cd0d0ce270cc82f91bc6c467a",
+                              "inLink": true
+                            },
+                            "\n              "
+                          ]
                         }
                       ]
                     },
@@ -631,14 +637,32 @@
                         },
                         "\n              ",
                         {
-                          "key": "block-39",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div>\n                <strong>Facebook Messenger <em aria-hidden=\"true\">↗</em></strong\n                ><span>Social messages in one inbox</span>\n              </div>",
-                          "inner": "\n                <strong>Facebook Messenger <em aria-hidden=\"true\">↗</em></strong\n                ><span>Social messages in one inbox</span>\n              ",
-                          "signature": "34724cfdc21460151bef82eec1ce9983e068aa75589f5882e90a0e3dae38e3d0",
-                          "inLink": true
+                          "parts": [
+                            "\n                ",
+                            {
+                              "key": "block-40",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong\n                >",
+                              "html": "<strong>Facebook Messenger <em aria-hidden=\"true\">↗</em></strong\n                >",
+                              "inner": "Facebook Messenger <em aria-hidden=\"true\">↗</em>",
+                              "signature": "25cd8c8f3ba3035c25b08d2ae0a6b81cdff688adbca3792a9379f54190f4e080",
+                              "inLink": true
+                            },
+                            {
+                              "key": "block-41",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Social messages in one inbox</span>",
+                              "inner": "Social messages in one inbox",
+                              "signature": "cc55cce3280467629f38355b5aa609b7a3a9146f60352012efc8ddf01d5edacd",
+                              "inLink": true
+                            },
+                            "\n              "
+                          ]
                         }
                       ]
                     },
@@ -655,13 +679,13 @@
               "parts": [
                 "\n          ",
                 {
-                  "key": "block-40",
-                  "type": "heading_3",
+                  "key": "block-42",
+                  "type": "heading_2",
                   "open": "<h3>",
                   "close": "</h3>",
                   "html": "<h3>Automation and customer relationships</h3>",
                   "inner": "Automation and customer relationships",
-                  "signature": "d00bfbecefee914a7dd3445f038a4e73dc907498afec2bd2842c5ea9f4681fbf"
+                  "signature": "bde13e128f69416333504befedeb881c9a7eba7553a30ea6f048388365f8fc31"
                 },
                 "\n          ",
                 "<div class=\"rule\"></div>",
@@ -685,14 +709,32 @@
                         },
                         "\n              ",
                         {
-                          "key": "block-41",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div>\n                <strong>AI chatbots <em aria-hidden=\"true\">↗</em></strong\n                ><span>Answers from your business content</span>\n              </div>",
-                          "inner": "\n                <strong>AI chatbots <em aria-hidden=\"true\">↗</em></strong\n                ><span>Answers from your business content</span>\n              ",
-                          "signature": "48509b7f358de5a9a224709684df567fce3d178bafd8747bd38dd6ae6e913ea1",
-                          "inLink": true
+                          "parts": [
+                            "\n                ",
+                            {
+                              "key": "block-43",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong\n                >",
+                              "html": "<strong>AI chatbots <em aria-hidden=\"true\">↗</em></strong\n                >",
+                              "inner": "AI chatbots <em aria-hidden=\"true\">↗</em>",
+                              "signature": "266f89a67c4c2a8659768d66e85876ab80f9b44b093d98907444b1a296d1d896",
+                              "inLink": true
+                            },
+                            {
+                              "key": "block-44",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Answers from your business content</span>",
+                              "inner": "Answers from your business content",
+                              "signature": "387adc9f6183957f6707c9316392dabd3e94311c3e47c8f3a9ab814136223201",
+                              "inLink": true
+                            },
+                            "\n              "
+                          ]
                         }
                       ]
                     },
@@ -710,14 +752,32 @@
                         },
                         "\n              ",
                         {
-                          "key": "block-42",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div>\n                <strong>Chatbot builder <em aria-hidden=\"true\">↗</em></strong\n                ><span>Create guided conversations</span>\n              </div>",
-                          "inner": "\n                <strong>Chatbot builder <em aria-hidden=\"true\">↗</em></strong\n                ><span>Create guided conversations</span>\n              ",
-                          "signature": "8c224106768c8c0aa45ba6a96092b6032a4ca3fd8912b646a1c207f10f56843b",
-                          "inLink": true
+                          "parts": [
+                            "\n                ",
+                            {
+                              "key": "block-45",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong\n                >",
+                              "html": "<strong>Chatbot builder <em aria-hidden=\"true\">↗</em></strong\n                >",
+                              "inner": "Chatbot builder <em aria-hidden=\"true\">↗</em>",
+                              "signature": "3c5a22146ec5cee0c4b54cfd7cf1e9018a66499b12a2c751ef01a61afa6e0c1d",
+                              "inLink": true
+                            },
+                            {
+                              "key": "block-46",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Create guided conversations</span>",
+                              "inner": "Create guided conversations",
+                              "signature": "b06afcc7937fb7378e0e124c5a17181e4f7f99cd8a281e179805ef688b6b2240",
+                              "inLink": true
+                            },
+                            "\n              "
+                          ]
                         }
                       ]
                     },
@@ -735,14 +795,32 @@
                         },
                         "\n              ",
                         {
-                          "key": "block-43",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div>\n                <strong>CRM integrations</strong\n                ><span>Connect conversations to customer records</span>\n              </div>",
-                          "inner": "\n                <strong>CRM integrations</strong\n                ><span>Connect conversations to customer records</span>\n              ",
-                          "signature": "0be2fce3674884672371f9016314687b9076e243705e248eb62a82bc836bb15c",
-                          "inLink": true
+                          "parts": [
+                            "\n                ",
+                            {
+                              "key": "block-47",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong\n                >",
+                              "html": "<strong>CRM integrations</strong\n                >",
+                              "inner": "CRM integrations",
+                              "signature": "ece292cddfdeb0e9acf3ffb9b0f8a05c349df892cf8a0b7f7a53d747c713abcb",
+                              "inLink": true
+                            },
+                            {
+                              "key": "block-48",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Connect conversations to customer records</span>",
+                              "inner": "Connect conversations to customer records",
+                              "signature": "49bad3283779358644a06622fdd1bbdb69e497923c144fd7a8a991323885e2d4",
+                              "inLink": true
+                            },
+                            "\n              "
+                          ]
                         }
                       ]
                     },
@@ -760,14 +838,32 @@
                         },
                         "\n              ",
                         {
-                          "key": "block-44",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div>\n                <strong>QR codes <em aria-hidden=\"true\">↗</em></strong\n                ><span>Start a conversation with a scan</span>\n              </div>",
-                          "inner": "\n                <strong>QR codes <em aria-hidden=\"true\">↗</em></strong\n                ><span>Start a conversation with a scan</span>\n              ",
-                          "signature": "b2e0befbc951a72bb7017a2d0001b741e504234de0c35dc19184a0f28b9709bc",
-                          "inLink": true
+                          "parts": [
+                            "\n                ",
+                            {
+                              "key": "block-49",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong\n                >",
+                              "html": "<strong>QR codes <em aria-hidden=\"true\">↗</em></strong\n                >",
+                              "inner": "QR codes <em aria-hidden=\"true\">↗</em>",
+                              "signature": "ff331c4bb777c95bd2c2391c841b4217376917ca770ed7a7a7e19df5fb7ea882",
+                              "inLink": true
+                            },
+                            {
+                              "key": "block-50",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Start a conversation with a scan</span>",
+                              "inner": "Start a conversation with a scan",
+                              "signature": "4a0fd8bbc1e2469a71ec6a391fac814228f5d7c623dddda16e50e74819c5f702",
+                              "inLink": true
+                            },
+                            "\n              "
+                          ]
                         }
                       ]
                     },
@@ -784,13 +880,13 @@
               "parts": [
                 "\n          ",
                 {
-                  "key": "block-45",
-                  "type": "heading_3",
+                  "key": "block-51",
+                  "type": "heading_2",
                   "open": "<h3>",
                   "close": "</h3>",
                   "html": "<h3>Developer tools</h3>",
                   "inner": "Developer tools",
-                  "signature": "892545ed7db398c7e584af5ff0d95ae8884445926e3c246f821588149bceed3f"
+                  "signature": "d98d55b622514684cac5fc719c4a237ce10a98a4a6bf55c59d39b83e88c18c32"
                 },
                 "\n          ",
                 "<div class=\"rule\"></div>",
@@ -814,14 +910,32 @@
                         },
                         "\n              ",
                         {
-                          "key": "block-46",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div>\n                <strong>Messaging API</strong\n                ><span>Send and receive texts with REST</span>\n              </div>",
-                          "inner": "\n                <strong>Messaging API</strong\n                ><span>Send and receive texts with REST</span>\n              ",
-                          "signature": "0f70007dd7b72162ef9463ef15520d5ddece893c6be4c8059f67f80ffb2deea6",
-                          "inLink": true
+                          "parts": [
+                            "\n                ",
+                            {
+                              "key": "block-52",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong\n                >",
+                              "html": "<strong>Messaging API</strong\n                >",
+                              "inner": "Messaging API",
+                              "signature": "0b1b1557f99858bf7cf991fa3a4e37c346ec53f1c3638d73439376e954bdee29",
+                              "inLink": true
+                            },
+                            {
+                              "key": "block-53",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Send and receive texts with REST</span>",
+                              "inner": "Send and receive texts with REST",
+                              "signature": "88ed7cb9239114c5643c888af8434b1c03f812c648e632255af5d3a112c6bdd3",
+                              "inLink": true
+                            },
+                            "\n              "
+                          ]
                         }
                       ]
                     },
@@ -839,14 +953,32 @@
                         },
                         "\n              ",
                         {
-                          "key": "block-47",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div>\n                <strong>Contacts and directory</strong\n                ><span>Customer records, channels, and users</span>\n              </div>",
-                          "inner": "\n                <strong>Contacts and directory</strong\n                ><span>Customer records, channels, and users</span>\n              ",
-                          "signature": "bce2d8a40e67ef74ae4a848f95c69815bd3209641d0dc9b35ed52408560a3eeb",
-                          "inLink": true
+                          "parts": [
+                            "\n                ",
+                            {
+                              "key": "block-54",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong\n                >",
+                              "html": "<strong>Contacts and directory</strong\n                >",
+                              "inner": "Contacts and directory",
+                              "signature": "bd5d9f2fd2a88810b772b216a0037e2e7262ff89264a1e6da8a7a8d6587fa31a",
+                              "inLink": true
+                            },
+                            {
+                              "key": "block-55",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Customer records, channels, and users</span>",
+                              "inner": "Customer records, channels, and users",
+                              "signature": "a2e0f59ef1a2f5675a6a7c233ebc6b6849eccb82dab9f3a05cf7d203467f6efc",
+                              "inLink": true
+                            },
+                            "\n              "
+                          ]
                         }
                       ]
                     },
@@ -864,14 +996,32 @@
                         },
                         "\n              ",
                         {
-                          "key": "block-48",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div>\n                <strong>Reporting</strong\n                ><span>Message volume and bot activity</span>\n              </div>",
-                          "inner": "\n                <strong>Reporting</strong\n                ><span>Message volume and bot activity</span>\n              ",
-                          "signature": "da76583dac37b77a37bdd000d18414f0e5769f2dcd4c51635030bbfa05092c33",
-                          "inLink": true
+                          "parts": [
+                            "\n                ",
+                            {
+                              "key": "block-56",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong\n                >",
+                              "html": "<strong>Reporting</strong\n                >",
+                              "inner": "Reporting",
+                              "signature": "a47223f28059961e01a17dc3b427dcbb3e9e87e6702b940c9a16d191c648137d",
+                              "inLink": true
+                            },
+                            {
+                              "key": "block-57",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Message volume and bot activity</span>",
+                              "inner": "Message volume and bot activity",
+                              "signature": "4c6e0046ec9bb9e8f570fe32da97edf902d46748a45cccd65677a133f537e1a0",
+                              "inLink": true
+                            },
+                            "\n              "
+                          ]
                         }
                       ]
                     },
@@ -888,13 +1038,13 @@
               "parts": [
                 "\n          ",
                 {
-                  "key": "block-49",
-                  "type": "heading_3",
+                  "key": "block-58",
+                  "type": "heading_2",
                   "open": "<h3>",
                   "close": "</h3>",
                   "html": "<h3>Connectors</h3>",
                   "inner": "Connectors",
-                  "signature": "159895dfbacc88b081cdc1c603df6d0b1f5f65aa4cea8b8e156e45b4c8581dd7"
+                  "signature": "eb7bd8cb5d23bf94da2e46ffb1a3855d6e7ee53dd8b559caad56c607b54551d7"
                 },
                 "\n          ",
                 "<div class=\"rule\"></div>",
@@ -911,14 +1061,30 @@
                       "parts": [
                         "<span class=\"connector-logo zapier\" aria-hidden=\"true\">✳</span>",
                         {
-                          "key": "block-50",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div><strong>Zapier</strong><span>Connect conversations to your apps</span></div>",
-                          "inner": "<strong>Zapier</strong><span>Connect conversations to your apps</span>",
-                          "signature": "93de4070195ca72f7c936ea9f9272ad58ccacd421e395a9ce1b81db675fad63a",
-                          "inLink": true
+                          "parts": [
+                            {
+                              "key": "block-59",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong>",
+                              "html": "<strong>Zapier</strong>",
+                              "inner": "Zapier",
+                              "signature": "c523da7c722162aa277f1693bbbb397a4a45834dd1fafc737b3844c14c86221d",
+                              "inLink": true
+                            },
+                            {
+                              "key": "block-60",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Connect conversations to your apps</span>",
+                              "inner": "Connect conversations to your apps",
+                              "signature": "cce06f46478f798827381e88a99fd6daa84e4c2da33f39a16519e5e01c3aa5b0",
+                              "inLink": true
+                            }
+                          ]
                         }
                       ]
                     },
@@ -931,14 +1097,32 @@
                         "<span class=\"connector-logo n8n\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M21.4737 5.6842c-1.1772 0-2.1663.8051-2.4468 1.8947h-2.8955c-1.235 0-2.289.893-2.492 2.111l-.1038.623a1.263 1.263 0 0 1-1.246 1.0555H11.289c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947s-2.1663.8051-2.4467 1.8947H4.973c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947C1.1311 9.4737 0 10.6047 0 12s1.131 2.5263 2.5263 2.5263c1.1772 0 2.1663-.8051 2.4468-1.8947h1.4223c.2804 1.0896 1.2696 1.8947 2.4467 1.8947 1.1772 0 2.1663-.8051 2.4468-1.8947h1.0008a1.263 1.263 0 0 1 1.2459 1.0555l.1038.623c.203 1.218 1.257 2.111 2.492 2.111h.3692c.2804 1.0895 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263c-1.1772 0-2.1664.805-2.4468 1.8947h-.3692a1.263 1.263 0 0 1-1.246-1.0555l-.1037-.623A2.52 2.52 0 0 0 13.9607 12a2.52 2.52 0 0 0 .821-1.4794l.1038-.623a1.263 1.263 0 0 1 1.2459-1.0555h2.8955c.2805 1.0896 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263m0 1.2632a1.263 1.263 0 0 1 1.2631 1.2631 1.263 1.263 0 0 1-1.2631 1.2632 1.263 1.263 0 0 1-1.2632-1.2632 1.263 1.263 0 0 1 1.2632-1.2631M2.5263 10.7368A1.263 1.263 0 0 1 3.7895 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 1.2632 12a1.263 1.263 0 0 1 1.2631-1.2632m6.3158 0A1.263 1.263 0 0 1 10.1053 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 7.579 12a1.263 1.263 0 0 1 1.2632-1.2632m10.1053 3.7895a1.263 1.263 0 0 1 1.2631 1.2632 1.263 1.263 0 0 1-1.2631 1.2631 1.263 1.263 0 0 1-1.2632-1.2631 1.263 1.263 0 0 1 1.2632-1.2632\"/></svg></span>",
                         "\n              ",
                         {
-                          "key": "block-51",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div>\n                <strong>n8n</strong><span>Send SMS from your workflows</span>\n              </div>",
-                          "inner": "\n                <strong>n8n</strong><span>Send SMS from your workflows</span>\n              ",
-                          "signature": "90f4a26721a091b39e6354a97d823fa5029e252212c4b47d0cc29b75ffcadc25",
-                          "inLink": true
+                          "parts": [
+                            "\n                ",
+                            {
+                              "key": "block-61",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong>",
+                              "html": "<strong>n8n</strong>",
+                              "inner": "n8n",
+                              "signature": "c37456078a4ebc0b3ab5905034de12e545111efb3acc152f2b6f7dccd8897e75",
+                              "inLink": true
+                            },
+                            {
+                              "key": "block-62",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Send SMS from your workflows</span>",
+                              "inner": "Send SMS from your workflows",
+                              "signature": "bf0b9a93f4b5dd0b97931c71be79cb0fe0b75633ec583ba4a37fd540b54e68c0",
+                              "inLink": true
+                            },
+                            "\n              "
+                          ]
                         }
                       ]
                     },
@@ -950,14 +1134,30 @@
                       "parts": [
                         "<span class=\"connector-logo node-red\" aria-hidden=\"true\"\n              ><svg width=\"27\" height=\"27\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M3 0C1.338 0 0 1.338 0 3v6.107h2.858c1.092 0 1.97.868 1.964 1.96v.021c.812-.095 1.312-.352 1.674-.683.416-.382.69-.91 1.016-1.499.325-.59.71-1.244 1.408-1.723.575-.395 1.355-.644 2.384-.686v-.45c0-1.092.88-1.976 1.972-1.976h7.893c1.091 0 1.974.884 1.974 1.976v1.942c0 1.091-.883 2.029-1.974 2.029h-7.893c-1.092 0-1.972-.938-1.972-2.03v-.453c-.853.037-1.408.236-1.798.504-.48.33-.774.802-1.086 1.368-.312.565-.63 1.22-1.222 1.763l-.077.069c3.071.415 4.465 1.555 5.651 2.593 1.39 1.215 2.476 2.275 6.3 2.288v-.46c0-1.092.894-1.946 1.986-1.946H24V3c0-1.662-1.338-3-3-3zm10.276 5.41c-.369 0-.687.268-.687.637v1.942c0 .368.318.636.687.636h7.892a.614.614 0 0 0 .635-.636V6.047a.614.614 0 0 0-.635-.636zM0 10.448v3.267h2.858a.696.696 0 0 0 .678-.69v-1.942c0-.368-.31-.635-.678-.635zm4.821 1.67v.907A1.965 1.965 0 0 1 2.858 15H0v6c0 1.662 1.338 3 3 3h18c1.662 0 3-1.338 3-3v-1.393h-2.942c-1.092 0-1.986-.913-1.986-2.005v-.445c-4.046-.032-5.598-1.333-6.983-2.544-1.437-1.257-2.751-2.431-7.268-2.496zM21.058 15a.644.644 0 0 0-.647.66v1.942c0 .368.278.612.647.612H24V15z\"/></svg></span>",
                         {
-                          "key": "block-52",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div><strong>Node-RED</strong><span>Send and receive SMS in your flows</span></div>",
-                          "inner": "<strong>Node-RED</strong><span>Send and receive SMS in your flows</span>",
-                          "signature": "8dcce5a8360c60e588bbcf454ce004e4e35ef13ffd5eb9822cdea0347e356b68",
-                          "inLink": true
+                          "parts": [
+                            {
+                              "key": "block-63",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong>",
+                              "html": "<strong>Node-RED</strong>",
+                              "inner": "Node-RED",
+                              "signature": "e68229a75689bb8763c4cdc7eb21663fc81b659ce52932405a5781fddc93bfb4",
+                              "inLink": true
+                            },
+                            {
+                              "key": "block-64",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Send and receive SMS in your flows</span>",
+                              "inner": "Send and receive SMS in your flows",
+                              "signature": "f4675ab7c8232864acc3fe90a0b4257588c936c5e3ad14590ec5905c6c405b9d",
+                              "inLink": true
+                            }
+                          ]
                         }
                       ]
                     },
@@ -969,14 +1169,30 @@
                       "parts": [
                         "<span class=\"connector-logo shuffle\" aria-hidden=\"true\"\n              ><svg width=\"27\" height=\"27\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 6h3c5 0 7 12 12 12h3m-4-4 4 4-4 4M3 18h3c2 0 3.5-2 5-5m2-2c1.5-3 3-5 5-5h3m-4-4 4 4-4 4\"/></svg\n            ></span>",
                         {
-                          "key": "block-53",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div><strong>Shuffle</strong><span>Add SMS to your security workflows</span></div>",
-                          "inner": "<strong>Shuffle</strong><span>Add SMS to your security workflows</span>",
-                          "signature": "58486e3ca7d5e73f2cae9ae73fa8355d934a7c1a785c8a8c0dce01e6f5cf5df3",
-                          "inLink": true
+                          "parts": [
+                            {
+                              "key": "block-65",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong>",
+                              "html": "<strong>Shuffle</strong>",
+                              "inner": "Shuffle",
+                              "signature": "c4813437b1b42348bf53a2b0f26009869d6d880cfdf38986ae9ed5c580f0d0b5",
+                              "inLink": true
+                            },
+                            {
+                              "key": "block-66",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Add SMS to your security workflows</span>",
+                              "inner": "Add SMS to your security workflows",
+                              "signature": "a58d156b005b4dd96f4b2ad4c6fa8973fae4dcd29b51ad5c219861b68a507013",
+                              "inLink": true
+                            }
+                          ]
                         }
                       ]
                     },
@@ -988,14 +1204,30 @@
                       "parts": [
                         "<span class=\"connector-logo github-actions\" aria-hidden=\"true\"><svg width=\"27\" height=\"27\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M1 3a2 2 0 0 1 2-2h6.5a2 2 0 0 1 2 2v6.5a2 2 0 0 1-2 2H7v4.063C7 16.355 7.644 17 8.438 17H12.5v-2.5a2 2 0 0 1 2-2H21a2 2 0 0 1 2 2V21a2 2 0 0 1-2 2h-6.5a2 2 0 0 1-2-2v-2.5H8.437A2.939 2.939 0 0 1 5.5 15.562V11.5H3a2 2 0 0 1-2-2Zm2-.5a.5.5 0 0 0-.5.5v6.5a.5.5 0 0 0 .5.5h6.5a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5ZM14.5 14a.5.5 0 0 0-.5.5V21a.5.5 0 0 0 .5.5H21a.5.5 0 0 0 .5-.5v-6.5a.5.5 0 0 0-.5-.5Z\"/></svg></span>",
                         {
-                          "key": "block-54",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div><strong>GitHub Actions</strong><span>Send SMS from your CI workflows</span></div>",
-                          "inner": "<strong>GitHub Actions</strong><span>Send SMS from your CI workflows</span>",
-                          "signature": "b78f21d2a183de0c61c16efc628469dc0bb9e8d5a76b9718a59f82952a9668e4",
-                          "inLink": true
+                          "parts": [
+                            {
+                              "key": "block-67",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong>",
+                              "html": "<strong>GitHub Actions</strong>",
+                              "inner": "GitHub Actions",
+                              "signature": "bdc5aeb2f93125a679b933e229e1f9e5d9dbafdd1d9907ca059a626c106b1e1b",
+                              "inLink": true
+                            },
+                            {
+                              "key": "block-68",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Send SMS from your CI workflows</span>",
+                              "inner": "Send SMS from your CI workflows",
+                              "signature": "75c5c11bb9ec66428ccac4de21c45ece58a6526570853b6d5125538d4f47cfd4",
+                              "inLink": true
+                            }
+                          ]
                         }
                       ]
                     },
@@ -1007,14 +1239,30 @@
                       "parts": [
                         "<span class=\"connector-logo apify\" aria-hidden=\"true\"><svg width=\"27\" height=\"27\" viewBox=\"-24 -24 248 248\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"14\" stroke-linejoin=\"round\"><path d=\"M114.695 0H196.97C198.643 0 200 1.35671 200 3.03031V128.766C200 131.778 196.083 132.945 194.434 130.425L112.159 4.68953C110.841 2.67412 112.287 0 114.695 0Z\"/><path d=\"M85.3048 0H3.0303C1.35671 0 0 1.35671 0 3.03031V128.766C0 131.778 3.91698 132.945 5.566 130.425L87.8405 4.68953C89.1593 2.67412 87.7134 0 85.3048 0Z\"/><path d=\"M98.5909 100.668L5.12683 194.835C3.22886 196.747 4.58334 200 7.27759 200H192.8C195.483 200 196.842 196.77 194.967 194.852L102.908 100.685C101.726 99.4749 99.7824 99.4676 98.5909 100.668Z\"/></svg></span>",
                         {
-                          "key": "block-55",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div><strong>Apify</strong><span>Send SMS from your Actors</span></div>",
-                          "inner": "<strong>Apify</strong><span>Send SMS from your Actors</span>",
-                          "signature": "cc6f38f2f3cb34fa85253c98fb9c90bbd5a3f102903ab0e125e4865047be6cf3",
-                          "inLink": true
+                          "parts": [
+                            {
+                              "key": "block-69",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong>",
+                              "html": "<strong>Apify</strong>",
+                              "inner": "Apify",
+                              "signature": "9f641b7b66d08244feb2ff63396379f1c0675149aa2db8ad6ee47594885b37c0",
+                              "inLink": true
+                            },
+                            {
+                              "key": "block-70",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Send SMS from your Actors</span>",
+                              "inner": "Send SMS from your Actors",
+                              "signature": "4f85bbfd5d92464ea17327c49a535c0bc9fac829be61449c59f1eb0030942da8",
+                              "inLink": true
+                            }
+                          ]
                         }
                       ]
                     },
@@ -1026,14 +1274,30 @@
                       "parts": [
                         "<span class=\"connector-logo directus\" aria-hidden=\"true\"><svg width=\"27\" height=\"27\" viewBox=\"0 0 64 39\" fill=\"currentColor\" fill-rule=\"evenodd\"><path d=\"M51.166 24.51a4.636 4.636 0 0 1-.763-.246 1.751 1.751 0 0 1-.54-.368c.147-1.304 0-2.435.122-3.713.492-4.967 3.615-3.393 6.418-4.204 1.745-.492 3.491-1.5 3.934-3.566a36.074 36.074 0 0 0-6.393-5.876C46.347 1.128 36.414-1.036 27.39.464a13.635 13.635 0 0 0 5.968 5.532s-2.445 0-4.541-1.565c-.615.245-1.845.73-2.435 1.024 4.794 4.598 12.293 5.114 17.678.984-.025.049-.492.762-1.057 3.737-1.254 6.343-4.869 5.852-9.343 4.254-9.294-3.369-14.408-.246-19.055-6.639a4.29 4.29 0 0 0-2.189 3.737c0 1.598.886 2.95 2.164 3.688.698-.926 1.011-1.189 2.228-1.189-1.883 1.068-2.105 2-2.916 4.582-.984 3.123-.566 6.32-5.164 7.155-2.434.123-2.385 1.77-3.27 4.23C4.352 33.188 2.877 34.467 0 37.491c1.18 1.426 2.41 1.598 3.663 1.082 2.582-1.082 4.574-4.426 6.442-6.59 2.09-2.409 7.106-1.376 10.892-3.737 2.607-1.598 3.885-3.761 2.164-7.425a7.254 7.254 0 0 1 1.869 4.426c4.376-.566 10.228 4.77 15.563 5.655a9.53 9.53 0 0 1-1.303-2.188c-.615-1.476-.811-2.828-.688-4.008.491 2.926 3.442 6.688 8.187 7.032 1.205.098 2.533-.05 3.91-.467 1.647-.492 3.171-1.131 4.99-.787 1.353.246 2.607.934 3.394 2.09 1.18 1.72 3.761 2.09 4.917-.025-2.606-6.81-9.786-7.253-12.834-8.04z\"/></svg></span>",
                         {
-                          "key": "block-56",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div><strong>Directus</strong><span>Send SMS from your Flows</span></div>",
-                          "inner": "<strong>Directus</strong><span>Send SMS from your Flows</span>",
-                          "signature": "57e3277b81714292d8ee15014bedc149c2604ee73776c749554cd878a8ce369d",
-                          "inLink": true
+                          "parts": [
+                            {
+                              "key": "block-71",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong>",
+                              "html": "<strong>Directus</strong>",
+                              "inner": "Directus",
+                              "signature": "45cbc33115d29a52b9d75ee6b35c916c2276f0f1eb1b039ec5caaf857eea9e1a",
+                              "inLink": true
+                            },
+                            {
+                              "key": "block-72",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Send SMS from your Flows</span>",
+                              "inner": "Send SMS from your Flows",
+                              "signature": "36f98620ca12ee8b12cd47d6c7d4bbdbef1c98a5ca87af8a355124fa19330f93",
+                              "inLink": true
+                            }
+                          ]
                         }
                       ]
                     },
@@ -1045,13 +1309,30 @@
                         "<span class=\"connector-logo pipedream\" aria-hidden=\"true\"\n                ><i></i><i></i><i></i\n              ></span>",
                         "\n              ",
                         {
-                          "key": "block-57",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div>\n                <strong>Pipedream</strong\n                ><span>Coming soon</span>\n              </div>",
-                          "inner": "\n                <strong>Pipedream</strong\n                ><span>Coming soon</span>\n              ",
-                          "signature": "7add84ed1ffd3663d4b3df2d24fa4b747e4bf72422d4e85745982347c14dce5e"
+                          "parts": [
+                            "\n                ",
+                            {
+                              "key": "block-73",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong\n                >",
+                              "html": "<strong>Pipedream</strong\n                >",
+                              "inner": "Pipedream",
+                              "signature": "a1ac25bbdea111b9ebc4b034740c47054e5bd40a58e8fe7c1665b5b35ea318f9"
+                            },
+                            {
+                              "key": "block-74",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Coming soon</span>",
+                              "inner": "Coming soon",
+                              "signature": "b548b4cc7d4aaf90afc07e8ea89c8792ffa4d3054b8d94fe5691302047bb2b5c"
+                            },
+                            "\n              "
+                          ]
                         },
                         "\n            "
                       ]
@@ -1064,13 +1345,30 @@
                         "<span class=\"connector-logo make\" aria-hidden=\"true\"\n                ><i></i><i></i><i></i\n              ></span>",
                         "\n              ",
                         {
-                          "key": "block-58",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div>\n                <strong>Make</strong\n                ><span>Coming soon</span>\n              </div>",
-                          "inner": "\n                <strong>Make</strong\n                ><span>Coming soon</span>\n              ",
-                          "signature": "61279a0948936fb264f4efe63ade691297e384ec6fe2e7f5bfd1265b8e8c9fc3"
+                          "parts": [
+                            "\n                ",
+                            {
+                              "key": "block-75",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong\n                >",
+                              "html": "<strong>Make</strong\n                >",
+                              "inner": "Make",
+                              "signature": "ac555b2a007e2305918d715d8bd1c23c190ce06f9a2bfb1758e478f6aabe47cf"
+                            },
+                            {
+                              "key": "block-76",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Coming soon</span>",
+                              "inner": "Coming soon",
+                              "signature": "b548b4cc7d4aaf90afc07e8ea89c8792ffa4d3054b8d94fe5691302047bb2b5c"
+                            },
+                            "\n              "
+                          ]
                         },
                         "\n            "
                       ]
@@ -1083,13 +1381,30 @@
                         "<span class=\"connector-logo keragon\" aria-hidden=\"true\"\n                ><img src=\"assets/images/keragon.svg\" alt=\"\"\n              width=\"25\" height=\"22\" /></span>",
                         "\n              ",
                         {
-                          "key": "block-59",
-                          "type": "paragraph",
                           "open": "<div>",
                           "close": "</div>",
-                          "html": "<div>\n                <strong>Keragon</strong\n                ><span>Coming soon</span>\n              </div>",
-                          "inner": "\n                <strong>Keragon</strong\n                ><span>Coming soon</span>\n              ",
-                          "signature": "108477e22ec27b96edfa82ac8c08d09c5d772f432b29f40628ad823297207053"
+                          "parts": [
+                            "\n                ",
+                            {
+                              "key": "block-77",
+                              "type": "heading_3",
+                              "open": "<strong>",
+                              "close": "</strong\n                >",
+                              "html": "<strong>Keragon</strong\n                >",
+                              "inner": "Keragon",
+                              "signature": "42e73271c1afc166d5cf9138dae7510349d88d82629b0cd2cec2dd7646a0899d"
+                            },
+                            {
+                              "key": "block-78",
+                              "type": "paragraph",
+                              "open": "<span>",
+                              "close": "</span>",
+                              "html": "<span>Coming soon</span>",
+                              "inner": "Coming soon",
+                              "signature": "b548b4cc7d4aaf90afc07e8ea89c8792ffa4d3054b8d94fe5691302047bb2b5c"
+                            },
+                            "\n              "
+                          ]
                         },
                         "\n            "
                       ]
@@ -1136,15 +1451,24 @@
       },
       "block-4": {
         "key": "block-4",
-        "type": "paragraph",
-        "open": "<div class=\"head\">",
-        "close": "</div>",
-        "html": "<div class=\"head\">\n                <span>DEVELOPER QUICKSTART</span\n                ><span class=\"env\">REST API</span>\n              </div>",
-        "inner": "\n                <span>DEVELOPER QUICKSTART</span\n                ><span class=\"env\">REST API</span>\n              ",
-        "signature": "b609834cd97ea610f8420ce255998c5520f9eea19a3df70e132bd7aa75fbb138"
+        "type": "heading_2",
+        "open": "<span>",
+        "close": "</span\n                >",
+        "html": "<span>DEVELOPER QUICKSTART</span\n                >",
+        "inner": "DEVELOPER QUICKSTART",
+        "signature": "e161ad6814b88b3668c02d2a869976ed4c0c529e42b066c30476cdec3c6bfc2b"
       },
       "block-5": {
         "key": "block-5",
+        "type": "paragraph",
+        "open": "<span class=\"env\">",
+        "close": "</span>",
+        "html": "<span class=\"env\">REST API</span>",
+        "inner": "REST API",
+        "signature": "b388805e0ef2c1f23eecc4c6ab4056f3f48fa2d80f3bb8b58054f28b04df1a7e"
+      },
+      "block-6": {
+        "key": "block-6",
         "type": "paragraph",
         "open": "<a href=\"api/authentication.html\"\n                >",
         "close": "</a\n              >",
@@ -1152,8 +1476,8 @@
         "inner": "Get your API key <span>→</span>",
         "signature": "e967b75ba0263ff6f570353c16cc611842f956fa613c6667ab98bd266021d8ff"
       },
-      "block-6": {
-        "key": "block-6",
+      "block-7": {
+        "key": "block-7",
         "type": "paragraph",
         "open": "<a href=\"api/send-a-message.html\"\n                >",
         "close": "</a\n              >",
@@ -1161,17 +1485,26 @@
         "inner": "Send your first message <span>→</span>",
         "signature": "c22992a67ec495180d7d33b14c30e04898388522bec67c7606560e6ea303b3e8"
       },
-      "block-7": {
-        "key": "block-7",
-        "type": "paragraph",
-        "open": "<div class=\"head\">",
-        "close": "</div>",
-        "html": "<div class=\"head\">\n                <span>ACCOUNT</span><span class=\"env\">Sign up</span>\n              </div>",
-        "inner": "\n                <span>ACCOUNT</span><span class=\"env\">Sign up</span>\n              ",
-        "signature": "1c4ab163dce012d803b7290e0153580a2b753ee30739932a3a7b7f3efc0b0a1d"
-      },
       "block-8": {
         "key": "block-8",
+        "type": "heading_2",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>ACCOUNT</span>",
+        "inner": "ACCOUNT",
+        "signature": "4db92b5b824cc59712fb173c00de10fa1539a1cc1328271857a11ef2d6b97a36"
+      },
+      "block-9": {
+        "key": "block-9",
+        "type": "paragraph",
+        "open": "<span class=\"env\">",
+        "close": "</span>",
+        "html": "<span class=\"env\">Sign up</span>",
+        "inner": "Sign up",
+        "signature": "a91d7502e63d0834c5cfe785741bcb8a15bae648533af9c37164ce45d9abd6bf"
+      },
+      "block-10": {
+        "key": "block-10",
         "type": "paragraph",
         "open": "<a href=\"https://signup.alive5.com/\" target=\"_blank\" rel=\"noreferrer\"\n                >",
         "close": "</a\n              >",
@@ -1179,35 +1512,8 @@
         "inner": "Create your account <span>→</span>",
         "signature": "ac1e3a988462bcd8da3652de74d5087beadd58597c16bc8dfae61e9a44cc4e86"
       },
-      "block-9": {
-        "key": "block-9",
-        "type": "paragraph",
-        "open": "<div class=\"num\">",
-        "close": "</div>",
-        "html": "<div class=\"num\">Hello from</div>",
-        "inner": "Hello from",
-        "signature": "699688d4b4eaf7f61e512d472862d53f4db5777f0da22b53b67da57b246e4b20"
-      },
-      "block-10": {
-        "key": "block-10",
-        "type": "image",
-        "open": "<img\n                    src=\"assets/images/alive5-logo-small.png\"\n                    alt=\"Alive5 logo\"\n                    width=\"56\"\n                    height=\"40\"\n                  />",
-        "close": "",
-        "html": "<img\n                    src=\"assets/images/alive5-logo-small.png\"\n                    alt=\"Alive5 logo\"\n                    width=\"56\"\n                    height=\"40\"\n                  />",
-        "inner": "",
-        "signature": "1dae59e1a61c8bb8c9580426cbe93d31197cffdc9f0a843189cb3c20773ec060"
-      },
       "block-11": {
         "key": "block-11",
-        "type": "paragraph",
-        "open": "<p class=\"sub\">",
-        "close": "</p>",
-        "html": "<p class=\"sub\">Your application → their inbox</p>",
-        "inner": "Your application → their inbox",
-        "signature": "d9bb25a6f8555497c0d3be7b9a35c15f367e85181ebddb9b391858a96d4baa03"
-      },
-      "block-12": {
-        "key": "block-12",
         "type": "heading_2",
         "open": "<h2>",
         "close": "</h2>",
@@ -1215,8 +1521,8 @@
         "inner": "Developers",
         "signature": "4faab40ae869d5fda4536581ff56c76bab2ff1215232b011b9a1583b4aa2bb06"
       },
-      "block-13": {
-        "key": "block-13",
+      "block-12": {
+        "key": "block-12",
         "type": "bulleted_list_item",
         "open": "<li>",
         "close": "</li>",
@@ -1226,8 +1532,8 @@
         "subLayout": [],
         "head": "<a href=\"api/reference.html\">Explore the API reference</a>"
       },
-      "block-14": {
-        "key": "block-14",
+      "block-13": {
+        "key": "block-13",
         "type": "bulleted_list_item",
         "open": "<li>",
         "close": "</li>",
@@ -1237,8 +1543,8 @@
         "subLayout": [],
         "head": "<a href=\"api/authentication.html\">Set up authentication</a>"
       },
-      "block-15": {
-        "key": "block-15",
+      "block-14": {
+        "key": "block-14",
         "type": "bulleted_list_item",
         "open": "<li>",
         "close": "</li>",
@@ -1248,30 +1554,26 @@
         "subLayout": [],
         "head": "<a href=\"api/contacts.html\">Work with contacts</a>"
       },
-      "block-16": {
-        "key": "block-16",
+      "block-15": {
+        "key": "block-15",
         "type": "bulleted_list_item",
         "open": "<li class=\"coming-soon\">",
         "close": "</li>",
         "html": "<li class=\"coming-soon\">\n              <span>Alive5 CLI</span><small>Coming soon</small>\n            </li>",
         "inner": "\n              <span>Alive5 CLI</span><small>Coming soon</small>\n            ",
-        "signature": "a8d8c2b1dd193e2fa17c6ad6260bdd8d7dbd8b5d68b4680a8f69cd08214adb19",
-        "subLayout": [],
-        "head": "\n              <span>Alive5 CLI</span><small>Coming soon</small>\n            "
+        "signature": "c69d6e281f7ee960ec5c375cf1ec5b0abba14e734d4b632e20fc97a6716dbadb"
       },
-      "block-17": {
-        "key": "block-17",
+      "block-16": {
+        "key": "block-16",
         "type": "bulleted_list_item",
         "open": "<li class=\"coming-soon\">",
         "close": "</li>",
         "html": "<li class=\"coming-soon\">\n              <span>Alive5 MCP</span><small>Coming soon</small>\n            </li>",
         "inner": "\n              <span>Alive5 MCP</span><small>Coming soon</small>\n            ",
-        "signature": "782486aface99b75cfb998f61f4b53acf92c02e73bc91441ae1fb17d472cd7d8",
-        "subLayout": [],
-        "head": "\n              <span>Alive5 MCP</span><small>Coming soon</small>\n            "
+        "signature": "0b888a1a60294f243dbfc2ca1bcab79e2746d3abcaecb677467b9911512e2468"
       },
-      "block-18": {
-        "key": "block-18",
+      "block-17": {
+        "key": "block-17",
         "type": "heading_2",
         "open": "<h2>",
         "close": "</h2>",
@@ -1279,8 +1581,8 @@
         "inner": "Automation",
         "signature": "ad8a35a27a368a0b732bc5c702942247c5496d5732195734ab946491f18e87df"
       },
-      "block-19": {
-        "key": "block-19",
+      "block-18": {
+        "key": "block-18",
         "type": "bulleted_list_item",
         "open": "<li>",
         "close": "</li>",
@@ -1290,8 +1592,8 @@
         "subLayout": [],
         "head": "<a href=\"connectors/zapier.html\">Build with Zapier</a>"
       },
-      "block-20": {
-        "key": "block-20",
+      "block-19": {
+        "key": "block-19",
         "type": "bulleted_list_item",
         "open": "<li>",
         "close": "</li>",
@@ -1301,8 +1603,8 @@
         "subLayout": [],
         "head": "<a href=\"connectors/n8n.html\">Build with n8n</a>"
       },
-      "block-21": {
-        "key": "block-21",
+      "block-20": {
+        "key": "block-20",
         "type": "bulleted_list_item",
         "open": "<li>",
         "close": "</li>",
@@ -1312,8 +1614,8 @@
         "subLayout": [],
         "head": "<a href=\"connectors/node-red.html\">Build with Node-RED</a>"
       },
-      "block-22": {
-        "key": "block-22",
+      "block-21": {
+        "key": "block-21",
         "type": "bulleted_list_item",
         "open": "<li>",
         "close": "</li>",
@@ -1323,8 +1625,8 @@
         "subLayout": [],
         "head": "<a href=\"connectors/shuffle.html\">Build with Shuffle</a>"
       },
-      "block-23": {
-        "key": "block-23",
+      "block-22": {
+        "key": "block-22",
         "type": "bulleted_list_item",
         "open": "<li>",
         "close": "</li>",
@@ -1334,8 +1636,8 @@
         "subLayout": [],
         "head": "<a href=\"connectors/github-actions.html\">Build with GitHub Actions</a>"
       },
-      "block-24": {
-        "key": "block-24",
+      "block-23": {
+        "key": "block-23",
         "type": "bulleted_list_item",
         "open": "<li>",
         "close": "</li>",
@@ -1345,8 +1647,8 @@
         "subLayout": [],
         "head": "<a href=\"connectors/apify.html\">Build with Apify</a>"
       },
-      "block-25": {
-        "key": "block-25",
+      "block-24": {
+        "key": "block-24",
         "type": "bulleted_list_item",
         "open": "<li>",
         "close": "</li>",
@@ -1356,41 +1658,35 @@
         "subLayout": [],
         "head": "<a href=\"connectors/directus.html\">Build with Directus</a>"
       },
-      "block-26": {
-        "key": "block-26",
+      "block-25": {
+        "key": "block-25",
         "type": "bulleted_list_item",
         "open": "<li class=\"coming-soon\">",
         "close": "</li>",
         "html": "<li class=\"coming-soon\">\n              <span>Pipedream</span><small>Coming soon</small>\n            </li>",
         "inner": "\n              <span>Pipedream</span><small>Coming soon</small>\n            ",
-        "signature": "e4c2130b5af37c2a9f87ceeccd9b8fe5792db528538a6172377cd2c18435c401",
-        "subLayout": [],
-        "head": "\n              <span>Pipedream</span><small>Coming soon</small>\n            "
+        "signature": "5aa5da807832631c137e518433b3cf017a17ca836f7ad0580ae7f7212360341a"
+      },
+      "block-26": {
+        "key": "block-26",
+        "type": "bulleted_list_item",
+        "open": "<li class=\"coming-soon\">",
+        "close": "</li>",
+        "html": "<li class=\"coming-soon\">\n              <span>Make</span><small>Coming soon</small>\n            </li>",
+        "inner": "\n              <span>Make</span><small>Coming soon</small>\n            ",
+        "signature": "22b4fa7bda391058026976b9150f776fcee76cac9397608f27af229a913cade1"
       },
       "block-27": {
         "key": "block-27",
         "type": "bulleted_list_item",
         "open": "<li class=\"coming-soon\">",
         "close": "</li>",
-        "html": "<li class=\"coming-soon\">\n              <span>Make</span><small>Coming soon</small>\n            </li>",
-        "inner": "\n              <span>Make</span><small>Coming soon</small>\n            ",
-        "signature": "903a4b7516f98f230c55f18f3da46fcbeaf481ec40938bd5a057988b07063d3f",
-        "subLayout": [],
-        "head": "\n              <span>Make</span><small>Coming soon</small>\n            "
+        "html": "<li class=\"coming-soon\">\n              <span>Keragon</span><small>Coming soon</small>\n            </li>",
+        "inner": "\n              <span>Keragon</span><small>Coming soon</small>\n            ",
+        "signature": "b6c9db6ad429b54e6942ba0b010cf480c15209ce8ba509cb1569b569f1affd35"
       },
       "block-28": {
         "key": "block-28",
-        "type": "bulleted_list_item",
-        "open": "<li class=\"coming-soon\">",
-        "close": "</li>",
-        "html": "<li class=\"coming-soon\">\n              <span>Keragon</span><small>Coming soon</small>\n            </li>",
-        "inner": "\n              <span>Keragon</span><small>Coming soon</small>\n            ",
-        "signature": "c6225566cd90f886135aa3b78486fb9794fe5261586d637dab33ebc758711ff3",
-        "subLayout": [],
-        "head": "\n              <span>Keragon</span><small>Coming soon</small>\n            "
-      },
-      "block-29": {
-        "key": "block-29",
         "type": "heading_2",
         "open": "<h2>",
         "close": "</h2>",
@@ -1398,8 +1694,8 @@
         "inner": "Messaging",
         "signature": "bfae035b7b261fc4bc347dcfb5bde0c24ede2a0155132d9a0e1245c9893bcd9c"
       },
-      "block-30": {
-        "key": "block-30",
+      "block-29": {
+        "key": "block-29",
         "type": "bulleted_list_item",
         "open": "<li>",
         "close": "</li>",
@@ -1409,8 +1705,8 @@
         "subLayout": [],
         "head": "<a href=\"api/send-a-message.html\">Send a text message</a>"
       },
-      "block-31": {
-        "key": "block-31",
+      "block-30": {
+        "key": "block-30",
         "type": "bulleted_list_item",
         "open": "<li>",
         "close": "</li>",
@@ -1420,8 +1716,8 @@
         "subLayout": [],
         "head": "\n              <a href=\"api/receive-messages.html\">Read messages</a>\n            "
       },
-      "block-32": {
-        "key": "block-32",
+      "block-31": {
+        "key": "block-31",
         "type": "bulleted_list_item",
         "open": "<li>",
         "close": "</li>",
@@ -1431,18 +1727,18 @@
         "subLayout": [],
         "head": "\n              <a href=\"api/sms-limits.html\"\n                >SMS limits and compliance</a\n              >\n            "
       },
-      "block-33": {
-        "key": "block-33",
+      "block-32": {
+        "key": "block-32",
         "type": "callout",
         "open": "<section class=\"wrap tryout-section\" aria-labelledby=\"cli-heading\">",
         "close": "</section>",
         "html": "<section class=\"wrap tryout-section\" aria-labelledby=\"cli-heading\">\n        <div class=\"section-head tryout-head\">\n          <h2 id=\"cli-heading\">Try it out</h2>\n          <span class=\"info-tip\">\n            <button\n              type=\"button\"\n              class=\"info-trigger\"\n              aria-label=\"About this unreleased CLI preview with fictional output\"\n              aria-describedby=\"tryout-info\"\n            >\n              <svg width=\"13\" height=\"13\" viewBox=\"0 0 12 12\" aria-hidden=\"true\">\n                <rect x=\"1\" y=\"1\" width=\"10\" height=\"10\" rx=\"2.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\" />\n                <path d=\"M5.2 5.4h1v3.1\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />\n                <circle cx=\"6\" cy=\"3.6\" r=\".75\" fill=\"currentColor\" />\n              </svg>\n            </button>\n            <span class=\"info-bubble\" role=\"tooltip\" id=\"tryout-info\"\n              >The CLI is not yet released. This preview shows common Alive5 API\n              actions as commands with fictional output.\n              Everything runs in your browser; nothing is sent.</span\n            >\n          </span>\n        </div>\n        <div class=\"tryout\" data-shell>\n          <span\n            class=\"shell-announcement\"\n            data-shell-announcement\n            role=\"status\"\n            aria-live=\"polite\"\n          ></span>\n          <div\n            class=\"tryout-list\"\n            role=\"tablist\"\n            aria-orientation=\"vertical\"\n            aria-label=\"Example API commands\"\n          ></div>\n          <span class=\"shell-scroll-cue\">Swipe for more commands →</span>\n          <div\n            class=\"shell stripe-shell\"\n            id=\"shell-panel\"\n            role=\"tabpanel\"\n            data-cli-preview\n          >\n            <div class=\"shell-scroll\">\n              <canvas\n                class=\"shell-logo\"\n                role=\"img\"\n                aria-label=\"Alive5 wordmark with the animated Isometric Desktop mascot and section-specific speech bubbles\"\n                >Alive5</canvas\n              >\n              <div class=\"shell-out\"></div>\n              <form class=\"shell-prompt\" autocomplete=\"off\">\n                <span aria-hidden=\"true\">$</span\n                ><textarea\n                  rows=\"2\"\n                  aria-label=\"Shell input\"\n                  enterkeyhint=\"send\"\n                  spellcheck=\"false\"\n                ></textarea>\n              </form>\n            </div>\n            <div class=\"shell-status\">\n              <span\n                class=\"shell-resize\"\n                data-shell-resize\n                role=\"separator\"\n                aria-orientation=\"horizontal\"\n                aria-label=\"Resize terminal\"\n                tabindex=\"0\"\n                title=\"Drag to resize\"\n              ></span\n              ><button\n                type=\"button\"\n                data-cli-motion\n                aria-label=\"Pause animation\"\n                title=\"Pause animation\"\n              >\n                <span aria-hidden=\"true\">Ⅱ</span></button\n              ><button\n                type=\"button\"\n                data-shell-prompt\n                aria-label=\"Go to prompt\"\n              >\n                ↓</button\n              ><button\n                type=\"button\"\n                data-shell-reset\n                aria-label=\"Clear terminal\"\n              >\n                ↺\n              </button>\n            </div>\n          </div>\n        </div>\n        <div class=\"tryout-foot\">\n          <a href=\"api/send-a-message.html\" data-shell-doc\n            >Learn more about sending messages</a\n          >\n        </div>\n      </section>",
         "inner": "\n        <div class=\"section-head tryout-head\">\n          <h2 id=\"cli-heading\">Try it out</h2>\n          <span class=\"info-tip\">\n            <button\n              type=\"button\"\n              class=\"info-trigger\"\n              aria-label=\"About this unreleased CLI preview with fictional output\"\n              aria-describedby=\"tryout-info\"\n            >\n              <svg width=\"13\" height=\"13\" viewBox=\"0 0 12 12\" aria-hidden=\"true\">\n                <rect x=\"1\" y=\"1\" width=\"10\" height=\"10\" rx=\"2.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\" />\n                <path d=\"M5.2 5.4h1v3.1\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />\n                <circle cx=\"6\" cy=\"3.6\" r=\".75\" fill=\"currentColor\" />\n              </svg>\n            </button>\n            <span class=\"info-bubble\" role=\"tooltip\" id=\"tryout-info\"\n              >The CLI is not yet released. This preview shows common Alive5 API\n              actions as commands with fictional output.\n              Everything runs in your browser; nothing is sent.</span\n            >\n          </span>\n        </div>\n        <div class=\"tryout\" data-shell>\n          <span\n            class=\"shell-announcement\"\n            data-shell-announcement\n            role=\"status\"\n            aria-live=\"polite\"\n          ></span>\n          <div\n            class=\"tryout-list\"\n            role=\"tablist\"\n            aria-orientation=\"vertical\"\n            aria-label=\"Example API commands\"\n          ></div>\n          <span class=\"shell-scroll-cue\">Swipe for more commands →</span>\n          <div\n            class=\"shell stripe-shell\"\n            id=\"shell-panel\"\n            role=\"tabpanel\"\n            data-cli-preview\n          >\n            <div class=\"shell-scroll\">\n              <canvas\n                class=\"shell-logo\"\n                role=\"img\"\n                aria-label=\"Alive5 wordmark with the animated Isometric Desktop mascot and section-specific speech bubbles\"\n                >Alive5</canvas\n              >\n              <div class=\"shell-out\"></div>\n              <form class=\"shell-prompt\" autocomplete=\"off\">\n                <span aria-hidden=\"true\">$</span\n                ><textarea\n                  rows=\"2\"\n                  aria-label=\"Shell input\"\n                  enterkeyhint=\"send\"\n                  spellcheck=\"false\"\n                ></textarea>\n              </form>\n            </div>\n            <div class=\"shell-status\">\n              <span\n                class=\"shell-resize\"\n                data-shell-resize\n                role=\"separator\"\n                aria-orientation=\"horizontal\"\n                aria-label=\"Resize terminal\"\n                tabindex=\"0\"\n                title=\"Drag to resize\"\n              ></span\n              ><button\n                type=\"button\"\n                data-cli-motion\n                aria-label=\"Pause animation\"\n                title=\"Pause animation\"\n              >\n                <span aria-hidden=\"true\">Ⅱ</span></button\n              ><button\n                type=\"button\"\n                data-shell-prompt\n                aria-label=\"Go to prompt\"\n              >\n                ↓</button\n              ><button\n                type=\"button\"\n                data-shell-reset\n                aria-label=\"Clear terminal\"\n              >\n                ↺\n              </button>\n            </div>\n          </div>\n        </div>\n        <div class=\"tryout-foot\">\n          <a href=\"api/send-a-message.html\" data-shell-doc\n            >Learn more about sending messages</a\n          >\n        </div>\n      ",
-        "signature": "143450c4d8bdccd73b831d4216c412d20c29cdf7108e5ebfe0cbfede3fa5e28f",
+        "signature": "490eb49afa3b62e2dceae813d0288aa968a555cdd9387cc30000df9535e69e2a",
         "widget": "cli-preview"
       },
-      "block-34": {
-        "key": "block-34",
+      "block-33": {
+        "key": "block-33",
         "type": "heading_2",
         "open": "<h2>",
         "close": "</h2>",
@@ -1450,8 +1746,8 @@
         "inner": "Browse by product",
         "signature": "95cf1b02de245c67d727c02abd521515c01a35db1a7557f4306e31602401da5e"
       },
-      "block-35": {
-        "key": "block-35",
+      "block-34": {
+        "key": "block-34",
         "type": "paragraph",
         "open": "<a\n            class=\"small-link\"\n            href=\"https://www.alive5.com\"\n            target=\"_blank\"\n            rel=\"noreferrer\"\n            >",
         "close": "</a\n          >",
@@ -1459,238 +1755,435 @@
         "inner": "Explore Alive5 ↗",
         "signature": "189554679a0810b4cd5308e1b35beb3fc8a537081b2023d8f229d76ae6306f18"
       },
-      "block-36": {
-        "key": "block-36",
-        "type": "heading_3",
+      "block-35": {
+        "key": "block-35",
+        "type": "heading_2",
         "open": "<h3>",
         "close": "</h3>",
         "html": "<h3>Messaging</h3>",
         "inner": "Messaging",
-        "signature": "d33fd938eeeb95b473ab0c754059d744eef28805b93d2dbc1c08116a589970b4"
+        "signature": "bfae035b7b261fc4bc347dcfb5bde0c24ede2a0155132d9a0e1245c9893bcd9c"
+      },
+      "block-36": {
+        "key": "block-36",
+        "type": "heading_3",
+        "open": "<strong>",
+        "close": "</strong\n                >",
+        "html": "<strong>SMS <em aria-hidden=\"true\">↗</em></strong\n                >",
+        "inner": "SMS <em aria-hidden=\"true\">↗</em>",
+        "signature": "53b904648e08e6f7000e489a320eef7de2a9309c2152e63ae71dddb7aae1808a",
+        "inLink": true
       },
       "block-37": {
         "key": "block-37",
         "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div>\n                <strong>SMS <em aria-hidden=\"true\">↗</em></strong\n                ><span>Two-way business texting</span>\n              </div>",
-        "inner": "\n                <strong>SMS <em aria-hidden=\"true\">↗</em></strong\n                ><span>Two-way business texting</span>\n              ",
-        "signature": "15ac82ed8550ccc4ce8eeb6654a96ed25e74502f84fff16f4f09f42fc7e9ad02",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Two-way business texting</span>",
+        "inner": "Two-way business texting",
+        "signature": "38a028f30975c2a8f9b2e7b939749d99246fa12c3d6c0f39192d82c728ebe1b7",
         "inLink": true
       },
       "block-38": {
         "key": "block-38",
-        "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div>\n                <strong>Live chat</strong\n                ><span>Website conversations with your team</span>\n              </div>",
-        "inner": "\n                <strong>Live chat</strong\n                ><span>Website conversations with your team</span>\n              ",
-        "signature": "72496731172e7537c16e1006c8abcab5dbedbd0d15e6d75715b1533f2ddaf0bc",
+        "type": "heading_3",
+        "open": "<strong>",
+        "close": "</strong\n                >",
+        "html": "<strong>Live chat</strong\n                >",
+        "inner": "Live chat",
+        "signature": "970dde0c775db7327eb33884b650f255bb676f21c998dd1dcc15b741964f9fa6",
         "inLink": true
       },
       "block-39": {
         "key": "block-39",
         "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div>\n                <strong>Facebook Messenger <em aria-hidden=\"true\">↗</em></strong\n                ><span>Social messages in one inbox</span>\n              </div>",
-        "inner": "\n                <strong>Facebook Messenger <em aria-hidden=\"true\">↗</em></strong\n                ><span>Social messages in one inbox</span>\n              ",
-        "signature": "34724cfdc21460151bef82eec1ce9983e068aa75589f5882e90a0e3dae38e3d0",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Website conversations with your team</span>",
+        "inner": "Website conversations with your team",
+        "signature": "8011ca2e9090aea4188c3cce07ec7a7fe84ff81cd0d0ce270cc82f91bc6c467a",
         "inLink": true
       },
       "block-40": {
         "key": "block-40",
         "type": "heading_3",
-        "open": "<h3>",
-        "close": "</h3>",
-        "html": "<h3>Automation and customer relationships</h3>",
-        "inner": "Automation and customer relationships",
-        "signature": "d00bfbecefee914a7dd3445f038a4e73dc907498afec2bd2842c5ea9f4681fbf"
+        "open": "<strong>",
+        "close": "</strong\n                >",
+        "html": "<strong>Facebook Messenger <em aria-hidden=\"true\">↗</em></strong\n                >",
+        "inner": "Facebook Messenger <em aria-hidden=\"true\">↗</em>",
+        "signature": "25cd8c8f3ba3035c25b08d2ae0a6b81cdff688adbca3792a9379f54190f4e080",
+        "inLink": true
       },
       "block-41": {
         "key": "block-41",
         "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div>\n                <strong>AI chatbots <em aria-hidden=\"true\">↗</em></strong\n                ><span>Answers from your business content</span>\n              </div>",
-        "inner": "\n                <strong>AI chatbots <em aria-hidden=\"true\">↗</em></strong\n                ><span>Answers from your business content</span>\n              ",
-        "signature": "48509b7f358de5a9a224709684df567fce3d178bafd8747bd38dd6ae6e913ea1",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Social messages in one inbox</span>",
+        "inner": "Social messages in one inbox",
+        "signature": "cc55cce3280467629f38355b5aa609b7a3a9146f60352012efc8ddf01d5edacd",
         "inLink": true
       },
       "block-42": {
         "key": "block-42",
-        "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div>\n                <strong>Chatbot builder <em aria-hidden=\"true\">↗</em></strong\n                ><span>Create guided conversations</span>\n              </div>",
-        "inner": "\n                <strong>Chatbot builder <em aria-hidden=\"true\">↗</em></strong\n                ><span>Create guided conversations</span>\n              ",
-        "signature": "8c224106768c8c0aa45ba6a96092b6032a4ca3fd8912b646a1c207f10f56843b",
-        "inLink": true
+        "type": "heading_2",
+        "open": "<h3>",
+        "close": "</h3>",
+        "html": "<h3>Automation and customer relationships</h3>",
+        "inner": "Automation and customer relationships",
+        "signature": "bde13e128f69416333504befedeb881c9a7eba7553a30ea6f048388365f8fc31"
       },
       "block-43": {
         "key": "block-43",
-        "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div>\n                <strong>CRM integrations</strong\n                ><span>Connect conversations to customer records</span>\n              </div>",
-        "inner": "\n                <strong>CRM integrations</strong\n                ><span>Connect conversations to customer records</span>\n              ",
-        "signature": "0be2fce3674884672371f9016314687b9076e243705e248eb62a82bc836bb15c",
+        "type": "heading_3",
+        "open": "<strong>",
+        "close": "</strong\n                >",
+        "html": "<strong>AI chatbots <em aria-hidden=\"true\">↗</em></strong\n                >",
+        "inner": "AI chatbots <em aria-hidden=\"true\">↗</em>",
+        "signature": "266f89a67c4c2a8659768d66e85876ab80f9b44b093d98907444b1a296d1d896",
         "inLink": true
       },
       "block-44": {
         "key": "block-44",
         "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div>\n                <strong>QR codes <em aria-hidden=\"true\">↗</em></strong\n                ><span>Start a conversation with a scan</span>\n              </div>",
-        "inner": "\n                <strong>QR codes <em aria-hidden=\"true\">↗</em></strong\n                ><span>Start a conversation with a scan</span>\n              ",
-        "signature": "b2e0befbc951a72bb7017a2d0001b741e504234de0c35dc19184a0f28b9709bc",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Answers from your business content</span>",
+        "inner": "Answers from your business content",
+        "signature": "387adc9f6183957f6707c9316392dabd3e94311c3e47c8f3a9ab814136223201",
         "inLink": true
       },
       "block-45": {
         "key": "block-45",
         "type": "heading_3",
-        "open": "<h3>",
-        "close": "</h3>",
-        "html": "<h3>Developer tools</h3>",
-        "inner": "Developer tools",
-        "signature": "892545ed7db398c7e584af5ff0d95ae8884445926e3c246f821588149bceed3f"
+        "open": "<strong>",
+        "close": "</strong\n                >",
+        "html": "<strong>Chatbot builder <em aria-hidden=\"true\">↗</em></strong\n                >",
+        "inner": "Chatbot builder <em aria-hidden=\"true\">↗</em>",
+        "signature": "3c5a22146ec5cee0c4b54cfd7cf1e9018a66499b12a2c751ef01a61afa6e0c1d",
+        "inLink": true
       },
       "block-46": {
         "key": "block-46",
         "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div>\n                <strong>Messaging API</strong\n                ><span>Send and receive texts with REST</span>\n              </div>",
-        "inner": "\n                <strong>Messaging API</strong\n                ><span>Send and receive texts with REST</span>\n              ",
-        "signature": "0f70007dd7b72162ef9463ef15520d5ddece893c6be4c8059f67f80ffb2deea6",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Create guided conversations</span>",
+        "inner": "Create guided conversations",
+        "signature": "b06afcc7937fb7378e0e124c5a17181e4f7f99cd8a281e179805ef688b6b2240",
         "inLink": true
       },
       "block-47": {
         "key": "block-47",
-        "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div>\n                <strong>Contacts and directory</strong\n                ><span>Customer records, channels, and users</span>\n              </div>",
-        "inner": "\n                <strong>Contacts and directory</strong\n                ><span>Customer records, channels, and users</span>\n              ",
-        "signature": "bce2d8a40e67ef74ae4a848f95c69815bd3209641d0dc9b35ed52408560a3eeb",
+        "type": "heading_3",
+        "open": "<strong>",
+        "close": "</strong\n                >",
+        "html": "<strong>CRM integrations</strong\n                >",
+        "inner": "CRM integrations",
+        "signature": "ece292cddfdeb0e9acf3ffb9b0f8a05c349df892cf8a0b7f7a53d747c713abcb",
         "inLink": true
       },
       "block-48": {
         "key": "block-48",
         "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div>\n                <strong>Reporting</strong\n                ><span>Message volume and bot activity</span>\n              </div>",
-        "inner": "\n                <strong>Reporting</strong\n                ><span>Message volume and bot activity</span>\n              ",
-        "signature": "da76583dac37b77a37bdd000d18414f0e5769f2dcd4c51635030bbfa05092c33",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Connect conversations to customer records</span>",
+        "inner": "Connect conversations to customer records",
+        "signature": "49bad3283779358644a06622fdd1bbdb69e497923c144fd7a8a991323885e2d4",
         "inLink": true
       },
       "block-49": {
         "key": "block-49",
         "type": "heading_3",
-        "open": "<h3>",
-        "close": "</h3>",
-        "html": "<h3>Connectors</h3>",
-        "inner": "Connectors",
-        "signature": "159895dfbacc88b081cdc1c603df6d0b1f5f65aa4cea8b8e156e45b4c8581dd7"
+        "open": "<strong>",
+        "close": "</strong\n                >",
+        "html": "<strong>QR codes <em aria-hidden=\"true\">↗</em></strong\n                >",
+        "inner": "QR codes <em aria-hidden=\"true\">↗</em>",
+        "signature": "ff331c4bb777c95bd2c2391c841b4217376917ca770ed7a7a7e19df5fb7ea882",
+        "inLink": true
       },
       "block-50": {
         "key": "block-50",
         "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div><strong>Zapier</strong><span>Connect conversations to your apps</span></div>",
-        "inner": "<strong>Zapier</strong><span>Connect conversations to your apps</span>",
-        "signature": "93de4070195ca72f7c936ea9f9272ad58ccacd421e395a9ce1b81db675fad63a",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Start a conversation with a scan</span>",
+        "inner": "Start a conversation with a scan",
+        "signature": "4a0fd8bbc1e2469a71ec6a391fac814228f5d7c623dddda16e50e74819c5f702",
         "inLink": true
       },
       "block-51": {
         "key": "block-51",
-        "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div>\n                <strong>n8n</strong><span>Send SMS from your workflows</span>\n              </div>",
-        "inner": "\n                <strong>n8n</strong><span>Send SMS from your workflows</span>\n              ",
-        "signature": "90f4a26721a091b39e6354a97d823fa5029e252212c4b47d0cc29b75ffcadc25",
-        "inLink": true
+        "type": "heading_2",
+        "open": "<h3>",
+        "close": "</h3>",
+        "html": "<h3>Developer tools</h3>",
+        "inner": "Developer tools",
+        "signature": "d98d55b622514684cac5fc719c4a237ce10a98a4a6bf55c59d39b83e88c18c32"
       },
       "block-52": {
         "key": "block-52",
-        "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div><strong>Node-RED</strong><span>Send and receive SMS in your flows</span></div>",
-        "inner": "<strong>Node-RED</strong><span>Send and receive SMS in your flows</span>",
-        "signature": "8dcce5a8360c60e588bbcf454ce004e4e35ef13ffd5eb9822cdea0347e356b68",
+        "type": "heading_3",
+        "open": "<strong>",
+        "close": "</strong\n                >",
+        "html": "<strong>Messaging API</strong\n                >",
+        "inner": "Messaging API",
+        "signature": "0b1b1557f99858bf7cf991fa3a4e37c346ec53f1c3638d73439376e954bdee29",
         "inLink": true
       },
       "block-53": {
         "key": "block-53",
         "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div><strong>Shuffle</strong><span>Add SMS to your security workflows</span></div>",
-        "inner": "<strong>Shuffle</strong><span>Add SMS to your security workflows</span>",
-        "signature": "58486e3ca7d5e73f2cae9ae73fa8355d934a7c1a785c8a8c0dce01e6f5cf5df3",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Send and receive texts with REST</span>",
+        "inner": "Send and receive texts with REST",
+        "signature": "88ed7cb9239114c5643c888af8434b1c03f812c648e632255af5d3a112c6bdd3",
         "inLink": true
       },
       "block-54": {
         "key": "block-54",
-        "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div><strong>GitHub Actions</strong><span>Send SMS from your CI workflows</span></div>",
-        "inner": "<strong>GitHub Actions</strong><span>Send SMS from your CI workflows</span>",
-        "signature": "b78f21d2a183de0c61c16efc628469dc0bb9e8d5a76b9718a59f82952a9668e4",
+        "type": "heading_3",
+        "open": "<strong>",
+        "close": "</strong\n                >",
+        "html": "<strong>Contacts and directory</strong\n                >",
+        "inner": "Contacts and directory",
+        "signature": "bd5d9f2fd2a88810b772b216a0037e2e7262ff89264a1e6da8a7a8d6587fa31a",
         "inLink": true
       },
       "block-55": {
         "key": "block-55",
         "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div><strong>Apify</strong><span>Send SMS from your Actors</span></div>",
-        "inner": "<strong>Apify</strong><span>Send SMS from your Actors</span>",
-        "signature": "cc6f38f2f3cb34fa85253c98fb9c90bbd5a3f102903ab0e125e4865047be6cf3",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Customer records, channels, and users</span>",
+        "inner": "Customer records, channels, and users",
+        "signature": "a2e0f59ef1a2f5675a6a7c233ebc6b6849eccb82dab9f3a05cf7d203467f6efc",
         "inLink": true
       },
       "block-56": {
         "key": "block-56",
-        "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div><strong>Directus</strong><span>Send SMS from your Flows</span></div>",
-        "inner": "<strong>Directus</strong><span>Send SMS from your Flows</span>",
-        "signature": "57e3277b81714292d8ee15014bedc149c2604ee73776c749554cd878a8ce369d",
+        "type": "heading_3",
+        "open": "<strong>",
+        "close": "</strong\n                >",
+        "html": "<strong>Reporting</strong\n                >",
+        "inner": "Reporting",
+        "signature": "a47223f28059961e01a17dc3b427dcbb3e9e87e6702b940c9a16d191c648137d",
         "inLink": true
       },
       "block-57": {
         "key": "block-57",
         "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div>\n                <strong>Pipedream</strong\n                ><span>Coming soon</span>\n              </div>",
-        "inner": "\n                <strong>Pipedream</strong\n                ><span>Coming soon</span>\n              ",
-        "signature": "7add84ed1ffd3663d4b3df2d24fa4b747e4bf72422d4e85745982347c14dce5e"
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Message volume and bot activity</span>",
+        "inner": "Message volume and bot activity",
+        "signature": "4c6e0046ec9bb9e8f570fe32da97edf902d46748a45cccd65677a133f537e1a0",
+        "inLink": true
       },
       "block-58": {
         "key": "block-58",
-        "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div>\n                <strong>Make</strong\n                ><span>Coming soon</span>\n              </div>",
-        "inner": "\n                <strong>Make</strong\n                ><span>Coming soon</span>\n              ",
-        "signature": "61279a0948936fb264f4efe63ade691297e384ec6fe2e7f5bfd1265b8e8c9fc3"
+        "type": "heading_2",
+        "open": "<h3>",
+        "close": "</h3>",
+        "html": "<h3>Connectors</h3>",
+        "inner": "Connectors",
+        "signature": "eb7bd8cb5d23bf94da2e46ffb1a3855d6e7ee53dd8b559caad56c607b54551d7"
       },
       "block-59": {
         "key": "block-59",
+        "type": "heading_3",
+        "open": "<strong>",
+        "close": "</strong>",
+        "html": "<strong>Zapier</strong>",
+        "inner": "Zapier",
+        "signature": "c523da7c722162aa277f1693bbbb397a4a45834dd1fafc737b3844c14c86221d",
+        "inLink": true
+      },
+      "block-60": {
+        "key": "block-60",
         "type": "paragraph",
-        "open": "<div>",
-        "close": "</div>",
-        "html": "<div>\n                <strong>Keragon</strong\n                ><span>Coming soon</span>\n              </div>",
-        "inner": "\n                <strong>Keragon</strong\n                ><span>Coming soon</span>\n              ",
-        "signature": "108477e22ec27b96edfa82ac8c08d09c5d772f432b29f40628ad823297207053"
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Connect conversations to your apps</span>",
+        "inner": "Connect conversations to your apps",
+        "signature": "cce06f46478f798827381e88a99fd6daa84e4c2da33f39a16519e5e01c3aa5b0",
+        "inLink": true
+      },
+      "block-61": {
+        "key": "block-61",
+        "type": "heading_3",
+        "open": "<strong>",
+        "close": "</strong>",
+        "html": "<strong>n8n</strong>",
+        "inner": "n8n",
+        "signature": "c37456078a4ebc0b3ab5905034de12e545111efb3acc152f2b6f7dccd8897e75",
+        "inLink": true
+      },
+      "block-62": {
+        "key": "block-62",
+        "type": "paragraph",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Send SMS from your workflows</span>",
+        "inner": "Send SMS from your workflows",
+        "signature": "bf0b9a93f4b5dd0b97931c71be79cb0fe0b75633ec583ba4a37fd540b54e68c0",
+        "inLink": true
+      },
+      "block-63": {
+        "key": "block-63",
+        "type": "heading_3",
+        "open": "<strong>",
+        "close": "</strong>",
+        "html": "<strong>Node-RED</strong>",
+        "inner": "Node-RED",
+        "signature": "e68229a75689bb8763c4cdc7eb21663fc81b659ce52932405a5781fddc93bfb4",
+        "inLink": true
+      },
+      "block-64": {
+        "key": "block-64",
+        "type": "paragraph",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Send and receive SMS in your flows</span>",
+        "inner": "Send and receive SMS in your flows",
+        "signature": "f4675ab7c8232864acc3fe90a0b4257588c936c5e3ad14590ec5905c6c405b9d",
+        "inLink": true
+      },
+      "block-65": {
+        "key": "block-65",
+        "type": "heading_3",
+        "open": "<strong>",
+        "close": "</strong>",
+        "html": "<strong>Shuffle</strong>",
+        "inner": "Shuffle",
+        "signature": "c4813437b1b42348bf53a2b0f26009869d6d880cfdf38986ae9ed5c580f0d0b5",
+        "inLink": true
+      },
+      "block-66": {
+        "key": "block-66",
+        "type": "paragraph",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Add SMS to your security workflows</span>",
+        "inner": "Add SMS to your security workflows",
+        "signature": "a58d156b005b4dd96f4b2ad4c6fa8973fae4dcd29b51ad5c219861b68a507013",
+        "inLink": true
+      },
+      "block-67": {
+        "key": "block-67",
+        "type": "heading_3",
+        "open": "<strong>",
+        "close": "</strong>",
+        "html": "<strong>GitHub Actions</strong>",
+        "inner": "GitHub Actions",
+        "signature": "bdc5aeb2f93125a679b933e229e1f9e5d9dbafdd1d9907ca059a626c106b1e1b",
+        "inLink": true
+      },
+      "block-68": {
+        "key": "block-68",
+        "type": "paragraph",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Send SMS from your CI workflows</span>",
+        "inner": "Send SMS from your CI workflows",
+        "signature": "75c5c11bb9ec66428ccac4de21c45ece58a6526570853b6d5125538d4f47cfd4",
+        "inLink": true
+      },
+      "block-69": {
+        "key": "block-69",
+        "type": "heading_3",
+        "open": "<strong>",
+        "close": "</strong>",
+        "html": "<strong>Apify</strong>",
+        "inner": "Apify",
+        "signature": "9f641b7b66d08244feb2ff63396379f1c0675149aa2db8ad6ee47594885b37c0",
+        "inLink": true
+      },
+      "block-70": {
+        "key": "block-70",
+        "type": "paragraph",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Send SMS from your Actors</span>",
+        "inner": "Send SMS from your Actors",
+        "signature": "4f85bbfd5d92464ea17327c49a535c0bc9fac829be61449c59f1eb0030942da8",
+        "inLink": true
+      },
+      "block-71": {
+        "key": "block-71",
+        "type": "heading_3",
+        "open": "<strong>",
+        "close": "</strong>",
+        "html": "<strong>Directus</strong>",
+        "inner": "Directus",
+        "signature": "45cbc33115d29a52b9d75ee6b35c916c2276f0f1eb1b039ec5caaf857eea9e1a",
+        "inLink": true
+      },
+      "block-72": {
+        "key": "block-72",
+        "type": "paragraph",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Send SMS from your Flows</span>",
+        "inner": "Send SMS from your Flows",
+        "signature": "36f98620ca12ee8b12cd47d6c7d4bbdbef1c98a5ca87af8a355124fa19330f93",
+        "inLink": true
+      },
+      "block-73": {
+        "key": "block-73",
+        "type": "heading_3",
+        "open": "<strong>",
+        "close": "</strong\n                >",
+        "html": "<strong>Pipedream</strong\n                >",
+        "inner": "Pipedream",
+        "signature": "a1ac25bbdea111b9ebc4b034740c47054e5bd40a58e8fe7c1665b5b35ea318f9"
+      },
+      "block-74": {
+        "key": "block-74",
+        "type": "paragraph",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Coming soon</span>",
+        "inner": "Coming soon",
+        "signature": "b548b4cc7d4aaf90afc07e8ea89c8792ffa4d3054b8d94fe5691302047bb2b5c"
+      },
+      "block-75": {
+        "key": "block-75",
+        "type": "heading_3",
+        "open": "<strong>",
+        "close": "</strong\n                >",
+        "html": "<strong>Make</strong\n                >",
+        "inner": "Make",
+        "signature": "ac555b2a007e2305918d715d8bd1c23c190ce06f9a2bfb1758e478f6aabe47cf"
+      },
+      "block-76": {
+        "key": "block-76",
+        "type": "paragraph",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Coming soon</span>",
+        "inner": "Coming soon",
+        "signature": "b548b4cc7d4aaf90afc07e8ea89c8792ffa4d3054b8d94fe5691302047bb2b5c"
+      },
+      "block-77": {
+        "key": "block-77",
+        "type": "heading_3",
+        "open": "<strong>",
+        "close": "</strong\n                >",
+        "html": "<strong>Keragon</strong\n                >",
+        "inner": "Keragon",
+        "signature": "42e73271c1afc166d5cf9138dae7510349d88d82629b0cd2cec2dd7646a0899d"
+      },
+      "block-78": {
+        "key": "block-78",
+        "type": "paragraph",
+        "open": "<span>",
+        "close": "</span>",
+        "html": "<span>Coming soon</span>",
+        "inner": "Coming soon",
+        "signature": "b548b4cc7d4aaf90afc07e8ea89c8792ffa4d3054b8d94fe5691302047bb2b5c"
       }
     }
   },
@@ -8107,7 +8600,7 @@
           "close": "</section>",
           "html": "<section\n          class=\"automation-lab\"\n          data-automation=\"overview\"\n          aria-label=\"Interactive SMS workflow\"\n        >\n          <div class=\"sc-heading\"><div><h2>A text in. A configured reply out.</h2><p class=\"sc-explanation\">Example workflow with a fixed reply.</p></div><button class=\"sc-play\" type=\"button\" aria-label=\"Pause animation\"><svg class=\"sc-play-icon\" viewBox=\"0 0 10 12\" aria-hidden=\"true\" fill=\"currentColor\"><path d=\"M2 1h2v10H2zM6 1h2v10H6z\"/></svg> Pause</button></div>\n          <div class=\"sc-samples\" role=\"tablist\" aria-label=\"Sample configurations\"><button id=\"sample-overview-0\" type=\"button\" role=\"tab\" aria-controls=\"scene-overview\" aria-selected=\"true\" tabindex=\"0\" data-example=\"0\">Appointment</button><button id=\"sample-overview-1\" type=\"button\" role=\"tab\" aria-controls=\"scene-overview\" aria-selected=\"false\" tabindex=\"-1\" data-example=\"1\">Opening hours</button><button id=\"sample-overview-2\" type=\"button\" role=\"tab\" aria-controls=\"scene-overview\" aria-selected=\"false\" tabindex=\"-1\" data-example=\"2\">Support request</button></div>\n          <div class=\"sc-scroll\"><div class=\"sc-scene\" id=\"scene-overview\" role=\"tabpanel\" aria-labelledby=\"sample-overview-0\" data-layout=\"overview\">\n            <svg class=\"sc-wires\" aria-hidden=\"true\"><path data-edge=\"0\"/><path data-edge=\"1\"/><circle class=\"sc-port\" data-port=\"0-0\" r=\"3\"/><circle class=\"sc-port\" data-port=\"0-1\" r=\"3\"/><circle class=\"sc-packet\" data-packet=\"0\" r=\"4\"/><circle class=\"sc-port\" data-port=\"1-0\" r=\"3\"/><circle class=\"sc-port\" data-port=\"1-1\" r=\"3\"/><circle class=\"sc-packet\" data-packet=\"1\" r=\"4\"/></svg>\n            <article class=\"sc-card sc-incoming\" data-card=\"0\"><div class=\"sc-card-head\"><span class=\"sc-icon\" aria-hidden=\"true\">↙</span><span>01 · TRIGGER</span><button type=\"button\" class=\"sc-grip\" aria-label=\"Move incoming SMS card\" aria-describedby=\"drag-overview\"><span aria-hidden=\"true\">⠿</span></button></div><h3>Incoming SMS</h3><div class=\"sc-message\" data-incoming>Could I reschedule my appointment?</div><div class=\"sc-source\"><span>Example sender</span><code>+1 202 555 0123</code></div></article>\n            <article class=\"sc-card sc-config\" data-card=\"1\"><div class=\"sc-card-head\"><span class=\"sc-icon\" aria-hidden=\"true\">⌘</span><span>02 · YOUR SETUP</span><button type=\"button\" class=\"sc-grip\" aria-label=\"Move configuration card\" aria-describedby=\"drag-overview\"><span aria-hidden=\"true\">⠿</span></button></div><h3>Configure the reply</h3><div class=\"sc-mapping\"><span>Recipient</span><span>← Sender's number</span></div><div class=\"sc-mapping\"><span>From number</span><span>Your SMS line</span></div><div class=\"sc-mapping\"><span>Sending user</span><span>Assigned user</span></div><div class=\"sc-template\"><span>Message</span><p data-template>Thanks for getting in touch. Which day works for you?</p></div></article>\n            <article class=\"sc-card sc-outgoing\" data-card=\"2\"><div class=\"sc-card-head\"><span class=\"sc-icon\" aria-hidden=\"true\">↗</span><span>03 · ACTION</span><button type=\"button\" class=\"sc-grip\" aria-label=\"Move Send SMS card\" aria-describedby=\"drag-overview\"><span aria-hidden=\"true\">⠿</span></button></div><h3>Send SMS</h3><div class=\"sc-reply\" data-reply>Thanks for getting in touch. Which day works for you?</div><div class=\"sc-destination\"><span>To</span><code>+1 202 555 0123</code></div></article>\n          </div></div><div class=\"sc-footer\"><button type=\"button\" class=\"sc-reset\" aria-label=\"Reset layout\"><span aria-hidden=\"true\">↺</span> Reset layout</button></div><span class=\"sc-sr\" id=\"drag-overview\">Drag this card's header, or focus its move button and use arrow keys. Home restores its position.</span><span class=\"sc-sr sc-announcement\" aria-live=\"polite\"></span>\n        </section>",
           "inner": "\n          <div class=\"sc-heading\"><div><h2>A text in. A configured reply out.</h2><p class=\"sc-explanation\">Example workflow with a fixed reply.</p></div><button class=\"sc-play\" type=\"button\" aria-label=\"Pause animation\"><svg class=\"sc-play-icon\" viewBox=\"0 0 10 12\" aria-hidden=\"true\" fill=\"currentColor\"><path d=\"M2 1h2v10H2zM6 1h2v10H6z\"/></svg> Pause</button></div>\n          <div class=\"sc-samples\" role=\"tablist\" aria-label=\"Sample configurations\"><button id=\"sample-overview-0\" type=\"button\" role=\"tab\" aria-controls=\"scene-overview\" aria-selected=\"true\" tabindex=\"0\" data-example=\"0\">Appointment</button><button id=\"sample-overview-1\" type=\"button\" role=\"tab\" aria-controls=\"scene-overview\" aria-selected=\"false\" tabindex=\"-1\" data-example=\"1\">Opening hours</button><button id=\"sample-overview-2\" type=\"button\" role=\"tab\" aria-controls=\"scene-overview\" aria-selected=\"false\" tabindex=\"-1\" data-example=\"2\">Support request</button></div>\n          <div class=\"sc-scroll\"><div class=\"sc-scene\" id=\"scene-overview\" role=\"tabpanel\" aria-labelledby=\"sample-overview-0\" data-layout=\"overview\">\n            <svg class=\"sc-wires\" aria-hidden=\"true\"><path data-edge=\"0\"/><path data-edge=\"1\"/><circle class=\"sc-port\" data-port=\"0-0\" r=\"3\"/><circle class=\"sc-port\" data-port=\"0-1\" r=\"3\"/><circle class=\"sc-packet\" data-packet=\"0\" r=\"4\"/><circle class=\"sc-port\" data-port=\"1-0\" r=\"3\"/><circle class=\"sc-port\" data-port=\"1-1\" r=\"3\"/><circle class=\"sc-packet\" data-packet=\"1\" r=\"4\"/></svg>\n            <article class=\"sc-card sc-incoming\" data-card=\"0\"><div class=\"sc-card-head\"><span class=\"sc-icon\" aria-hidden=\"true\">↙</span><span>01 · TRIGGER</span><button type=\"button\" class=\"sc-grip\" aria-label=\"Move incoming SMS card\" aria-describedby=\"drag-overview\"><span aria-hidden=\"true\">⠿</span></button></div><h3>Incoming SMS</h3><div class=\"sc-message\" data-incoming>Could I reschedule my appointment?</div><div class=\"sc-source\"><span>Example sender</span><code>+1 202 555 0123</code></div></article>\n            <article class=\"sc-card sc-config\" data-card=\"1\"><div class=\"sc-card-head\"><span class=\"sc-icon\" aria-hidden=\"true\">⌘</span><span>02 · YOUR SETUP</span><button type=\"button\" class=\"sc-grip\" aria-label=\"Move configuration card\" aria-describedby=\"drag-overview\"><span aria-hidden=\"true\">⠿</span></button></div><h3>Configure the reply</h3><div class=\"sc-mapping\"><span>Recipient</span><span>← Sender's number</span></div><div class=\"sc-mapping\"><span>From number</span><span>Your SMS line</span></div><div class=\"sc-mapping\"><span>Sending user</span><span>Assigned user</span></div><div class=\"sc-template\"><span>Message</span><p data-template>Thanks for getting in touch. Which day works for you?</p></div></article>\n            <article class=\"sc-card sc-outgoing\" data-card=\"2\"><div class=\"sc-card-head\"><span class=\"sc-icon\" aria-hidden=\"true\">↗</span><span>03 · ACTION</span><button type=\"button\" class=\"sc-grip\" aria-label=\"Move Send SMS card\" aria-describedby=\"drag-overview\"><span aria-hidden=\"true\">⠿</span></button></div><h3>Send SMS</h3><div class=\"sc-reply\" data-reply>Thanks for getting in touch. Which day works for you?</div><div class=\"sc-destination\"><span>To</span><code>+1 202 555 0123</code></div></article>\n          </div></div><div class=\"sc-footer\"><button type=\"button\" class=\"sc-reset\" aria-label=\"Reset layout\"><span aria-hidden=\"true\">↺</span> Reset layout</button></div><span class=\"sc-sr\" id=\"drag-overview\">Drag this card's header, or focus its move button and use arrow keys. Home restores its position.</span><span class=\"sc-sr sc-announcement\" aria-live=\"polite\"></span>\n        ",
-          "signature": "e36822705aef29f2b3a6d10fd282efca733359ccab43dfc2f85038695b9bd662",
+          "signature": "fbc28bbce45eab69e0ed28173f0b08ccbb5655eb3da6b372de6b9b0248dafc6d",
           "widget": "connector-scenarios"
         },
         "\n        ",
@@ -8641,7 +9134,7 @@
         "close": "</section>",
         "html": "<section\n          class=\"automation-lab\"\n          data-automation=\"overview\"\n          aria-label=\"Interactive SMS workflow\"\n        >\n          <div class=\"sc-heading\"><div><h2>A text in. A configured reply out.</h2><p class=\"sc-explanation\">Example workflow with a fixed reply.</p></div><button class=\"sc-play\" type=\"button\" aria-label=\"Pause animation\"><svg class=\"sc-play-icon\" viewBox=\"0 0 10 12\" aria-hidden=\"true\" fill=\"currentColor\"><path d=\"M2 1h2v10H2zM6 1h2v10H6z\"/></svg> Pause</button></div>\n          <div class=\"sc-samples\" role=\"tablist\" aria-label=\"Sample configurations\"><button id=\"sample-overview-0\" type=\"button\" role=\"tab\" aria-controls=\"scene-overview\" aria-selected=\"true\" tabindex=\"0\" data-example=\"0\">Appointment</button><button id=\"sample-overview-1\" type=\"button\" role=\"tab\" aria-controls=\"scene-overview\" aria-selected=\"false\" tabindex=\"-1\" data-example=\"1\">Opening hours</button><button id=\"sample-overview-2\" type=\"button\" role=\"tab\" aria-controls=\"scene-overview\" aria-selected=\"false\" tabindex=\"-1\" data-example=\"2\">Support request</button></div>\n          <div class=\"sc-scroll\"><div class=\"sc-scene\" id=\"scene-overview\" role=\"tabpanel\" aria-labelledby=\"sample-overview-0\" data-layout=\"overview\">\n            <svg class=\"sc-wires\" aria-hidden=\"true\"><path data-edge=\"0\"/><path data-edge=\"1\"/><circle class=\"sc-port\" data-port=\"0-0\" r=\"3\"/><circle class=\"sc-port\" data-port=\"0-1\" r=\"3\"/><circle class=\"sc-packet\" data-packet=\"0\" r=\"4\"/><circle class=\"sc-port\" data-port=\"1-0\" r=\"3\"/><circle class=\"sc-port\" data-port=\"1-1\" r=\"3\"/><circle class=\"sc-packet\" data-packet=\"1\" r=\"4\"/></svg>\n            <article class=\"sc-card sc-incoming\" data-card=\"0\"><div class=\"sc-card-head\"><span class=\"sc-icon\" aria-hidden=\"true\">↙</span><span>01 · TRIGGER</span><button type=\"button\" class=\"sc-grip\" aria-label=\"Move incoming SMS card\" aria-describedby=\"drag-overview\"><span aria-hidden=\"true\">⠿</span></button></div><h3>Incoming SMS</h3><div class=\"sc-message\" data-incoming>Could I reschedule my appointment?</div><div class=\"sc-source\"><span>Example sender</span><code>+1 202 555 0123</code></div></article>\n            <article class=\"sc-card sc-config\" data-card=\"1\"><div class=\"sc-card-head\"><span class=\"sc-icon\" aria-hidden=\"true\">⌘</span><span>02 · YOUR SETUP</span><button type=\"button\" class=\"sc-grip\" aria-label=\"Move configuration card\" aria-describedby=\"drag-overview\"><span aria-hidden=\"true\">⠿</span></button></div><h3>Configure the reply</h3><div class=\"sc-mapping\"><span>Recipient</span><span>← Sender's number</span></div><div class=\"sc-mapping\"><span>From number</span><span>Your SMS line</span></div><div class=\"sc-mapping\"><span>Sending user</span><span>Assigned user</span></div><div class=\"sc-template\"><span>Message</span><p data-template>Thanks for getting in touch. Which day works for you?</p></div></article>\n            <article class=\"sc-card sc-outgoing\" data-card=\"2\"><div class=\"sc-card-head\"><span class=\"sc-icon\" aria-hidden=\"true\">↗</span><span>03 · ACTION</span><button type=\"button\" class=\"sc-grip\" aria-label=\"Move Send SMS card\" aria-describedby=\"drag-overview\"><span aria-hidden=\"true\">⠿</span></button></div><h3>Send SMS</h3><div class=\"sc-reply\" data-reply>Thanks for getting in touch. Which day works for you?</div><div class=\"sc-destination\"><span>To</span><code>+1 202 555 0123</code></div></article>\n          </div></div><div class=\"sc-footer\"><button type=\"button\" class=\"sc-reset\" aria-label=\"Reset layout\"><span aria-hidden=\"true\">↺</span> Reset layout</button></div><span class=\"sc-sr\" id=\"drag-overview\">Drag this card's header, or focus its move button and use arrow keys. Home restores its position.</span><span class=\"sc-sr sc-announcement\" aria-live=\"polite\"></span>\n        </section>",
         "inner": "\n          <div class=\"sc-heading\"><div><h2>A text in. A configured reply out.</h2><p class=\"sc-explanation\">Example workflow with a fixed reply.</p></div><button class=\"sc-play\" type=\"button\" aria-label=\"Pause animation\"><svg class=\"sc-play-icon\" viewBox=\"0 0 10 12\" aria-hidden=\"true\" fill=\"currentColor\"><path d=\"M2 1h2v10H2zM6 1h2v10H6z\"/></svg> Pause</button></div>\n          <div class=\"sc-samples\" role=\"tablist\" aria-label=\"Sample configurations\"><button id=\"sample-overview-0\" type=\"button\" role=\"tab\" aria-controls=\"scene-overview\" aria-selected=\"true\" tabindex=\"0\" data-example=\"0\">Appointment</button><button id=\"sample-overview-1\" type=\"button\" role=\"tab\" aria-controls=\"scene-overview\" aria-selected=\"false\" tabindex=\"-1\" data-example=\"1\">Opening hours</button><button id=\"sample-overview-2\" type=\"button\" role=\"tab\" aria-controls=\"scene-overview\" aria-selected=\"false\" tabindex=\"-1\" data-example=\"2\">Support request</button></div>\n          <div class=\"sc-scroll\"><div class=\"sc-scene\" id=\"scene-overview\" role=\"tabpanel\" aria-labelledby=\"sample-overview-0\" data-layout=\"overview\">\n            <svg class=\"sc-wires\" aria-hidden=\"true\"><path data-edge=\"0\"/><path data-edge=\"1\"/><circle class=\"sc-port\" data-port=\"0-0\" r=\"3\"/><circle class=\"sc-port\" data-port=\"0-1\" r=\"3\"/><circle class=\"sc-packet\" data-packet=\"0\" r=\"4\"/><circle class=\"sc-port\" data-port=\"1-0\" r=\"3\"/><circle class=\"sc-port\" data-port=\"1-1\" r=\"3\"/><circle class=\"sc-packet\" data-packet=\"1\" r=\"4\"/></svg>\n            <article class=\"sc-card sc-incoming\" data-card=\"0\"><div class=\"sc-card-head\"><span class=\"sc-icon\" aria-hidden=\"true\">↙</span><span>01 · TRIGGER</span><button type=\"button\" class=\"sc-grip\" aria-label=\"Move incoming SMS card\" aria-describedby=\"drag-overview\"><span aria-hidden=\"true\">⠿</span></button></div><h3>Incoming SMS</h3><div class=\"sc-message\" data-incoming>Could I reschedule my appointment?</div><div class=\"sc-source\"><span>Example sender</span><code>+1 202 555 0123</code></div></article>\n            <article class=\"sc-card sc-config\" data-card=\"1\"><div class=\"sc-card-head\"><span class=\"sc-icon\" aria-hidden=\"true\">⌘</span><span>02 · YOUR SETUP</span><button type=\"button\" class=\"sc-grip\" aria-label=\"Move configuration card\" aria-describedby=\"drag-overview\"><span aria-hidden=\"true\">⠿</span></button></div><h3>Configure the reply</h3><div class=\"sc-mapping\"><span>Recipient</span><span>← Sender's number</span></div><div class=\"sc-mapping\"><span>From number</span><span>Your SMS line</span></div><div class=\"sc-mapping\"><span>Sending user</span><span>Assigned user</span></div><div class=\"sc-template\"><span>Message</span><p data-template>Thanks for getting in touch. Which day works for you?</p></div></article>\n            <article class=\"sc-card sc-outgoing\" data-card=\"2\"><div class=\"sc-card-head\"><span class=\"sc-icon\" aria-hidden=\"true\">↗</span><span>03 · ACTION</span><button type=\"button\" class=\"sc-grip\" aria-label=\"Move Send SMS card\" aria-describedby=\"drag-overview\"><span aria-hidden=\"true\">⠿</span></button></div><h3>Send SMS</h3><div class=\"sc-reply\" data-reply>Thanks for getting in touch. Which day works for you?</div><div class=\"sc-destination\"><span>To</span><code>+1 202 555 0123</code></div></article>\n          </div></div><div class=\"sc-footer\"><button type=\"button\" class=\"sc-reset\" aria-label=\"Reset layout\"><span aria-hidden=\"true\">↺</span> Reset layout</button></div><span class=\"sc-sr\" id=\"drag-overview\">Drag this card's header, or focus its move button and use arrow keys. Home restores its position.</span><span class=\"sc-sr sc-announcement\" aria-live=\"polite\"></span>\n        ",
-        "signature": "e36822705aef29f2b3a6d10fd282efca733359ccab43dfc2f85038695b9bd662",
+        "signature": "fbc28bbce45eab69e0ed28173f0b08ccbb5655eb3da6b372de6b9b0248dafc6d",
         "widget": "connector-scenarios"
       },
       "block-3": {
@@ -8977,7 +9470,7 @@
           "close": "</section>",
           "html": "<section class=\"zapier-product\" aria-labelledby=\"explore\">\n          <div class=\"zapier-product-copy\">\n            <div class=\"zapier-brand\"><span class=\"connector-logo zapier\" aria-hidden=\"true\">✳</span><span>Alive5 + Zapier</span></div>\n            <h2 id=\"explore\">Explore Alive5 + Zapier</h2>\n            <fieldset class=\"zapier-choices\">\n              <legend>Choose an example workflow</legend>\n              <label><input type=\"radio\" name=\"workflow\" value=\"reminder\" checked aria-controls=\"zapier-preview\" /><span><strong>Send a reminder</strong><small>Turn a calendar event into a text.</small></span></label>\n              <label><input type=\"radio\" name=\"workflow\" value=\"log\" aria-controls=\"zapier-preview\" /><span><strong>Log a conversation</strong><small>Keep your messages in a spreadsheet.</small></span></label>\n              <label><input type=\"radio\" name=\"workflow\" value=\"notify\" aria-controls=\"zapier-preview\" /><span><strong>Keep your team in the loop</strong><small>Bring new live chats into Slack.</small></span></label>\n            </fieldset>\n            <a class=\"zapier-cta\" data-zapier-template href=\"https://zapier.com/apps/alive5/integrations/google-calendar/337150/send-alive5-text-messages-for-new-events-starting-in-google-calendar\" target=\"_blank\" rel=\"noreferrer\">Explore this template <span aria-hidden=\"true\">↗</span></a>\n          </div>\n          <div class=\"zapier-product-visual\" id=\"zapier-preview\" role=\"region\" aria-label=\"Example workflow preview\">\n            <div class=\"zapier-preview-heading\">Workflow preview</div>\n            <div class=\"zapier-workflow\">\n              <div class=\"zapier-step\"><span class=\"zapier-app-icon calendar\" data-trigger-icon aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"4\" y=\"5\" width=\"16\" height=\"16\" rx=\"3\"/><path d=\"M8 3v4m8-4v4M4 11h16m-11 4h2m2 0h2m-6 3h2\"/></svg></span><div><small>1. Trigger · <span data-trigger-app>Google Calendar</span></small><strong data-trigger-event>Event Start</strong></div></div>\n              <div class=\"zapier-connection\" aria-hidden=\"true\"><span>↓</span></div>\n              <div class=\"zapier-step\"><span class=\"zapier-app-icon alive5\" data-action-icon aria-hidden=\"true\"><img src=\"../assets/images/alive5-logo-small.png\" alt=\"\" width=\"28\" height=\"25\" /></span><div><small>2. Action · <span data-action-app>Alive5</span></small><strong data-action-event>Send SMS</strong></div></div>\n            </div>\n            <div class=\"zapier-result\" data-result>\n              <span class=\"zapier-app-icon result\" aria-hidden=\"true\">✓</span>\n              <div><small>3. Result</small><strong data-result-label>Appointment reminder</strong><small data-result-footer>From your business number</small></div>\n            </div>\n            <span class=\"zapier-sr-only\" data-workflow-announcement role=\"status\" aria-live=\"polite\"></span>\n          </div>\n        </section>",
           "inner": "\n          <div class=\"zapier-product-copy\">\n            <div class=\"zapier-brand\"><span class=\"connector-logo zapier\" aria-hidden=\"true\">✳</span><span>Alive5 + Zapier</span></div>\n            <h2 id=\"explore\">Explore Alive5 + Zapier</h2>\n            <fieldset class=\"zapier-choices\">\n              <legend>Choose an example workflow</legend>\n              <label><input type=\"radio\" name=\"workflow\" value=\"reminder\" checked aria-controls=\"zapier-preview\" /><span><strong>Send a reminder</strong><small>Turn a calendar event into a text.</small></span></label>\n              <label><input type=\"radio\" name=\"workflow\" value=\"log\" aria-controls=\"zapier-preview\" /><span><strong>Log a conversation</strong><small>Keep your messages in a spreadsheet.</small></span></label>\n              <label><input type=\"radio\" name=\"workflow\" value=\"notify\" aria-controls=\"zapier-preview\" /><span><strong>Keep your team in the loop</strong><small>Bring new live chats into Slack.</small></span></label>\n            </fieldset>\n            <a class=\"zapier-cta\" data-zapier-template href=\"https://zapier.com/apps/alive5/integrations/google-calendar/337150/send-alive5-text-messages-for-new-events-starting-in-google-calendar\" target=\"_blank\" rel=\"noreferrer\">Explore this template <span aria-hidden=\"true\">↗</span></a>\n          </div>\n          <div class=\"zapier-product-visual\" id=\"zapier-preview\" role=\"region\" aria-label=\"Example workflow preview\">\n            <div class=\"zapier-preview-heading\">Workflow preview</div>\n            <div class=\"zapier-workflow\">\n              <div class=\"zapier-step\"><span class=\"zapier-app-icon calendar\" data-trigger-icon aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"4\" y=\"5\" width=\"16\" height=\"16\" rx=\"3\"/><path d=\"M8 3v4m8-4v4M4 11h16m-11 4h2m2 0h2m-6 3h2\"/></svg></span><div><small>1. Trigger · <span data-trigger-app>Google Calendar</span></small><strong data-trigger-event>Event Start</strong></div></div>\n              <div class=\"zapier-connection\" aria-hidden=\"true\"><span>↓</span></div>\n              <div class=\"zapier-step\"><span class=\"zapier-app-icon alive5\" data-action-icon aria-hidden=\"true\"><img src=\"../assets/images/alive5-logo-small.png\" alt=\"\" width=\"28\" height=\"25\" /></span><div><small>2. Action · <span data-action-app>Alive5</span></small><strong data-action-event>Send SMS</strong></div></div>\n            </div>\n            <div class=\"zapier-result\" data-result>\n              <span class=\"zapier-app-icon result\" aria-hidden=\"true\">✓</span>\n              <div><small>3. Result</small><strong data-result-label>Appointment reminder</strong><small data-result-footer>From your business number</small></div>\n            </div>\n            <span class=\"zapier-sr-only\" data-workflow-announcement role=\"status\" aria-live=\"polite\"></span>\n          </div>\n        ",
-          "signature": "efa560f66cf9c169ab22131f9aa31c06d758a910f452207fb9481d6822679bef",
+          "signature": "f63469303637dbd1a6cddb56595a30bc30e31e179acc146fcc0354cda546a3cb",
           "widget": "zapier-previews"
         },
         "\n\n        ",
@@ -9642,7 +10135,7 @@
         "close": "</section>",
         "html": "<section class=\"zapier-product\" aria-labelledby=\"explore\">\n          <div class=\"zapier-product-copy\">\n            <div class=\"zapier-brand\"><span class=\"connector-logo zapier\" aria-hidden=\"true\">✳</span><span>Alive5 + Zapier</span></div>\n            <h2 id=\"explore\">Explore Alive5 + Zapier</h2>\n            <fieldset class=\"zapier-choices\">\n              <legend>Choose an example workflow</legend>\n              <label><input type=\"radio\" name=\"workflow\" value=\"reminder\" checked aria-controls=\"zapier-preview\" /><span><strong>Send a reminder</strong><small>Turn a calendar event into a text.</small></span></label>\n              <label><input type=\"radio\" name=\"workflow\" value=\"log\" aria-controls=\"zapier-preview\" /><span><strong>Log a conversation</strong><small>Keep your messages in a spreadsheet.</small></span></label>\n              <label><input type=\"radio\" name=\"workflow\" value=\"notify\" aria-controls=\"zapier-preview\" /><span><strong>Keep your team in the loop</strong><small>Bring new live chats into Slack.</small></span></label>\n            </fieldset>\n            <a class=\"zapier-cta\" data-zapier-template href=\"https://zapier.com/apps/alive5/integrations/google-calendar/337150/send-alive5-text-messages-for-new-events-starting-in-google-calendar\" target=\"_blank\" rel=\"noreferrer\">Explore this template <span aria-hidden=\"true\">↗</span></a>\n          </div>\n          <div class=\"zapier-product-visual\" id=\"zapier-preview\" role=\"region\" aria-label=\"Example workflow preview\">\n            <div class=\"zapier-preview-heading\">Workflow preview</div>\n            <div class=\"zapier-workflow\">\n              <div class=\"zapier-step\"><span class=\"zapier-app-icon calendar\" data-trigger-icon aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"4\" y=\"5\" width=\"16\" height=\"16\" rx=\"3\"/><path d=\"M8 3v4m8-4v4M4 11h16m-11 4h2m2 0h2m-6 3h2\"/></svg></span><div><small>1. Trigger · <span data-trigger-app>Google Calendar</span></small><strong data-trigger-event>Event Start</strong></div></div>\n              <div class=\"zapier-connection\" aria-hidden=\"true\"><span>↓</span></div>\n              <div class=\"zapier-step\"><span class=\"zapier-app-icon alive5\" data-action-icon aria-hidden=\"true\"><img src=\"../assets/images/alive5-logo-small.png\" alt=\"\" width=\"28\" height=\"25\" /></span><div><small>2. Action · <span data-action-app>Alive5</span></small><strong data-action-event>Send SMS</strong></div></div>\n            </div>\n            <div class=\"zapier-result\" data-result>\n              <span class=\"zapier-app-icon result\" aria-hidden=\"true\">✓</span>\n              <div><small>3. Result</small><strong data-result-label>Appointment reminder</strong><small data-result-footer>From your business number</small></div>\n            </div>\n            <span class=\"zapier-sr-only\" data-workflow-announcement role=\"status\" aria-live=\"polite\"></span>\n          </div>\n        </section>",
         "inner": "\n          <div class=\"zapier-product-copy\">\n            <div class=\"zapier-brand\"><span class=\"connector-logo zapier\" aria-hidden=\"true\">✳</span><span>Alive5 + Zapier</span></div>\n            <h2 id=\"explore\">Explore Alive5 + Zapier</h2>\n            <fieldset class=\"zapier-choices\">\n              <legend>Choose an example workflow</legend>\n              <label><input type=\"radio\" name=\"workflow\" value=\"reminder\" checked aria-controls=\"zapier-preview\" /><span><strong>Send a reminder</strong><small>Turn a calendar event into a text.</small></span></label>\n              <label><input type=\"radio\" name=\"workflow\" value=\"log\" aria-controls=\"zapier-preview\" /><span><strong>Log a conversation</strong><small>Keep your messages in a spreadsheet.</small></span></label>\n              <label><input type=\"radio\" name=\"workflow\" value=\"notify\" aria-controls=\"zapier-preview\" /><span><strong>Keep your team in the loop</strong><small>Bring new live chats into Slack.</small></span></label>\n            </fieldset>\n            <a class=\"zapier-cta\" data-zapier-template href=\"https://zapier.com/apps/alive5/integrations/google-calendar/337150/send-alive5-text-messages-for-new-events-starting-in-google-calendar\" target=\"_blank\" rel=\"noreferrer\">Explore this template <span aria-hidden=\"true\">↗</span></a>\n          </div>\n          <div class=\"zapier-product-visual\" id=\"zapier-preview\" role=\"region\" aria-label=\"Example workflow preview\">\n            <div class=\"zapier-preview-heading\">Workflow preview</div>\n            <div class=\"zapier-workflow\">\n              <div class=\"zapier-step\"><span class=\"zapier-app-icon calendar\" data-trigger-icon aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"4\" y=\"5\" width=\"16\" height=\"16\" rx=\"3\"/><path d=\"M8 3v4m8-4v4M4 11h16m-11 4h2m2 0h2m-6 3h2\"/></svg></span><div><small>1. Trigger · <span data-trigger-app>Google Calendar</span></small><strong data-trigger-event>Event Start</strong></div></div>\n              <div class=\"zapier-connection\" aria-hidden=\"true\"><span>↓</span></div>\n              <div class=\"zapier-step\"><span class=\"zapier-app-icon alive5\" data-action-icon aria-hidden=\"true\"><img src=\"../assets/images/alive5-logo-small.png\" alt=\"\" width=\"28\" height=\"25\" /></span><div><small>2. Action · <span data-action-app>Alive5</span></small><strong data-action-event>Send SMS</strong></div></div>\n            </div>\n            <div class=\"zapier-result\" data-result>\n              <span class=\"zapier-app-icon result\" aria-hidden=\"true\">✓</span>\n              <div><small>3. Result</small><strong data-result-label>Appointment reminder</strong><small data-result-footer>From your business number</small></div>\n            </div>\n            <span class=\"zapier-sr-only\" data-workflow-announcement role=\"status\" aria-live=\"polite\"></span>\n          </div>\n        ",
-        "signature": "efa560f66cf9c169ab22131f9aa31c06d758a910f452207fb9481d6822679bef",
+        "signature": "f63469303637dbd1a6cddb56595a30bc30e31e179acc146fcc0354cda546a3cb",
         "widget": "zapier-previews"
       },
       "block-4": {
