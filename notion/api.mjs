@@ -22,7 +22,7 @@ export async function listChildren(client, id) {
 export async function readBlocks(client, id) {
   const blocks = await listChildren(client, id);
   for (const b of blocks) {
-    if (b.type === 'child_page' || b.type === 'child_database') throw new Error('Article bodies cannot contain nested pages or databases. Add articles under a section.');
+    if (b.type === 'child_page' || b.type === 'child_database') continue;
     if (b.has_children) b[b.type].children = await readBlocks(client, b.id);
   }
   return blocks;

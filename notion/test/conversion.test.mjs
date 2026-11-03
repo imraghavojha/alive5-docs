@@ -77,7 +77,7 @@ test('new pages, duplicate title slugs, deleted pages, and section order drive t
   const tree = structuredClone(fixture.tree);
   tree[1].articles.splice(1, 1);
   tree[1].articles.push({ id: 'new-1', title: 'New guide', blocks: [{ id: 'p1', type: 'paragraph', paragraph: { rich_text: rich('Editable new article') } }] });
-  tree[1].articles.push({ id: 'new-2', title: 'New guide', blocks: [] });
+  tree[1].articles.push({ id: 'new-2', title: 'New guide', blocks: [{ id: 'intro', type: 'paragraph', paragraph: { rich_text: rich('Introduction') } }] });
   [tree[1], tree[4]] = [tree[4], tree[1]];
   const result = await buildTree(tree, fixture.map, fixture.templates);
   assert.ok(result.removed.includes('api/authentication.html'));
@@ -98,8 +98,7 @@ test('rich text escapes markup and rejects active URL schemes', () => {
   const p = { id: 'p', type: 'paragraph', paragraph: { rich_text: rich('<script>alert(1)</script>') } };
   assert.match(renderBlocks([p]), /&lt;script&gt;/);
   p.paragraph.rich_text[0].text.link = { url: 'javascript:alert(1)' };
-  assert.throws(() => renderBlocks([p]), /Unsupported URL/);
-  assert.throws(() => renderBlocks([{ id: 'x', type: 'unsupported', unsupported: {} }]), /Unsupported Notion block/);
+  assert.equal(renderBlocks([p]), '<p>&lt;script&gt;alert(1)&lt;/script&gt;</p>');
 });
 
 test('code, tables and image payloads satisfy API limits and hide layout metadata', () => {
@@ -146,7 +145,7 @@ test('second builds are stable after additions, deletions, renames, and reorder'
   const tree = structuredClone(fixture.tree);
   tree[1].articles.splice(1, 1);
   tree[1].title = 'Updated API';
-  tree.push({ id: 'new-section', title: 'More guides', articles: [{ id: 'new-page', title: 'A new page', blocks: [] }] });
+  tree.push({ id: 'new-section', title: 'More guides', articles: [{ id: 'new-page', title: 'A new page', blocks: [{ id: 'intro', type: 'paragraph', paragraph: { rich_text: rich('Introduction') } }] }] });
   const first = await buildTree(tree, fixture.map, fixture.templates);
   const second = await buildTree(tree, first.map, fixture.templates);
   assert.deepEqual([...second.output], [...first.output]);

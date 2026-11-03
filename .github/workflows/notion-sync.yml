@@ -33,22 +33,25 @@ jobs:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_ROOT_PAGE_ID: ${{ secrets.NOTION_ROOT_PAGE_ID }}
       - name: Commit changed output
-        id: commit
         shell: bash
         run: |
           git add -A -- '*.html' assets/site.js assets/search-index.json notion/map.json
           if [ -d assets/notion ]; then git add -A -- assets/notion; fi
           if git diff --cached --quiet; then
-            echo 'changed=false' >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'Sync docs from Notion'
           git push origin HEAD:main
-          echo 'changed=true' >> "$GITHUB_OUTPUT"
       - name: Request a Pages build
-        if: steps.commit.outputs.changed == 'true'
+        if: ${{ !cancelled() }}
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh api --method POST repos/${{ github.repository }}/pages/builds
+        run: |
+          main=$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)
+          latest=$(gh api "repos/$GITHUB_REPOSITORY/pages/builds/latest" --jq '[.commit, .status] | @tsv') || latest=''
+          IFS=$'\t' read -r commit status <<< "$latest"
+          if [ "$commit" != "$main" ] || [[ ! "$status" =~ ^(built|building|queued)$ ]]; then
+            gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"
+          fi

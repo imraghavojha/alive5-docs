@@ -5,13 +5,18 @@ import { execFileSync } from 'node:child_process';
 import { credentials, readTree } from './api.mjs';
 import { ROOT, readJSON, writeJSON, remapBlocks, allocatePath, newTemplate, updateNavigation, validatePath } from './site.mjs';
 import { renderPage, renderBlocks } from './render.mjs';
-import { slug, escape } from './html.mjs';
+import { slug, escape, resolvePageLinks } from './html.mjs';
 import { localizeImages, knownImages } from './media.mjs';
 
 export async function buildTree(tree, originalMap, templates, root = ROOT) {
   const map = structuredClone(originalMap);
-  const used = new Set([...Object.keys(map.pages), '404.html', 'api/reference.html', 'index.html']);
-  const byId = new Map(Object.entries(map.pages).map(([path, page]) => [page.id, path]));
+  const active = new Set(tree.flatMap(s => s.articles.map(a => a.id)));
+  const removed = Object.keys(map.pages).filter(path => !active.has(map.pages[path].id));
+  if (removed.length > 3) throw new Error('Refusing to delete more than 3 pages in one run.');
+  if (removed.includes('index.html')) throw new Error('Refusing to delete index.html.');
+  const tombstones = map.tombstones || {};
+  const used = new Set([...Object.keys(map.pages), ...Object.values(tombstones).map(t => t.path), '404.html', 'api/reference.html', 'index.html']);
+  const byId = new Map([...Object.entries(tombstones).map(([id, t]) => [id, t.path]), ...Object.entries(map.pages).map(([path, page]) => [page.id, path])]);
   const fallback = Object.values(templates).find(t => t.before.includes('class="doc"'));
   if (!fallback) throw new Error('No article template exists. Run seed first.');
   const output = new Map(), seen = new Set(), sections = structuredClone(tree);
@@ -22,17 +27,27 @@ export async function buildTree(tree, originalMap, templates, root = ROOT) {
       const path = byId.get(article.id) || allocatePath(article.title, used);
       validatePath(path);
       article.path = path;
-      let record = map.pages[path];
+      if (byId.has(article.id) && !article.blocks.some(b => !b.archived && !b.in_trash)) throw new Error(`Empty existing article: ${path}`);
+      let record = map.pages[path] ||= tombstones[article.id]?.record;
+      delete tombstones[article.id];
       if (!record) record = map.pages[path] = { id: article.id, title: article.title, label: article.title, page: slug(path), section: slug(section.title), sectionId: section.id, bindings: {}, seeded: true };
+    }
+  }
+  const paths = new Map(sections.flatMap(s => s.articles.map(a => [a.id.replaceAll('-', '').toLowerCase(), a.path])));
+  for (const section of sections) {
+    for (const article of section.articles) {
+      const path = article.path, record = map.pages[path];
       const template = templates[path] || newTemplate(fallback, path, article.title, record.section);
-      const blocks = remapBlocks(article.blocks, record.bindings);
+      const blocks = remapBlocks(resolvePageLinks(article.blocks, paths), record.bindings);
       const body = !template.fresh ? renderPage(blocks, template, article.title) : template.before + `<h1>${escape(article.title)}</h1>` + renderBlocks(blocks, template, path) + template.after;
       output.set(path, body);
     }
   }
-  const previous = Object.keys(map.pages);
-  const removed = previous.filter(path => !seen.has(map.pages[path].id));
-  for (const path of removed) { validatePath(path); delete map.pages[path]; }
+  for (const path of removed) {
+    validatePath(path);
+    (map.tombstones ||= {})[map.pages[path].id] = { path, record: map.pages[path] };
+    delete map.pages[path];
+  }
   const js = await readFile(resolve(root, 'assets/site.js'), 'utf8');
   output.set('assets/site.js', updateNavigation(js, sections, map));
   const originalOrder = originalMap.order || Object.keys(originalMap.pages);

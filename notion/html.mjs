@@ -14,9 +14,29 @@ export const digest = value => createHash('sha256').update(JSON.stringify(value)
 export const parseHTML = html => parse(html, { sourceCodeLocationInfo: true });
 export const fragment = html => parseFragment(html, { sourceCodeLocationInfo: true });
 export const rich = value => String(value).match(/[\s\S]{1,2000}/g)?.map(content => ({ type: 'text', text: { content } })) || [];
-export function safeURL(value) {
-  if (!/^(https?:|mailto:|tel:|#|\.?\.?\/)/i.test(value) && /^[a-z][\w+.-]*:/i.test(value)) throw new Error(`Unsupported URL protocol: ${value.split(':')[0]}`);
-  return value;
+export function safeURL(value, path = 'index.html') {
+  if (typeof value !== 'string' || !value.trim()) return null;
+  try {
+    const url = new URL(value, new URL(path, BASE));
+    return ['http:', 'https:', 'mailto:'].includes(url.protocol) ? url.href : null;
+  } catch { return null; }
+}
+export function resolvePageLinks(value, paths) {
+  if (Array.isArray(value)) return value.map(v => resolvePageLinks(v, paths));
+  if (!value || typeof value !== 'object') return value;
+  const result = Object.fromEntries(Object.entries(value).map(([k, v]) => [k, resolvePageLinks(v, paths)]));
+  const pageId = value.mention?.page?.id?.replaceAll('-', '').toLowerCase();
+  if (pageId && paths.has(pageId)) return { type: 'text', text: { content: value.plain_text || 'Page', link: { url: BASE + paths.get(pageId) } }, annotations: value.annotations };
+  for (const key of ['url', 'href']) {
+    if (typeof result[key] !== 'string') continue;
+    try {
+      const url = new URL(result[key]);
+      if (!/(^|\.)notion\.(so|site)$/.test(url.hostname)) continue;
+      const id = url.pathname.match(/([a-f0-9]{32}|[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12})\/?$/i)?.[1].replaceAll('-', '').toLowerCase();
+      if (paths.has(id)) result[key] = BASE + paths.get(id) + url.hash;
+    } catch {}
+  }
+  return result;
 }
 export function richText(node, path, inherited) {
   if (!inherited) {
@@ -56,8 +76,8 @@ export function renderRich(values, path = 'index.html', inLink = false) {
     let out = escape(r.text?.content ?? r.plain_text ?? '');
     const a = r.annotations || {};
     for (const [key, tag] of Object.entries({ code: 'code', bold: 'strong', italic: 'em', strikethrough: 's', underline: 'u' })) if (a[key]) out = `<${tag}>${out}</${tag}>`;
-    const url = r.text?.link?.url ?? r.href;
-    if (url && !inLink) out = `<a href="${escape(siteURL(safeURL(url), path))}">${out}</a>`;
+    const url = safeURL(r.text?.link?.url ?? r.href, path);
+    if (url && !inLink) out = `<a href="${escape(siteURL(url, path))}">${out}</a>`;
     return out;
   }).join('');
 }
