@@ -1,4 +1,4 @@
-import { Client } from '@notionhq/client';
+import notion from '@notionhq/client';
 import { signature } from './html.mjs';
 import { uploadImage, localizeImages } from './media.mjs';
 
@@ -6,7 +6,7 @@ export function credentials() {
   const { NOTION_TOKEN: token, NOTION_ROOT_PAGE_ID: rootId } = process.env;
   if (!token || !rootId) throw new Error('Set NOTION_TOKEN and NOTION_ROOT_PAGE_ID.');
   if (!/^[a-f0-9-]{32,36}$/i.test(rootId)) throw new Error('NOTION_ROOT_PAGE_ID must be a page ID.');
-  return { client: new Client({ auth: token, notionVersion: '2025-09-03', maxRetries: 5 }), rootId: rootId.replaceAll('-', '').toLowerCase() };
+  return { client: new notion.Client({ auth: token, notionVersion: '2025-09-03', maxRetries: 5 }), rootId: rootId.replaceAll('-', '').toLowerCase() };
 }
 export async function listChildren(client, id) {
   const blocks = [];
