@@ -153,3 +153,96 @@ test('review 7: Pages reconciliation retries failed or stale builds even without
     assert.equal((await readFile(calls, 'utf8')).trim().split('\n').length, 2);
   } finally { await rm(dir, { recursive: true, force: true }); }
 });
+
+test('re-check 1: site URL rewriting never turns a path into an executable scheme', () => {
+  const base = 'https://imraghavojha.github.io/alive5-docs/';
+  for (const path of ['index.html', 'api/index.html']) {
+    for (const tail of ['javascript:alert(1)', 'data:text/html,test', 'api/contacts.html', '/example.com']) {
+      const url = base + tail;
+      const p = paragraph('Link');
+      p.paragraph.rich_text[0].text.link = { url };
+      const variants = [renderBlocks([p], { leaves: {} }, path), renderBlocks([{ id: 'bookmark', type: 'bookmark', bookmark: { url } }], { leaves: {} }, path)];
+      const { blocks, template } = convert('<main><h1>Title</h1><a href="https://example.com"><h3>Card</h3></a></main>', path);
+      blocks[0].heading_3.rich_text = p.paragraph.rich_text;
+      variants.push(renderPage(blocks, template));
+      for (const html of variants) {
+        const href = attr(walk(parseHTML(html)).find(n => n.tagName === 'a'), 'href');
+        assert.match(href, /^\.\.?\//);
+        assert.equal(new URL(href, base + path).protocol, 'https:');
+        assert.equal(new URL(href, base + path).origin, new URL(base).origin);
+      }
+    }
+  }
+});
+
+test('re-check 2: existing articles require meaningful rendered body content', async t => {
+  t.mock.method(console, 'warn', () => {});
+  const blank = paragraph(' \n\t\u00a0');
+  const emptyBodies = [
+    [blank],
+    [{ id: 'container', type: 'column_list', column_list: { children: [{ id: 'column', type: 'column', column: { children: [blank] } }] } }],
+    [{ id: 'skipped', type: 'unsupported', unsupported: {} }],
+    [{ id: 'skipped-child', type: 'unsupported', unsupported: { children: [paragraph('Not rendered')] } }],
+    [{ id: 'divider', type: 'divider', divider: {} }],
+  ];
+  const original = structuredClone(fixture.tree[1].articles[1].blocks.find(b => b.type === 'paragraph'));
+  original.paragraph.rich_text = [];
+  emptyBodies.push([original]);
+  for (const blocks of emptyBodies) {
+    const tree = structuredClone(fixture.tree);
+    tree[1].articles[1].blocks = blocks;
+    await assert.rejects(build(tree), /Empty existing article: api\/authentication.html/);
+  }
+  const meaningful = [
+    paragraph('Real text'),
+    { id: 'code', type: 'code', code: { language: 'javascript', rich_text: rich('return 1'), caption: [] } },
+    { id: 'image', type: 'image', image: { type: 'external', external: { url: 'https://example.com/image.png' }, caption: [] } },
+    { id: 'table', type: 'table', table: { table_width: 1, has_column_header: false, children: [{ id: 'row', type: 'table_row', table_row: { cells: [rich('Value')] } }] } },
+    { id: 'fallback', type: 'embed', embed: { url: 'https://example.com' } },
+  ];
+  for (const block of meaningful) {
+    const tree = structuredClone(fixture.tree);
+    tree[1].articles[1].blocks = [block];
+    assert.ok((await build(tree)).output.has('api/authentication.html'));
+  }
+  const tree = structuredClone(fixture.tree);
+  tree[4].articles[1].blocks = tree[4].articles[1].blocks.filter(b => b.type === 'callout' && b.callout.rich_text.some(r => r.text?.content === '⟦zapier-previews⟧'));
+  assert.ok((await build(tree)).output.has('connectors/zapier.html'));
+});
+
+test('re-check 3: empty new pages are skipped repeatedly, then publish once filled', async t => {
+  const warnings = [];
+  t.mock.method(console, 'warn', message => warnings.push(message));
+  const tree = structuredClone(fixture.tree);
+  const drafts = [[], [paragraph(' ')], [{ id: 'empty', type: 'column', column: { children: [] } }], [{ id: 'unknown', type: 'unsupported', unsupported: {} }]];
+  for (const [i, blocks] of drafts.entries()) tree[1].articles.push({ id: `draft-${i}`, title: `Draft ${i}`, blocks });
+  const first = await build(tree);
+  assert.deepEqual(first.map, fixture.map);
+  assert.equal(first.output.size, 22);
+  assert.doesNotMatch(first.output.get('assets/site.js'), /Draft [0-3]/);
+  const second = await build(tree, first.map);
+  assert.deepEqual(second.map, fixture.map);
+  assert.deepEqual([...second.output], [...first.output]);
+  assert.equal(warnings.filter(w => /Skipping empty new article: Draft/.test(w)).length, 8);
+  tree[1].articles.at(-4).blocks = [paragraph('Ready to publish')];
+  const filled = await build(tree, second.map);
+  assert.equal(filled.map.pages['draft-0.html'].id, 'draft-0');
+  assert.match(filled.output.get('assets/site.js'), /Draft 0/);
+  assert.match(filled.output.get('draft-0.html'), /Ready to publish/);
+});
+
+test('re-check 4: paragraphs and different list types always break list merging', () => {
+  for (const position of [0, 1, 2]) {
+    for (const type of ['numbered_list_item', 'bulleted_list_item']) {
+      const { blocks, template } = convert('<main><h1>Title</h1><ol><li>First</li><li>Last</li></ol></main>', 'index.html');
+      blocks.splice(position, 0, { id: 'inserted', type, [type]: { rich_text: rich('Inserted') } }, paragraph('Separator'));
+      const doc = parseHTML(renderPage(blocks, template));
+      const separator = walk(doc).find(n => n.tagName === 'p' && text(n) === 'Separator');
+      assert.equal(separator.parentNode.tagName, 'main');
+      for (const list of walk(doc).filter(n => ['ol', 'ul'].includes(n.tagName))) {
+        assert.ok(list.childNodes.filter(n => n.tagName).every(n => n.tagName === 'li'));
+        if (position < 2 || type === 'bulleted_list_item') assert.ok(!(text(list).includes('Inserted') && text(list).includes('Last')));
+      }
+    }
+  }
+});

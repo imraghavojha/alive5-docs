@@ -4,7 +4,7 @@ import { pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { credentials, readTree } from './api.mjs';
 import { ROOT, readJSON, writeJSON, remapBlocks, allocatePath, newTemplate, updateNavigation, validatePath } from './site.mjs';
-import { renderPage, renderBlocks } from './render.mjs';
+import { renderPage, renderBlocks, hasContent } from './render.mjs';
 import { slug, escape, resolvePageLinks } from './html.mjs';
 import { localizeImages, knownImages } from './media.mjs';
 
@@ -21,17 +21,26 @@ export async function buildTree(tree, originalMap, templates, root = ROOT) {
   if (!fallback) throw new Error('No article template exists. Run seed first.');
   const output = new Map(), seen = new Set(), sections = structuredClone(tree);
   for (const section of sections) {
+    const published = [];
     for (const article of section.articles) {
       if (seen.has(article.id)) throw new Error('Duplicate Notion page ID.');
       seen.add(article.id);
-      const path = byId.get(article.id) || allocatePath(article.title, used);
+      const existing = byId.get(article.id);
+      const bindings = map.pages[existing]?.bindings || tombstones[article.id]?.record?.bindings;
+      if (!hasContent(remapBlocks(article.blocks, bindings), templates[existing] || { leaves: {} }, existing || 'index.html')) {
+        if (existing) throw new Error(`Empty existing article: ${existing}`);
+        console.warn(`Skipping empty new article: ${article.title}`);
+        continue;
+      }
+      const path = existing || allocatePath(article.title, used);
       validatePath(path);
       article.path = path;
-      if (byId.has(article.id) && !article.blocks.some(b => !b.archived && !b.in_trash)) throw new Error(`Empty existing article: ${path}`);
       let record = map.pages[path] ||= tombstones[article.id]?.record;
       delete tombstones[article.id];
       if (!record) record = map.pages[path] = { id: article.id, title: article.title, label: article.title, page: slug(path), section: slug(section.title), sectionId: section.id, bindings: {}, seeded: true };
+      published.push(article);
     }
+    section.articles = published;
   }
   const paths = new Map(sections.flatMap(s => s.articles.map(a => [a.id.replaceAll('-', '').toLowerCase(), a.path])));
   for (const section of sections) {

@@ -76,13 +76,16 @@ export function renderRich(values, path = 'index.html', inLink = false) {
     let out = escape(r.text?.content ?? r.plain_text ?? '');
     const a = r.annotations || {};
     for (const [key, tag] of Object.entries({ code: 'code', bold: 'strong', italic: 'em', strikethrough: 's', underline: 'u' })) if (a[key]) out = `<${tag}>${out}</${tag}>`;
-    const url = safeURL(r.text?.link?.url ?? r.href, path);
-    if (url && !inLink) out = `<a href="${escape(siteURL(url, path))}">${out}</a>`;
+    const url = siteURL(r.text?.link?.url ?? r.href, path);
+    if (url && !inLink) out = `<a href="${escape(url)}">${out}</a>`;
     return out;
   }).join('');
 }
-export function siteURL(url, path) {
-  if (!url.startsWith(BASE)) return url;
-  const dest = url.slice(BASE.length) || 'index.html';
-  return '../'.repeat(path.split('/').length - 1) + dest;
+export function siteURL(value, path = 'index.html') {
+  const url = safeURL(value, path);
+  if (!url) return null;
+  const href = url.startsWith(BASE)
+    ? ('../'.repeat(path.split('/').length - 1) || './') + (url.slice(BASE.length) || 'index.html')
+    : url;
+  return safeURL(href, path) ? href : null;
 }

@@ -1,8 +1,9 @@
-import { escape, plain, renderRich, signature, slug, siteURL, safeURL } from './html.mjs';
+import { escape, plain, renderRich, signature, slug, siteURL, fragment, walk, text } from './html.mjs';
 
 const keys = node => typeof node === 'string' ? [] : node.key ? [node.key] : (node.parts || []).flatMap(keys);
 const live = blocks => blocks.filter(b => !b.archived && !b.in_trash);
 export function renderBlocks(blocks, template = { leaves: {} }, path = template.path || 'index.html', listTag) {
+  blocks = live(blocks);
   const render = b => renderBlock(b, template, path);
   let out = '';
   for (let i = 0; i < blocks.length; i++) {
@@ -19,6 +20,10 @@ export function renderBlocks(blocks, template = { leaves: {} }, path = template.
     } else out += render(b);
   }
   return out;
+}
+export function hasContent(blocks, template, path) {
+  const doc = fragment(renderBlocks(blocks, { ...template, quiet: true }, path));
+  return !!text(doc).trim() || walk(doc).some(n => ['pre', 'img', 'table'].includes(n.tagName));
 }
 function codeGroup(blocks, template, path, node) {
   const head = blocks.length > 1 ? blocks.map((b, i) => `<button class="tab" aria-selected="${i === 0}" type="button">${escape(plain(b.code.caption) || b.code.language)}</button>`).join('') : `<span class="name">${escape(plain(blocks[0].code.caption) || blocks[0].code.language)}</span>`;
@@ -59,9 +64,9 @@ function renderBlock(b, template, path) {
   }
   if (b.type === 'image') {
     if (unchanged) return leaf.html;
-    const url = safeURL(d.external?.url || d.file?.url, path);
+    const url = siteURL(d.external?.url || d.file?.url, path);
     if (!url) return `<p>${escape(plain(d.caption))}</p>`;
-    const img = `<img src="${escape(siteURL(url, path))}" alt="${escape(plain(d.caption))}" loading="lazy">`;
+    const img = `<img src="${escape(url)}" alt="${escape(plain(d.caption))}" loading="lazy">`;
     return same ? img : `<figure class="page-art">${img}</figure>`;
   }
   if (b.type === 'code') return unchanged ? leaf.html : `${same ? leaf.open : '<pre>'}${escape(plain(d.rich_text))}${same ? leaf.close : '</pre>'}`;
@@ -70,7 +75,7 @@ function renderBlock(b, template, path) {
   if (['column_list', 'column', 'synced_block'].includes(b.type)) return renderBlocks(sub, template, path);
   const tag = { paragraph: 'p', heading_1: 'h2', heading_2: 'h2', heading_3: 'h3', bulleted_list_item: 'li', numbered_list_item: 'li', callout: 'div', quote: 'blockquote', toggle: 'details', to_do: 'div' }[b.type];
   if (!tag) {
-    console.warn(`${path}: unsupported Notion block ${b.type}; using fallback.`);
+    if (!template.quiet) console.warn(`${path}: unsupported Notion block ${b.type}; using fallback.`);
     return fallback(b, path);
   }
   if (unchanged && !sub.length && !leaf.subLayout?.length) return leaf.html;
@@ -102,16 +107,19 @@ export function renderLayout(node, blocks, template, path) {
   for (let i = 0; i < blocks.length; i++) {
     if (owner.has(blocks[i].id) || !/^(numbered|bulleted)_list_item$/.test(blocks[i].type)) continue;
     const tag = blocks[i].type === 'numbered_list_item' ? 'ol' : 'ul';
-    const adjacent = [owner.get(blocks[i - 1]?.id), blocks.slice(i + 1).map(b => owner.get(b.id)).find(Boolean)];
-    const entry = adjacent.find(e => e?.part.open?.match(new RegExp(`^<${tag}\\b`)));
+    const type = blocks[i].type;
+    let next = i + 1;
+    while (blocks[next]?.type === type && !owner.has(blocks[next].id)) next++;
+    const adjacent = [blocks[i - 1]?.type === type && owner.get(blocks[i - 1].id), blocks[next]?.type === type && owner.get(blocks[next].id)];
+    const entry = adjacent.find(e => e?.part?.open?.match(new RegExp(`^<${tag}\\b`)));
     if (entry) owner.set(blocks[i].id, entry);
   }
   let opening = node.open || '';
   if (node.link && blocks.some(b => template.leaves[b.id]?.signature !== signature(b))) {
     const url = blocks.flatMap(b => b[b.type].rich_text || []).map(r => r.text?.link?.url).find(Boolean);
     if (url) {
-      const safe = safeURL(url, path);
-      opening = opening.replace(/href="[^"]*"/, () => safe ? `href="${escape(siteURL(safe, path))}"` : '');
+      const safe = siteURL(url, path);
+      opening = opening.replace(/href="[^"]*"/, () => safe ? `href="${escape(safe)}"` : '');
     }
   }
   let out = opening + (entries[0]?.prefix || '');
@@ -127,7 +135,9 @@ export function renderLayout(node, blocks, template, path) {
     }
     const group = [blocks[i]];
     if (!entry.part.key) {
+      const listType = /^<(ol|ul)\b/.test(entry.part.open || '') && blocks[i].type;
       while (blocks[i + 1]) {
+        if (listType && blocks[i + 1].type !== listType) break;
         const next = owner.get(blocks[i + 1].id);
         const following = blocks.slice(i + 1).map(b => owner.get(b.id)).find(Boolean);
         if (next !== entry && (next || !(following === entry || entry.part.code && blocks[i + 1].type === 'code'))) break;
