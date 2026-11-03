@@ -4,3 +4,4 @@ __pycache__/
 .local/
 .orchestration/
 node_modules/
+notion/*.tmp

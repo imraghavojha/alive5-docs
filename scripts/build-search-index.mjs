@@ -20,7 +20,7 @@ const attribute = (tag, name) => decode(tag.match(new RegExp(`\\b${name}\\s*=\\s
 async function crawl(dir) {
   const files = [];
   for (const entry of await readdir(dir, { withFileTypes: true })) {
-    if (entry.isDirectory() && !["assets", "scripts", ".git", "node_modules"].includes(entry.name)) {
+    if (entry.isDirectory() && !["assets", "scripts", "notion", ".github", ".git", "node_modules"].includes(entry.name)) {
       files.push(...await crawl(join(dir, entry.name)));
     } else if (entry.isFile() && entry.name.endsWith(".html") && entry.name !== "404.html") {
       files.push(join(dir, entry.name));
