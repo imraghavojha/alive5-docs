@@ -141,6 +141,30 @@ test('uploaded Notion images use stable local bytes, not expiring signed URLs', 
   assert.match(tree[0].articles[0].blocks[0].image.external.url, /assets\/notion\/[a-f0-9]+\.png$/);
 });
 
+test('scripted uploaded SVGs are skipped with a warning and never published', async t => {
+  const warnings = [];
+  t.mock.method(console, 'warn', message => warnings.push(message));
+  const tree = structuredClone(fixture.tree);
+  const blocks = tree[1].articles[0].blocks;
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg"><script>alert(document.domain)</script></svg>';
+  for (const ext of ['svg', 'png']) blocks.push({ id: `uploaded-${ext}`, type: 'image', image: { type: 'file', file: { url: `https://prod-files-secure.s3.us-west-2.amazonaws.com/image.${ext}` }, caption: [] } });
+  const images = await localizeImages(tree, async url => url.pathname.endsWith('.svg')
+    ? new Response(svg, { headers: { 'content-type': 'image/svg+xml' } })
+    : new Response('safe image bytes', { headers: { 'content-type': 'image/png' } }));
+  const result = await buildTree(tree, fixture.map, fixture.templates);
+  for (const [path, bytes] of images) result.output.set(path, bytes);
+  assert.equal(images.size, 1);
+  assert.ok([...images.keys()].every(path => path.endsWith('.png')));
+  assert.ok(!blocks.some(b => b.id === 'uploaded-svg'));
+  assert.ok(blocks.some(b => b.id === 'uploaded-png' && b.image.type === 'external'));
+  assert.deepEqual(warnings, ['Skipping uploaded image uploaded-svg: unsupported image type image/svg+xml.']);
+  for (const [path, data] of result.output) {
+    assert.ok(!path.endsWith('.svg'));
+    assert.ok(!data.toString().includes(svg));
+  }
+  assert.doesNotMatch(result.output.get('api/index.html'), /amazonaws\.com\/image\.svg/);
+});
+
 test('second builds are stable after additions, deletions, renames, and reorder', async () => {
   const tree = structuredClone(fixture.tree);
   tree[1].articles.splice(1, 1);

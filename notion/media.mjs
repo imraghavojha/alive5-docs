@@ -27,15 +27,20 @@ export async function uploadImage(client, block, root) {
 export async function localizeImages(tree, fetchImage = fetch, known = new Map()) {
   const files = new Map();
   async function visit(blocks) {
-    for (const b of blocks) {
+    for (let i = 0; i < blocks.length; i++) {
+      const b = blocks[i];
       if (b.type === 'image' && b.image.type === 'file') {
         const url = new URL(b.image.file.url);
         if (url.protocol !== 'https:' || !/\.(amazonaws\.com|notion-static\.com|notion\.so|notion\.site)$/.test(url.hostname)) throw new Error('Unexpected Notion image host.');
         const response = await fetchImage(url, { signal: AbortSignal.timeout(30000), redirect: 'error' });
         if (!response.ok) throw new Error(`Image download failed: ${response.status}`);
         const mime = response.headers.get('content-type')?.split(';')[0];
-        const ext = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp', 'image/gif': 'gif', 'image/svg+xml': 'svg' }[mime];
-        if (!ext) throw new Error(`Unsupported uploaded image type: ${mime}`);
+        const ext = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp', 'image/gif': 'gif' }[mime];
+        if (!ext) {
+          console.warn(`Skipping uploaded image ${b.id}: unsupported image type ${mime}.`);
+          blocks.splice(i--, 1);
+          continue;
+        }
         const buffer = Buffer.from(await response.arrayBuffer());
         if (buffer.length > 20 * 1024 * 1024) throw new Error('Image exceeds 20 MB.');
         const hash = createHash('sha256').update(buffer).digest('hex').slice(0, 24);
