@@ -420,8 +420,8 @@ a:hover { text-decoration: none; }
 .product-icon.qr,
 .product-icon.code { color: var(--blue); background: var(--blue-tint); }
 .layout {
-  /* Fit the sticky columns below the header while the page is at the top. */
-  --layout-viewport-height: calc(100vh - var(--bar-h) - var(--menu-h));
+  /* Fit the sticky columns beneath the visible portion of the header. */
+  --layout-viewport-height: calc(100vh - var(--chrome-visible, (var(--bar-h) + var(--menu-h))));
   max-width: 1500px;
   padding: 0 24px;
   min-height: var(--layout-viewport-height);

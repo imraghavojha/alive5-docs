@@ -12,6 +12,7 @@
   let activeLink;
   const navObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
+      navObserver.unobserve(entry.target);
       if (entry.target === activeLink && entry.intersectionRatio < 1 && entry.rootBounds.height) {
         nav.scrollBy({
           top: entry.boundingClientRect.top - entry.rootBounds.top - entry.rootBounds.height / 2,

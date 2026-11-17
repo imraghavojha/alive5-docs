@@ -105,6 +105,19 @@ function renderHeader() {
     close();
     if (wasInMenu) host.querySelector(".logo").focus({ preventScroll: true });
   });
+  let frame;
+  const updateChrome = () => {
+    frame = undefined;
+    const { style } = document.documentElement;
+    if (mobile.matches) style.removeProperty("--chrome-visible");
+    else style.setProperty("--chrome-visible", `${Math.max(0, host.getBoundingClientRect().bottom)}px`);
+  };
+  const scheduleChrome = () => {
+    if (!frame) frame = requestAnimationFrame(updateChrome);
+  };
+  window.addEventListener("scroll", scheduleChrome, { passive: true });
+  window.addEventListener("resize", scheduleChrome, { passive: true });
+  updateChrome();
 }
 
 function wireTheme() {
