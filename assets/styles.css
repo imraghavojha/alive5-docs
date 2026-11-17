@@ -248,7 +248,12 @@ button { font-family: inherit; }
 .browse-grid a:hover strong { color: var(--link-hov); }
 .browse-grid a:hover span { color: var(--ink); }
 .layout { display: grid; grid-template-columns: 240px minmax(0, 800px) 205px; gap: 44px; margin: 0 auto; align-items: start; }
-:is(.sidebar, [data-sidebar]) { position: sticky; top: 0; overflow-y: auto; }
+:is(.sidebar, [data-sidebar], .toc, [data-toc]) {
+  position: sticky;
+  top: 0;
+  max-height: var(--layout-viewport-height);
+  overflow-y: auto;
+}
 .sidebar-group > .label { padding: 0 10px; }
 :is(.sidebar, [data-sidebar]) a { display: block; border-radius: 5px; }
 :is(.sidebar, [data-sidebar]) a:hover { color: var(--ink); background: var(--tint); }
@@ -268,7 +273,7 @@ button { font-family: inherit; }
 .doc p code,
 .doc li code,
 .doc td code { border-radius: 4px; color: var(--ink); }
-:is(.toc, [data-toc]) { position: sticky; top: 0; padding: 44px 0 64px; line-height: 20px; }
+:is(.toc, [data-toc]) { padding: 44px 0 64px; line-height: 20px; }
 :is(.toc, [data-toc]) .label { color: var(--ink-str); margin-bottom: 10px; }
 :is(.toc, [data-toc]) a { display: block; }
 :is(.toc, [data-toc]) a:hover { color: var(--ink); }
@@ -354,7 +359,16 @@ a:hover { text-decoration: none; }
 .hero .tagline { font-size: 21px; line-height: 30px; color: var(--muted); margin-top: 14px; }
 .hero-cta { margin-top: 23px; gap: 24px; white-space: nowrap; }
 .btn-primary { height: 38px; border-radius: 999px; padding: 0 13px; font-weight: 700; font-size: 14px; box-shadow: var(--shadow-brand); }
-.btn-primary span { font-size: 22px; margin-left: 8px; }
+.btn-primary > span {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin-left: 8px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  font-size: 0;
+  transform: rotate(45deg);
+}
 .link-arrow { font-size: 14px; color: var(--ink-str); }
 .dots { width: 100%; height: 315px; top: 0; background-image: radial-gradient(var(--dots) 1px, transparent 1.3px); background-size: 14px 14px; opacity: 0.46; mask-image: linear-gradient(to bottom, var(--mask-opaque), transparent 95%); -webkit-mask-image: linear-gradient(to bottom, var(--mask-opaque), transparent 95%); }
 .hero:after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 44% 75%, var(--hero-glow) 15%, var(--hero-clear) 65%); }
@@ -405,8 +419,14 @@ a:hover { text-decoration: none; }
 .product-icon.crm { color: var(--green); background: var(--green-tint); }
 .product-icon.qr,
 .product-icon.code { color: var(--blue); background: var(--blue-tint); }
-.layout { max-width: 1500px; padding: 0 24px; min-height: calc(100vh - var(--bar-h) - var(--menu-h)); }
-:is(.sidebar, [data-sidebar]) { border-right: 1px solid var(--line); padding: 28px 22px 48px 0; min-height: calc(100vh - 112px); max-height: 100vh; }
+.layout {
+  /* Fit the sticky columns below the header while the page is at the top. */
+  --layout-viewport-height: calc(100vh - var(--bar-h) - var(--menu-h));
+  max-width: 1500px;
+  padding: 0 24px;
+  min-height: var(--layout-viewport-height);
+}
+:is(.sidebar, [data-sidebar]) { border-right: 1px solid var(--line); padding: 28px 22px 48px 0; min-height: var(--layout-viewport-height); }
 .sidebar-group + .sidebar-group { margin-top: 26px; }
 .sidebar-group > .label { font-weight: 650; padding-left: 10px; margin-bottom: 8px; }
 :is(.sidebar, [data-sidebar]) a { padding: 5px 10px; }
@@ -426,7 +446,6 @@ a:hover { text-decoration: none; }
 .doc-actions button { padding-left: 0; border-right: 1px solid var(--line); }
 .doc-actions a:hover,
 .doc-actions button:hover { color: var(--link); }
-:is(.toc, [data-toc]) { max-height: 100vh; overflow-y: auto; }
 :is(.toc, [data-toc]) .label { text-transform: uppercase; font-weight: 600; }
 :is(.toc, [data-toc]) a { padding: 5px 0 5px 12px; border-left: 1px solid var(--line-2); }
 :is(.toc, [data-toc]) a.on { border-color: var(--a5); }
@@ -855,8 +874,8 @@ table.tbl td.t { font-size: 12px; }
 /* Match the injected shell before its script arrives, including both bar borders. */
 [data-header] { display: block; min-height: calc(var(--bar-h) + var(--menu-h)); }
 .menubar-in { height: calc(var(--menu-h) - 1px); }
-[data-sidebar] { min-width: 0; min-height: min(926px, 100vh); }
-[data-toc] { min-width: 0; min-height: 134px; }
+[data-sidebar] { min-width: 0; }
+[data-toc] { min-width: 0; min-height: min(134px, var(--layout-viewport-height)); }
 [data-docfoot] { min-height: 280px; }
 /* enhanceDocs inserts a 50px action row with a collapsing 26px bottom margin. */
 .doc > .sub:not(:has(+ .doc-actions)) { margin-bottom: 26px; }

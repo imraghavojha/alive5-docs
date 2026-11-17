@@ -8,8 +8,6 @@
 }
 .reference-layout .reference-toc {
   display: block;
-  top: 24px;
-  max-height: calc(100vh - 48px);
   padding: 28px 0 20px;
   scrollbar-width: thin;
 }
