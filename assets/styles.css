@@ -24,7 +24,7 @@
   --muted: #5f6877;
   --faint: #657080;
   --a5: #f05f3a;
-  --cta-bg: #d4461f;
+  --cta-bg: #d2441d;
   --cta-hover: #c13d18;
   --a5-light: #fff5f2;
   --link: #c9431f;
@@ -189,9 +189,9 @@ button { font-family: inherit; }
 .logo .word { font-weight: 800; color: var(--night); }
 .logo .kind { color: var(--link); }
 .topbar-mid { position: absolute; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
-.searchbox { display: flex; align-items: center; gap: 8px; padding: 0 10px; background: var(--surface); font-size: 14px; cursor: text; }
+.searchbox { display: flex; align-items: center; gap: 8px; background: var(--surface); font-size: 14px; cursor: text; }
 .searchbox:hover { color: var(--muted); }
-.searchbox .kbd { margin-left: auto; font-size: 12px; color: var(--faint); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; line-height: 17px; }
+.searchbox .kbd { margin-left: auto; font-size: 12px; color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 0 5px; line-height: 17px; }
 .askai { display: flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 16px; box-shadow: var(--shadow-card); color: var(--ink); font-size: 14px; font-weight: 500; }
 .askai:hover { color: var(--ink); }
 .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
@@ -276,7 +276,7 @@ button { font-family: inherit; }
 .code { min-width: 0; max-width: 100%; overflow: hidden; }
 .code-head { display: flex; align-items: center; gap: 2px; padding: 0 8px 0 14px; }
 .code-head .name { margin-right: 10px; }
-.code-head button.tab { border: 0; background: none; cursor: pointer; font-weight: 500; border-radius: 4px; }
+.code-head button.tab { border: 0; background: none; cursor: pointer; font-weight: 500; border-radius: 999px; }
 .copy { margin-left: auto; cursor: pointer; border: 1px solid var(--line); background: none; border-radius: 999px; }
 .code pre { color: var(--ink); margin: 0; max-width: 100%; white-space: pre; overflow-wrap: normal; overflow-x: auto; }
 .code pre[hidden] { display: none; }
@@ -341,7 +341,7 @@ a:hover { text-decoration: none; }
 .logo { gap: 7px; }
 .logo .word { font-size: 25px; letter-spacing: -1.2px; }
 .logo .kind { font-size: 18px; font-weight: 600; letter-spacing: 0.2px; }
-.searchbox { width: 204px; border: 1px solid var(--line); border-radius: 7px; box-shadow: var(--shadow-card); color: var(--muted); height: 34px; }
+.searchbox { width: 204px; border: 1px solid var(--line); border-radius: 999px; padding: 0 8px 0 14px; box-shadow: var(--shadow-card); color: var(--muted); height: 34px; }
 .askai,
 .signin { border: 1px solid var(--line); border-radius: 999px; box-shadow: var(--shadow-card); height: 34px; font-size: 13px; }
 .askai { background: var(--surface); }
@@ -433,7 +433,7 @@ a:hover { text-decoration: none; }
 .code { border-radius: 7px; border: 1px solid var(--line); background: var(--tint); margin-top: 18px; }
 .code-head { background: var(--code-head); border-bottom: 1px solid var(--line); padding-left: 12px; }
 .code-head .name { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.code-head button.tab { color: var(--muted); padding: 4px 10px; }
+.code-head button.tab { color: var(--muted); padding-block: 4px; padding-inline: 10px; }
 .code-head button.tab:hover { color: var(--ink-str); background: var(--code-hover); }
 .code-head button.tab[aria-selected="true"] { color: var(--ink); background: var(--code-active); }
 .copy { color: var(--muted); border-color: var(--line); }
