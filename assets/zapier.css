@@ -10,8 +10,8 @@
 .zapier-choices input { accent-color: var(--a5); width: 16px; height: 16px; margin: 3px 0 0; flex: none; }
 .zapier-choices strong { display: block; color: var(--ink-str); font-size: 13px; line-height: 21px; font-weight: 600; }
 .zapier-choices small { display: block; color: var(--muted); font-size: 12px; line-height: 18px; margin-top: 0; }
-.zapier-cta { display: inline-flex; align-items: center; gap: 13px; background: var(--a5); color: var(--on-brand); padding: 8px 12px; border-radius: 999px; font-size: 13px; line-height: 20px; font-weight: 700; box-shadow: var(--shadow-brand); }
-.zapier-cta:hover { background: var(--a5-dark); color: var(--on-brand); }
+.zapier-cta { display: inline-flex; align-items: center; gap: 13px; background: var(--cta-bg); color: var(--on-brand); padding: 8px 12px; border-radius: 999px; font-size: 13px; line-height: 20px; font-weight: 700; box-shadow: var(--shadow-brand); }
+.zapier-cta:hover { background: var(--cta-hover); color: var(--on-brand); }
 .zapier-product-visual { align-self: center; min-width: 0; padding: 0; }
 .zapier-preview-heading { display: flex; align-items: center; gap: 6px; font-size: 10px; line-height: 16px; color: var(--muted); margin: 0 0 12px; }
 .zapier-step, .zapier-result { display: grid; grid-template-columns: 35px minmax(0, 1fr); align-items: center; gap: 11px; width: 100%; height: 84px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; box-shadow: var(--shadow-card); margin: 0; }
