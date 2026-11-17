@@ -6,6 +6,7 @@
     "node": ">=22"
   },
   "scripts": {
+    "repoint": "node repoint.mjs",
     "seed": "node seed.mjs",
     "build": "node build.mjs",
     "verify": "node verify.mjs",
