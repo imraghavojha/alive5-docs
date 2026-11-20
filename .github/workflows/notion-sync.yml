@@ -27,6 +27,14 @@ jobs:
           cache: npm
           cache-dependency-path: notion/package-lock.json
       - run: npm ci --prefix notion --omit=dev
+      - name: Sync API reference from Postman
+        if: vars.POSTMAN_REFERENCE_SYNC == 'true'
+        continue-on-error: true
+        run: node scripts/sync-postman-reference.mjs
+        env:
+          POSTMAN_COLLECTION_URL: ${{ vars.POSTMAN_COLLECTION_URL }}
+          POSTMAN_COLLECTION_UID: ${{ vars.POSTMAN_COLLECTION_UID }}
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
       - name: Read Notion and build static pages
         run: npm run build --prefix notion
         env:
