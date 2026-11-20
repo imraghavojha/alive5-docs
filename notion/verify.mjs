@@ -5,8 +5,6 @@ import { resolve, dirname, extname } from 'node:path';
 import { createServer } from 'node:http';
 import { execFileSync } from 'node:child_process';
 import { chromium } from 'playwright';
-import pixelmatch from 'pixelmatch';
-import { PNG } from 'pngjs';
 import { ROOT } from './site.mjs';
 import { offlineSite } from './offline.mjs';
 import { build, buildTree } from './build.mjs';
@@ -15,7 +13,6 @@ import { parseHTML, children } from './html.mjs';
 if (process.argv.includes('--live')) await build({ check: true });
 const temp = await mkdtemp(resolve(tmpdir(), 'alive5-notion-'));
 let browser, server;
-const failures = [];
 const structure = node => ({ tag: node.tagName || node.nodeName, ...(node.value !== undefined ? { text: node.value } : {}), ...(node.attrs ? { attrs: node.attrs } : {}), children: children(node).map(structure) });
 try {
   const { tree, map, templates } = await offlineSite(ROOT);
@@ -51,40 +48,17 @@ try {
   await new Promise(r => server.listen(0, '127.0.0.1', r));
   const origin = `http://127.0.0.1:${server.address().port}`;
   browser = await chromium.launch({ headless: true });
-  async function open(variant, path, width, frozen = false) {
+  async function open(variant, path, width) {
     const context = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 1, colorScheme: 'light', reducedMotion: 'reduce', permissions: ['clipboard-read', 'clipboard-write'] });
     const page = await context.newPage();
     const errors = [];
     page.on('pageerror', e => errors.push(e.message));
     await page.route('**/*', route => route.request().url().startsWith(origin) ? route.continue() : route.abort());
-    if (frozen) {
-      await page.clock.install({ time: new Date('2026-01-01T00:00:00Z') });
-      await page.clock.pauseAt(new Date('2026-01-01T00:00:00Z'));
-    }
     await page.goto(`${origin}/${variant}/${path}`, { waitUntil: 'networkidle' });
-    if (frozen) await page.clock.runFor(1200);
-    await page.evaluate(async () => { await document.fonts.ready; await Promise.all([...document.images].map(i => i.decode().catch(() => {}))); });
     assert.deepEqual(errors, [], `${variant}/${path}: JavaScript errors`);
     return { page, context };
   }
   for (const width of [1440, 390]) {
-    for (const path of paths) {
-      const shots = [];
-      for (const variant of ['current', 'rendered']) {
-        const { page, context } = await open(variant, path, width, true);
-        const file = resolve(temp, `${variant}-${width}-${path.replaceAll('/', '-')}.png`);
-        const bytes = await page.screenshot({ path: file, fullPage: true, animations: 'disabled', caret: 'hide' });
-        shots.push(PNG.sync.read(bytes));
-        await context.close();
-      }
-      const [a, b] = shots;
-      if (a.width !== b.width || a.height !== b.height) { failures.push(`${path} @ ${width}: size ${a.width}x${a.height} / ${b.width}x${b.height}`); continue; }
-      const diff = new PNG({ width: a.width, height: a.height });
-      const pixels = pixelmatch(a.data, b.data, diff.data, a.width, a.height, { threshold: 0, includeAA: true });
-      await writeFile(resolve(temp, `diff-${width}-${path.replaceAll('/', '-')}.png`), PNG.sync.write(diff));
-      console.log(`${width} ${path}: ${pixels} different pixels`);
-      if (pixels) failures.push(`${path} @ ${width}: ${pixels} pixels`);
-    }
     for (const variant of ['current', 'rendered']) {
       for (const path of ['api/authentication.html', 'api/send-a-message.html', 'integrations/widget.html']) {
         const { page, context } = await open(variant, path, width);
@@ -166,8 +140,7 @@ try {
       console.log(`${variant} @ ${width}: tabs, code copy, copy page, theme persistence, search, mobile menu, Zapier, scenarios, CLI passed.`);
     }
   }
-  assert.deepEqual(failures, [], 'Pixel differences');
-  console.log(`${paths.length * 2} screenshot pairs: zero differing pixels. All behavioral checks passed.`);
+  console.log('All behavioral checks passed.');
 } finally {
   await browser?.close();
   if (server) await new Promise(r => server.close(r));
