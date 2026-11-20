@@ -5,8 +5,37 @@ import { execFileSync } from 'node:child_process';
 import { credentials, readTree } from './api.mjs';
 import { ROOT, readJSON, writeJSON, remapBlocks, allocatePath, newTemplate, updateNavigation, validatePath } from './site.mjs';
 import { renderPage, renderBlocks, hasContent } from './render.mjs';
-import { BASE, slug, escape, resolvePageLinks } from './html.mjs';
+import { BASE, slug, escape, resolvePageLinks, parseHTML, walk, attr } from './html.mjs';
 import { localizeImages, knownImages } from './media.mjs';
+
+function archivedTarget(href, page, archived) {
+  if (!href) return;
+  const url = URL.parse(href, BASE + page);
+  if (!url) return;
+  url.search = '';
+  url.hash = '';
+  const path = url.href.slice(BASE.length);
+  if (url.href.startsWith(BASE) && archived.has(path)) return path;
+}
+
+function filterHomeLinks(blocks, archived) {
+  return blocks.filter(block => {
+    const data = block[block.type];
+    if (data.children) data.children = filterHomeLinks(data.children, archived);
+    if (data.children?.length || !['paragraph', 'heading_1', 'heading_2', 'heading_3', 'numbered_list_item', 'bulleted_list_item'].includes(block.type)) return true;
+    const words = data.rich_text.filter(r => (r.text?.content ?? r.plain_text ?? '').trim());
+    return !words.length || !words.every(r => archivedTarget(r.text?.link?.url ?? r.href, 'index.html', archived));
+  });
+}
+
+function checkWidgets(template, html, path) {
+  for (const leaf of Object.values(template.leaves)) {
+    if (!leaf.widget) continue;
+    const first = html.indexOf(leaf.html);
+    if (first < 0) throw new Error(`${path}: missing ${leaf.widget} widget. Restore its Notion callout or add a callout containing ⟦${leaf.widget}⟧.`);
+    if (html.includes(leaf.html, first + leaf.html.length)) throw new Error(`${path}: duplicate ${leaf.widget} widget. Keep one callout on this page.`);
+  }
+}
 
 async function renderSitemap(pages, root) {
   const paths = new Set(['index.html', 'api/reference.html', ...Object.keys(pages)]);
@@ -54,6 +83,7 @@ export async function buildTree(tree, originalMap, templates, root = ROOT) {
       const path = existing || allocatePath(article.title, used);
       validatePath(path);
       article.path = path;
+      byId.set(article.id, path);
       let record = map.pages[path] ||= tombstones[article.id]?.record;
       delete tombstones[article.id];
       if (!record) record = map.pages[path] = { id: article.id, title: article.title, label: article.title, page: slug(path), section: slug(section.title), bindings: {}, seeded: true };
@@ -66,7 +96,8 @@ export async function buildTree(tree, originalMap, templates, root = ROOT) {
     }
     section.articles = published;
   }
-  const paths = new Map(sections.flatMap(s => s.articles.map(a => [a.id.replaceAll('-', '').toLowerCase(), a.path])));
+  const archived = new Set([...removed, ...Object.values(tombstones).map(t => t.path)]);
+  const paths = new Map([...byId].map(([id, path]) => [id.replaceAll('-', '').toLowerCase(), path]));
   for (const section of sections) {
     const sectionGuide = section.articles.find(a => templates[a.path]?.before.includes('class="doc"'));
     for (const article of section.articles) {
@@ -74,8 +105,10 @@ export async function buildTree(tree, originalMap, templates, root = ROOT) {
       const template = templates[path] || newTemplate(templates[sectionGuide?.path] || fallback, path, article.title, {
         slug: record.section, title: section.title, path: sectionGuide?.path || section.articles[0].path,
       });
-      const blocks = remapBlocks(resolvePageLinks(article.blocks, paths), record.bindings);
+      let blocks = remapBlocks(resolvePageLinks(article.blocks, paths), record.bindings);
+      if (path === 'index.html' && archived.size) blocks = filterHomeLinks(blocks, archived);
       const body = template.fresh ? template.before + renderBlocks(blocks, template, path) + template.after : renderPage(blocks, template, article.title);
+      checkWidgets(template, body, path);
       output.set(path, body);
     }
   }
@@ -105,6 +138,14 @@ export async function buildTree(tree, originalMap, templates, root = ROOT) {
   if (renamed || reordered) map.order = order;
   for (const section of sections) map.sections[section.id] ||= { title: section.title, hidden: false, added: true };
   output.set('sitemap.xml', await renderSitemap(map.pages, root));
+  if (archived.size) {
+    for (const [page, html] of output) {
+      if (!page.endsWith('.html')) continue;
+      const links = walk(parseHTML(html)).filter(node => node.tagName === 'a');
+      const targets = new Set(links.map(link => archivedTarget(attr(link, 'href'), page, archived)).filter(Boolean));
+      for (const target of targets) console.warn(`::warning::${page} links to archived guide ${target}`);
+    }
+  }
   return { output, removed, map };
 }
 export async function build({ root = ROOT, check = false } = {}) {

@@ -15,6 +15,59 @@ const fixture = await offlineSite(ROOT);
 const paragraph = value => ({ id: 'new-paragraph', type: 'paragraph', paragraph: { rich_text: rich(value) } });
 const build = (tree, map = fixture.map) => buildTree(tree, map, fixture.templates);
 
+test('an archived guide loses its homepage entries until restored, while prose keeps its links', async t => {
+  const warnings = [];
+  t.mock.method(console, 'warn', message => warnings.push(message));
+  const tree = structuredClone(fixture.tree);
+  const path = 'connectors/n8n.html', target = fixture.map.pages[path].id;
+  const articles = tree.find(s => s.articles.some(a => a.id === target)).articles;
+  const index = articles.findIndex(a => a.id === target);
+  const home = tree[0].articles[0];
+  const mention = { type: 'mention', plain_text: 'n8n guide', mention: { type: 'page', page: { id: target } } };
+  const prose = paragraph('For setup details, read the ');
+  prose.paragraph.rich_text.push(mention);
+  home.blocks.push(prose);
+  const standalone = paragraph('');
+  standalone.id = 'standalone';
+  standalone.paragraph.rich_text = [mention];
+  home.blocks.push(standalone);
+  const original = (await build(tree)).output.get('index.html');
+  const [guide] = articles.splice(index, 1);
+  const first = await build(tree);
+  const again = await build(tree, first.map);
+  for (const result of [first, again]) {
+    const html = result.output.get('index.html');
+    const links = walk(parseHTML(html)).filter(n => n.tagName === 'a' && attr(n, 'href').endsWith(path));
+    assert.deepEqual(links.map(text), ['n8n guide']);
+    assert.match(text(links[0].parentNode), /For setup details, read the n8n guide/);
+    assert.doesNotMatch(html, /class="connector-logo n8n"|Build with n8n/);
+    assert.match(html, /Build with Zapier/);
+  }
+  assert.equal(warnings.filter(w => w === `::warning::index.html links to archived guide ${path}`).length, 2);
+  assert.ok(warnings.includes(`::warning::connectors/index.html links to archived guide ${path}`));
+  articles.splice(index, 0, guide);
+  warnings.length = 0;
+  assert.equal((await build(tree, again.map)).output.get('index.html'), original);
+  assert.deepEqual(warnings, []);
+});
+
+test('widget pages require exactly one original, copied, or marker callout', async () => {
+  const tree = structuredClone(fixture.tree);
+  const path = 'connectors/zapier.html', page = fixture.map.pages[path];
+  const blocks = tree.flatMap(s => s.articles).find(a => a.id === page.id).blocks;
+  const leaf = Object.values(fixture.templates[path].leaves).find(l => l.widget);
+  const index = blocks.findIndex(b => b.id === page.bindings[leaf.key]);
+  const [callout] = blocks.splice(index, 1);
+  await assert.rejects(build(tree), /connectors\/zapier\.html: missing zapier-previews widget/);
+  const copy = { ...structuredClone(callout), id: 'copied-callout' };
+  blocks.splice(index, 0, copy);
+  assert.ok((await build(tree)).output.get(path).includes(leaf.html));
+  copy.callout.rich_text = rich('⟦zapier-previews⟧');
+  assert.ok((await build(tree)).output.get(path).includes(leaf.html));
+  blocks.push(callout);
+  await assert.rejects(build(tree), /duplicate zapier-previews widget/);
+});
+
 test('review 1: reject mass deletion, homepage deletion, and empty existing bodies', async () => {
   const empty = structuredClone(fixture.tree);
   empty.forEach(s => { s.articles = []; });

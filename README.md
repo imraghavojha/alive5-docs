@@ -54,6 +54,16 @@ The script seeds, builds, and verifies locally, then disables **Sync Notion docs
 
 Edit ordinary headings, paragraphs, lists, tables, code, and images. Adjacent code blocks with captions become labeled tabs. Keep the information callouts describing repo-owned interactive examples where those examples belong. The Reference section links directly to the official Postman collection. [Notion blocks](https://developers.notion.com/reference/block) cannot carry the site's CSS layouts and JavaScript behavior, so repo templates preserve those. Existing images use published asset URLs; seed uploads local illustration assets through the file-upload API. Notion-uploaded images are copied locally during build to avoid expiring links. Unsupported blocks produce a warning and a safe link/text fallback, or are skipped. Sync aborts if an existing article has no meaningful rendered content, the homepage would be deleted, or more than three pages would be deleted at once. Empty new pages are skipped until they have content. Deleted page URLs stay reserved for restoration.
 
+Archiving a guide hides its standalone homepage links and cards on the next sync. Restoring the same Notion page brings those entries back. Links inside prose or interactive examples stay visible and the sync log names each page that still links to the archived guide.
+
+Keep one widget callout on each demo's original page. If a callout is missing or duplicated, the sync stops before it publishes. To recover a deleted callout, add a Notion callout containing exactly the marker for that page.
+
+| Page | Recovery marker |
+| --- | --- |
+| Developer documentation (home) | `⟦cli-preview⟧` |
+| Connectors overview | `⟦connector-scenarios⟧` |
+| Build with Zapier | `⟦zapier-previews⟧` |
+
 For offline checks, run `npm test` and `npm run verify` inside `notion/`. Verification rebuilds from an API-shaped tree, compares DOM text and structure for every article, and checks that the search index matches the published version. It also checks interactions on desktop (1440 px) and mobile (390 px). Add `--live` to compare the site against a fresh Notion API read.
 
 ## Syncing the API reference from Postman
