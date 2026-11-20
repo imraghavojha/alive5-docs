@@ -12,8 +12,5 @@
     "POST Users": "account-setup",
     "Widgets": "account-setup",
     "Bots": "account-setup"
-  },
-  "ids": {
-    "POST /public/1.0/conversations/sms/push": "push-sms"
   }
 }

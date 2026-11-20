@@ -1,177 +1,150 @@
 import { readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { parseArgs } from 'node:util';
-
+import { parse, parseFragment } from '../notion/node_modules/parse5/dist/index.js';
 const config = JSON.parse(await readFile(new URL('./postman-reference.json', import.meta.url), 'utf8'));
 const reference = new URL('../api/reference.html', import.meta.url);
-const entities = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
-const plain = Object.fromEntries(Object.entries(entities).map(([char, entity]) => [entity, char]));
-const escape = (s) => s.replace(/[&<>"']/g, (char) => entities[char]);
-const decode = (s) => s.replace(/&(amp|lt|gt|quot|apos|nbsp|#39);/g, (entity) => plain[entity] ?? (entity === '&apos;' ? "'" : ' '));
-const description = (value) => {
-  const content = typeof value === 'string' ? value : value?.content ?? '';
-  return /^\s*<(?:p|div|ul|ol|pre|h[1-6])\b/i.test(content)
-    ? decode(content.replace(/<\/?(?:p|div|li|br|h[1-6])\b[^>]*>/gi, ' ').replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim()
-    : content.trim();
-};
-const slug = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const escape = (s) => s.replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
+const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const placeholder = (key) => 'YOUR_' + slug(key).replaceAll('-', '_').toUpperCase();
 const version = /^\/public\/[\d.]+(?=\/)/;
-const badge = (method) => `<span class="method m-${method.toLowerCase()}">${method}</span>`;
-const rawExample = (value, key = 'body') => {
-  if (Array.isArray(value)) return value.slice(0, 1).map((entry) => rawExample(entry, key));
-  if (value && typeof value === 'object') return Object.fromEntries(Object.keys(value).map((name) => [name, rawExample(value[name], name)]));
+const variable = /(?:%7B%7B|\{\{)([\w-]+)(?:%7D%7D|\}\})|(?<=\/)(?::|%3A)([\w-]+)/gi;
+const routeKey = (verb, path) => verb + ' ' + path.replace(variable, (_, braces, colon) => ':' + (braces ?? colon));
+const quote = (value) => '"' + value.replace(/["\\$\x60]/g, '\\$&') + '"';
+const examplePath = (path) => path.replace(variable, (_, braces, colon) => placeholder(braces ?? colon));
+const decode = (path) => { try { return decodeURIComponent(path); } catch { return path; } };
+const active = (params = []) => params.filter(({ disabled, key }) => !disabled && key);
+const keys = (params) => active(params).map(({ key }) => key);
+const warn = (message) => console.warn('::warning::' + message.replaceAll('%', '%25').replaceAll('\r', '%0D').replaceAll('\n', '%0A'));
+const text = (node) => node?.nodeName === '#text' ? node.value : (node?.childNodes ?? []).map(text).join('');
+const description = (value) => {
+  const content = (typeof value === 'string' ? value : value?.content ?? '').trim();
+  return /^<(?:p|div|ul|ol|pre|h[1-6])\b/i.test(content) ? text(parseFragment(content)).replace(/\s+/g, ' ').trim() : content;
+};
+const example = (value, key = 'body') => {
+  if (Array.isArray(value)) return value.slice(0, 1).map((item) => example(item, key));
+  if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([name, item]) => [name, example(item, name)]));
   return typeof value === 'string' ? placeholder(key) : { number: 0, boolean: false }[typeof value] ?? null;
 };
-
 function collect(items, routes = new Map(), folder) {
   for (const item of items) {
-    if (Array.isArray(item.item)) {
-      collect(item.item, routes, folder ?? item.name);
-      continue;
-    }
+    if (Array.isArray(item.item)) { collect(item.item, routes, folder ?? item.name); continue; }
     const { method, url, body, description: prose } = item.request ?? {};
     const verb = method?.toUpperCase();
-    if (!verb || !/^[A-Z]+$/.test(verb) || !url) throw new Error('Invalid Postman request');
+    if (!/^[A-Z]+$/.test(verb ?? '') || !url || typeof item.name !== 'string') throw new Error('Invalid Postman request');
     const address = URL.parse(typeof url === 'string' ? url : url.raw ??
-      `${url.protocol}://${url.host?.join('.')}${url.port ? ':' + url.port : ''}/${url.path?.join('/') ?? ''}`);
-    if (address?.protocol !== 'https:') { console.warn(`Skipping non-HTTPS Postman request: ${item.name}`); continue; }
-    const active = (params) => params.filter(({ disabled, key }) => !disabled && key);
-    const query = active(url.query ?? [...address.searchParams.keys()].map((key) => ({ key })));
-    const mode = body?.mode;
-    const form = active(Array.isArray(body?.[mode]) ? body[mode] : []);
+      (url.protocol + '://' + url.host?.join('.') + (url.port ? ':' + url.port : '') + '/' + (url.path?.join('/') ?? '')));
+    if (address?.protocol !== 'https:') { warn('Skipping non-HTTPS Postman request ' + item.name); continue; }
+    const path = address.pathname, route = routeKey(verb, path);
+    if (routes.has(route)) continue;
+    const query = url.query ? keys(url.query) : [...address.searchParams.keys()];
+    const mode = body?.mode, form = ['formdata', 'urlencoded'].includes(mode) ? active(body[mode]) : [];
     let json;
-    if (mode === 'raw') try { json = rawExample(JSON.parse(body.raw)); } catch { /* Use a generic body placeholder below. */ }
-    const path = address.pathname;
-    const route = `${verb} ${path}`;
-    const fields = routes.get(route)?.fields ?? new Map();
-    for (const param of [...query, ...form, ...active(url.variable ?? []),
-      ...Object.keys(json && !Array.isArray(json) && typeof json === 'object' ? json : {}).map((key) => ({ key }))]) {
-      if (!fields.get(param.key)) fields.set(param.key, description(param.description));
-    }
-    if (!routes.has(route)) routes.set(route, { route, verb, path, address, group: config.groups[`${verb} ${folder}`] ?? config.groups[folder] ?? 'directory',
-      id: config.ids[route] ?? slug(route), title: item.name, prose: description(prose), fields, mode, form, query, json });
+    if (mode === 'raw') try { json = example(JSON.parse(body.raw)); } catch { /* Use the generic raw body placeholder. */ }
+    const pathKeys = [...path.matchAll(variable)].map(([, braces, colon]) => braces ?? colon);
+    const jsonKeys = json && !Array.isArray(json) && typeof json === 'object' ? Object.keys(json) : [];
+    const params = new Set([...query, ...form.map(({ key }) => key), ...pathKeys, ...keys(url.variable), ...jsonKeys]);
+    const group = config.groups[verb + ' ' + folder] ?? config.groups[folder];
+    routes.set(route, { verb, address, path, group, title: item.name, prose: description(prose), params, query, mode, form, json });
   }
   return routes;
 }
-
-const row = ([key, prose]) => `              <tr>\n                <td>${escape(key)}</td>\n                <td>${escape(prose)}</td>\n              </tr>\n`;
-const table = (fields) => `            <table class="tbl">
-              <tr><th>Parameter</th><th>Description</th></tr>
-${[...fields].map(row).join('')}            </table>\n`;
-function render({ id, verb, path, address, title, prose, fields, query, form, mode, json }) {
-  const quote = (value) => "'" + value.replaceAll("'", "'\\''") + "'";
-  const queryString = new URLSearchParams(query.map(({ key }) => [key, placeholder(key)])).toString();
-  const examplePath = path.replace(/%7B%7B([\w-]+)%7D%7D|(?<=\/):([\w-]+)/gi, (_, name, variable) => placeholder(name ?? variable));
-  const curl = [`curl -X ${verb}`, quote(address.origin + examplePath + (queryString ? '?' + queryString : '')), '-H "X-A5-APIKEY: $ALIVE5_KEY"'];
+function render(id, { verb, address, path, title, prose, query, mode, form, json }) {
+  const search = new URLSearchParams(query.map((key) => [key, placeholder(key)])).toString();
+  const curl = ['curl -X ' + verb, quote(address.origin + examplePath(path) + (search ? '?' + search : '')), '-H "X-A5-APIKEY: $ALIVE5_KEY"'];
   for (const { key, type } of form) {
-    const file = mode === 'formdata' && type === 'file';
+    const file = mode === 'formdata' && type === 'file', value = placeholder(key);
     const flag = mode === 'urlencoded' ? '--data-urlencode' : file ? '--form' : '--form-string';
-    curl.push(`${flag} ${quote(key + '=' + (file ? '@' : '') + placeholder(key))}`);
+    curl.push(flag + ' ' + quote(key + '=' + (file ? '@' + value + '_FILE' : value)));
   }
-  if (mode === 'raw') curl.push(json === undefined ? "--data-raw 'YOUR_REQUEST_BODY'" : `--json ${quote(JSON.stringify(json))}`);
-  if (mode === 'file') curl.push("--data-binary '@YOUR_REQUEST_FILE'");
-  return `        <div class="endpoint reference-entry" id="${id}">
+  if (mode === 'raw') curl.push(json === undefined ? '--data-raw "YOUR_REQUEST_BODY"' : "--json '" + JSON.stringify(json).replaceAll("'", "'\\''") + "'");
+  if (mode === 'file') curl.push('--data-binary "@YOUR_REQUEST_FILE"');
+  const label = escape(verb + ' ' + title);
+  return `<div class="endpoint reference-entry" id="${id}" data-postman>
           <div class="reference-description">
-            <h3>${badge(verb)}${escape(title)}</h3>
-            <p class="path">${escape(path.replace(version, ''))}</p>
-${prose ? `            <p>${escape(prose)}</p>\n` : ''}${fields.size ? table(fields) : ''}          </div>
-          <div aria-label="Examples for ${verb} ${escape(title)}" class="reference-examples" role="group">
+            <h3><span class="method m-${verb.toLowerCase()}">${verb}</span>${escape(title)}</h3>
+            <p class="path">${escape(decode(path.replace(version, '')))}</p>
+${prose ? '            <p>' + escape(prose) + '</p>\n' : ''}          </div>
+          <div aria-label="Examples for ${label}" class="reference-examples" role="group">
             <figure class="reference-code">
               <figcaption><span>Request</span><span>curl</span><button class="copy" type="button">Copy</button></figcaption>
-              <pre aria-label="curl request for ${verb} ${escape(title)}" tabindex="0"><code>${escape(curl.join(' \\\n  '))}</code></pre>
+              <pre aria-label="curl request for ${label}" tabindex="0"><code>${escape(curl.join(' \\\n  '))}</code></pre>
             </figure>
           </div>
-        </div>\n`;
+        </div>`;
 }
-
-const entry = /^ {8}<div class="endpoint reference-entry" id="([\w-]+)">[\s\S]*?^ {8}<\/div>\n/gm;
-const tocLink = /^ {10}<a class="reference-toc-endpoint" href="#([\w-]+)">[^\n]*<\/a>\n/gm;
-const methodBadge = /<span class="method m-[a-z]+">([A-Z]+)<\/span>/;
-const pathLabel = /<p class="path">([^<]+)<\/p>/;
-const versionedPath = (block) => {
-  const request = block.match(/<code>curl[^<]+/)?.[0] ?? '';
-  const requestPath = decode(request).match(/https:\/\/[^/\s"']+(\/public\/[\d.]+)\//)?.[1] ?? '';
-  const path = decode(block.match(pathLabel)[1]);
-  return version.test(path) ? path : requestPath + path;
-};
-
+const attr = (node, name) => node.attrs?.find((attribute) => attribute.name === name)?.value;
+const has = (node, name) => attr(node, 'class')?.split(/\s+/).includes(name);
+const walk = function* (node) { yield node; for (const child of node.childNodes ?? []) yield* walk(child); };
+const location = (node) => node.sourceCodeLocation;
+const generatedKey = (verb, path, label) => JSON.stringify([path, routeKey(verb, label.trim())]);
 function sync(html, routes) {
-  const current = new Map([...html.matchAll(entry)].map(([block, id]) => [id, `${block.match(methodBadge)[1]} ${versionedPath(block)}`]));
-  if (!current.size || current.size !== html.split('class="endpoint reference-entry"').length - 1) throw new Error('Unexpected reference entry markup');
-  const byRoute = new Map([...current].map(([id, route]) => [route, id]));
-  const links = new Map([...html.matchAll(tocLink)].map(([link, id]) => [id, link]));
-  const bindings = new Map(), additions = new Map(), groupLinks = new Map(), added = [], updated = [];
-  for (const route of routes.values()) {
-    const id = current.has(config.ids[route.route]) ? route.id : byRoute.get(route.route);
-    if (id) {
-      if (bindings.has(id)) throw new Error(`Conflicting routes for #${id}`);
-      bindings.set(id, route);
-    } else {
-      if (current.has(route.id) || additions.has(route.id)) throw new Error(`Duplicate anchor #${route.id}. Add a Postman id override.`);
-      additions.set(route.id, route);
-    }
+  const nodes = [...walk(parse(html, { sourceCodeLocationInfo: true }))].filter(location);
+  const entries = nodes.filter((node) => has(node, 'endpoint') && has(node, 'reference-entry'));
+  const generated = new Set(entries.filter((node) => attr(node, 'data-postman') !== undefined));
+  const anchors = new Set([...generated].map((node) => attr(node, 'id')).filter(Boolean));
+  const ids = new Set(nodes.map((node) => attr(node, 'id')));
+  const toc = new Map(nodes.filter((node) => has(node, 'reference-toc-section')).map((node) => [attr(node, 'href').slice(1), node.parentNode]));
+  const sections = nodes.filter((node) => node.tagName === 'h2' && toc.has(attr(node, 'id')));
+  if (!sections.length) throw new Error('Missing reference sections');
+  const edits = [], curated = new Set(), previous = new Map();
+  const newline = html.includes('\r\n') ? '\r\n' : '\n';
+  const lineStart = (offset) => html.lastIndexOf('\n', offset - 1) + 1;
+  const atLineStart = (offset) => !html.slice(lineStart(offset), offset).trim();
+  const insert = (offset, block, indent) => edits.push(atLineStart(offset)
+    ? [lineStart(offset), lineStart(offset), ' '.repeat(indent) + block.replaceAll('\n', newline) + newline] : [offset, offset, block]);
+  for (const node of [...generated, ...nodes.filter((node) => has(node, 'reference-toc-endpoint') && anchors.has(attr(node, 'href')?.slice(1)))]) {
+    const { startOffset, endOffset } = location(node);
+    const tail = atLineStart(startOffset) && /^[ \t]*\r?\n/.exec(html.slice(endOffset));
+    edits.push(tail ? [lineStart(startOffset), endOffset + tail[0].length, ''] : [startOffset, endOffset, '']);
   }
-  const removed = [...current].filter(([id]) => !bindings.has(id)).map(([, route]) => route);
-  if (removed.length > 3) throw new Error(`Refusing to remove ${removed.length} endpoints (maximum 3)`);
-  const output = html.replace(/^( {8}<h2 id="([\w-]+)">[^\n]+<\/h2>\n)([\s\S]*?)(?=^ {8}(?:<h2 |<div class="pager">))/gm, (_, heading, group, body) => {
-    const toc = [];
-    groupLinks.set(group, toc);
-    body = body.replace(entry, (block, id) => {
-      if (!bindings.has(id)) return '';
-      const route = bindings.get(id);
-      bindings.delete(id);
-      toc.push(links.get(id) ?? `          <a class="reference-toc-endpoint" href="#${id}">${block.match(/<\/span>([\s\S]*?)<\/h3>/)[1].trim()}</a>\n`);
-      const next = block.replace(methodBadge, badge(route.verb))
-        .replace(pathLabel, (label) => current.get(id).endsWith(' ' + route.path) ? label : `<p class="path">${escape(route.path)}</p>`)
-        .replace(/(<table class="tbl">[\s\S]*?)( {12}<\/table>)/, (_, table, close) => {
-        const keys = new Set([...table.matchAll(/<tr>\s*<td>([^<]+)<\/td>/g)].map(([, key]) => decode(key.trim())));
-        return table + [...route.fields].filter(([key]) => !keys.has(key)).map(row).join('') + close;
-      });
-      if (next !== block) updated.push(route.route);
-      return next;
-    });
-    for (const route of additions.values()) {
-      if (route.group !== group) continue;
-      additions.delete(route.id);
-      added.push(route.route);
-      body += render(route);
-      toc.push(`          <a class="reference-toc-endpoint" href="#${route.id}">${escape(route.title)}</a>\n`);
+  let drift = 0;
+  for (const entry of entries) {
+    const children = [...walk(entry)], id = attr(entry, 'id'), content = text(entry);
+    const verb = text(children.find((node) => has(node, 'method'))).trim();
+    const path = text(children.find((node) => has(node, 'path'))).trim();
+    const curl = text(children.find((node) => node.tagName === 'code' && text(node).trimStart().startsWith('curl')));
+    if (generated.has(entry)) {
+      if (id) previous.set(generatedKey(verb, curl.match(/"https:\/\/[^/"?]+(\/[^"?]*)/)?.[1], path), id);
+      continue;
     }
-    return heading + body;
-  }).replace(/^( {10}<a class="reference-toc-section" href="#([\w-]+)">[^\n]+<\/a>\n)([\s\S]*?)(?=^ {8}<\/div>)/gm, (_, heading, group) => {
-    const toc = groupLinks.get(group);
-    groupLinks.delete(group);
-    return heading + toc.join('');
-  });
-  if (bindings.size || groupLinks.size) throw new Error('Unexpected reference section markup');
-  if (additions.size) throw new Error('Missing reference group for new Postman routes');
-  return { output, added, removed, updated };
+    const prefix = curl.match(/https:\/\/[^/\s"']+(\/public\/[\d.]+)\//)?.[1] ?? '';
+    const route = routeKey(verb, version.test(path) ? path : prefix + path);
+    curated.add(route);
+    const missing = [...routes.get(route)?.params ?? []].filter((key) =>
+      !new RegExp('(?<![\\w-])' + key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?![\\w-])').test(content));
+    if (routes.has(route) && !missing.length) continue;
+    drift++;
+    warn('#' + id + ' ' + route + (routes.has(route) ? ' is missing Postman parameters ' + missing.join(', ') : ' is missing from Postman'));
+  }
+  for (const [route, item] of routes) {
+    if (curated.has(route)) continue;
+    const { verb, path } = item, prior = previous.get(generatedKey(verb, quote(examplePath(path)).slice(1, -1), decode(path.replace(version, ''))));
+    const name = slug(item.title), base = verb.toLowerCase() + (name ? '-' + name : '');
+    let id = prior ?? (name && !ids.has(name) ? name : base);
+    for (let n = 2; !prior && ids.has(id); n++) id = base + '-' + n;
+    ids.add(id);
+    const section = sections.find((node) => attr(node, 'id') === item.group) ?? sections.at(-1);
+    const siblings = section.parentNode.childNodes, next = siblings.slice(siblings.indexOf(section) + 1).find((node) => sections.includes(node) || has(node, 'pager'));
+    insert(next ? location(next).startOffset : location(section.parentNode).endTag.startOffset, render(escape(id), item), 8);
+    insert(location(toc.get(attr(section, 'id'))).endTag.startOffset, '<a class="reference-toc-endpoint" href="#' + escape(id) + '">' + escape(item.title) + '</a>', 10);
+  }
+  return { drift, output: edits.reverse().sort((a, b) => b[0] - a[0] || b[1] - a[1])
+    .reduce((source, [start, end, value]) => source.slice(0, start) + value + source.slice(end), html) };
 }
-
 const { values: { check, out } } = parseArgs({ options: { check: { type: 'boolean' }, out: { type: 'string' } } });
-const { POSTMAN_COLLECTION_URL: url, POSTMAN_API_KEY: key, POSTMAN_COLLECTION_UID: uid } = process.env;
-const authenticated = !url && key && uid;
-const response = await fetch(url || (authenticated ? `https://api.getpostman.com/collections/${encodeURIComponent(uid)}` : config.url), {
-  ...(authenticated && { headers: { 'X-Api-Key': key }, redirect: 'error' }), signal: AbortSignal.timeout(20_000),
-});
-if (!response.ok) throw new Error(`Postman feed returned HTTP ${response.status}`);
+const response = await fetch(process.env.POSTMAN_COLLECTION_URL || config.url, { signal: AbortSignal.timeout(20_000) });
+if (!response.ok) throw new Error('Postman feed returned HTTP ' + response.status);
 const { collection, item } = await response.json();
 const routes = collect(collection?.item ?? item ?? []);
 if (!routes.size) throw new Error('Postman feed yielded zero HTTPS routes');
 const target = out ?? reference;
-const prior = await readFile(target, 'utf8').catch((error) => {
-  if (out && error.code === 'ENOENT') return null;
-  throw error;
-});
+const prior = await readFile(target, 'utf8').catch((error) => { if (out && error.code === 'ENOENT') return null; throw error; });
 const html = prior ?? await readFile(reference, 'utf8');
-const { output, added, removed, updated } = sync(html, routes);
-console.log(`Postman reference: ${added.length} added, ${removed.length} removed, ${updated.length} updated${output !== html ? ' (drift)' : ''}`);
-for (const [label, values] of [['+', added], ['-', removed], ['~', updated]]) {
-  for (const value of values) console.log(`  ${label} ${value}`);
-}
-if (check) process.exitCode = Number(output !== html);
+const { output, drift } = sync(html, routes);
+console.log('Postman reference: generated content ' + (output === html ? 'current' : 'changed') + ', ' + drift + ' curated entries with drift');
+if (check) process.exitCode = Number(output !== html || drift > 0);
 else if (output !== prior) {
-  const temp = out ? `${out}.${process.pid}.tmp` : new URL(`reference.html.${process.pid}.tmp`, reference);
+  const temp = out ? out + '.' + process.pid + '.tmp' : new URL('reference.html.' + process.pid + '.tmp', reference);
   try { await writeFile(temp, output, { flag: 'wx' }); await rename(temp, target); }
   finally { await rm(temp, { force: true }); }
 }
