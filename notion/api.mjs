@@ -7,7 +7,7 @@ export function credentials() {
   if (!token || !value) throw new Error('Set NOTION_TOKEN and NOTION_ROOT_PAGE_ID.');
   const rootId = /^https?:\/\//i.test(value) ? new URL(value).pathname.match(/([a-f0-9]{32})\/?$/i)?.[1] : value;
   if (!rootId || !/^[a-f0-9-]{32,36}$/i.test(rootId)) throw new Error('NOTION_ROOT_PAGE_ID must be a page ID.');
-  return { client: new notion.Client({ auth: token, notionVersion: '2025-09-03', maxRetries: 5 }), rootId: rootId.replaceAll('-', '').toLowerCase() };
+  return { client: new notion.Client({ auth: token, notionVersion: '2025-09-03', retry: { maxRetries: 5 } }), rootId: rootId.replaceAll('-', '').toLowerCase() };
 }
 export async function listChildren(client, id) {
   const blocks = [];

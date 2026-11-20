@@ -74,7 +74,11 @@ export async function buildTree(tree, originalMap, templates, root = ROOT) {
       output.set(path, html.replace(/<div class="pager">[\s\S]*?<\/div>/, () => `<div class="pager">${link(sequence[i - 1], false)}${link(sequence[i + 1], true)}</div>`));
     }
   }
-  if (JSON.stringify(order) !== JSON.stringify(originalOrder)) map.order = order;
+  if (renamed || JSON.stringify(order) !== JSON.stringify(originalOrder)) map.order = order;
+  for (const [path, title] of titles) {
+    const record = map.pages[path];
+    if (record.title !== title) record.title = record.label = title;
+  }
   for (const section of sections) map.sections[section.id] ||= { title: section.title, hidden: false, added: true };
   return { output, removed, map };
 }

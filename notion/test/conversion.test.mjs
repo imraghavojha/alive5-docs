@@ -8,6 +8,7 @@ import { offlineSite } from '../offline.mjs';
 import { buildTree } from '../build.mjs';
 import { listChildren, seedBlocks, requestBlock } from '../api.mjs';
 import { localizeImages, uploadImage, knownImages } from '../media.mjs';
+import { convert } from '../convert.mjs';
 
 const fixture = await offlineSite(ROOT);
 const article = path => {
@@ -53,6 +54,22 @@ test('deleting the first block keeps the page heading and breadcrumbs', () => {
   assert.doesNotMatch(html, /Authenticate requests with your Alive5 API key\./);
 });
 
+test('renaming a guide updates its breadcrumb and map, and keeps the second build stable', async () => {
+  const tree = structuredClone(fixture.tree);
+  const path = 'api/authentication.html';
+  const title = 'Keys & access';
+  tree[1].articles.find(a => a.id === fixture.map.pages[path].id).title = title;
+  const first = await buildTree(tree, fixture.map, fixture.templates);
+  assert.equal(first.map.pages[path].title, title);
+  assert.equal(first.map.pages[path].label, title);
+  assert.match(first.output.get(path), /<h1>Keys &amp; access<\/h1>/);
+  assert.match(first.output.get(path), /<li aria-current="page">Keys &amp; access<\/li>/);
+  assert.match(first.output.get('api/index.html'), /Keys &amp; access →/);
+  assert.ok(navigation(first.output.get('assets/site.js')).sidebar.flatMap(s => s.items).some(([, href, label]) => href === path && label === 'Keys &amp; access'));
+  const second = await buildTree(tree, first.map, fixture.templates);
+  assert.deepEqual(second, first);
+});
+
 test('edited table cells and nested list items replace their original content', () => {
   const { blocks, template } = article('connectors/directus.html');
   const table = blocks.find(b => b.type === 'table');
@@ -63,6 +80,35 @@ test('edited table cells and nested list items replace their original content', 
   assert.match(html, /Changed field/);
   assert.match(html, /Changed instruction/);
   assert.doesNotMatch(html, /Copy or generate your/);
+});
+
+const tableFixture = (head, body) => convert(`<main><h1>Title</h1><table>${head}<tbody>${body}</tbody></table></main>`, 'index.html');
+
+test('column headers can be enabled and disabled for cached rows', () => {
+  const body = '<tr><td class="keep">Body</td><td>Detail</td></tr>';
+  const enabled = tableFixture('', `<tr><td>First</td><td>Second</td></tr>${body}`);
+  enabled.blocks[0].table.has_column_header = true;
+  assert.match(renderPage(enabled.blocks, enabled.template), new RegExp(`<thead><tr><th>First</th><th>Second</th></tr></thead><tbody>${body}</tbody>`));
+
+  const disabled = tableFixture('<thead><tr><th>First</th><th>Second</th></tr></thead>', body);
+  disabled.blocks[0].table.has_column_header = false;
+  assert.match(renderPage(disabled.blocks, disabled.template), new RegExp(`<tbody><tr><td>First</td><td>Second</td></tr>${body}</tbody>`));
+});
+
+test('row header changes check both cached tables and cached rows', () => {
+  const { blocks, template } = tableFixture('', '<tr><td>One</td><td class="keep">Two</td></tr><tr><th>Three</th><td>Four</td></tr>');
+  const table = blocks[0].table;
+  assert.ok(!table.has_row_header);
+  assert.match(renderPage(blocks, template), /<tbody><tr><td>One<\/td><td class="keep">Two<\/td><\/tr><tr><td>Three<\/td><td>Four<\/td><\/tr><\/tbody>/);
+  table.has_row_header = true;
+  assert.match(renderPage(blocks, template), /<tbody><tr><th>One<\/th><td class="keep">Two<\/td><\/tr><tr><th>Three<\/th><td>Four<\/td><\/tr><\/tbody>/);
+});
+
+test('reordering cached rows rebuilds cells that enter or leave the header', () => {
+  const { blocks, template } = tableFixture('<thead><tr><th>First</th><th>Second</th></tr></thead>', '<tr><td>One</td><td>Two</td></tr><tr><td class="keep">Three</td><td>Four</td></tr>');
+  const rows = blocks[0].table.children;
+  [rows[0], rows[1]] = [rows[1], rows[0]];
+  assert.match(renderPage(blocks, template), /<thead><tr><th>One<\/th><th>Two<\/th><\/tr><\/thead><tbody><tr><td>First<\/td><td>Second<\/td><\/tr><tr><td class="keep">Three<\/td><td>Four<\/td><\/tr><\/tbody>/);
 });
 
 test('reordered headings follow Notion order and keep their fragment IDs', () => {

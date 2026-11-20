@@ -51,15 +51,19 @@ function renderBlock(b, template, path) {
     if (/^⟦.*⟧$/.test(plain(d.rich_text))) throw new Error(`Unknown widget marker: ${plain(d.rich_text)}`);
   }
   if (b.type === 'table') {
-    if (unchanged && sub.length === leaf.rows.length && sub.every((r, i) => r.id === leaf.rows[i].key && signature(r) === leaf.rows[i].signature)) return leaf.html;
+    const cellTag = (i, j) => (i === 0 && d.has_column_header) || (j === 0 && d.has_row_header) ? 'th' : 'td';
+    const cellMatches = (cell, tag) => cell?.open?.match(/^<(th|td)(?=[\s/>])/i)?.[1].toLowerCase() === tag;
+    const rowMatches = (row, old, i) => old?.cells?.length === row.table_row?.cells?.length && old?.signature === signature(row)
+      && old.cells.every((cell, j) => cellMatches(cell, cellTag(i, j)));
+    if (unchanged && sub.length === leaf.rows.length && sub.every((r, i) => r.id === leaf.rows[i].key && rowMatches(r, leaf.rows[i], i))) return leaf.html;
     const rows = sub.map((r, i) => {
       if (r.type !== 'table_row' || r.table_row.cells.length !== d.table_width) throw new Error('Invalid table row');
       const old = template.leaves[r.id];
-      if (old && signature(r) === old.signature) return old.html;
+      if (rowMatches(r, old, i)) return old.html;
       return `<tr>${r.table_row.cells.map((c, j) => {
-        const tag = (i === 0 && d.has_column_header) || (j === 0 && d.has_row_header) ? 'th' : 'td';
-        const cell = old?.cells[j];
-        return `${cell?.open?.startsWith(`<${tag}`) ? cell.open : `<${tag}>`}${renderRich(c, path)}</${tag}>`;
+        const tag = cellTag(i, j);
+        const cell = old?.cells?.[j];
+        return `${cellMatches(cell, tag) ? cell.open : `<${tag}>`}${renderRich(c, path)}</${tag}>`;
       }).join('')}</tr>`;
     });
     return `<table class="tbl">${d.has_column_header ? `<thead>${rows.shift() || ''}</thead>` : ''}<tbody>${rows.join('')}</tbody></table>`;
@@ -155,6 +159,7 @@ export function renderPage(blocks, template, title = template.title) {
   let result = template.before + renderLayout(template.tree, live(blocks), template, template.path) + template.after;
   if (title !== template.title) {
     result = result.replace(/(<h1\b[^>]*>)[\s\S]*?(<\/h1>)/, (_, open, close) => open + escape(title) + close)
+      .replace(/<nav\b[^>]* class="crumbs"[^>]*>[\s\S]*?<\/nav>/, crumbs => crumbs.replace(/(<li\b[^>]* aria-current="page"[^>]*>(?:<a\b[^>]*>)?)[^<]*/, (_, open) => open + escape(title)))
       .replaceAll(escape(template.title) + ' · Alive5 Docs', () => escape(title) + ' · Alive5 Docs');
   }
   return result;
