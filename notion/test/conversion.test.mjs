@@ -1,8 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { dirname, join } from 'node:path';
 import { renderPage, renderBlocks } from '../render.mjs';
-import { plain, rich, parseHTML, walk, attr } from '../html.mjs';
+import { plain, rich, parseHTML, walk, attr, text } from '../html.mjs';
 import { ROOT, remapBlocks, navigation } from '../site.mjs';
 import { offlineSite } from '../offline.mjs';
 import { buildTree } from '../build.mjs';
@@ -17,10 +19,11 @@ const article = path => {
   return { blocks: remapBlocks(structuredClone(a.blocks), old.bindings), template: fixture.templates[path] };
 };
 
-test('all 21 API-shaped article trees reproduce original HTML and nav', async () => {
+test('offline build reproduces all 21 guides, the API reference, nav, and sitemap bytes', async () => {
   const result = await buildTree(fixture.tree, fixture.map, fixture.templates);
-  assert.equal(result.output.size, 22);
-  for (const [path, html] of result.output) assert.equal(html, await readFile(`${ROOT}/${path}`, 'utf8'), path);
+  const paths = [...Object.keys(fixture.map.pages), 'api/reference.html', 'assets/site.js', 'sitemap.xml'];
+  assert.equal(result.output.size, paths.length);
+  for (const path of paths) assert.deepEqual(Buffer.from(result.output.get(path)), await readFile(`${ROOT}/${path}`), path);
   assert.deepEqual(result.removed, []);
 });
 
@@ -70,6 +73,20 @@ test('renaming a guide updates its breadcrumb and map, and keeps the second buil
   assert.deepEqual(second, first);
 });
 
+test('renaming a guide preserves its custom label in the map, sidebar, and pagers', async () => {
+  const tree = structuredClone(fixture.tree);
+  const path = 'api/sms-limits.html';
+  const title = 'Messaging quotas and compliance';
+  tree.flatMap(s => s.articles).find(a => a.id === fixture.map.pages[path].id).title = title;
+  const result = await buildTree(tree, fixture.map, fixture.templates);
+  assert.equal(result.map.pages[path].title, title);
+  assert.equal(result.map.pages[path].label, 'SMS limits');
+  const sidebar = navigation(result.output.get('assets/site.js')).sidebar;
+  assert.equal(sidebar.flatMap(s => s.items).find(([, href]) => href === path)[2], 'SMS limits');
+  assert.match(result.output.get('api/send-a-message.html'), /<strong>SMS limits →<\/strong>/);
+  assert.match(result.output.get('api/receive-messages.html'), /<strong>← SMS limits<\/strong>/);
+});
+
 test('edited table cells and nested list items replace their original content', () => {
   const { blocks, template } = article('connectors/directus.html');
   const table = blocks.find(b => b.type === 'table');
@@ -95,13 +112,27 @@ test('column headers can be enabled and disabled for cached rows', () => {
   assert.match(renderPage(disabled.blocks, disabled.template), new RegExp(`<tbody><tr><td>First</td><td>Second</td></tr>${body}</tbody>`));
 });
 
-test('row header changes check both cached tables and cached rows', () => {
+test('row header changes check both cached tables and cached rows in legacy templates', () => {
   const { blocks, template } = tableFixture('', '<tr><td>One</td><td class="keep">Two</td></tr><tr><th>Three</th><td>Four</td></tr>');
   const table = blocks[0].table;
+  delete template.leaves[blocks[0].id].headerFlags;
   assert.ok(!table.has_row_header);
-  assert.match(renderPage(blocks, template), /<tbody><tr><td>One<\/td><td class="keep">Two<\/td><\/tr><tr><td>Three<\/td><td>Four<\/td><\/tr><\/tbody>/);
+  assert.match(renderPage(blocks, template), /<tbody><tr><td>One<\/td><td class="keep">Two<\/td><\/tr><tr><th>Three<\/th><td>Four<\/td><\/tr><\/tbody>/);
   table.has_row_header = true;
   assert.match(renderPage(blocks, template), /<tbody><tr><th>One<\/th><td class="keep">Two<\/td><\/tr><tr><th>Three<\/th><td>Four<\/td><\/tr><\/tbody>/);
+});
+
+test('mixed headers round-trip exactly and only an edited row is normalized', () => {
+  const head = '<tr><th scope="col">One</th><td>Two</td></tr>';
+  const unedited = '<tr class="keep"><th scope="row">Three&nbsp;</th><td>Four</td></tr>';
+  const edited = '<tr><th>Five</th><td>Six</td></tr>';
+  const source = `<main><h1>Title</h1><table class="mixed">\n<thead>${head}</thead>\n<tbody>${unedited}${edited}</tbody></table></main>`;
+  const { blocks, template } = convert(source, 'index.html');
+  assert.equal(renderPage(blocks, template), source);
+
+  blocks[0].table.children[2].table_row.cells[1] = rich('Updated');
+  const html = renderPage(blocks, template);
+  assert.ok(html.includes(`<thead>${head}</thead><tbody>${unedited}<tr><td>Five</td><td>Updated</td></tr></tbody>`));
 });
 
 test('reordering cached rows rebuilds cells that enter or leave the header', () => {
@@ -129,6 +160,10 @@ test('new pages, duplicate title slugs, deleted pages, and section order drive t
   assert.ok(result.removed.includes('api/authentication.html'));
   assert.equal(result.map.pages['new-guide.html'].id, 'new-1');
   assert.equal(result.map.pages['new-guide-2.html'].id, 'new-2');
+  const sitemap = result.output.get('sitemap.xml');
+  assert.match(sitemap, /\/new-guide\.html<\/loc>/);
+  assert.match(sitemap, /\/new-guide-2\.html<\/loc>/);
+  assert.doesNotMatch(sitemap, /\/(?:api\/authentication|404)\.html<\/loc>/);
   const html = result.output.get('new-guide.html');
   assert.ok(html.indexOf('<h1>New guide</h1>') < html.indexOf('Editable new article'));
   assert.match(html, /src="assets\/site.js"/);
@@ -138,6 +173,46 @@ test('new pages, duplicate title slugs, deleted pages, and section order drive t
   assert.ok(nav.sidebar.flatMap(g => g.items).some(i => i[1] === 'api/reference.html'));
   const next = await buildTree(tree, result.map, fixture.templates);
   assert.deepEqual([...next.output.keys()], [...result.output.keys()]);
+  assert.equal(next.output.get('sitemap.xml'), sitemap);
+});
+
+test('deleting the guide before the API reference changes only the reference pager', async () => {
+  const path = 'api/reference.html';
+  const original = await readFile(`${ROOT}/${path}`, 'utf8');
+  const map = { ...fixture.map, order: Object.keys(fixture.map.pages) };
+  const unchanged = await buildTree(fixture.tree, map, fixture.templates);
+  assert.equal(unchanged.output.get(path), original);
+
+  const tree = structuredClone(fixture.tree);
+  const reporting = fixture.map.pages['api/reporting.html'].id;
+  const section = tree.find(s => s.articles.some(a => a.id === reporting));
+  section.articles = section.articles.filter(a => a.id !== reporting);
+  const result = await buildTree(tree, map, fixture.templates);
+  assert.deepEqual(result.removed, ['api/reporting.html']);
+  const pager = '<div class="pager"><a href="../api/contacts.html"><span>Previous</span><strong>← Contacts</strong></a>' +
+    '<a class="next" href="../connectors/index.html"><span>Next</span><strong>Overview →</strong></a></div>';
+  assert.equal(result.output.get(path), original.replace(/<div class="pager">[\s\S]*?<\/div>/, pager));
+});
+
+test('new guides have a section breadcrumb and link to both neighbors', async () => {
+  const tree = structuredClone(fixture.tree);
+  const section = tree.find(s => s.title === 'Connectors');
+  const title = 'A & B guide';
+  section.articles.splice(2, 0, { id: 'new-guide', title, blocks: [{ id: 'intro', type: 'paragraph', paragraph: { rich_text: rich('Introduction') } }] });
+  const result = await buildTree(tree, fixture.map, fixture.templates);
+  const nodes = walk(parseHTML(result.output.get('a-b-guide.html')));
+  const crumbs = nodes.find(n => n.tagName === 'nav' && attr(n, 'class') === 'crumbs');
+  assert.equal(attr(crumbs, 'aria-label'), 'Breadcrumb');
+  assert.deepEqual(walk(crumbs).filter(n => n.tagName === 'a').map(n => [attr(n, 'href'), text(n)]), [
+    ['index.html', 'Home'], ['connectors/index.html', 'Connectors'],
+  ]);
+  assert.equal(text(walk(crumbs).find(n => attr(n, 'aria-current') === 'page')), title);
+  const pager = nodes.find(n => n.tagName === 'div' && attr(n, 'class') === 'pager');
+  assert.deepEqual(walk(pager).filter(n => n.tagName === 'a').map(n => [attr(n, 'href'), text(walk(n).find(c => c.tagName === 'strong'))]), [
+    ['connectors/zapier.html', '← Zapier'], ['connectors/n8n.html', 'n8n →'],
+  ]);
+  assert.match(result.output.get('connectors/zapier.html'), /href="\.\.\/a-b-guide\.html"/);
+  assert.match(result.output.get('connectors/n8n.html'), /href="\.\.\/a-b-guide\.html"/);
 });
 
 test('rich text escapes markup and rejects active URL schemes', () => {
@@ -211,13 +286,20 @@ test('scripted uploaded SVGs are skipped with a warning and never published', as
   assert.doesNotMatch(result.output.get('api/index.html'), /amazonaws\.com\/image\.svg/);
 });
 
-test('second builds are stable after additions, deletions, renames, and reorder', async () => {
+test('second builds are stable after additions, deletions, renames, and reorder', async t => {
   const tree = structuredClone(fixture.tree);
   tree[1].articles.splice(1, 1);
   tree[1].title = 'Updated API';
   tree.push({ id: 'new-section', title: 'More guides', articles: [{ id: 'new-page', title: 'A new page', blocks: [{ id: 'intro', type: 'paragraph', paragraph: { rich_text: rich('Introduction') } }] }] });
   const first = await buildTree(tree, fixture.map, fixture.templates);
-  const second = await buildTree(tree, first.map, fixture.templates);
+  const root = await mkdtemp(join(tmpdir(), 'notion-build-test-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  for (const path of ['assets/site.js', 'api/reference.html', 'sitemap.xml']) {
+    const file = join(root, path);
+    await mkdir(dirname(file), { recursive: true });
+    await writeFile(file, first.output.get(path));
+  }
+  const second = await buildTree(tree, first.map, fixture.templates, root);
   assert.deepEqual([...second.output], [...first.output]);
   assert.deepEqual(second.map, first.map);
 });
@@ -234,12 +316,13 @@ test('edited linked cards update the link without nesting anchors', () => {
 test('Notion navigation titles cannot inject HTML', async () => {
   const tree = structuredClone(fixture.tree);
   tree[1].title = '<img src=x onerror=alert(1)>';
-  tree[1].articles[0].title = '<svg onload=alert(1)>';
+  const path = 'api/authentication.html';
+  tree[1].articles.find(a => a.id === fixture.map.pages[path].id).title = '<svg onload=alert(1)>';
   const result = await buildTree(tree, fixture.map, fixture.templates);
   const nav = navigation(result.output.get('assets/site.js'));
   assert.match(nav.sidebar[0].label, /^&lt;img/);
-  assert.match(nav.sidebar[0].items[0][2], /^&lt;svg/);
-  assert.doesNotMatch(result.output.get('api/index.html'), /<svg onload/);
+  assert.match(nav.sidebar[0].items.find(([, href]) => href === path)[2], /^&lt;svg/);
+  assert.doesNotMatch(result.output.get(path), /<svg onload/);
 });
 
 test('local seed illustrations upload through the SDK and retain their original template on readback', async () => {

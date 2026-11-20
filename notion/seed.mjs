@@ -13,7 +13,7 @@ const source = await inventory();
 const media = { root: ROOT, known: await knownImages(ROOT) };
 const templatesFile = resolve(ROOT, 'notion/templates.json');
 let templates = map.rootId === rootId ? await readJSON(templatesFile).catch(e => { if (e.code === 'ENOENT') return {}; throw e; }) : {};
-if (map.rootId !== rootId) map = { version: 1, rootId, navigation: { menu: source.menu, sidebar: source.sidebar }, sections: {}, pages: {} };
+if (map.rootId !== rootId) map = { rootId, navigation: { menu: source.menu }, sections: {}, pages: {} };
 const save = () => writeJSON(file, map);
 const saveTemplates = () => writeJSON(templatesFile, templates);
 const postman = (await readFile(resolve(ROOT, 'api/reference.html'), 'utf8')).match(/href="(https:\/\/documenter\.getpostman\.com\/[^"]+)"/)?.[1];
@@ -36,7 +36,7 @@ for (const section of source.sections) {
       continue;
     }
     const pageId = await ensurePage(client, id, article.title, old?.id);
-    const record = map.pages[article.path] ||= { id: pageId, sectionId: id, title: article.title, label: article.label, page: article.template.page, section: article.template.section, bindings: {}, seeded: false };
+    const record = map.pages[article.path] ||= { id: pageId, title: article.title, label: article.label, page: article.template.page, section: article.template.section, bindings: {}, seeded: false };
     templates[article.path] ||= article.template;
     await writeJSON(templatesFile, templates);
     await save();

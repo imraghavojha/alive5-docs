@@ -3,7 +3,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 import { convert } from './convert.mjs';
-import { slug, escape, fragment, text } from './html.mjs';
+import { BASE, slug, escape, fragment, text } from './html.mjs';
 
 export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const readJSON = async path => JSON.parse(await readFile(path, 'utf8'));
@@ -22,16 +22,16 @@ export async function inventory(root = ROOT) {
   const sections = [];
   for (const group of groups) {
     const articles = [];
-    for (const [id, path, label] of group.items) {
+    for (const [, path, label] of group.items) {
       if (path === 'api/reference.html') continue;
       const html = await readFile(resolve(root, path), 'utf8').catch(e => { if (path === 'index.html' && e.code === 'ENOENT') return null; throw e; });
       if (html === null) continue;
       const article = convert(html, path);
-      articles.push({ path, label, id, title: article.template.title, ...article });
+      articles.push({ path, label, title: article.template.title, ...article });
     }
     sections.push({ title: text(fragment(group.label)), hidden: !!group.hidden, articles });
   }
-  return { ...nav, sections };
+  return { menu: nav.menu, sections };
 }
 export function remapBlocks(blocks, bindings = {}) {
   const reverse = Object.fromEntries(Object.entries(bindings).map(([local, remote]) => [remote, local]));
@@ -47,23 +47,31 @@ export function allocatePath(title, used) {
 }
 export function newTemplate(base, path, title, section) {
   const prefix = '../'.repeat(path.split('/').length - 1);
-  let shell = base.before + `<h1>${escape(title)}</h1>` + base.after;
-  shell = shell.replace(/(?:\.\.\/)*assets\//g, prefix + 'assets/')
+  const withAssets = html => html.replace(/(?:\.\.\/)*assets\//g, prefix + 'assets/');
+  const before = withAssets(base.before)
     .replace(/data-root="[^"]*"/, `data-root="${prefix}"`)
     .replace(/data-page="[^"]*"/, `data-page="${slug(path)}"`)
-    .replace(/data-section="[^"]*"/, `data-section="${escape(section)}"`)
+    .replace(/data-section="[^"]*"/, `data-section="${escape(section.slug)}"`)
     .replace(/<title>[\s\S]*?<\/title>/, () => `<title>${escape(title)} · Alive5 Docs</title>`)
     .replace(/(<meta\s+(?:property|name)="(?:og:title|twitter:title)"\s+content=")[^"]*/g, (_, opening) => opening + escape(title) + ' · Alive5 Docs')
     .replace(/(<meta\s+(?:property|name)="(?:description|og:description|twitter:description)"\s+content=")[^"]*/g, (_, opening) => opening + escape(title))
-    .replace(/(<link rel="canonical" href=")[^"]*/g, (_, opening) => opening + 'https://imraghavojha.github.io/alive5-docs/' + path)
-    .replace(/(<meta property="og:url" content=")[^"]*/g, (_, opening) => opening + 'https://imraghavojha.github.io/alive5-docs/' + path);
-  return { ...convert(shell, path).template, fresh: true };
+    .replace(/(<link rel="canonical" href=")[^"]*/g, (_, opening) => opening + BASE + path)
+    .replace(/(<meta property="og:url" content=")[^"]*/g, (_, opening) => opening + BASE + path);
+  const sectionLabel = escape(section.title);
+  const sectionCrumb = section.path === path ? sectionLabel : `<a href="${prefix + section.path}">${sectionLabel}</a>`;
+  const breadcrumbs = `<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="${prefix}index.html">Home</a></li><li>${sectionCrumb}</li><li aria-current="page">${escape(title)}</li></ol></nav>`;
+  return {
+    before: `${before}\n        ${breadcrumbs}\n        <h1>${escape(title)}</h1>\n        `,
+    after: `\n        <div class="pager"></div>\n      ${withAssets(base.after)}`,
+    leaves: {},
+    fresh: true,
+  };
 }
 export function updateNavigation(js, sections, map) {
   const original = map.navigation;
   const sidebar = sections.filter(s => !map.sections[s.id]?.hidden || s.articles.some(a => a.path !== 'index.html')).map(s => ({ label: escape(s.title), items: s.articles.map(a => {
-    const old = map.pages[a.path];
-    return [old.page, a.path, escape(a.title === old.title ? old.label : a.title)];
+    const page = map.pages[a.path];
+    return [page.page, a.path, escape(page.label)];
   }) }));
   let reference = sidebar.find(g => g.label === 'Reference');
   if (!reference) { reference = { label: 'Reference', items: [] }; sidebar.splice(Math.min(2, sidebar.length), 0, reference); }
@@ -88,5 +96,4 @@ export function updateNavigation(js, sections, map) {
 }
 export function validatePath(path) {
   if (!/^(?:[a-z0-9-]+\/)*[a-z0-9-]+\.html$/.test(path) || ['404.html', 'api/reference.html'].includes(path)) throw new Error(`Invalid managed page path: ${path}`);
-  return path;
 }

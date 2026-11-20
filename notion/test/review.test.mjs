@@ -84,7 +84,7 @@ test('review 4: unsupported blocks warn with the page and preserve safe fallback
   assert.match(html, /href="https:\/\/example.com\/a\?x=1&amp;y=2">&lt;PDF&gt;<\/a>/);
   assert.match(html, /&lt;embed&gt;/);
   assert.match(html, /&lt;text&gt;/);
-  assert.equal(result.output.size, 22);
+  assert.equal([...result.output.keys()].filter(path => path.endsWith('.html')).length, 22);
   assert.equal(warnings.length, 4);
   assert.ok(warnings.every(w => w.includes('api/index.html')));
 });
@@ -218,8 +218,9 @@ test('re-check 3: empty new pages are skipped repeatedly, then publish once fill
   for (const [i, blocks] of drafts.entries()) tree[1].articles.push({ id: `draft-${i}`, title: `Draft ${i}`, blocks });
   const first = await build(tree);
   assert.deepEqual(first.map, fixture.map);
-  assert.equal(first.output.size, 22);
+  assert.equal([...first.output.keys()].filter(path => path.endsWith('.html')).length, 22);
   assert.doesNotMatch(first.output.get('assets/site.js'), /Draft [0-3]/);
+  assert.doesNotMatch(first.output.get('sitemap.xml'), /\/draft-[0-3]\.html<\/loc>/);
   const second = await build(tree, first.map);
   assert.deepEqual(second.map, fixture.map);
   assert.deepEqual([...second.output], [...first.output]);
@@ -228,6 +229,7 @@ test('re-check 3: empty new pages are skipped repeatedly, then publish once fill
   const filled = await build(tree, second.map);
   assert.equal(filled.map.pages['draft-0.html'].id, 'draft-0');
   assert.match(filled.output.get('assets/site.js'), /Draft 0/);
+  assert.match(filled.output.get('sitemap.xml'), /\/draft-0\.html<\/loc>/);
   assert.match(filled.output.get('draft-0.html'), /Ready to publish/);
 });
 

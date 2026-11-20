@@ -3,7 +3,7 @@ import { inventory } from './site.mjs';
 
 export async function offlineSite(root) {
   const source = await inventory(root);
-  const map = { version: 1, rootId: randomUUID(), navigation: { menu: source.menu, sidebar: source.sidebar }, sections: {}, pages: {} };
+  const map = { rootId: randomUUID(), navigation: { menu: source.menu }, sections: {}, pages: {} };
   const templates = {}, tree = [];
   for (const section of source.sections) {
     const id = randomUUID();
@@ -24,7 +24,7 @@ export async function offlineSite(root) {
       };
       entry.articles.push({ id: pageId, title: a.title, blocks: a.blocks.map(api) });
       templates[a.path] = a.template;
-      map.pages[a.path] = { id: pageId, sectionId: id, title: a.title, label: a.label, page: a.template.page, section: a.template.section, bindings, seeded: true };
+      map.pages[a.path] = { id: pageId, title: a.title, label: a.label, page: a.template.page, section: a.template.section, bindings, seeded: true };
     }
   }
   return { tree, map, templates };

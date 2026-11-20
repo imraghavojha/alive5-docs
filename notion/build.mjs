@@ -5,8 +5,26 @@ import { execFileSync } from 'node:child_process';
 import { credentials, readTree } from './api.mjs';
 import { ROOT, readJSON, writeJSON, remapBlocks, allocatePath, newTemplate, updateNavigation, validatePath } from './site.mjs';
 import { renderPage, renderBlocks, hasContent } from './render.mjs';
-import { slug, escape, resolvePageLinks } from './html.mjs';
+import { BASE, slug, escape, resolvePageLinks } from './html.mjs';
 import { localizeImages, knownImages } from './media.mjs';
+
+async function renderSitemap(pages, root) {
+  const paths = new Set(['index.html', 'api/reference.html', ...Object.keys(pages)]);
+  const previous = await readFile(resolve(root, 'sitemap.xml'), 'utf8').catch(error => {
+    if (error.code === 'ENOENT') return '';
+    throw error;
+  });
+  // Preserve the published order for URLs that still exist.
+  const ordered = [];
+  for (const [, url] of previous.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+    if (!url.startsWith(BASE)) continue;
+    const path = url.slice(BASE.length) || 'index.html';
+    if (paths.delete(path)) ordered.push(path);
+  }
+  ordered.push(...[...paths].sort());
+  const entries = ordered.map(path => `  <url><loc>${BASE}${path === 'index.html' ? '' : path}</loc></url>`);
+  return ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', ...entries, '</urlset>', ''].join('\n');
+}
 
 export async function buildTree(tree, originalMap, templates, root = ROOT) {
   const map = structuredClone(originalMap);
@@ -20,6 +38,7 @@ export async function buildTree(tree, originalMap, templates, root = ROOT) {
   const fallback = Object.values(templates).find(t => t.before.includes('class="doc"'));
   if (!fallback) throw new Error('No article template exists. Run seed first.');
   const output = new Map(), seen = new Set(), sections = structuredClone(tree);
+  let renamed = false;
   for (const section of sections) {
     const published = [];
     for (const article of section.articles) {
@@ -37,18 +56,26 @@ export async function buildTree(tree, originalMap, templates, root = ROOT) {
       article.path = path;
       let record = map.pages[path] ||= tombstones[article.id]?.record;
       delete tombstones[article.id];
-      if (!record) record = map.pages[path] = { id: article.id, title: article.title, label: article.title, page: slug(path), section: slug(section.title), sectionId: section.id, bindings: {}, seeded: true };
+      if (!record) record = map.pages[path] = { id: article.id, title: article.title, label: article.title, page: slug(path), section: slug(section.title), bindings: {}, seeded: true };
+      if (record.title !== article.title) {
+        if (record.label === record.title) record.label = article.title;
+        record.title = article.title;
+        renamed = true;
+      }
       published.push(article);
     }
     section.articles = published;
   }
   const paths = new Map(sections.flatMap(s => s.articles.map(a => [a.id.replaceAll('-', '').toLowerCase(), a.path])));
   for (const section of sections) {
+    const sectionGuide = section.articles.find(a => templates[a.path]?.before.includes('class="doc"'));
     for (const article of section.articles) {
       const path = article.path, record = map.pages[path];
-      const template = templates[path] || newTemplate(fallback, path, article.title, record.section);
+      const template = templates[path] || newTemplate(templates[sectionGuide?.path] || fallback, path, article.title, {
+        slug: record.section, title: section.title, path: sectionGuide?.path || section.articles[0].path,
+      });
       const blocks = remapBlocks(resolvePageLinks(article.blocks, paths), record.bindings);
-      const body = !template.fresh ? renderPage(blocks, template, article.title) : template.before + `<h1>${escape(article.title)}</h1>` + renderBlocks(blocks, template, path) + template.after;
+      const body = template.fresh ? template.before + renderBlocks(blocks, template, path) + template.after : renderPage(blocks, template, article.title);
       output.set(path, body);
     }
   }
@@ -59,27 +86,25 @@ export async function buildTree(tree, originalMap, templates, root = ROOT) {
   }
   const js = await readFile(resolve(root, 'assets/site.js'), 'utf8');
   output.set('assets/site.js', updateNavigation(js, sections, map));
+  const referencePath = 'api/reference.html';
+  output.set(referencePath, await readFile(resolve(root, referencePath), 'utf8'));
   const originalOrder = originalMap.order || Object.keys(originalMap.pages);
   const order = sections.flatMap(s => s.articles.map(a => a.path));
-  const titles = new Map(sections.flatMap(s => s.articles.map(a => [a.path, a.title])));
-  const renamed = [...titles].some(([path, title]) => title !== map.pages[path].title);
-  if (map.order || renamed || JSON.stringify(order) !== JSON.stringify(originalOrder)) {
+  const reordered = JSON.stringify(order) !== JSON.stringify(originalOrder);
+  if (map.order || renamed || reordered) {
     const sequence = [...order];
     const referenceAt = Math.min(sequence.findIndex(p => p.startsWith('connectors/')), sequence.length);
-    sequence.splice(referenceAt < 0 ? sequence.length : referenceAt, 0, 'api/reference.html');
+    sequence.splice(referenceAt < 0 ? sequence.length : referenceAt, 0, referencePath);
     for (const [path, html] of output) {
-      if (!path.endsWith('.html')) continue;
+      if (!path.endsWith('.html') || (path === referencePath && !reordered)) continue;
       const i = sequence.indexOf(path), prefix = '../'.repeat(path.split('/').length - 1);
-      const link = (p, next) => p ? `<a${next ? ' class="next"' : ''} href="${prefix + p}"><span>${next ? 'Next' : 'Previous'}</span><strong>${next ? '' : '← '}${escape(titles.get(p) !== map.pages[p]?.title ? titles.get(p) || 'API reference' : map.pages[p]?.label || 'API reference')}${next ? ' →' : ''}</strong></a>` : '';
+      const link = (p, next) => p ? `<a${next ? ' class="next"' : ''} href="${prefix + p}"><span>${next ? 'Next' : 'Previous'}</span><strong>${next ? '' : '← '}${escape(map.pages[p]?.label ?? 'API reference')}${next ? ' →' : ''}</strong></a>` : '';
       output.set(path, html.replace(/<div class="pager">[\s\S]*?<\/div>/, () => `<div class="pager">${link(sequence[i - 1], false)}${link(sequence[i + 1], true)}</div>`));
     }
   }
-  if (renamed || JSON.stringify(order) !== JSON.stringify(originalOrder)) map.order = order;
-  for (const [path, title] of titles) {
-    const record = map.pages[path];
-    if (record.title !== title) record.title = record.label = title;
-  }
+  if (renamed || reordered) map.order = order;
   for (const section of sections) map.sections[section.id] ||= { title: section.title, hidden: false, added: true };
+  output.set('sitemap.xml', await renderSitemap(map.pages, root));
   return { output, removed, map };
 }
 export async function build({ root = ROOT, check = false } = {}) {

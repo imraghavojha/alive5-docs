@@ -47,18 +47,19 @@ export function convert(html, path) {
         parts.push(add(pre, 'code', { rich_text: rich(text(pre)), caption: rich(caption), language }, target));
       }
       if (!pres.length) throw new Error(`Code container without pre: ${path}`);
-      return { ...shell(n), parts, code: true, original: slice(n), keys: parts.map(p => p.key), head: head ? slice(head) : '' };
+      return { ...shell(n), parts, code: true, original: slice(n), keys: parts.map(p => p.key) };
     }
     if (n.tagName === 'table') {
       const rows = walk(n).filter(c => c.tagName === 'tr');
       const rowBlocks = [];
       const rowTemplates = rows.map(row => {
         const cells = children(row).filter(c => ['td', 'th'].includes(c.tagName));
-        return add(row, 'table_row', { cells: cells.map(c => richText(c, path)) }, rowBlocks, { cells: cells.map(c => ({ ...shell(c), inner: inner(c) })) });
+        return add(row, 'table_row', { cells: cells.map(c => richText(c, path)) }, rowBlocks, { cells: cells.map(c => ({ open: shell(c).open })) });
       });
       const width = rowBlocks[0].table_row.cells.length;
       if (rowBlocks.some(r => r.table_row.cells.length !== width)) throw new Error(`Nonrectangular table: ${path}`);
-      return add(n, 'table', { table_width: width, has_column_header: rows[0] && children(rows[0]).some(c => c.tagName === 'th'), has_row_header: false, children: rowBlocks }, target, { rows: rowTemplates, header: slice(n).includes('<thead>') });
+      const headerFlags = { has_column_header: children(rows[0]).some(c => c.tagName === 'th'), has_row_header: false };
+      return add(n, 'table', { table_width: width, ...headerFlags, children: rowBlocks }, target, { rows: rowTemplates, headerFlags });
     }
     if (home && n.tagName === 'li' && hasClass(n, 'coming-soon')) return add(n, 'bulleted_list_item', { rich_text: rich(children(n).filter(c => c.tagName).map(c => text(c).trim()).join(' — ')) }, target);
     if (card(n) || quickstart(n)) return { ...shell(n), parts: children(n).map(c => layout(c, target)) };

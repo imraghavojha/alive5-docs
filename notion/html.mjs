@@ -10,11 +10,11 @@ export const text = node => node.nodeName === '#text' ? node.value : children(no
 export const plain = rich => (rich || []).map(r => r.text?.content ?? r.plain_text ?? '').join('');
 export const escape = value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 export const slug = value => value.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'page';
-export const digest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
+const digest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 export const parseHTML = html => parse(html, { sourceCodeLocationInfo: true });
 export const fragment = html => parseFragment(html, { sourceCodeLocationInfo: true });
 export const rich = value => String(value).match(/[\s\S]{1,2000}/g)?.map(content => ({ type: 'text', text: { content } })) || [];
-export function safeURL(value, path = 'index.html') {
+function safeURL(value, path = 'index.html') {
   if (typeof value !== 'string' || !value.trim()) return null;
   try {
     const url = new URL(value, new URL(path, BASE));
@@ -54,7 +54,7 @@ export function richText(node, path, inherited) {
   const result = children(node).flatMap(n => richText(n, path, { ...(Object.keys(annotations).length ? { annotations } : {}), ...(link ? { link } : {}) }));
   return result.map(({ link: url, ...r }) => url ? { ...r, text: { ...r.text, link: { url } } } : r);
 }
-export function normalizeRich(values = []) {
+function normalizeRich(values = []) {
   const result = [];
   for (const r of values) {
     const a = Object.fromEntries(Object.entries(r.annotations || {}).filter(([k, v]) => v && !(k === 'color' && v === 'default')).sort());

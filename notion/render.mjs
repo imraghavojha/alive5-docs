@@ -18,7 +18,7 @@ export function renderBlocks(blocks, template = { leaves: {} }, path = template.
     } else if (b.type === 'code') {
       const group = [b];
       while (plain(group.at(-1).code.caption) && blocks[i + 1]?.type === 'code' && plain(blocks[i + 1].code.caption)) group.push(blocks[++i]);
-      out += codeGroup(group, template, path);
+      out += codeGroup(group, template);
     } else out += render(b);
   }
   return out;
@@ -27,7 +27,7 @@ export function hasContent(blocks, template, path) {
   const doc = fragment(renderBlocks(blocks, { ...template, quiet: true }, path));
   return !!text(doc).trim() || walk(doc).some(n => ['pre', 'img', 'table'].includes(n.tagName));
 }
-function codeGroup(blocks, template, path, node) {
+function codeGroup(blocks, template, node) {
   const head = blocks.length > 1 ? blocks.map((b, i) => `<button class="tab" aria-selected="${i === 0}" type="button">${escape(plain(b.code.caption) || b.code.language)}</button>`).join('') : `<span class="name">${escape(plain(blocks[0].code.caption) || blocks[0].code.language)}</span>`;
   return `${node?.open || '<div class="code">'}<div class="code-head">${head}<button class="copy" type="button">Copy</button></div>${blocks.map((b, i) => `<pre${i ? ' hidden' : ''}>${template.leaves[b.id]?.signature === signature(b) ? template.leaves[b.id].inner : escape(plain(b.code.rich_text))}</pre>`).join('')}${node?.close || '</div>'}`;
 }
@@ -51,15 +51,24 @@ function renderBlock(b, template, path) {
     if (/^⟦.*⟧$/.test(plain(d.rich_text))) throw new Error(`Unknown widget marker: ${plain(d.rich_text)}`);
   }
   if (b.type === 'table') {
+    const rowUnchanged = (row, old) => row.type === 'table_row' && old?.type === 'table_row' && old.signature === signature(row);
+    if (unchanged && sub.length === leaf.rows.length && sub.every((r, i) => r.id === leaf.rows[i].key && rowUnchanged(r, leaf.rows[i]))) return leaf.html;
+
     const cellTag = (i, j) => (i === 0 && d.has_column_header) || (j === 0 && d.has_row_header) ? 'th' : 'td';
     const cellMatches = (cell, tag) => cell?.open?.match(/^<(th|td)(?=[\s/>])/i)?.[1].toLowerCase() === tag;
-    const rowMatches = (row, old, i) => old?.cells?.length === row.table_row?.cells?.length && old?.signature === signature(row)
-      && old.cells.every((cell, j) => cellMatches(cell, cellTag(i, j)));
-    if (unchanged && sub.length === leaf.rows.length && sub.every((r, i) => r.id === leaf.rows[i].key && rowMatches(r, leaf.rows[i], i))) return leaf.html;
+    const originalRows = same ? leaf.rows : [];
+    const originalFirst = originalRows[0];
+    const originalIds = new Set(originalRows.map(r => r.key));
+    // Templates already on disk predate headerFlags and were seeded with row headers off.
+    const originalColumnHeader = leaf?.headerFlags?.has_column_header ?? (originalFirst?.cells.some(c => cellMatches(c, 'th')) || false);
+    const originalRowHeader = leaf?.headerFlags?.has_row_header ?? false;
+    const flagsChanged = Boolean(d.has_column_header) !== originalColumnHeader || Boolean(d.has_row_header) !== originalRowHeader;
     const rows = sub.map((r, i) => {
       if (r.type !== 'table_row' || r.table_row.cells.length !== d.table_width) throw new Error('Invalid table row');
       const old = template.leaves[r.id];
-      if (rowMatches(r, old, i)) return old.html;
+      const movedAcrossHeader = d.has_column_header && ((i === 0) !== (r.id === originalFirst?.key));
+      const keepSourceTags = originalIds.has(r.id) && !flagsChanged && !movedAcrossHeader;
+      if (rowUnchanged(r, old) && (keepSourceTags || old.cells.every((cell, j) => cellMatches(cell, cellTag(i, j))))) return old.html;
       return `<tr>${r.table_row.cells.map((c, j) => {
         const tag = cellTag(i, j);
         const cell = old?.cells?.[j];
@@ -91,11 +100,11 @@ function renderBlock(b, template, path) {
   const attrs = /^heading_/.test(b.type) ? ` id="${slug(plain(d.rich_text))}-${b.id.replaceAll('-', '').slice(0, 8)}"` : b.type === 'callout' ? ' class="note"' : '';
   return `${same ? leaf.open : `<${tag}${attrs}>`}${b.type === 'to_do' ? `<input type="checkbox" disabled${d.checked ? ' checked' : ''}> ` : ''}${body}${nested}${same ? leaf.close : `</${tag}>`}`;
 }
-export function renderLayout(node, blocks, template, path) {
+function renderLayout(node, blocks, template, path) {
   if (node.key) return blocks.map(b => renderBlock(b, template, path)).join('');
   if (node.code) {
     if (blocks.every(b => b.type === 'code') && blocks.length === node.keys.length && blocks.every((b, i) => b.id === node.keys[i] && signature(b) === template.leaves[b.id].signature)) return node.original;
-    if (blocks.every(b => b.type === 'code')) return codeGroup(blocks, template, path, node);
+    if (blocks.every(b => b.type === 'code')) return codeGroup(blocks, template, node);
     return renderBlocks(blocks, template, path);
   }
   const entries = [], owner = new Map();
