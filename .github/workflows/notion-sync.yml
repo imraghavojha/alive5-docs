@@ -15,6 +15,7 @@ concurrency:
 
 jobs:
   sync:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -28,13 +29,17 @@ jobs:
           cache-dependency-path: notion/package-lock.json
       - run: npm ci --prefix notion --omit=dev
       - name: Sync API reference from Postman
+        id: postman
         if: vars.POSTMAN_REFERENCE_SYNC == 'true'
         continue-on-error: true
         run: node scripts/sync-postman-reference.mjs
         env:
           POSTMAN_COLLECTION_URL: ${{ vars.POSTMAN_COLLECTION_URL }}
-          POSTMAN_COLLECTION_UID: ${{ vars.POSTMAN_COLLECTION_UID }}
-          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+      - name: Report Postman sync failure
+        if: steps.postman.outcome == 'failure'
+        run: |
+          echo '::warning::Postman reference sync failed. See the Postman sync step for details.'
+          echo 'Postman reference sync failed. See the Postman sync step for details.' >> "$GITHUB_STEP_SUMMARY"
       - name: Read Notion and build static pages
         run: npm run build --prefix notion
         env:
@@ -43,7 +48,7 @@ jobs:
       - name: Commit changed output
         shell: bash
         run: |
-          git add -A -- '*.html' assets/site.js assets/search-index.json notion/map.json
+          git add -A -- '*.html' assets/site.js assets/search-index.json notion/map.json sitemap.xml
           if [ -d assets/notion ]; then git add -A -- assets/notion; fi
           if git diff --cached --quiet; then
             exit 0
@@ -51,7 +56,15 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'Sync docs from Notion'
-          git push origin HEAD:main
+          if ! git push origin HEAD:main; then
+            git fetch origin main
+            if ! git rebase origin/main; then
+              echo '::error::Could not rebase the docs sync commit onto origin/main.'
+              git rebase --abort
+              exit 1
+            fi
+            git push origin HEAD:main
+          fi
       - name: Request a Pages build
         if: ${{ !cancelled() }}
         env:
