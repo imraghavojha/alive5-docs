@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>(()=>{let t;try{t=localStorage.getItem("a5-theme")}catch{}document.documentElement.dataset.theme=t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"})();</script>
+  <meta name="color-scheme" content="light dark">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Introducing Alive5 CLI</title>
+  <meta name="description" content="A command line for Alive5, built for agents.">
+  <link rel="canonical" href="https://imraghavojha.github.io/alive5-docs/introducing/">
+  <meta property="og:url" content="https://imraghavojha.github.io/alive5-docs/introducing/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Introducing Alive5 CLI">
+  <meta property="og:description" content="A command line for Alive5, built for agents.">
+  <meta property="og:image" content="https://imraghavojha.github.io/alive5-docs/introducing/media/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Introducing Alive5 CLI, with the pixel mascot standing beneath three orbit arcs.">
+  <meta name="twitter:image" content="https://imraghavojha.github.io/alive5-docs/introducing/media/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Introducing Alive5 CLI">
+  <meta name="twitter:description" content="A command line for Alive5, built for agents.">
+  <meta name="twitter:image:alt" content="Introducing Alive5 CLI, with the pixel mascot standing beneath three orbit arcs.">
+  <link rel="icon" type="image/png" sizes="16x16" href="media/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="media/favicon-32.png">
+  <link rel="icon" type="image/svg+xml" sizes="any" href="media/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="media/apple-touch-icon.png">
+  <meta name="theme-color" content="#151524">
+  <link rel="preload" href="../assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="introducing.css">
+  <script src="../assets/site.js" defer></script>
+  <script src="introducing.js" defer></script>
+</head>
+<body data-root="../">
+  <a class="skip" href="#main-content">Skip to content</a>
+  <svg class="symbols" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="terminal" viewBox="0 0 30 30"><path fill="currentColor" d="M1 5h4v4H1zM5 9h4v4H5zM9 13h4v4H9zM5 17h4v4H5zM1 21h4v4H1zM17 21h12v4H17z"/></symbol>
+      <filter id="reflection-ink" color-interpolation-filters="sRGB">
+        <feColorMatrix type="luminanceToAlpha"/>
+        <feComposite in2="SourceAlpha" operator="in"/>
+      </filter>
+      <symbol id="left" viewBox="0 0 30 30"><path fill="currentColor" fill-rule="evenodd" d="M17 5h4v4h-4v4h-4v4h4v4h4v4h-4v-4h-4v-4H9v-4h4V9h4Z"/></symbol>
+      <symbol id="copy" viewBox="0 0 30 30"><path fill="currentColor" fill-rule="evenodd" d="M1 9h20v20H1Zm4 4v12h12V13ZM5 1h20v4H5Zm20 4h4v20h-4Z"/></symbol>
+      <symbol id="check" viewBox="0 0 30 30"><path fill="currentColor" fill-rule="evenodd" d="M1 13h4v4h4v4h4v-4h4v-4h4V9h4V5h4v8h-4v4h-4v4h-4v4h-4v4H9v-4H5v-4H1Z"/></symbol>
+      <symbol id="bubble" viewBox="0 0 36 26"><path fill="currentColor" fill-rule="evenodd" d="M4 0h28v3h4v14h-4v3H15v3h-4v3H7v-6H4v-3H0V3h4ZM12 3h12v3h-9v3h9v9H12v-3h9v-3h-9Z"/></symbol>
+    </defs>
+  </svg>
+  <header data-header></header>
+  <main id="main-content" tabindex="-1">
+    <section class="hero" aria-labelledby="headline">
+      <div class="frame" aria-hidden="true"><div class="frame-edge"></div><div class="frame-edge"></div><div class="frame-edge"></div><div class="frame-edge"></div><div class="highlight"><div class="highlight-glow"></div></div><svg class="icon corner" aria-hidden="true"><use href="#terminal"/></svg></div>
+      <div class="stage">
+        <div class="lockup"><svg class="icon brand-mark" aria-hidden="true"><use href="#bubble"/></svg><span class="title">Introducing Alive5 CLI</span></div>
+        <h1 id="headline">Let your agents text your customers.</h1>
+        <div class="scene">
+          <div class="scene-box">
+            <div class="orbits" role="img" aria-label="Wait, Read and Reply orbiting Alive5"></div>
+          </div>
+        </div>
+        <div class="mascot" aria-hidden="true">
+          <div class="mascot-crop">
+            <img class="sprite-still" src="media/mascot-still.png" alt="" width="90" height="110">
+            <div class="mascot-motion">
+              <img class="sprite-ready" src="media/mascot-ready.png" alt="" width="90" height="660">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bar">
+        <div class="mascot reflection" aria-hidden="true">
+          <div class="mascot-crop">
+            <img class="sprite-still" src="media/mascot-still.png" alt="" width="90" height="110">
+            <div class="mascot-motion">
+              <img class="sprite-ready" src="media/mascot-ready.png" alt="" width="90" height="660">
+            </div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="back-group">
+            <a class="back utility" href="../index.html" aria-label="Back to docs"><svg class="icon leave" aria-hidden="true"><use href="#left"/></svg><span>Back to docs</span><svg class="icon enter" aria-hidden="true"><use href="#left"/></svg></a>
+          </div>
+          <div class="share-group">
+            <button class="share utility" type="button" aria-label="Share this post">Share this post<span><svg class="icon " aria-hidden="true"><use href="#copy"/></svg><svg class="icon " aria-hidden="true"><use href="#check"/></svg></span></button>
+            <small role="status">Copy url to clipboard</small>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="cli-showcase" id="cli" aria-label="Alive5 CLI showcase">
+      <div class="cli-prose">
+        <p>Agent-native, so your agents can handle your Alive5 inbox.</p>
+
+        <div class="cli-media cli-media--home demo-frame">
+          <div class="cli-window" style="--window-ratio: 1796 / 1192; --window-ratio-mobile: 814 / 1142">
+            <video id="cli-home" aria-label="Alive5 CLI Home demo" aria-describedby="cli-home-description" width="1796" height="1192" muted playsinline preload="none" data-media="media/cli-home" data-avc="avc1.64002a" data-avc-mobile="avc1.640020"></video>
+            <picture class="demo-poster">
+              <source data-result="(max-width: 639px)" media="(max-width: 639px) and (prefers-reduced-motion: reduce)" srcset="media/cli-home-m-result.jpg" width="814" height="1142">
+              <source data-result="all" media="(prefers-reduced-motion: reduce)" srcset="media/cli-home-result.jpg">
+              <source media="(max-width: 639px)" srcset="media/cli-home-m-poster.jpg" width="814" height="1142">
+              <img src="media/cli-home-poster.jpg" width="1796" height="1192" alt="Alive5 CLI Home with the workspace menu and recent conversations." aria-describedby="cli-home-description" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <span id="cli-home-description" hidden>Alive5 CLI Home with the workspace menu and recent conversations.</span>
+          <button type="button" class="demo-toggle" aria-controls="cli-home" aria-label="Play Alive5 CLI Home demo" aria-pressed="false" hidden></button>
+        </div>
+        <p class="cli-caption" aria-hidden="true">Your whole Alive5 inbox, right in the terminal.</p>
+
+        <div class="cli-media cli-media--reply demo-frame">
+          <div class="cli-window" style="--window-ratio: 1796 / 1360; --window-ratio-mobile: 814 / 1218">
+            <video id="cli-reply" aria-label="Alive5 CLI reply demo" aria-describedby="cli-reply-description" width="1796" height="1360" muted playsinline preload="none" data-media="media/cli-reply" data-avc="avc1.640032" data-avc-mobile="avc1.640020"></video>
+            <picture class="demo-poster">
+              <source data-result="(max-width: 639px)" media="(max-width: 639px) and (prefers-reduced-motion: reduce)" srcset="media/cli-reply-m-result.jpg" width="814" height="1218">
+              <source data-result="all" media="(prefers-reduced-motion: reduce)" srcset="media/cli-reply-result.jpg">
+              <source media="(max-width: 639px)" srcset="media/cli-reply-m-poster.jpg" width="814" height="1218">
+              <img src="media/cli-reply-poster.jpg" width="1796" height="1360" alt="Opening a conversation in Alive5 CLI and sending a reply." aria-describedby="cli-reply-description" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <span id="cli-reply-description" hidden>Opening a conversation in Alive5 CLI and sending a reply.</span>
+          <button type="button" class="demo-toggle" aria-controls="cli-reply" aria-label="Play Alive5 CLI reply demo" aria-pressed="false" hidden></button>
+        </div>
+        <p class="cli-caption" aria-hidden="true">Open a conversation and send a reply.</p>
+
+        <div class="cli-media cli-media--agent demo-frame">
+          <div class="cli-window" style="--window-ratio: 1796 / 1124; --window-ratio-mobile: 814 / 1076">
+            <video id="cli-agent" aria-label="Alive5 CLI agent demo" aria-describedby="cli-agent-description" width="1796" height="1124" muted playsinline preload="none" data-media="media/cli-agent" data-avc="avc1.640028" data-avc-mobile="avc1.64001f"></video>
+            <picture class="demo-poster">
+              <source data-result="(max-width: 639px)" media="(max-width: 639px) and (prefers-reduced-motion: reduce)" srcset="media/cli-agent-m-result.jpg" width="814" height="1076">
+              <source data-result="all" media="(prefers-reduced-motion: reduce)" srcset="media/cli-agent-result.jpg">
+              <source media="(max-width: 639px)" srcset="media/cli-agent-m-result.jpg" width="814" height="1076">
+              <img src="media/cli-agent-result.jpg" width="1796" height="1124" alt="The Alive5 CLI terminal showing the agent workflow." aria-describedby="cli-agent-description" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <span id="cli-agent-description" hidden>An agent waits for an inbound text, receives it as JSON, sends a reply, and waits again.</span>
+          <button type="button" class="demo-toggle" aria-controls="cli-agent" aria-label="Play Alive5 CLI agent demo" aria-pressed="false" hidden></button>
+        </div>
+        <p class="cli-caption" aria-hidden="true">An agent waits for a text and replies on its own.</p>
+        <section class="cli-install" aria-labelledby="cli-install-title">
+          <h2 id="cli-install-title">Installation</h2>
+          <p>Launching soon</p>
+        </section>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

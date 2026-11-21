@@ -245,8 +245,8 @@
                       "type": "bulleted_list_item",
                       "open": "<li class=\"coming-soon\">",
                       "close": "</li>",
-                      "html": "<li class=\"coming-soon\">\n              <span>Alive5 CLI</span><small>Coming soon</small>\n            </li>",
-                      "inner": "\n              <span>Alive5 CLI</span><small>Coming soon</small>\n            ",
+                      "html": "<li class=\"coming-soon\">\n              <a href=\"introducing/\">Alive5 CLI</a><small>Coming soon</small>\n            </li>",
+                      "inner": "\n              <a href=\"introducing/\">Alive5 CLI</a><small>Coming soon</small>\n            ",
                       "signature": "c69d6e281f7ee960ec5c375cf1ec5b0abba14e734d4b632e20fc97a6716dbadb"
                     },
                     "\n            ",
@@ -1559,8 +1559,8 @@
         "type": "bulleted_list_item",
         "open": "<li class=\"coming-soon\">",
         "close": "</li>",
-        "html": "<li class=\"coming-soon\">\n              <span>Alive5 CLI</span><small>Coming soon</small>\n            </li>",
-        "inner": "\n              <span>Alive5 CLI</span><small>Coming soon</small>\n            ",
+        "html": "<li class=\"coming-soon\">\n              <a href=\"introducing/\">Alive5 CLI</a><small>Coming soon</small>\n            </li>",
+        "inner": "\n              <a href=\"introducing/\">Alive5 CLI</a><small>Coming soon</small>\n            ",
         "signature": "c69d6e281f7ee960ec5c375cf1ec5b0abba14e734d4b632e20fc97a6716dbadb"
       },
       "block-16": {
