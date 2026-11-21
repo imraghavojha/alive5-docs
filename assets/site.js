@@ -480,7 +480,9 @@ function wireSearch() {
     .replace(/\//g, " ").replace(/\s+/g, " ").trim();
   const escape = (value) => value.replace(/[&<>"']/g, (char) =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
-  const curated = SEARCH.map(([title, path, keywords]) => ({ title, path, keywords, heading: "", snippet: "", text: "" }));
+  const published = new Set(["index.html", ...SIDEBAR.flatMap(group => group.items.map(([, path]) => path))]);
+  const curated = SEARCH.filter(([, path]) => published.has(path))
+    .map(([title, path, keywords]) => ({ title, path, keywords, heading: "", snippet: "", text: "" }));
   const rank = (row, query, terms) => {
     const title = normalize(row.title), heading = normalize(row.heading);
     const keywords = normalize(`${row.id || ""} ${row.endpoint || ""} ${row.keywords || ""}`);

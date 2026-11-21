@@ -140,6 +140,31 @@ try {
       console.log(`${variant} @ ${width}: tabs, code copy, copy page, theme persistence, search, mobile menu, Zapier, scenarios, CLI passed.`);
     }
   }
+  // Exercise the search dialog after an archive, including its offline keyword suggestions.
+  const archivedPath = 'connectors/n8n.html';
+  const archivedId = map.pages[archivedPath]?.id;
+  const archivedTree = tree.map(section => ({ ...section, articles: section.articles.filter(a => a.id !== archivedId) }));
+  const archivedSite = await buildTree(archivedTree, map, templates);
+  const dest = resolve(temp, 'rendered');
+  for (const [path, content] of archivedSite.output) await writeFile(resolve(dest, path), content);
+  await rm(resolve(dest, archivedPath), { force: true });
+  execFileSync(process.execPath, ['scripts/build-search-index.mjs'], { cwd: dest });
+  for (const offline of [false, true]) {
+    const { page, context } = await open('rendered', 'index.html', 390);
+    if (offline) await page.route('**/assets/search-index.json', route => route.abort());
+    const indexLoaded = page.waitForEvent(offline ? 'requestfailed' : 'requestfinished',
+      request => request.url().endsWith('/assets/search-index.json'));
+    await page.locator('[data-search]').click();
+    await indexLoaded;
+    const search = page.getByRole('textbox', { name: 'Search documentation' });
+    await search.fill('n8n');
+    assert.equal(await page.locator(`.search-results a[href*="${archivedPath}"]`).count(), 0);
+    await search.fill('Zapier');
+    await page.locator('.search-results a[href*="connectors/zapier.html"]').first().click();
+    assert.equal(await page.locator('h1').innerText(), 'Build with Zapier');
+    await context.close();
+  }
+  console.log('Archived guide excluded from search with the index available and unavailable.');
   console.log('All behavioral checks passed.');
 } finally {
   await browser?.close();
