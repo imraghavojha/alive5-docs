@@ -58,6 +58,55 @@ try {
     assert.deepEqual(errors, [], `${variant}/${path}: JavaScript errors`);
     return { page, context };
   }
+  {
+    const { page, context } = await open('current', 'index.html', 1440);
+    await page.locator('[data-theme-toggle]').click();
+    await page.evaluate(() => document.fonts.ready);
+    const widths = [1440, 1024, 941, 940, 801, 768, 761, 760, 740, 721, 720, 601, 600, 390, 320];
+    for (const width of widths) {
+      await page.setViewportSize({ width, height: 900 });
+      const problems = await page.locator('.topbar-in').evaluate(bar => {
+        const bounds = bar.getBoundingClientRect();
+        const style = getComputedStyle(bar);
+        const rightEdge = bounds.right - parseFloat(style.paddingRight);
+        let previousRight = bounds.left + parseFloat(style.paddingLeft);
+        const issues = [];
+        for (const control of bar.querySelectorAll('a, button')) {
+          if (!control.getClientRects().length) continue;
+          const box = control.getBoundingClientRect();
+          const label = control.textContent.trim() || control.getAttribute('aria-label');
+          if (box.left < previousRight - 0.5 || box.right > rightEdge + 0.5 ||
+              box.top < bounds.top - 0.5 || box.bottom > bounds.bottom + 0.5) {
+            issues.push(`${label} overlaps another control or exceeds the header`);
+          }
+          previousRight = box.right;
+          const verticalBounds = control.matches('.logo') ? bounds : box;
+          const text = document.createTreeWalker(control, NodeFilter.SHOW_TEXT);
+          const range = document.createRange();
+          for (let node = text.nextNode(); node; node = text.nextNode()) {
+            const parent = node.parentElement;
+            const labelText = node.textContent.trim();
+            if (!labelText || !parent.getClientRects().length || getComputedStyle(parent).clipPath !== 'none') continue;
+            const labelRight = Math.min(box.right, parent.getBoundingClientRect().right);
+            range.selectNodeContents(node);
+            const lines = [...range.getClientRects()];
+            if (lines.length !== 1 || lines.some(line =>
+              line.left < box.left - 0.5 || line.right > labelRight + 0.5 ||
+              line.top < verticalBounds.top - 0.5 || line.bottom > verticalBounds.bottom + 0.5)) {
+              issues.push(`${labelText} wraps or clips`);
+            }
+          }
+        }
+        return issues;
+      });
+      assert.deepEqual(problems, [], `Header labels and controls fit at ${width}px`);
+      for (const name of ['Alive5.com', 'Book a demo', 'Sign in']) {
+        assert.equal(await page.locator('.topbar').getByRole('link', { name }).isVisible(), width > 720, `${name} at ${width}px`);
+      }
+    }
+    await context.close();
+    console.log('Header labels and controls fit at desktop, tablet and mobile widths.');
+  }
   for (const width of [1440, 390]) {
     for (const variant of ['current', 'rendered']) {
       for (const path of ['api/authentication.html', 'api/send-a-message.html', 'integrations/widget.html']) {

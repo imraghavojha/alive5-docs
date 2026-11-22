@@ -183,18 +183,29 @@ button { font-family: inherit; }
 .skip:focus { width: auto; padding: 6px 14px; color: var(--bg); }
 .wrap { margin: 0 auto; padding: 0 24px; }
 .topbar { background: var(--bar); }
-.topbar-in { height: var(--bar-h); display: flex; align-items: center; padding: 0 24px; position: relative; }
-.logo { display: flex; align-items: center; }
+.topbar-in {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(max-content, 1fr) minmax(0, max-content) minmax(max-content, 1fr);
+  align-items: center;
+  gap: 20px;
+  height: var(--bar-h);
+  padding: 0 24px;
+  white-space: nowrap;
+}
+.logo { display: flex; align-items: center; justify-self: start; }
 .logo:hover { color: inherit; }
 .logo .word { font-weight: 800; color: var(--night); }
 .logo .kind { color: var(--link); }
-.topbar-mid { position: absolute; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
-.searchbox { display: flex; align-items: center; gap: 8px; background: var(--surface); font-size: 14px; cursor: text; }
+.topbar-mid { display: flex; gap: 8px; }
+.searchbox { display: flex; align-items: center; gap: 8px; min-width: 0; background: var(--surface); font-size: 14px; cursor: text; }
 .searchbox:hover { color: var(--muted); }
+.searchbox .search-label { overflow: hidden; text-overflow: ellipsis; }
+.searchbox svg, .searchbox .kbd { flex: none; }
 .searchbox .kbd { margin-left: auto; font-size: 12px; color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 0 5px; line-height: 17px; }
-.askai { display: flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 16px; box-shadow: var(--shadow-card); color: var(--ink); font-size: 14px; font-weight: 500; }
+.askai { display: flex; flex: none; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 16px; box-shadow: var(--shadow-card); color: var(--ink); font-size: 14px; font-weight: 500; }
 .askai:hover { color: var(--ink); }
-.topbar-right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+.topbar-right { justify-self: end; display: flex; align-items: center; gap: 16px; }
 .topbar-right .create { display: inline-flex; align-items: center; height: 34px; padding: 0 14px; border-radius: 999px; background: var(--cta-bg); color: #fff; font-size: 13px; font-weight: 700; }
 .topbar-right .create:hover { background: var(--cta-hover); }
 .signin { display: flex; align-items: center; gap: 5px; height: 28px; padding: 0 12px; border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-card); color: var(--ink); font-size: 14px; font-weight: 500; }
@@ -316,16 +327,16 @@ table.tbl td.t { color: var(--faint); font-size: 12px; font-family: var(--sans);
 :is(.docfoot, [data-docfoot]) { border-top: 0; margin-top: 0; padding: 0 0 40px; }
 .docfoot-in { display: block; gap: 24px; flex-wrap: wrap; color: var(--ink); }
 @media (max-width: 940px) {
-  .topbar-mid { position: static; transform: none; margin-left: auto; }
-  .topbar-right { margin-left: 16px; }
+  .topbar-in, .topbar-right { gap: 12px; }
   .menubar-in { overflow-x: auto; }
   .trio,
   .browse-grid,
   .cards { grid-template-columns: 1fr 1fr; }
 }
+@media (max-width: 760px) {
+  .searchbox .kbd { display: none; }
+}
 @media (max-width: 720px) {
-  .topbar-mid .askai,
-  .topbar-right .create { display: none; }
   .trio,
   .browse-grid,
   .cards,
@@ -342,7 +353,6 @@ a { touch-action: manipulation; }
 button { cursor: pointer; }
 a:hover { text-decoration: none; }
 .wrap { max-width: 1056px; }
-.topbar-in { gap: 20px; }
 .logo { gap: 7px; }
 .logo .word { font-size: 25px; letter-spacing: -1.2px; }
 .logo .kind { font-size: 18px; font-weight: 600; letter-spacing: 0.2px; }
@@ -566,15 +576,8 @@ table.tbl tr:last-child td { border-bottom: 0; }
   .cards { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 720px) {
-  .topbar-in { padding: 0 20px; gap: 16px; height: 60px; }
   .logo .word { font-size: 24px; }
   .logo .kind { font-size: 15px; }
-  .topbar-mid { margin-left: auto; }
-  .topbar-right { margin-left: 0; }
-  .signin { height: 30px; padding: 0 9px; font-size: 11px; }
-  .searchbox { width: 32px; justify-content: center; padding: 0; height: 30px; border-radius: 999px; }
-  .searchbox .search-label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
-  .searchbox .kbd { display: none; }
   .menubar-in { padding: 0 20px; overflow-x: auto; scrollbar-width: none; }
   .menubar nav { white-space: nowrap; flex: none; }
   .menubar nav a { padding: 0 11px; }
@@ -940,18 +943,16 @@ input::placeholder, textarea::placeholder { color: var(--faint); opacity: 1; }
 /* Dark outlines and muted text retain enough separation inside tinted panels. */
 [data-theme="dark"] .connector-logo.node-red svg { fill: var(--surface); }
 [data-theme="dark"] .connector-logo.keragon img { filter: brightness(1.65); }
-@media (max-width: 720px) {
-  .topbar-in { gap: 12px; }
-  .topbar-right { gap: 10px; }
-}
-
 .mobile-menu-toggle, .mobile-menu { display: none; }
 @media (max-width: 720px) {
   html { scroll-padding-top: 76px; }
   [data-header] { height: var(--bar-h); position: relative; z-index: 10; }
   .topbar { border-bottom: 1px solid var(--line); }
-  .topbar-in { height: calc(var(--bar-h) - 1px); }
-  .topbar-right .signin, .menubar { display: none; }
+  .topbar-in { grid-template-columns: minmax(max-content, 1fr) auto auto; height: calc(var(--bar-h) - 1px); padding-inline: 20px; }
+  .topbar-right { gap: 10px; }
+  .topbar-mid .askai, .topbar-right .create, .topbar-right .signin, .menubar { display: none; }
+  .searchbox { justify-content: center; padding: 0; }
+  .searchbox .search-label { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); }
   .topbar-mid .searchbox, .theme-toggle, .mobile-menu-toggle { width: 40px; height: 40px; box-shadow: none; }
   .mobile-menu-toggle { display: grid; place-items: center; flex: none; padding: 0; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); }
   .mobile-menu-toggle:hover { color: var(--link); border-color: var(--line-hover); }
