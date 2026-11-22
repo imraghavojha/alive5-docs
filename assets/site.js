@@ -4,18 +4,21 @@ const href = (p) => ROOT + p;
 
 const MENU = [
   ["start", "index.html", "Get started"],
-  ["devres", "api/index.html", "Developer resources"],
+  ["api", "api/index.html", "API"],
   ["connectors", "connectors/index.html", "Connectors"],
   ["integrations", "integrations/index.html", "Integrations"],
-  ["messaging", "api/send-a-message.html", "Messaging"],
-  ["contacts", "api/contacts.html", "Contacts"],
-  ["reporting", "api/reporting.html", "Reporting"],
 ];
+
+const API_SECTIONS = new Set([
+  "devres", "messaging", "contacts", "reporting",
+  "alive5-api", "messaging-and-data", "reference",
+]);
 
 function renderHeader() {
   const host = document.querySelector("[data-header]");
   if (!host) return;
-  const section = document.body.dataset.section || "";
+  const pageSection = document.body.dataset.section || "";
+  const section = API_SECTIONS.has(pageSection) ? "api" : pageSection;
   host.innerHTML = `
     <div class="topbar">
       <div class="topbar-in">

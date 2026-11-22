@@ -91,10 +91,11 @@ html { scrollbar-gutter: stable; }
   z-index: 10;
   bottom: 56px;
   left: 96px;
-  max-width: 33.3333%;
-  font-size: 44px;
-  line-height: 1.375;
+  max-width: min(37%, 540px);
+  font-size: clamp(36px, 3.05vw, 44px);
+  line-height: 1.25;
   letter-spacing: -.01em;
+  text-wrap: balance;
 }
 .scene { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .scene-box { display: grid; place-items: center; width: min(1000px, calc(100% - 32px)); aspect-ratio: 1; transform: translateY(288px); }
@@ -184,16 +185,16 @@ html { scrollbar-gutter: stable; }
   .lockup { gap: 8px; margin: 32px 56px 0 40px; font-size: 28px; line-height: 40px; }
   .lockup .title { text-wrap: balance; }
   .hero .brand-mark { width: 44px; margin-top: 4.1px; }
-  .hero h1 { min-block-size: 3lh; margin-inline: 40px; font-size: 24px; text-wrap: balance; }
+  .hero h1 { min-block-size: 3lh; margin-inline: 40px; font-size: 24px; }
   .scene { min-height: 320px; }
   .bar { height: 80px; }
 }
 @media (max-width: 380px) {
-  .lockup { margin-right: 46px; font-size: 26px; }
+  .lockup { font-size: 26px; }
 }
 
 .cli-showcase {
-  padding-block: 128px;
+  padding-block: clamp(48px, 6vw, 88px) clamp(64px, 8vw, 112px);
   color: var(--ink);
   background: var(--bg);
   font: 400 16px/28px var(--sans);
@@ -203,17 +204,25 @@ html { scrollbar-gutter: stable; }
   --frame-y-pad: 40px;
   display: flex;
   flex-direction: column;
+  gap: clamp(40px, 5vw, 64px);
   width: min(720px, calc(100% - 32px));
   margin-inline: auto;
 }
-.cli-prose > p { margin-block-end: 48px; line-height: 24px; text-wrap: pretty; }
-.cli-caption + .cli-install {
+.cli-demo { margin: 0; }
+.cli-caption {
+  margin: 16px var(--frame-x-pad) 0;
+  color: var(--ink-str);
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  font-weight: 500;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+.cli-install {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 12px 20px;
-  margin-block-start: 48px;
   padding: clamp(16px, 4vw, 24px);
   border: 1px solid var(--line);
   border-radius: 16px;
@@ -228,8 +237,6 @@ html { scrollbar-gutter: stable; }
   font-size: 13px;
   line-height: 20px;
 }
-.cli-media { margin-block-start: 48px; }
-.cli-prose > .cli-caption { margin: 14px 0 0; font-size: 13px; line-height: 20px; color: color-mix(in srgb, var(--ink) 58%, transparent); text-wrap: pretty; }
 .cli-media {
   --corner: 14px;
   --cutout: linear-gradient(var(--bg), var(--bg));
@@ -395,17 +402,14 @@ html { scrollbar-gutter: stable; }
   }
 }
 @media (min-width: 1024px) {
-  .cli-showcase { padding-block-start: 80px; }
   .cli-prose {
     --frame-x-pad: 48px;
     --frame-y-pad: 56px;
     width: min(880px, calc(100% - 128px));
   }
-  .cli-prose > p { margin-block-end: 28px; font-size: 18px; line-height: 26px; }
-  .cli-media { margin-inline: -48px; }
+  .cli-demo { margin-inline: calc(-1 * var(--frame-x-pad)); }
 }
 @media (max-width: 639px) {
-  .cli-showcase { padding-block: 40px 64px; }
   .cli-prose { --frame-x-pad: 12px; --frame-y-pad: 48px; width: calc(100% - 24px); }
   .cli-window { aspect-ratio: var(--window-ratio-mobile); }
   .demo-toggle {

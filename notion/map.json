@@ -9,9 +9,9 @@
         "Get started"
       ],
       [
-        "devres",
+        "api",
         "api/index.html",
-        "Developer resources"
+        "API"
       ],
       [
         "connectors",
@@ -22,21 +22,6 @@
         "integrations",
         "integrations/index.html",
         "Integrations"
-      ],
-      [
-        "messaging",
-        "api/send-a-message.html",
-        "Messaging"
-      ],
-      [
-        "contacts",
-        "api/contacts.html",
-        "Contacts"
-      ],
-      [
-        "reporting",
-        "api/reporting.html",
-        "Reporting"
       ]
     ],
     "sidebar": [
