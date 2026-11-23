@@ -79,7 +79,7 @@ a:hover { color: var(--ink); }
   align-items: center;
   justify-content: center;
   height: 48px;
-  margin: 26px 0 28px;
+  margin: 26px 0 12px;
   border-radius: 10px;
   background: var(--cta);
   color: #fff;
@@ -89,23 +89,8 @@ a:hover { color: var(--ink); }
   transition: background-color .15s ease;
 }
 .cta:hover { background: var(--cta-hover); color: #fff; }
-ol { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; gap: 16px; }
-li { position: relative; padding-left: 38px; counter-increment: step; font-size: .9375rem; }
-li::before {
-  content: counter(step);
-  position: absolute;
-  left: 0;
-  top: -1px;
-  display: grid;
-  place-items: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--chip);
-  font-size: .8125rem;
-  font-weight: 700;
-}
-details { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); font-size: .8125rem; color: var(--muted); }
+.note { margin: 0; color: var(--muted); font-size: .8125rem; text-align: center; }
+details { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); font-size: .8125rem; color: var(--muted); }
 summary { cursor: pointer; width: fit-content; }
 .url { display: flex; gap: 8px; margin-top: 10px; }
 .url code {
@@ -133,13 +118,9 @@ summary { cursor: pointer; width: fit-content; }
 <main>
   <img class="brand" src="../assets/images/alive5-logo-small-3x.webp" alt="Alive5" width="77" height="28">
   <h1>Alive5 for Claude</h1>
-  <p class="sub">Read and reply to your business texts from Claude.</p>
+  <p class="sub">Text your customers from Claude.</p>
   <a class="cta" href="https://claude.ai/customize/connectors?modal=add-custom-connector&amp;connectorName=Alive5&amp;connectorUrl=https%3A%2F%2Fwmbb2krgd4yqmghwsxd3yamzey0ocqsz.lambda-url.us-east-1.on.aws%2Fv1%2Fclaude%2Fmcp" target="_blank" rel="noopener">Add to Claude</a>
-  <ol>
-    <li>Keep the defaults in Claude. Click <strong>Continue</strong>, then <strong>Add</strong>.</li>
-    <li>Click <strong>Connect</strong>. On the Alive5 page, paste your API key and click <strong>Connect</strong>.</li>
-    <li>Once connected, ask Claude <a href="https://claude.ai/new?q=Show%20my%20latest%20texts" target="_blank" rel="noopener">“Show my latest texts.”</a></li>
-  </ol>
+  <p class="note">Have your Alive5 API key ready. <a href="https://app-prod.alive5.com/integrations" target="_blank" rel="noopener">Find it</a></p>
   <details>
     <summary>Server URL</summary>
     <div class="url"><code>https://wmbb2krgd4yqmghwsxd3yamzey0ocqsz.lambda-url.us-east-1.on.aws/v1/claude/mcp</code><button type="button" id="copy">Copy</button></div>
