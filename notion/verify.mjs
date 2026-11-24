@@ -22,7 +22,7 @@ try {
     const dest = resolve(temp, variant);
     await mkdir(dest);
     for (const dir of ['assets', 'scripts']) await cp(resolve(ROOT, dir), resolve(dest, dir), { recursive: true });
-    for (const path of [...paths, 'api/reference.html', 'introducing/index.html', '404.html']) {
+    for (const path of [...paths, 'api/reference.html', 'claude/index.html', 'introducing/index.html', '404.html']) {
       await mkdir(dirname(resolve(dest, path)), { recursive: true });
       await cp(resolve(ROOT, path), resolve(dest, path));
     }

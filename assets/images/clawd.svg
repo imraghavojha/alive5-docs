@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 10" width="216" height="120" shape-rendering="crispEdges">
+<!-- Claude Code mascot, derived 1:1 from the CLI welcome glyphs. Pixel = 1 wide x 2 tall (terminal cell quadrant). Colour rgb(215,119,87). -->
+<g fill="#D77757"><rect x="3" y="0" width="12" height="2"/><rect x="3" y="2" width="2" height="2"/><rect x="6" y="2" width="6" height="2"/><rect x="13" y="2" width="2" height="2"/><rect x="1" y="4" width="16" height="2"/><rect x="3" y="6" width="12" height="2"/><rect x="4" y="8" width="1" height="2"/><rect x="6" y="8" width="1" height="2"/><rect x="11" y="8" width="1" height="2"/><rect x="13" y="8" width="1" height="2"/></g>
+</svg>

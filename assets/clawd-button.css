@@ -1,0 +1,51 @@
+.clawd-button {
+  position: relative;
+  display: inline-flex;
+  isolation: isolate;
+  vertical-align: middle;
+}
+.clawd-button > a { position: relative; z-index: 1; }
+.clawd-sprite {
+  position: absolute;
+  right: 10px;
+  bottom: 100%;
+  width: 54px;
+  height: 30px;
+  max-width: none;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+[data-clawd="peek"] .clawd-sprite { transform: translateY(30px); }
+@media (prefers-reduced-motion: no-preference) {
+  [data-clawd="peek"] .clawd-sprite { animation: clawd-peek 6s ease-in-out infinite; }
+  [data-clawd="peek"]:is(:hover,:focus-within) .clawd-sprite { animation: clawd-pop 420ms both; }
+}
+@keyframes clawd-peek {
+  0%, 18%, 46% { transform: translate(0,30px); }
+  25%, 38% { transform: translate(0,15px); }
+  47%, 62%, 96% { transform: translate(-56px,30px); }
+  70%, 86% { transform: translate(-56px,15px); }
+  97%, 100% { transform: translate(0,30px); }
+}
+@keyframes clawd-pop {
+  0% { transform: translateY(22px); }
+  62% { transform: translateY(-7px); }
+  85% { transform: translateY(1px); }
+  100% { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-clawd="peek"] .clawd-sprite { transform: none; }
+}
+.ink-cover, html.ink-arrival::after {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483645;
+  background: #252628;
+  pointer-events: none;
+}
+html.ink-arrival::after {
+  content: "";
+  animation: ink-guard 0s 2s forwards;
+}
+@keyframes ink-guard { to { visibility: hidden; } }
+.clawd-falling { position: fixed; z-index: 2147483646; right: auto; bottom: auto; }

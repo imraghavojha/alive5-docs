@@ -1,138 +1,75 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
-<title>Alive5 for Claude</title>
-<meta name="description" content="Read and reply to your Alive5 texts from Claude.">
-<link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png">
-<link rel="canonical" href="https://imraghavojha.github.io/alive5-docs/claude/">
-<meta property="og:title" content="Alive5 for Claude">
-<meta property="og:description" content="Read and reply to your Alive5 texts from Claude.">
-<meta property="og:url" content="https://imraghavojha.github.io/alive5-docs/claude/">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://imraghavojha.github.io/alive5-docs/assets/images/og.png">
-<style>
-@font-face {
-  font-family: "Plus Jakarta Sans";
-  font-weight: 200 800;
-  font-display: swap;
-  src: url("../assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2") format("woff2");
-}
-:root {
-  color-scheme: light;
-  --canvas: #f7f6f3;
-  --surface: #fff;
-  --ink: #24221f;
-  --muted: #645f58;
-  --line: #e6e2dc;
-  --chip: #f4f1ec;
-  --focus: #a83a18;
-  --cta: #d2441d;
-  --cta-hover: #c13d18;
-  --shadow: 0 18px 52px -28px #49352538, 0 2px 5px #49352509;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --canvas: #161615;
-    --surface: #232321;
-    --ink: #f6f4ef;
-    --muted: #c3beb6;
-    --line: #3d3b36;
-    --chip: #2c2b29;
-    --focus: #ff996f;
-    --shadow: 0 20px 54px -28px #000a;
-  }
-  .brand { filter: invert(1) hue-rotate(180deg) brightness(1.15) saturate(.85); }
-}
-* { box-sizing: border-box; }
-body {
-  display: grid;
-  place-items: center;
-  min-height: 100svh;
-  margin: 0;
-  padding: 16px;
-  background: var(--canvas);
-  color: var(--ink);
-  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-main {
-  width: min(100%, 460px);
-  padding: clamp(24px, 6vw, 40px);
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  background: var(--surface);
-  box-shadow: var(--shadow);
-}
-.brand { display: block; width: 77px; height: auto; }
-h1 { margin: 22px 0 6px; font-size: clamp(1.375rem, 5.8vw, 1.75rem); font-weight: 650; line-height: 1.23; letter-spacing: -.042em; }
-.sub { margin: 0; color: var(--muted); }
-a { color: var(--muted); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-a:hover { color: var(--ink); }
-:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
-.cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 48px;
-  margin: 26px 0 12px;
-  border-radius: 10px;
-  background: var(--cta);
-  color: #fff;
-  font-size: .9375rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: background-color .15s ease;
-}
-.cta:hover { background: var(--cta-hover); color: #fff; }
-.note { margin: 0; color: var(--muted); font-size: .8125rem; text-align: center; }
-details { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); font-size: .8125rem; color: var(--muted); }
-summary { cursor: pointer; width: fit-content; }
-.url { display: flex; gap: 8px; margin-top: 10px; }
-.url code {
-  flex: 1;
-  min-width: 0;
-  padding: 8px 10px;
-  border-radius: 8px;
-  background: var(--chip);
-  font-size: .75rem;
-  overflow-wrap: anywhere;
-}
-.url button {
-  padding: 0 12px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface);
-  color: var(--ink);
-  font: inherit;
-  cursor: pointer;
-}
-@media (prefers-reduced-motion: reduce) { .cta { transition: none; } }
-</style>
+  <!-- Opt into view transitions before linked styles load. -->
+  <style>@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }</style>
+  <script>(()=>{let t;try{t=localStorage.getItem("a5-theme")}catch{}document.documentElement.dataset.theme=t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"})();</script>
+  <script>
+    try {
+      const until = Number(sessionStorage.getItem("alive5-ink-arrival"));
+      sessionStorage.removeItem("alive5-ink-arrival");
+      if (until > Date.now() && !matchMedia("(prefers-reduced-motion: reduce)").matches)
+        document.documentElement.classList.add("ink-arrival");
+    } catch {}
+  </script>
+  <meta name="color-scheme" content="light dark">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alive5 for Claude</title>
+  <meta name="description" content="Manage your Alive5 inbox with Claude.">
+  <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="claude.css">
+  <link rel="stylesheet" href="../assets/clawd-button.css">
+  <script src="../assets/clawd-button.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <link rel="canonical" href="https://imraghavojha.github.io/alive5-docs/claude/">
+  <meta property="og:title" content="Alive5 for Claude">
+  <meta property="og:description" content="Manage your Alive5 inbox with Claude.">
+  <meta property="og:url" content="https://imraghavojha.github.io/alive5-docs/claude/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Alive5 Docs">
+  <meta property="og:image" content="https://imraghavojha.github.io/alive5-docs/assets/images/og.png">
 </head>
-<body>
-<main>
-  <img class="brand" src="../assets/images/alive5-logo-small-3x.webp" alt="Alive5" width="77" height="28">
-  <h1>Alive5 for Claude</h1>
-  <p class="sub">Text your customers from Claude.</p>
-  <a class="cta" href="https://claude.ai/customize/connectors?modal=add-custom-connector&amp;connectorName=Alive5&amp;connectorUrl=https%3A%2F%2Fwmbb2krgd4yqmghwsxd3yamzey0ocqsz.lambda-url.us-east-1.on.aws%2Fv1%2Fclaude%2Fmcp" target="_blank" rel="noopener">Add to Claude</a>
-  <p class="note">Have your Alive5 API key ready. <a href="https://app-prod.alive5.com/integrations" target="_blank" rel="noopener">Find it</a></p>
-  <details>
-    <summary>Server URL</summary>
-    <div class="url"><code>https://wmbb2krgd4yqmghwsxd3yamzey0ocqsz.lambda-url.us-east-1.on.aws/v1/claude/mcp</code><button type="button" id="copy">Copy</button></div>
-  </details>
-</main>
-<script>
-const copy = document.getElementById('copy');
-copy.addEventListener('click', async () => {
-  try { await navigator.clipboard.writeText(copy.previousElementSibling.textContent); copy.textContent = 'Copied'; }
-  catch { copy.textContent = 'Select and copy'; }
-  setTimeout(() => { copy.textContent = 'Copy'; }, 1600);
-});
-</script>
+<body data-root="../">
+  <a class="skip" href="#main">Skip to content</a>
+  <header data-header></header>
+
+  <main id="main" class="hero claude-hero">
+    <span class="dots" aria-hidden="true"></span>
+    <div class="wrap hero-in claude-content">
+      <h1>Alive5 for Claude</h1>
+      <p class="tagline">Manage your Alive5 inbox with Claude.</p>
+
+      <div class="keycard claude-setup">
+        <div>
+          <span class="clawd-button" data-clawd="perched"><img class="clawd-sprite" src="../assets/images/clawd.svg" width="54" height="30" alt="" draggable="false"><a class="btn-primary" href="https://claude.ai/customize/connectors?modal=add-custom-connector&amp;connectorName=Alive5&amp;connectorUrl=https%3A%2F%2Fwmbb2krgd4yqmghwsxd3yamzey0ocqsz.lambda-url.us-east-1.on.aws%2Fv1%2Fclaude%2Fmcp" target="_blank" rel="noopener">Add to Claude <span aria-hidden="true">›</span></a></span>
+          <p class="claude-note">Have your Alive5 API key ready. <a href="https://app-prod.alive5.com/integrations" target="_blank" rel="noopener">Find it</a></p>
+        </div>
+        <details class="claude-server">
+          <summary>Server URL</summary>
+          <div class="claude-url">
+            <code id="server-url">https://wmbb2krgd4yqmghwsxd3yamzey0ocqsz.lambda-url.us-east-1.on.aws/v1/claude/mcp</code>
+            <button type="button" class="copy" id="copy" aria-live="polite">Copy</button>
+          </div>
+        </details>
+      </div>
+    </div>
+  </main>
+  <script>
+    const copy = document.getElementById("copy");
+    const serverURL = document.getElementById("server-url");
+    let resetCopy;
+    copy.addEventListener("click", async () => {
+      clearTimeout(resetCopy);
+      try {
+        await navigator.clipboard.writeText(serverURL.textContent);
+        copy.textContent = "Copied";
+      } catch {
+        copy.textContent = "Select and copy";
+      }
+      resetCopy = setTimeout(() => { copy.textContent = "Copy"; }, 1600);
+    });
+  </script>
 </body>
 </html>

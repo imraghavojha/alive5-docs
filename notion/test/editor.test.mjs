@@ -36,8 +36,26 @@ test('homepage has separate native card headings and descriptions, with byte-ide
     assert.equal(plain(blocks[index + 1].paragraph.rich_text), description);
   }
   assert.ok(blocks.some(b => b.type === 'heading_2' && plain(b.heading_2.rich_text) === 'Developer quickstart'));
-  assert.ok(blocks.some(b => b.type === 'bulleted_list_item' && plain(b.bulleted_list_item.rich_text) === 'Alive5 CLI — Coming soon'));
+  assert.ok(blocks.some(b => b.type === 'bulleted_list_item' && plain(b.bulleted_list_item.rich_text) === 'Alive5 CLI and MCP — Coming soon'));
   assert.ok(!blocks.some(b => /QUICKSTARTREST|ACCOUNTSign|CLIComing|ZapierConnect|Hello from/.test(plain(b[b.type].rich_text))));
+});
+
+test('the homepage announcement renders from both existing and updated Notion blocks', async () => {
+  const html = await readFile(`${ROOT}/index.html`, 'utf8');
+  const { 'index.html': template } = JSON.parse(await readFile(`${ROOT}/notion/templates.json`, 'utf8'));
+  const previous = html.replace(/Alive5 CLI and MCP<\/a>\s*<small>Coming soon<\/small>/, `Alive5 CLI</a><small>Coming soon</small>
+            </li>
+            <li class="coming-soon">
+              <span>Alive5 MCP</span><small>Coming soon</small>`);
+  const { blocks } = convert(previous, 'index.html');
+  const label = block => plain(block.bulleted_list_item?.rich_text);
+  const oldCli = blocks.find(block => label(block) === 'Alive5 CLI — Coming soon');
+  const oldMcp = blocks.find(block => label(block) === 'Alive5 MCP — Coming soon');
+  assert.ok(oldCli && oldMcp);
+  assert.equal(renderPage(blocks, template), html);
+
+  oldCli.bulleted_list_item.rich_text = rich('Alive5 CLI and MCP — Coming soon');
+  assert.equal(renderPage(blocks.filter(block => block !== oldMcp), template), html);
 });
 
 test('all three widget notes use one neutral icon and restore the original widgets', async () => {

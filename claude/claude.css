@@ -1,0 +1,75 @@
+.claude-hero {
+  padding-bottom: 56px;
+}
+
+.hero-in.claude-content {
+  display: block;
+}
+
+.claude-content .tagline {
+  max-width: none;
+  text-wrap: balance;
+}
+
+.claude-hero .keycard.claude-setup {
+  position: relative;
+  inset: auto;
+  width: min(100%, 460px);
+  margin-top: 26px;
+  padding: 40px clamp(18px, 5vw, 24px) clamp(18px, 5vw, 24px);
+}
+
+.claude-note {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.claude-note a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.claude-server {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.claude-server summary {
+  width: fit-content;
+  cursor: pointer;
+}
+
+.claude-server summary:hover {
+  color: var(--link);
+}
+
+.claude-url {
+  display: flex;
+  align-items: start;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.claude-url code {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--code-bg);
+  color: var(--ink-str);
+  font-size: 12px;
+  line-height: 18px;
+  overflow-wrap: anywhere;
+}
+
+.claude-url .copy {
+  flex: none;
+  max-width: 90px;
+}

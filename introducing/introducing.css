@@ -240,9 +240,9 @@ html { scrollbar-gutter: stable; }
 .cli-media {
   --corner: 14px;
   --cutout: linear-gradient(var(--bg), var(--bg));
-  --frame-light: radial-gradient(ellipse at 84% -8%, #ffeacb, transparent 66%);
-  --frame-shade: radial-gradient(ellipse at -8% 91%, #b63a1e, transparent 72%);
-  --frame-base: linear-gradient(128deg, #eb5124, #f7a17f 49%, #ffe0bd);
+  --frame-light: radial-gradient(ellipse at 84% -8%, #9fb0d6, transparent 66%);
+  --frame-shade: radial-gradient(ellipse at -8% 91%, #101020, transparent 72%);
+  --frame-base: linear-gradient(128deg, #1b1b30, #2f3a5c 52%, #56678f);
   position: relative;
   isolation: isolate;
   padding: var(--frame-y-pad) var(--frame-x-pad);
@@ -255,19 +255,19 @@ html { scrollbar-gutter: stable; }
   --frame-base: linear-gradient(141deg, #414047, #302d36 53%, #25232a);
 }
 .cli-media--agent {
-  --frame-light: radial-gradient(ellipse at 16% 106%, #fff3da, transparent 68%);
-  --frame-shade: radial-gradient(ellipse at 106% 12%, #cd411c, transparent 70%);
-  --frame-base: linear-gradient(40deg, #ffe0bd, #f9a984 52%, #eb5124);
+  --frame-light: radial-gradient(ellipse at 16% 106%, #9fd9c4, transparent 68%);
+  --frame-shade: radial-gradient(ellipse at 106% 12%, #0b1d1b, transparent 70%);
+  --frame-base: linear-gradient(40deg, #5f9e8b, #24564b 52%, #11302b);
 }
 [data-theme="dark"] .cli-media--home {
-  --frame-base: linear-gradient(128deg, #382825, #733e31 55%, #94634f);
-  --frame-light: radial-gradient(ellipse at 84% -8%, #a17563, transparent 66%);
-  --frame-shade: radial-gradient(ellipse at -8% 91%, #302329, transparent 72%);
+  --frame-base: linear-gradient(128deg, #161627, #262f4b 55%, #435273);
+  --frame-light: radial-gradient(ellipse at 84% -8%, #6d7ca0, transparent 66%);
+  --frame-shade: radial-gradient(ellipse at -8% 91%, #0d0d18, transparent 72%);
 }
 [data-theme="dark"] .cli-media--agent {
-  --frame-base: linear-gradient(308deg, #382825, #733e31 55%, #94634f);
-  --frame-light: radial-gradient(ellipse at 16% 108%, #a17563, transparent 66%);
-  --frame-shade: radial-gradient(ellipse at 108% 9%, #302329, transparent 72%);
+  --frame-base: linear-gradient(40deg, #477a6b, #1c4640 55%, #0e2724);
+  --frame-light: radial-gradient(ellipse at 16% 108%, #6fa894, transparent 66%);
+  --frame-shade: radial-gradient(ellipse at 108% 9%, #091715, transparent 72%);
 }
 [data-theme="dark"] .cli-media--reply {
   --frame-light: radial-gradient(ellipse at 65% 105%, rgb(160 152 169 / 22%), transparent 65%),
@@ -423,3 +423,186 @@ html { scrollbar-gutter: stable; }
   .demo-frame video, .demo-toggle { display: none; }
   .demo-frame .demo-poster { visibility: visible; }
 }
+
+/* CLI carousel: one full card at a time, neighbours peeking in from the edges. */
+.cli-carousel {
+  --frame-x-pad: 48px;
+  --frame-y-pad: 56px;
+  --peek: clamp(16px, 8vw, 128px);
+  --gap: clamp(8px, 1.2vw, 16px);
+  --card: min(976px, calc(100cqw - 2 * var(--peek)));
+  --tallest: 1360 / 1796;
+  --arrows: 96px;
+  position: relative;
+  container-type: inline-size;
+}
+.cli-track {
+  position: relative;
+  display: flex;
+  gap: var(--gap);
+  width: calc(var(--card) + 2 * var(--peek));
+  margin-inline: auto;
+  padding-inline: var(--peek);
+  box-sizing: border-box;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  --fade: min(24px, calc(var(--peek) * .3));
+  mask-image: linear-gradient(90deg, transparent, #000 var(--fade), #000 calc(100% - var(--fade)), transparent);
+}
+.cli-track::-webkit-scrollbar { display: none; }
+.cli-slide {
+  flex: 0 0 var(--card);
+  min-width: 0;
+  scroll-snap-align: center;
+  margin: 0;
+  scroll-snap-stop: always;
+  transition: filter .45s ease, opacity .45s ease;
+}
+.cli-slide:not(.is-active) { filter: saturate(.55) brightness(.8); cursor: pointer; }
+.cli-slide:not(.is-active):hover { filter: saturate(.75) brightness(.9); }
+.cli-slide .cli-caption { transition: opacity .35s ease; }
+.cli-slide:not(.is-active) .cli-caption { opacity: 0; }
+.cli-slide .cli-media {
+  display: grid;
+  align-content: center;
+  box-sizing: border-box;
+  height: calc((var(--card) - 2 * var(--frame-x-pad)) * var(--tallest) + 2 * var(--frame-y-pad));
+}
+.cli-slide .cli-caption { margin-right: calc(var(--frame-x-pad) + var(--arrows)); }
+.cli-arrows {
+  position: absolute;
+  right: calc((100% - var(--card)) / 2 + var(--frame-x-pad) - 12px);
+  bottom: -6px;
+  display: flex;
+  gap: 4px;
+}
+.cli-arrow {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink-str);
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, opacity .2s ease;
+}
+.cli-arrow:hover { background: color-mix(in srgb, var(--ink-str) 7%, transparent); color: #d2441d; }
+.cli-arrow:focus-visible { outline: 2px solid var(--ink-str); outline-offset: 2px; }
+.cli-arrow[aria-disabled="true"] { opacity: .3; cursor: default; }
+.cli-arrow[aria-disabled="true"]:hover { background: transparent; color: var(--ink-str); }
+.cli-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.cli-carousel + .cli-prose { margin-top: clamp(40px, 5vw, 64px); }
+
+@media (max-width: 1023px) {
+  .cli-carousel { --frame-x-pad: 40px; --frame-y-pad: 48px; }
+}
+@media (max-width: 639px) {
+  .cli-carousel { --frame-x-pad: 12px; --frame-y-pad: 48px; --peek: 20px; --tallest: 1218 / 814; }
+  .cli-slide .cli-caption { margin-right: var(--frame-x-pad); }
+  .cli-arrows {
+    position: static;
+    justify-content: flex-end;
+    width: var(--card);
+    margin: 8px auto 0;
+  }
+}
+
+/* MCP: a single card in the same frame, then Add to Claude. */
+.mcp-showcase {
+  padding-block: 0 clamp(72px, 9vw, 128px);
+  color: var(--ink);
+  background: var(--bg);
+  font: 400 16px/28px var(--sans);
+}
+.section-intro { gap: 0; }
+.section-intro h2 {
+  margin: 0;
+  color: var(--ink-str);
+  font-size: clamp(30px, 3vw, 42px);
+  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: -.047em;
+}
+.section-intro p {
+  max-width: 56ch;
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.58;
+  text-wrap: pretty;
+}
+.mcp-stage {
+  --frame-x-pad: 48px;
+  --frame-y-pad: 56px;
+  container-type: inline-size;
+  margin-top: clamp(28px, 3.5vw, 44px);
+}
+.mcp-stage .cli-demo {
+  width: min(976px, calc(100cqw - 2 * clamp(16px, 8vw, 128px)));
+  margin-inline: auto;
+}
+.mcp-cta { margin-top: clamp(24px, 3vw, 36px); }
+.mcp-claude {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 48px;
+  padding-inline: 18px 16px;
+  border-radius: 8px;
+  background: #d2441d;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color .2s ease;
+}
+.mcp-claude:hover { background: #b83815; color: #fff; }
+.mcp-claude:focus-visible { outline: 2px solid var(--ink-str); outline-offset: 3px; }
+.mcp-claude svg { flex: none; transition: transform .2s ease; }
+.mcp-claude:hover svg { transform: translateX(3px); }
+.cli-media--mcp {
+  --frame-light: radial-gradient(ellipse at 16% -8%, #b0644099, transparent 66%);
+  --frame-shade: radial-gradient(ellipse at 108% 92%, #1f0d09, transparent 72%);
+  --frame-base: linear-gradient(232deg, #2a120d, #6b2a17 52%, #9a4524);
+}
+[data-theme="dark"] .cli-media--mcp {
+  --frame-base: linear-gradient(232deg, #1f110e, #4f2316 55%, #74361f);
+  --frame-light: radial-gradient(ellipse at 16% -8%, #8a4c3380, transparent 66%);
+  --frame-shade: radial-gradient(ellipse at 108% 92%, #170b09, transparent 72%);
+}
+.cli-media--mcp .cli-window { background: #191919; background-image: none; }
+.cli-media--mcp .cli-window :is(video, img) { mix-blend-mode: normal; }
+@media (max-width: 1023px) {
+  .mcp-stage { --frame-x-pad: 40px; --frame-y-pad: 48px; }
+}
+@media (max-width: 639px) {
+  .mcp-stage { --frame-x-pad: 12px; --frame-y-pad: 48px; }
+  .mcp-stage .cli-demo { width: calc(100cqw - 40px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cli-slide, .cli-arrow, .mcp-claude, .mcp-claude svg { transition: none; }
+  .cli-track { scroll-behavior: auto; }
+}
+
+.cli-intro { margin-bottom: clamp(28px, 3.5vw, 44px); }
+
+/* Headings, install note and button line up with the window edge inside the cards. */
+.cli-showcase, .mcp-showcase { container-type: inline-size; --peek: clamp(16px, 8vw, 128px); --fx: 48px; }
+.cli-showcase > .cli-prose, .mcp-showcase > .cli-prose {
+  width: calc(min(976px, 100cqw - 2 * var(--peek)) - 2 * var(--fx));
+  margin-inline: auto;
+}
+@media (max-width: 1023px) { .cli-showcase, .mcp-showcase { --fx: 40px; } }
+@media (max-width: 639px) { .cli-showcase, .mcp-showcase { --fx: 12px; --peek: 20px; } }

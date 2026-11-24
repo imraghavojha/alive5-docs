@@ -4,7 +4,7 @@
     "title": "Developer documentation",
     "page": "home",
     "section": "start",
-    "before": "<!doctype html>\n<html lang=\"en\">\n  <head>\n    <script>(()=>{let t;try{t=localStorage.getItem(\"a5-theme\")}catch{}document.documentElement.dataset.theme=t===\"light\"||t===\"dark\"?t:matchMedia(\"(prefers-color-scheme: dark)\").matches?\"dark\":\"light\"})();</script>\n    <meta name=\"color-scheme\" content=\"light dark\">\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <title>Developer documentation · Alive5 Docs</title>\n    <meta\n      name=\"description\"\n      content=\"Guides, examples and the API reference for building business messaging on Alive5.\"\n    />\n    <link rel=\"icon\" type=\"image/png\" sizes=\"48x48\" href=\"assets/images/favicon.png\" />\n    <link rel=\"stylesheet\" href=\"assets/styles.css\" />\n    <link rel=\"stylesheet\" href=\"assets/shell.css\" />\n    <script defer src=\"assets/site.js\"></script>\n    <script defer src=\"assets/shell.js\"></script>\n    <script type=\"speculationrules\">\n      {\"prefetch\":[{\"where\":{\"and\":[{\"href_matches\":\"{*.html}\",\"relative_to\":\"document\"},{\"not\":{\"selector_matches\":\"[target=_blank], [href*=\\\"#\\\"], [download]\"}}]},\"eagerness\":\"moderate\"}]}\n    </script>\n    <link rel=\"canonical\" href=\"https://imraghavojha.github.io/alive5-docs/\" />\n    <meta property=\"og:title\" content=\"Developer documentation · Alive5 Docs\" />\n    <meta property=\"og:description\" content=\"Guides, examples and the API reference for building business messaging on Alive5.\" />\n    <meta property=\"og:url\" content=\"https://imraghavojha.github.io/alive5-docs/\" />\n    <meta property=\"og:type\" content=\"website\" />\n    <meta property=\"og:site_name\" content=\"Alive5 Docs\" />\n    <meta property=\"og:image\" content=\"https://imraghavojha.github.io/alive5-docs/assets/images/og.png\" />\n    <meta property=\"og:image:width\" content=\"1200\" />\n    <meta property=\"og:image:height\" content=\"630\" />\n    <meta property=\"og:image:alt\" content=\"Alive5 Developer Documentation. Build messaging into your applications.\" />\n    <meta name=\"twitter:card\" content=\"summary_large_image\" />\n    <meta name=\"twitter:title\" content=\"Developer documentation · Alive5 Docs\" />\n    <meta name=\"twitter:description\" content=\"Guides, examples and the API reference for building business messaging on Alive5.\" />\n    <meta name=\"twitter:image\" content=\"https://imraghavojha.github.io/alive5-docs/assets/images/og.png\" />\n    <meta name=\"twitter:image:alt\" content=\"Alive5 Developer Documentation. Build messaging into your applications.\" />\n  </head>\n  <body data-root=\"\" data-page=\"home\" data-section=\"start\">\n    <a class=\"skip\" href=\"#main\">Skip to content</a>\n    <header data-header></header>\n\n    <main id=\"main\">",
+    "before": "<!doctype html>\n<html lang=\"en\">\n  <head>\n    <!-- Opt into view transitions before linked styles load. -->\n    <style>@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }</style>\n    <script>(()=>{let t;try{t=localStorage.getItem(\"a5-theme\")}catch{}document.documentElement.dataset.theme=t===\"light\"||t===\"dark\"?t:matchMedia(\"(prefers-color-scheme: dark)\").matches?\"dark\":\"light\"})();</script>\n    <meta name=\"color-scheme\" content=\"light dark\">\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <title>Developer documentation · Alive5 Docs</title>\n    <meta\n      name=\"description\"\n      content=\"Guides, examples and the API reference for building business messaging on Alive5.\"\n    />\n    <link rel=\"icon\" type=\"image/png\" sizes=\"48x48\" href=\"assets/images/favicon.png\" />\n    <link rel=\"stylesheet\" href=\"assets/styles.css\" />\n    <link rel=\"stylesheet\" href=\"assets/shell.css\" />\n    <script defer src=\"assets/site.js\"></script>\n    <script defer src=\"assets/shell.js\"></script>\n    <script type=\"speculationrules\">\n      {\"prefetch\":[{\"where\":{\"and\":[{\"href_matches\":\"{*.html}\",\"relative_to\":\"document\"},{\"not\":{\"selector_matches\":\"[target=_blank], [href*=\\\"#\\\"], [download]\"}}]},\"eagerness\":\"moderate\"}]}\n    </script>\n    <link rel=\"canonical\" href=\"https://imraghavojha.github.io/alive5-docs/\" />\n    <meta property=\"og:title\" content=\"Developer documentation · Alive5 Docs\" />\n    <meta property=\"og:description\" content=\"Guides, examples and the API reference for building business messaging on Alive5.\" />\n    <meta property=\"og:url\" content=\"https://imraghavojha.github.io/alive5-docs/\" />\n    <meta property=\"og:type\" content=\"website\" />\n    <meta property=\"og:site_name\" content=\"Alive5 Docs\" />\n    <meta property=\"og:image\" content=\"https://imraghavojha.github.io/alive5-docs/assets/images/og.png\" />\n    <meta property=\"og:image:width\" content=\"1200\" />\n    <meta property=\"og:image:height\" content=\"630\" />\n    <meta property=\"og:image:alt\" content=\"Alive5 Developer Documentation. Build messaging into your applications.\" />\n    <meta name=\"twitter:card\" content=\"summary_large_image\" />\n    <meta name=\"twitter:title\" content=\"Developer documentation · Alive5 Docs\" />\n    <meta name=\"twitter:description\" content=\"Guides, examples and the API reference for building business messaging on Alive5.\" />\n    <meta name=\"twitter:image\" content=\"https://imraghavojha.github.io/alive5-docs/assets/images/og.png\" />\n    <meta name=\"twitter:image:alt\" content=\"Alive5 Developer Documentation. Build messaging into your applications.\" />\n  </head>\n  <body data-root=\"\" data-page=\"home\" data-section=\"start\">\n    <a class=\"skip\" href=\"#main\">Skip to content</a>\n    <header data-header></header>\n\n    <main id=\"main\">",
     "after": "</main>\n    <footer data-docfoot class=\"home-foot\"></footer>\n    <script type=\"module\" src=\"assets/cli-preview.js\"></script>\n  </body>\n</html>\n",
     "tree": {
       "open": "",
@@ -245,18 +245,17 @@
                       "type": "bulleted_list_item",
                       "open": "<li class=\"coming-soon\">",
                       "close": "</li>",
-                      "html": "<li class=\"coming-soon\">\n              <a href=\"introducing/\">Alive5 CLI</a><small>Coming soon</small>\n            </li>",
-                      "inner": "\n              <a href=\"introducing/\">Alive5 CLI</a><small>Coming soon</small>\n            ",
-                      "signature": "c69d6e281f7ee960ec5c375cf1ec5b0abba14e734d4b632e20fc97a6716dbadb"
+                      "html": "<li class=\"coming-soon\">\n              <a href=\"introducing/\">Alive5 CLI and MCP</a> <small>Coming soon</small>\n            </li>",
+                      "inner": "\n              <a href=\"introducing/\">Alive5 CLI and MCP</a> <small>Coming soon</small>\n            ",
+                      "signature": "17f6beb5f67af0ad26bd2e1baadbcf0aff28bd4ef1f05d732fa53b110c7ef741",
+                      "previousSignature": "c69d6e281f7ee960ec5c375cf1ec5b0abba14e734d4b632e20fc97a6716dbadb"
                     },
-                    "\n            ",
                     {
                       "key": "block-16",
                       "type": "bulleted_list_item",
                       "open": "<li class=\"coming-soon\">",
                       "close": "</li>",
-                      "html": "<li class=\"coming-soon\">\n              <span>Alive5 MCP</span><small>Coming soon</small>\n            </li>",
-                      "inner": "\n              <span>Alive5 MCP</span><small>Coming soon</small>\n            ",
+                      "html": "",
                       "signature": "0b888a1a60294f243dbfc2ca1bcab79e2746d3abcaecb677467b9911512e2468"
                     },
                     "\n          "
@@ -1559,17 +1558,17 @@
         "type": "bulleted_list_item",
         "open": "<li class=\"coming-soon\">",
         "close": "</li>",
-        "html": "<li class=\"coming-soon\">\n              <a href=\"introducing/\">Alive5 CLI</a><small>Coming soon</small>\n            </li>",
-        "inner": "\n              <a href=\"introducing/\">Alive5 CLI</a><small>Coming soon</small>\n            ",
-        "signature": "c69d6e281f7ee960ec5c375cf1ec5b0abba14e734d4b632e20fc97a6716dbadb"
+        "html": "<li class=\"coming-soon\">\n              <a href=\"introducing/\">Alive5 CLI and MCP</a> <small>Coming soon</small>\n            </li>",
+        "inner": "\n              <a href=\"introducing/\">Alive5 CLI and MCP</a> <small>Coming soon</small>\n            ",
+        "signature": "17f6beb5f67af0ad26bd2e1baadbcf0aff28bd4ef1f05d732fa53b110c7ef741",
+        "previousSignature": "c69d6e281f7ee960ec5c375cf1ec5b0abba14e734d4b632e20fc97a6716dbadb"
       },
       "block-16": {
         "key": "block-16",
         "type": "bulleted_list_item",
         "open": "<li class=\"coming-soon\">",
         "close": "</li>",
-        "html": "<li class=\"coming-soon\">\n              <span>Alive5 MCP</span><small>Coming soon</small>\n            </li>",
-        "inner": "\n              <span>Alive5 MCP</span><small>Coming soon</small>\n            ",
+        "html": "",
         "signature": "0b888a1a60294f243dbfc2ca1bcab79e2746d3abcaecb677467b9911512e2468"
       },
       "block-17": {

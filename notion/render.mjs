@@ -42,7 +42,9 @@ function renderBlock(b, template, path) {
   const d = b[b.type] || {};
   const leaf = template.leaves[b.id];
   const same = leaf?.type === b.type;
-  const unchanged = same && leaf.signature === signature(b);
+  const currentSignature = same && signature(b);
+  // A published template can replace seeded content before the Notion block is updated.
+  const unchanged = same && (currentSignature === leaf.signature || currentSignature === leaf.previousSignature);
   const sub = live(d.children || []);
   if (leaf?.widget && b.type === 'callout') return leaf.html;
   if (b.type === 'callout') {

@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Opt into view transitions before linked styles load. -->
+    <style>@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }</style>
     <script>(()=>{let t;try{t=localStorage.getItem("a5-theme")}catch{}document.documentElement.dataset.theme=t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"})();</script>
     <meta name="color-scheme" content="light dark">
     <meta charset="utf-8" />
@@ -96,10 +98,7 @@
             <li><a href="api/authentication.html">Set up authentication</a></li>
             <li><a href="api/contacts.html">Work with contacts</a></li>
             <li class="coming-soon">
-              <a href="introducing/">Alive5 CLI</a><small>Coming soon</small>
-            </li>
-            <li class="coming-soon">
-              <span>Alive5 MCP</span><small>Coming soon</small>
+              <a href="introducing/">Alive5 CLI and MCP</a> <small>Coming soon</small>
             </li>
           </ul>
         </div>

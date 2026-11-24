@@ -84,10 +84,10 @@ function buildOrbit({start, end, scale, period, degrees, diamond, satellite, lab
 
 // Marker angles in the settled reference frame, measured clockwise from the right.
 const rings = [
-  {start: "Texts", end: "Wait", scale: 1.5, period: -250, degrees: -51.985, diamond: "#fec63a", satellite: "#fbd679"},
-  {start: "Inbox", end: "", scale: 1.38, period: 300, degrees: -131.842, diamond: "#44ba82", satellite: "#94eacc"},
-  {start: "JSON", end: "Read", scale: 1.1, period: -220, degrees: -115.370, diamond: "#55b3fb", satellite: "#55b3fb", labelY: -28},
-  {start: "Agents", end: "Reply", scale: .75, period: 260, degrees: -66.709, diamond: "#fa500f", satellite: "#ff8204"}
+  {start: "", end: "Wait", scale: 1.5, period: -250, degrees: -51.985, diamond: "#fec63a", satellite: "#fbd679"},
+  {start: "", end: "", scale: 1.38, period: 300, degrees: -131.842, diamond: "#44ba82", satellite: "#94eacc"},
+  {start: "", end: "Read", scale: 1.1, period: -220, degrees: -115.370, diamond: "#55b3fb", satellite: "#55b3fb", labelY: -28},
+  {start: "", end: "Reply", scale: .75, period: 260, degrees: -66.709, diamond: "#fa500f", satellite: "#ff8204"}
 ].map(buildOrbit);
 svg(lines("orbit-inner"), "ellipse", {class: "inner", cx: 415.412, cy, rx: 261.064, ry: 261.832});
 orbits.append(moving);
@@ -206,7 +206,7 @@ function measure() {
     const label = ring.labelBounds;
     const x = Math.min(initial.x, label.x);
     const y = Math.min(initial.y, label.y);
-    ring.introBounds = label.width ? {x, y,
+    ring.introBounds = !initial.width ? label : label.width ? {x, y,
       width: Math.max(initial.x + initial.width, label.x + label.width) - x,
       height: Math.max(initial.y + initial.height, label.y + label.height) - y
     } : initial;
@@ -714,7 +714,7 @@ let playingDemo;
 
 function setupDemo(video) {
   const frame = video.closest(".demo-frame");
-  const toggle = frame.querySelector(".demo-toggle");
+  const toggle = frame.querySelector(".demo-toggle") ?? document.createElement("button");
   const label = video.getAttribute("aria-label");
   const poster = frame.querySelector(".demo-poster");
   const image = poster.querySelector("img");
@@ -1019,4 +1019,71 @@ reducedMotion.addEventListener("change", syncShowcase);
 mobileDemos.addEventListener("change", syncShowcase);
 if (mobileMenu) {
   new MutationObserver(syncShowcase).observe(mobileMenu, {attributeFilter: ["hidden"]});
+}
+
+const cliTrack = document.querySelector(".cli-track");
+if (cliTrack) {
+  const slides = [...cliTrack.querySelectorAll(".cli-slide")];
+  const previous = document.querySelector("[data-cli-prev]");
+  const next = document.querySelector("[data-cli-next]");
+  const status = document.querySelector("[data-cli-status]");
+  let active = -1;
+  let scrollFrame;
+
+  function nearestSlide() {
+    const center = cliTrack.scrollLeft + cliTrack.clientWidth / 2;
+    let best = 0;
+    let distance = Infinity;
+    slides.forEach((slide, i) => {
+      const gap = Math.abs(slide.offsetLeft + slide.offsetWidth / 2 - center);
+      if (gap < distance) {
+        distance = gap;
+        best = i;
+      }
+    });
+    return best;
+  }
+
+  function updateSlides() {
+    const current = nearestSlide();
+    if (current === active) return;
+    const announce = active >= 0;
+    active = current;
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("is-active", i === active);
+      slide.setAttribute("aria-hidden", String(i !== active));
+    });
+    previous.setAttribute("aria-disabled", String(active === 0));
+    next.setAttribute("aria-disabled", String(active === slides.length - 1));
+    if (announce) status.textContent = `Demo ${active + 1} of ${slides.length}`;
+  }
+
+  function goTo(index, instant = false) {
+    const slide = slides[Math.max(0, Math.min(slides.length - 1, index))];
+    cliTrack.scrollTo({
+      left: slide.offsetLeft + slide.offsetWidth / 2 - cliTrack.clientWidth / 2,
+      behavior: instant || reducedMotion.matches ? "auto" : "smooth"
+    });
+  }
+
+  previous.addEventListener("click", () => goTo(active - 1));
+  next.addEventListener("click", () => goTo(active + 1));
+  cliTrack.addEventListener("click", event => {
+    const slide = event.target.closest(".cli-slide");
+    if (slide && !slide.classList.contains("is-active")) goTo(slides.indexOf(slide));
+  });
+  cliTrack.closest(".cli-carousel").addEventListener("keydown", event => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    goTo(active + (event.key === "ArrowLeft" ? -1 : 1));
+  });
+  cliTrack.addEventListener("scroll", () => {
+    if (scrollFrame !== undefined) return;
+    scrollFrame = requestAnimationFrame(() => {
+      scrollFrame = undefined;
+      updateSlides();
+    });
+  }, {passive: true});
+  window.addEventListener("resize", () => goTo(active, true));
+  updateSlides();
 }
