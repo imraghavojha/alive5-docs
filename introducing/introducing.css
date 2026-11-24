@@ -553,7 +553,7 @@ html { scrollbar-gutter: stable; }
   width: min(976px, calc(100cqw - 2 * clamp(16px, 8vw, 128px)));
   margin-inline: auto;
 }
-.mcp-cta { margin-top: clamp(24px, 3vw, 36px); }
+.mcp-cta { align-items: flex-start; margin-top: clamp(24px, 3vw, 36px); }
 .mcp-claude {
   display: inline-flex;
   align-items: center;
