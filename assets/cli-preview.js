@@ -3,138 +3,78 @@ import { drawLogo, theme, syncTheme } from "./cli-art.js";
 const root = document.querySelector("[data-cli-preview]");
 if (root) {
   const canvas = root.querySelector("canvas");
+  const scroll = root.querySelector(".shell-scroll");
   const context = canvas.getContext("2d");
-  const button = root.querySelector("[data-cli-motion]");
-  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-  let paused = reduced.matches;
-  let visible = false;
-  let timer;
-  let time = 0;
-  let previous = 0;
-  let width = 84;
+  const columns = 34;
+  const rows = 5;
+  const padding = 4;
   let cellWidth = 9;
-  const cellHeight = 14;
+  let cellHeight = 18;
 
-  function paintCell(x, y, ch, fg = theme.ink, bg = theme.bg, bold = false) {
-    context.fillStyle = bg;
-    context.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+  const corners = { "╭": [1, 1], "╮": [-1, 1], "╰": [1, -1], "╯": [-1, -1] };
+
+  function paintCell(x, y, ch, fg = theme.ink) {
+    const left = x * cellWidth;
+    const top = y * cellHeight + padding;
+    const cx = left + cellWidth / 2;
+    const cy = top + cellHeight / 2;
     context.fillStyle = fg;
-    if (ch === "▀" || ch === "▄") {
+    if (ch === "█" || ch === "▀" || ch === "▄") {
       const half = cellHeight / 2;
-      context.fillRect(x * cellWidth, y * cellHeight + (ch === "▄" ? half : 0), cellWidth, half);
-      return;
+      context.fillRect(left, ch === "▄" ? cy : top, cellWidth, ch === "█" ? cellHeight : half);
+    } else if (ch === "─") {
+      context.fillRect(left, cy - 0.5, cellWidth, 1);
+    } else if (ch === "│") {
+      context.fillRect(cx - 0.5, top, 1, cellHeight);
+    } else if (corners[ch]) {
+      const [horizontal, vertical] = corners[ch];
+      const radius = cellWidth / 3;
+      context.beginPath();
+      context.moveTo(cx + horizontal * cellWidth / 2, cy);
+      context.lineTo(cx + horizontal * radius, cy);
+      context.quadraticCurveTo(cx, cy, cx, cy + vertical * radius);
+      context.lineTo(cx, cy + vertical * cellHeight / 2);
+      context.strokeStyle = fg;
+      context.stroke();
+    } else if (ch !== " ") {
+      context.fillText(ch, cx, cy, cellWidth);
     }
-    // Terminal box-drawing characters join at cell boundaries, independent of font metrics.
-    const box = {
-      "┌": [0, 1, 0, 1],
-      "┐": [1, 0, 0, 1],
-      "└": [0, 1, 1, 0],
-      "┘": [1, 0, 1, 0],
-      "┬": [1, 1, 0, 1],
-      "─": [1, 1, 0, 0],
-      "│": [0, 0, 1, 1],
-      "╭": [0, 1, 0, 1],
-      "╮": [1, 0, 0, 1],
-      "╰": [0, 1, 1, 0],
-      "╯": [1, 0, 1, 0],
-    }[ch];
-    if (box) {
-      const cx = (x + 0.5) * cellWidth,
-        cy = (y + 0.5) * cellHeight;
-      if (box[0]) context.fillRect(x * cellWidth, cy, cellWidth / 2 + 0.5, 1);
-      if (box[1]) context.fillRect(cx, cy, cellWidth / 2, 1);
-      if (box[2]) context.fillRect(cx, y * cellHeight, 1, cellHeight / 2 + 0.5);
-      if (box[3]) context.fillRect(cx, cy, 1, cellHeight / 2);
-      return;
-    }
-    context.font = `${bold ? "600" : "400"} 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`;
-    context.fillText(ch, (x + 0.5) * cellWidth, y * cellHeight + 11, cellWidth);
   }
+
   function render() {
     syncTheme();
+    context.clearRect(0, 0, columns * cellWidth, rows * cellHeight + padding * 2);
     context.textAlign = "center";
-    context.fillStyle = theme.bg;
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.textBaseline = "middle";
+    context.font = `${cellWidth * 1.55}px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`;
     drawLogo(
       {
-        put: (x, y, text, ...style) =>
-          [...text].forEach((ch, col) => paintCell(x + col, y, ch, ...style)),
+        put: (x, y, text, fg) =>
+          [...text].forEach((ch, col) => paintCell(x + col, y, ch, fg)),
         theme,
       },
-      {
-        x: 1,
-        y: 1,
-        width: width - 2,
-        height: 5,
-        time,
-        motion: paused ? "off" : "full",
-        section: root.dataset.cliSection || undefined,
-      },
+      { x: 0, y: 0, width: columns, height: rows, variant: "frame", mascot: "wave", effect: "plain" },
     );
   }
+
   function resize() {
-    const available = root.querySelector(".shell-scroll").clientWidth - 32;
-    width = Math.max(28, Math.min(80, Math.floor(available / 9)));
-    cellWidth = Math.max(1, Math.min(10, Math.floor(available / width)));
-    const logicalWidth = width * cellWidth;
-    const logicalHeight = cellHeight * 7;
+    cellWidth = Math.min(9, Math.max(1, Math.floor((scroll.clientWidth - 32) / columns)));
+    cellHeight = cellWidth * 2;
+    const width = columns * cellWidth;
+    const height = rows * cellHeight + padding * 2;
     const ratio = Math.min(devicePixelRatio || 1, 2);
-    canvas.width = Math.round(logicalWidth * ratio);
-    canvas.height = logicalHeight * ratio;
-    canvas.style.width = `${logicalWidth}px`;
-    canvas.style.height = `${logicalHeight}px`;
+    canvas.width = Math.round(width * ratio);
+    canvas.height = Math.round(height * ratio);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
     render();
   }
-  function schedule() {
-    clearTimeout(timer);
-    button.disabled = reduced.matches;
-    const label = reduced.matches
-      ? "Animation disabled by reduced motion preference"
-      : paused
-        ? "Play animation"
-        : "Pause animation";
-    button.setAttribute("aria-label", label);
-    button.title = label;
-    button.querySelector("span").textContent = paused ? "▷" : "Ⅱ";
-    if (reduced.matches || paused || !visible || document.hidden) {
-      previous = 0;
-      return;
-    }
-    timer = setTimeout(() => {
-      const now = performance.now();
-      if (previous) time += Math.min((now - previous) / 1000, 0.3);
-      previous = now;
-      render();
-      schedule();
-    }, 40);
-  }
-  root.addEventListener("cli-section-change", () => {
-    time = 0;
-    render();
-    schedule();
-  });
-  button.addEventListener("click", () => {
-    if (reduced.matches) return;
-    paused = !paused;
-    schedule();
-  });
-  reduced.addEventListener("change", () => {
-    if (reduced.matches) paused = true;
-    time = 0;
-    render();
-    schedule();
-  });
-  document.addEventListener("visibilitychange", schedule);
+
   new MutationObserver(render).observe(document.documentElement, {
     attributes: true,
     attributeFilter: ["data-theme"],
   });
-  new ResizeObserver(resize).observe(root);
-  new IntersectionObserver(([entry]) => {
-    visible = entry.isIntersecting;
-    schedule();
-  }).observe(canvas);
+  new ResizeObserver(resize).observe(scroll);
   resize();
-  schedule();
 }

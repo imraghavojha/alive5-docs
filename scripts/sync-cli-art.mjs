@@ -1,4 +1,4 @@
-// Sync the shared wordmark renderer. The browser supplies its own theme and mascot.
+// Sync the CLI banner renderer. The browser supplies the docs theme.
 import { writeFile, mkdir, realpath, stat } from "node:fs/promises";
 import { dirname, resolve, join, relative, sep } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -22,11 +22,13 @@ function readSource(name) {
 }
 
 const files = new Map();
-files.set(
-  "logo.js",
-  `// Synced from alive5-cli ${revision}; use scripts/sync-cli-art.mjs to update.\n` +
-    readSource("logo.js").replaceAll("'./screen.js'", "'./theme.js'"),
-);
+for (const name of ["logo.js", "mascot.js"]) {
+  files.set(
+    name,
+    `// Synced from alive5-cli ${revision}; use scripts/sync-cli-art.mjs to update.\n` +
+      readSource(name).replaceAll("'./screen.js'", "'./theme.js'"),
+  );
+}
 const screen = readSource("screen.js");
 const mixStart = screen.indexOf("export const mix =");
 const mixEnd = screen.indexOf("const sgrCache");

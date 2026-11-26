@@ -1,4 +1,4 @@
-// Synced from alive5-cli 880a2f675378490c458a9d4a881aa7d9badbf94d; use scripts/sync-cli-art.mjs to update.
+// Synced from alive5-cli f3e04ebeec24ff08ba1622dcd3aab7298dd5253d; use scripts/sync-cli-art.mjs to update.
 // FIGlet output via pyfiglet: Small, Small Slant and Bigfig by Glenn Chappell;
 // Small/Small Slant updates by Paul Burton; Rectangles by David Villegas.
 import { mix } from './theme.js';
@@ -64,7 +64,7 @@ export const logos = [
   {
     id: 'type',
     name: 'Wordmark',
-    description: 'Simple type with an orange 5.',
+    description: 'Simple type in a single line.',
     lines: [WORDMARK],
     fiveFrom: null,
     wide: true,
@@ -116,7 +116,7 @@ export function drawLogo(
     height = LOGO_HEIGHT,
     time = 0,
     motion = 'full',
-    effect = 'cosmos',
+    effect = 'plain',
     variant = 'frame',
     mascot,
     section,
@@ -125,16 +125,18 @@ export function drawLogo(
   const theme = screen.theme;
   const logo = logoById(variant);
   const character = mascotById(mascot);
-  // Keep the default label on small terminals. Other wordmarks can fall
-  // back to plain text to leave room for the section animations.
-  const gap = logo.id === 'frame' ? 2 : 9;
+  const plain = effect === 'plain';
+  // Keep the still Label and Wave together at the reference's four-cell gap.
+  if (plain && logo.id === 'frame' && character.id === 'wave') width = Math.min(width, 34);
+  // The compact section cue occupies four cells beside the mascot.
+  const gap = 4;
   const fits =
     Math.max(...logo.lines.map((line) => line.length)) <= mascotLeft(width, character) - gap;
   const lines = fits ? logo.lines : [WORDMARK];
   const fiveFrom = fits && lines.length > 1 ? logo.fiveFrom : null;
   const artWidth = Math.max(...lines.map((line) => line.length));
   const top = y + Math.floor((height - lines.length) / 2);
-  const animated = motion === 'full' || (motion === 'subtle' && time < 0.85);
+  const animated = !plain && (motion === 'full' || (motion === 'subtle' && time < 0.85));
   const t = animated ? time : 0;
   const scene = {
     screen,
@@ -158,7 +160,7 @@ export function drawLogo(
   lines.forEach((line, row) => {
     [...line].forEach((char, col) => {
       if (char === ' ') return;
-      let fg = isNumeral(fiveFrom, char, col) ? theme.orange : theme.ink;
+      let fg = !plain && isNumeral(fiveFrom, char, col) ? theme.orange : theme.ink;
       if (animated && effect === 'signal') {
         const sweep = ((t * 9) % (artWidth + 12)) - 6;
         fg = mix(fg, theme.hot, Math.max(0, 1 - Math.abs(col - sweep) / 3) * 0.65);

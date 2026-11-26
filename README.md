@@ -27,7 +27,7 @@ Every Alive5 developer guide in one place: the REST API, connectors, chat widget
 
 ## Updating the CLI preview
 
-Run `node scripts/sync-cli-art.mjs /path/to/alive5-cli` to refresh the shared wordmark renderer and palette helpers. The preview uses the docs theme and the colored Waving Buddy sprite in `assets/cli/mascots/wave.js`.
+Run `node scripts/sync-cli-art.mjs /path/to/alive5-cli` to refresh the shared banner renderer and palette helpers. The preview shows the CLI’s boxed Alive5 wordmark and still, monochrome Wave in the current docs theme.
 
 ## Editing through Notion
 
