@@ -27,7 +27,7 @@ Every Alive5 developer guide in one place: the REST API, connectors, chat widget
 
 ## Updating the CLI preview
 
-Run `node scripts/sync-cli-art.mjs /path/to/alive5-cli` to refresh the shared banner renderer and palette helpers. The preview shows the CLI’s boxed Alive5 wordmark and still, monochrome Wave in the current docs theme.
+Run `node scripts/sync-cli-art.mjs /path/to/alive5-cli` to refresh the shared banner renderer and palette helpers. The preview shows the CLI’s boxed Alive5 wordmark and compact monochrome Wave in the current docs theme. Wave animates and shows command cues when motion is enabled.
 
 ## Editing through Notion
 

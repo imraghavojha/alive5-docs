@@ -320,6 +320,20 @@ function wireShell() {
     inputWidth = entry.contentRect.width;
     fit();
   }).observe(input);
+  const preview = root.querySelector("[data-cli-preview]");
+  const setMascotSection = (command) => {
+    const [, resource, action] = command.trim().split(/\s+/);
+    preview.dataset.cliSection = ({
+      sms: action === "send" ? "compose" : "messages",
+      conversations: "conversations",
+      contacts: "contacts",
+      channels: "contacts",
+      users: "contacts",
+      tags: "contacts",
+      inbox: "inbox",
+    })[resource] || "";
+    preview.dispatchEvent(new Event("cli-section-change"));
+  };
   const stage = (index, focus = true) => {
     const op = OPS[index];
     buttons.forEach((b, i) => {
@@ -330,6 +344,7 @@ function wireShell() {
       .querySelector(".shell")
       .setAttribute("aria-labelledby", `shell-tab-${index}`);
     input.value = op.cmd;
+    setMascotSection(op.cmd);
     fit();
     foot.href = href(op.doc);
     foot.textContent = op.docLabel;
@@ -357,6 +372,7 @@ function wireShell() {
       fit();
       return;
     }
+    setMascotSection(command);
     history.push(command);
     if (history.length > 40) history.shift();
     historyIndex = history.length;
