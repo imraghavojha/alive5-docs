@@ -1,4 +1,4 @@
-// Sync the dependency-free renderer and frames from an Alive5 CLI checkout.
+// Sync the shared wordmark renderer. The browser supplies its own theme and mascot.
 import { writeFile, mkdir, realpath, stat } from "node:fs/promises";
 import { dirname, resolve, join, relative, sep } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -22,18 +22,11 @@ function readSource(name) {
 }
 
 const files = new Map();
-for (const name of [
+files.set(
   "logo.js",
-  "mascot.js",
-  "mascots/isometric-desktop.js",
-  "mascots/pocket-macintosh.js",
-]) {
-  files.set(
-    name,
-    `// Synced from alive5-cli ${revision}; use scripts/sync-cli-art.mjs to update.\n` +
-      readSource(name).replaceAll("'./screen.js'", "'./theme.js'"),
-  );
-}
+  `// Synced from alive5-cli ${revision}; use scripts/sync-cli-art.mjs to update.\n` +
+    readSource("logo.js").replaceAll("'./screen.js'", "'./theme.js'"),
+);
 const screen = readSource("screen.js");
 const mixStart = screen.indexOf("export const mix =");
 const mixEnd = screen.indexOf("const sgrCache");
@@ -64,7 +57,7 @@ for (const [name, content] of files) {
   }
 }
 
-await mkdir(join(output, "mascots"), { recursive: true });
+await mkdir(output, { recursive: true });
 for (const [name, content] of files) {
   await writeFile(join(output, name), content);
 }

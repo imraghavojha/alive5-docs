@@ -9,7 +9,7 @@ html { scrollbar-gutter: stable; }
   --chrome-height: calc(var(--bar-h) + var(--menu-h));
   --frame-x: 56px;
   --frame-y: 120px;
-  --sprite: 120px;
+  --pixel-scale: 4;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -113,14 +113,15 @@ html { scrollbar-gutter: stable; }
 .orbit-pose .initial-label { font-size: 32px; }
 .hero:not(.settled) :is(.frame-edge, .corner, .orbit-caption, .letter) { will-change: transform; }
 .hero:not(.settled) :is(.lockup, h1, .highlight, .orbit-outer, .orbit-dot-layer, .orbit-caption svg) { will-change: opacity; }
-.mascot { position: absolute; width: calc(var(--sprite) * 0.9); aspect-ratio: 18/22; left: 50%; bottom: 0; transform: translateX(-50%); pointer-events: none; }
+/* Hide the sprite's transparent bottom row at the seam with its reflection. */
+.mascot { position: absolute; width: calc(32 * var(--pixel-scale) * 1px); aspect-ratio: 1; left: 50%; bottom: calc(-1 * var(--pixel-scale) * 1px); transform: translateX(-50%); pointer-events: none; }
 .mascot-crop { position: absolute; inset: 0; overflow: hidden; }
 .mascot img { display: block; width: 100%; height: auto; image-rendering: pixelated; }
 .mascot-motion { position: absolute; inset: 0; visibility: hidden; }
 .hero.animated .mascot .sprite-still { visibility: hidden; }
 .hero.animated .mascot-motion { visibility: visible; }
 .reflection {
-  top: 0;
+  top: calc(-1 * var(--pixel-scale) * 1px);
   bottom: auto;
   opacity: .3;
   mask-image: linear-gradient(black 18%, transparent 100%);
@@ -165,7 +166,7 @@ html { scrollbar-gutter: stable; }
 
 @media (max-width: 1023px) {
   .hero .utility { font-size: 13px; }
-  .hero { --frame-x: 32px; --frame-y: 32px; --sprite: 96px; height: auto; min-height: calc(80svh - var(--chrome-height)); }
+  .hero { --frame-x: 32px; --frame-y: 32px; --pixel-scale: 3; height: auto; min-height: calc(80svh - var(--chrome-height)); }
   .lockup { position: relative; inset: auto; align-items: baseline; max-width: none; align-self: start; gap: 12px; margin: 52px 52px 0; padding: 0; font-size: 28px; line-height: 40px; }
   .hero .brand-mark { width: 48px; align-self: start; margin-top: 5px; }
   .hero h1 { position: relative; inset: auto; max-width: 512px; margin: 16px 52px 32px; font-size: 24px; line-height: 33px; }
@@ -180,7 +181,7 @@ html { scrollbar-gutter: stable; }
   .bar-row { padding-inline: 16px; }
 }
 @media (max-width: 639px) {
-  .hero { --frame-x: 20px; --frame-y: 20px; --sprite: 80px; }
+  .hero { --frame-x: 20px; --frame-y: 20px; }
   .hero .corner { width: 20px; height: 20px; top: 13px; right: 13px; }
   .lockup { gap: 8px; margin: 32px 56px 0 40px; font-size: 28px; line-height: 40px; }
   .lockup .title { text-wrap: balance; }

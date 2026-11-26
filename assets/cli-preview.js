@@ -19,6 +19,11 @@ if (root) {
     context.fillStyle = bg;
     context.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
     context.fillStyle = fg;
+    if (ch === "▀" || ch === "▄") {
+      const half = cellHeight / 2;
+      context.fillRect(x * cellWidth, y * cellHeight + (ch === "▄" ? half : 0), cellWidth, half);
+      return;
+    }
     // Terminal box-drawing characters join at cell boundaries, independent of font metrics.
     const box = {
       "┌": [0, 1, 0, 1],
@@ -70,7 +75,7 @@ if (root) {
   function resize() {
     const available = root.querySelector(".shell-scroll").clientWidth - 32;
     width = Math.max(28, Math.min(80, Math.floor(available / 9)));
-    cellWidth = Math.min(10, available / width);
+    cellWidth = Math.max(1, Math.min(10, Math.floor(available / width)));
     const logicalWidth = width * cellWidth;
     const logicalHeight = cellHeight * 7;
     const ratio = Math.min(devicePixelRatio || 1, 2);
@@ -102,7 +107,7 @@ if (root) {
       previous = now;
       render();
       schedule();
-    }, 167);
+    }, 40);
   }
   root.addEventListener("cli-section-change", () => {
     time = 0;

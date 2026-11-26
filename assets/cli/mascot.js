@@ -1,84 +1,80 @@
-// Synced from alive5-cli 4f56f4f8a1ed9b0ec081838fa7f65d5f7192c3bc; use scripts/sync-cli-art.mjs to update.
-import isometric from './mascots/isometric-desktop.js';
-import macintosh from './mascots/pocket-macintosh.js';
-import { mix } from './theme.js';
+import wave from "./mascots/wave.js";
+import { mix } from "./theme.js";
 
-export const mascots = [
-  {
-    ...isometric,
-    id: 'isometric-desktop',
-    name: 'Isometric Desktop',
-    shortName: 'Isometric',
-    description: 'A shaded desktop with a travelling highlight and a friendly blink.',
-  },
-  {
-    ...macintosh,
-    id: 'pocket-macintosh',
-    shortName: 'Pocket Mac',
-    description: 'A little Macintosh with a blinking face and a flickering floppy slot.',
-  },
-];
+// The shared wordmark resolves its mascot through this module.
+export const mascotById = () => wave;
+export const mascotLeft = (width, mascot) => width - mascot.width - 1;
 
-export const mascotById = (id) => mascots.find((item) => item.id === id) || mascots[0];
+const cycle = wave.frames.reduce((sum, frame) => sum + frame.ms, 0);
 
-export function mascotFrame(mascot, time) {
-  let elapsed = Math.max(0, time) * 1000;
-  const duration = mascot.frames.reduce((sum, frame) => sum + (frame.ms || mascot.frameMs), 0);
-  elapsed %= duration;
-  for (const frame of mascot.frames) {
-    const ms = frame.ms || mascot.frameMs;
-    if (elapsed < ms) return frame;
-    elapsed -= ms;
+function frameAt(time) {
+  let elapsed = (time * 1000) % cycle;
+  for (const frame of wave.frames) {
+    if (elapsed < frame.ms) return frame;
+    elapsed -= frame.ms;
   }
-  return mascot.frames[mascot.still || 0];
+  return wave.frames[0];
 }
 
 export function drawMascot({ screen, x, y, width, height, artWidth, t, section }, mascot) {
-  const left = width - mascot.width - 1;
-  const top = Math.floor((height - mascot.height) / 2);
-  if (left < artWidth + 2 || top < 0) return;
-  const theme = screen.theme;
-  const palette = {
-    i: theme.ink,
-    m: theme.muted,
-    f: theme.faint,
-    1: mix(theme.bg, theme.ink, 0.1),
-    2: mix(theme.bg, theme.ink, 0.22),
-  };
-  const frame = mascotFrame(mascot, t);
-  frame.rows.forEach((row, py) =>
-    [...row].forEach((ch, px) => {
-      const fg = palette[frame.fg[py][px]] || theme.ink;
-      const bg = palette[frame.bg[py][px]] || theme.bg;
-      screen.put(x + left + px, y + top + py, ch, fg, bg);
-    }),
-  );
-  if (section) drawSectionDetail(screen, x + left, y + top, mascot, section, t, palette);
+  const left = x + mascotLeft(width, mascot);
+  const top = y + Math.floor((height - mascot.height) / 2);
+  if (left < x + artWidth + 2 || top < y) return;
+
+  // Each terminal cell contains two source pixels over the page background.
+  const { px } = frameAt(t);
+  for (let row = 0; row < px.length; row += 2) {
+    for (let col = 0; col < mascot.width; col++) {
+      const upper = mascot.palette[px[row][col]];
+      const lower = mascot.palette[px[row + 1][col]];
+      const glyph = upper ? "▀" : lower ? "▄" : " ";
+      screen.put(left + col, top + row / 2, glyph, upper ?? lower, upper ? lower : undefined);
+    }
+  }
+  if (section) drawSectionDetail(screen, left, top, x + artWidth + 1, section, t);
 }
 
-function drawSectionDetail(screen, left, top, mascot, section, time, palette) {
+function drawSectionDetail(screen, left, top, start, section, time) {
+  const { put, theme: { bg, muted } } = screen;
+  const gap = left - start;
+  const cardX = Math.max(start, left - 9);
   const phase = Math.floor(time / 0.34) % 16;
-  const cardX = left - 9;
-  const put = (x, y, text, fg = palette.i, bg = screen.theme.bg) => screen.put(x, y, text, fg, bg);
-  const bubble = (text, y) => {
-    put(cardX, y, '╭─────╮');
-    put(cardX, y + 1, `│${text.padStart(Math.floor((5 + text.length) / 2)).padEnd(5)}│`);
-    put(cardX, y + 2, '╰───┬─╯');
+  const compactCue = (text, y) => {
+    const cue = text.slice(0, gap);
+    if (cue) put(left - cue.length, y, cue);
   };
-  if (section === 'messages' && phase >= 2 && phase <= 11)
-    bubble(phase < 4 ? '·' : phase < 6 ? '··' : '···', top);
-  if (section === 'conversations' && phase >= 2 && phase <= 12)
-    bubble(phase < 7 ? 'hi' : 'ok', top + (phase < 7 ? 0 : 1));
-  if (section === 'contacts' && phase >= 2 && phase <= 12) {
+  const bubble = (text, y) => {
+    if (gap < 7) {
+      compactCue(text, y + 1);
+      return;
+    }
+    put(cardX, y, "╭─────╮");
+    put(cardX, y + 1, `│${text.padStart(Math.floor((5 + text.length) / 2)).padEnd(5)}│`);
+    put(cardX, y + 2, "╰───┬─╯");
+  };
+
+  if (section === "inbox") {
+    const pulse = (Math.sin(time * 2.2) + 1) / 2;
+    const color = mix(bg, muted, 0.3 + pulse * 0.7);
+    const count = Math.min(2, gap);
+    put(left - (gap >= 7 ? 4 : count), top + 1, ")".repeat(count), color);
+    if (gap >= 7) put(left - 7, top + 1, ")", mix(bg, muted, 0.25 + (1 - pulse) * 0.6));
+  }
+  if (section === "messages" && phase >= 2 && phase <= 11)
+    bubble(phase < 4 ? "·" : phase < 6 ? "··" : "···", top);
+  if (section === "conversations" && phase >= 2 && phase <= 12)
+    bubble(phase < 7 ? "hi" : "ok", top + (phase < 7 ? 0 : 1));
+  if (section === "contacts" && phase >= 2 && phase <= 12) {
+    if (gap < 7) {
+      compactCue("o =", top + 1);
+      return;
+    }
     const slide = phase < 4 ? 2 : phase > 10 ? 1 : 0;
-    put(cardX + slide, top, '┌─────┐');
-    put(cardX + slide, top + 1, '│ o = │');
-    put(cardX + slide, top + 2, '└─────┘');
+    const x = Math.min(cardX + slide, left - 7);
+    put(x, top, "┌─────┐");
+    put(x, top + 1, "│ o = │");
+    put(x, top + 2, "└─────┘");
   }
-  if (section === 'compose' && phase >= 3 && phase <= 10) {
-    const face = phase < 5 ? '>_ ' : phase < 7 ? '>h_' : '>hi';
-    const isometric = mascot.id === 'isometric-desktop';
-    put(left + 2, top + (isometric ? 2 : 1), face, palette.i, palette[isometric ? 1 : 2]);
-    if (phase <= 9) put(cardX + 1, top + 2, phase % 2 ? '[   ]' : '[ _ ]', palette.m);
-  }
+  if (section === "compose" && phase >= 3 && phase <= 10)
+    bubble(phase < 5 ? ">_" : phase < 7 ? ">h_" : ">hi", top);
 }

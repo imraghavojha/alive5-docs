@@ -1,8 +1,8 @@
-// Synced from alive5-cli 4f56f4f8a1ed9b0ec081838fa7f65d5f7192c3bc; use scripts/sync-cli-art.mjs to update.
+// Synced from alive5-cli 880a2f675378490c458a9d4a881aa7d9badbf94d; use scripts/sync-cli-art.mjs to update.
 // FIGlet output via pyfiglet: Small, Small Slant and Bigfig by Glenn Chappell;
 // Small/Small Slant updates by Paul Burton; Rectangles by David Villegas.
 import { mix } from './theme.js';
-import { mascotById, drawMascot } from './mascot.js';
+import { mascotById, mascotLeft, drawMascot } from './mascot.js';
 
 export const WORDMARK = 'Alive5';
 export const LOGO_HEIGHT = 7;
@@ -118,16 +118,18 @@ export function drawLogo(
     motion = 'full',
     effect = 'cosmos',
     variant = 'frame',
-    mascot = 'isometric-desktop',
+    mascot,
     section,
   },
 ) {
   const theme = screen.theme;
   const logo = logoById(variant);
   const character = mascotById(mascot);
-  // Every variant fits the smallest supported terminal. A narrower command
-  // banner keeps readable text instead of clipping letterforms.
-  const fits = Math.max(...logo.lines.map((line) => line.length)) <= width - character.width - 10;
+  // Keep the default label on small terminals. Other wordmarks can fall
+  // back to plain text to leave room for the section animations.
+  const gap = logo.id === 'frame' ? 2 : 9;
+  const fits =
+    Math.max(...logo.lines.map((line) => line.length)) <= mascotLeft(width, character) - gap;
   const lines = fits ? logo.lines : [WORDMARK];
   const fiveFrom = fits && lines.length > 1 ? logo.fiveFrom : null;
   const artWidth = Math.max(...lines.map((line) => line.length));

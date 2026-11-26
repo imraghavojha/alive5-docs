@@ -451,7 +451,7 @@ function cancel(animation) {
 
 function startMascot() {
   const riseDuration = 700;
-  const holds = [1050, 390, 120, 510, 280, 650];
+  const holds = [1450, 160, 230, 250, 400, 120];
   const duration = holds.reduce((sum, hold) => sum + hold, 0);
   let offset = 0;
   const frames = holds.map((hold, i) => {
